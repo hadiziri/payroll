@@ -34,6 +34,8 @@ import com.sonatrach.dz.rubrique.domain.Rubrique;
 import com.sonatrach.dz.rubrique.repo.RubriqueRepo;
 import com.sonatrach.dz.structure.domain.Structure;
 import com.sonatrach.dz.structure.repo.StructureRepo;
+import com.sonatrach.dz.tabstructure.domain.TabStructure;
+import com.sonatrach.dz.tabstructure.repo.TabStructureRepo;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
@@ -71,7 +73,8 @@ public class Controller {
 	 PaysRepo paysRepo;
 	 @Autowired
 	 RubriqueRepo rubriqueRepo;
-	 
+	 @Autowired
+	 TabStructureRepo tabStructureRepo;
 	 
 	 //****************************************API*****************************************************************************
 	 @GetMapping("/allBanques")
@@ -235,6 +238,21 @@ public class Controller {
 			exporter6.exportReport();
 			break;
 
+			
+		 case "structure": 	List<TabStructure>lesTabStructures=tabStructureRepo.findAll();
+			//load file and compile it
+			File fileTabStructure = ResourceUtils.getFile("classpath:lesTabStructures.jrxml");
+			JasperReport jasperReport7 = JasperCompileManager.compileReport(fileTabStructure.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource7 = new JRBeanCollectionDataSource(lesTabStructures);
+			JasperPrint jasperPrint7 = JasperFillManager.fillReport(jasperReport7,null , dataSource7);
+			JRXlsxExporter exporter7 = new JRXlsxExporter();
+			exporter7.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter7.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter7.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint7);
+			Object outputFileName7=pathWithMounth + "\\"+fileName+" "+formatter.format(date)+".xlsx";
+			exporter7.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName7);
+			exporter7.exportReport();
+			break;
 		
 		
         default: 
