@@ -1,0 +1,15 @@
+<form #formulaire="ngForm" class="formulaire">
+    <label for="name">Nom Structure :</label>
+    <input required type="text" id="name" name="name" ngModel class="form-control">
+
+    <label for="firstname">Code Structure:</label>
+    <input required type="text" id="firstname" name="firstname" ngModel class="form-control">
+
+    <label for="job">Email groupe gestionnaire:</label>
+    <input required type="text" id="job" name="job" ngModel class="form-control">
+
+ 
+
+    <br>
+    <button [disabled]="formulaire.invalid" class="btn btn-primary" >Ajouter</button>
+  </form>

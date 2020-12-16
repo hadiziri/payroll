@@ -1,0 +1,27 @@
+table {
+    width: 100%;
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+  .container{
+    margin-top: 20px;
+  }
+
+  #first_btn{
+    margin-left: 20px;
+  }
+
+ 
+  button:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+  }
+
+  .header_table{
+    background-color:#343A3D;
+    color: white;
+  }
+

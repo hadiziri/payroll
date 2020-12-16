@@ -1,0 +1,10 @@
+.formulaire{
+    margin: 20px;
+}
+.ng-invalid.ng-touched{
+    border-color: red;
+}
+
+.ng-touched{
+    border-color:grey;
+}
