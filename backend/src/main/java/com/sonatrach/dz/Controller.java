@@ -65,8 +65,8 @@ public class Controller {
 	 LocaliteRepo localiteRepo;
 	 
 	 @GetMapping("/allBanques")
-	 public List<Localite> getAllBanques(){
-		 return localiteRepo.findAll();
+	 public List<Fonction> getAllBanques(){
+		 return fonctionRepo.findAll();
 	 }
 	 
 	 
@@ -159,7 +159,7 @@ public class Controller {
 		    				exporter2.exportReport();
 		    				break;
 		    				
-       /* case "fonction": 	List<Fonction>lesFonctions=fonctionRepo.findAll();
+        case "fonction": 	List<Fonction>lesFonctions=fonctionRepo.findAll();
 							//load file and compile it
 		    				File fileFonctions = ResourceUtils.getFile("classpath:lesFonctions.jrxml");
 		    				JasperReport jasperReport3 = JasperCompileManager.compileReport(fileFonctions.getAbsolutePath());
@@ -173,7 +173,7 @@ public class Controller {
 		    				exporter3.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName3);
 		    				exporter3.exportReport();
 		    				break;
-		*/
+		
 		    				
 		    			    /* case "localite": 	List<Localite>lesLocalites=localiteRepo.findAll();
 							//load file and compile it

@@ -11,81 +11,126 @@ import javax.persistence.Table;
 @Table(name ="PAIE_FONCTIONS")
 public class Fonction{
 	@Id
-    private String FON_CFCT; 
-	private String FON_DESIGNATION;
-	private int FON_ACTFCT;
-	private int FON_CAT_SGT;
-	private int FON_SECT_SGT;
-	private int FON_FIND;
-	private int FON_CORPS;
-	private int FON_NUIS;
+   
+	
+	
+	@Column(name="FON_CFCT")
+	private String fon_CFCT;
+	@Column(name="FON_DESIGNATION")
+	private String fon_DESIGNATION;
+	@Column(name="FON_CATEGORIE")
+	private String fon_CATEGORIE;	
+	@Column(name="FON_CAT_SGT")
+	private Integer fon_CAT_SGT;
+	@Column(name="FON_SECT_SGT")
+	private Integer fon_SECT_SGT;
+	@Column(name="FON_FIND")
+	private Integer fon_FIND;
+	@Column(name="FON_CORPS")
+	private Integer fon_CORPS;
+	@Column(name="FON_NUIS")
+	private Integer fon_NUIS;
+	
+	
+	 /*private String FON_CFCT; 
+		private String FON_DESIGNATION;
+		private String FON_CATEGORIE;
+	private Integer FON_CAT_SGT;
+	private Integer FON_SECT_SGT;
+	private Integer FON_FIND;
+	private Integer FON_CORPS;
+	private Integer FON_NUIS;*/
+	
+	
+	
 	
 	public Fonction() {
 		
 	}
 
-	public String getFON_CFCT() {
-		return FON_CFCT;
+
+	public String getFon_CFCT() {
+		return fon_CFCT;
 	}
 
-	public void setFON_CFCT(String fON_CFCT) {
-		FON_CFCT = fON_CFCT;
+
+	public void setFon_CFCT(String fon_CFCT) {
+		this.fon_CFCT = fon_CFCT;
 	}
 
-	public String getFON_DESIGNATION() {
-		return FON_DESIGNATION;
+
+	public String getFon_DESIGNATION() {
+		return fon_DESIGNATION;
 	}
 
-	public void setFON_DESIGNATION(String fON_DESIGNATION) {
-		FON_DESIGNATION = fON_DESIGNATION;
+
+	public void setFon_DESIGNATION(String fon_DESIGNATION) {
+		this.fon_DESIGNATION = fon_DESIGNATION;
 	}
 
-	public int getFON_ACTFCT() {
-		return FON_ACTFCT;
+
+	public String getFon_CATEGORIE() {
+		return fon_CATEGORIE;
 	}
 
-	public void setFON_ACTFCT(int fON_ACTFCT) {
-		FON_ACTFCT = fON_ACTFCT;
+
+	public void setFon_CATEGORIE(String fon_CATEGORIE) {
+		this.fon_CATEGORIE = fon_CATEGORIE;
 	}
 
-	public int getFON_CAT_SGT() {
-		return FON_CAT_SGT;
+
+	public Integer getFon_CAT_SGT() {
+		return fon_CAT_SGT;
 	}
 
-	public void setFON_CAT_SGT(int fON_CAT_SGT) {
-		FON_CAT_SGT = fON_CAT_SGT;
+
+	public void setFon_CAT_SGT(Integer fon_CAT_SGT) {
+		this.fon_CAT_SGT = fon_CAT_SGT;
 	}
 
-	public int getFON_SECT_SGT() {
-		return FON_SECT_SGT;
+
+	public Integer getFon_SECT_SGT() {
+		return fon_SECT_SGT;
 	}
 
-	public void setFON_SECT_SGT(int fON_SECT_SGT) {
-		FON_SECT_SGT = fON_SECT_SGT;
+
+	public void setFon_SECT_SGT(Integer fon_SECT_SGT) {
+		this.fon_SECT_SGT = fon_SECT_SGT;
 	}
 
-	public int getFON_FIND() {
-		return FON_FIND;
+
+	public Integer getFon_FIND() {
+		return fon_FIND;
 	}
 
-	public void setFON_FIND(int fON_FIND) {
-		FON_FIND = fON_FIND;
+
+	public void setFon_FIND(Integer fon_FIND) {
+		this.fon_FIND = fon_FIND;
 	}
 
-	public int getFON_CORPS() {
-		return FON_CORPS;
+
+	public Integer getFon_CORPS() {
+		return fon_CORPS;
 	}
 
-	public void setFON_CORPS(int fON_CORPS) {
-		FON_CORPS = fON_CORPS;
+
+	public void setFon_CORPS(Integer fon_CORPS) {
+		this.fon_CORPS = fon_CORPS;
 	}
 
-	public int getFON_NUIS() {
-		return FON_NUIS;
+
+	public Integer getFon_NUIS() {
+		return fon_NUIS;
 	}
 
-	public void setFON_NUIS(int fON_NUIS) {
-		FON_NUIS = fON_NUIS;
+
+	public void setFon_NUIS(Integer fon_NUIS) {
+		this.fon_NUIS = fon_NUIS;
 	}
+
+
+	
+
+	
 	
 }
