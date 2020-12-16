@@ -1,4 +1,4 @@
-package com.sonatrach.dz.localite.domain;
+package com.sonatrach.dz.rubrique.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,29 +6,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name ="PAIE_LOCALITES")
-public class Localite {
+@Table(name ="PAIE_RUBRIQUES")
+public class Rubrique {
 	@Id
-	@Column(name="LOC_CLOC")
+	@Column(name="RUB_CRUB")
 	private String code;
 
-	@Column(name="LOC_DESIGNATION")
+	@Column(name="RUB_DESIGNATION")
 	private String designation;
-	
-	public Localite() {
-		
-	}
 
-	
 	public String getCode() {
 		return code;
 	}
 
-
 	public void setCode(String code) {
 		this.code = code;
 	}
-
 
 	public String getDesignation() {
 		return designation;

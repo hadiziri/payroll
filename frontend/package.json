@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ngcc"
+    "postinstall": "ngcc",
+    "start": "ng serve --host 0.0.0.0 --disable-host-check"
   },
   "private": true,
   "dependencies": {
@@ -29,7 +29,7 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1100.2",
+    "@angular-devkit/build-angular": "^0.1100.4",
     "@angular/cli": "~11.0.2",
     "@angular/compiler-cli": "~11.0.1",
     "@types/jasmine": "~3.6.0",

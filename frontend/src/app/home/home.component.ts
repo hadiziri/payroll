@@ -1,4 +1,4 @@
-import { Structure } from './../Models/Structure';
+
 import { CustomerService } from './../Services/customer.service';
 import { Customer, Representative } from './../Models/costumers';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
@@ -32,11 +32,11 @@ export interface PeriodicElement {
 export class HomeComponent implements OnInit  {
 
   displayedColumns: string[] = ['IDSTRUCTURE','STRUCTURENAME', 'STRUCTURECODELIKE', 'EMAILGROUPMANAGERS', 'STATUSSTRUCTURE','action'];
-  dataSource :MatTableDataSource<Structure>  ;
+ 
   icon_etat:String="vert.svg";
   etat:String="";
   ELEMENT_DATA:Structure[]=[];
-
+  dataSource :MatTableDataSource<Structure> =new MatTableDataSource(this.ELEMENT_DATA) ;
     
   
 
