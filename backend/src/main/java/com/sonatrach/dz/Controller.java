@@ -50,7 +50,7 @@ import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class Controller {
-
+//repositories
 	 @Autowired
 	 BanqueRepo banqueRepo;
 	 @Autowired
