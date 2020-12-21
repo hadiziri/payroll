@@ -1,6 +1,7 @@
 package com.sonatrach.dz;
 
 import java.io.File;
+
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -75,8 +76,7 @@ import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
-
+@CrossOrigin("http://localhost:4200")
 public class Controller {
     //**********************************************repositories************************************************************
 	 @Autowired
@@ -98,16 +98,13 @@ public class Controller {
 	 @Autowired
 	 TabStructureRepo tabStructureRepo;
 	 @Autowired
-		AuthenticationManager authenticationManager;
-
-		@Autowired
-		UserRepository userRepository;
-
-		@Autowired
-		PasswordEncoder encoder;
-
-		@Autowired
-		JwtProvider jwtProvider;
+	 AuthenticationManager authenticationManager;
+	 @Autowired
+	 UserRepository userRepository;
+	 @Autowired
+	 PasswordEncoder encoder;
+	 @Autowired
+	 JwtProvider jwtProvider;
 		
 	 
 	 //****************************************API*****************************************************************************
@@ -158,17 +155,26 @@ public class Controller {
 
 	 @RequestMapping(value="/api/auth/signin" ,method = RequestMethod.POST)
 		public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
-			System.out.println("1");
-			Authentication authentication = authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-			System.out.println(authentication);
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-			System.out.println("2");
-			String jwt = jwtProvider.generateJwtToken(authentication);
-			System.out.println(jwt);
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+			
+		 
+		 Optional<User> currentUser=userRepository.findByUsername(loginRequest.getUsername());
+	
+		 if(currentUser.get().getState()==1) {
+			 Authentication authentication = authenticationManager.authenticate(
+						new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+				
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+			
+				String jwt = jwtProvider.generateJwtToken(authentication);
+		
+				UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-			return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername()));
+				
+				return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername()));
+		 }else {
+			 return ResponseEntity.ok(new JwtResponse("no", currentUser.get().getUsername()));
+		 }
+		
 		}
 
 	 
@@ -184,12 +190,11 @@ public class Controller {
 						HttpStatus.BAD_REQUEST);
 			}
 
-			System.out.println(signUpRequest.getName());
 			// Creating user's account
 			User user = new User(signUpRequest.getName(), signUpRequest.getUsername(), signUpRequest.getEmail(),
-					encoder.encode(signUpRequest.getPassword()));
+					encoder.encode(signUpRequest.getPassword()),0);
 
-			System.out.println(user.getName() + "    " + user.getPassword());
+		
 
 			userRepository.save(user);
 

@@ -23,3 +23,10 @@
       -webkit-border-radius: 50%;
       border-radius: 50%;
   }
+  .ng-invalid.ng-touched{
+    border-color: red;
+}
+
+.ng-valid.ng-touched{
+    border-color: #3DBC14;
+}

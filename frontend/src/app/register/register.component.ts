@@ -1,3 +1,4 @@
+import { error } from 'protractor';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -37,7 +38,7 @@ export class RegisterComponent implements OnInit {
       },
       error => {
         console.log(error);
-        this.errorMessage = error.error.message;
+        this.errorMessage = error.error.errorMessage;
         this.isSignUpFailed = true;
       }
     );

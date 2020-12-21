@@ -30,21 +30,23 @@ public class User{
     private Long iduser;
 	@Column(name="NAME")
     private String name;
-	@Column(name="USERNAME")
+	@Column(name="USERNAME", unique = true)
     private String username;
 	@Column(name="EMAIL")
     private String email;
 	@Column(name="PASSWORD")
     private String password;
-
+	@Column(name="ACCOUNTSTATE")
+	private int state;
   
     public User() {}
 
-    public User(String name, String username, String email, String password) {
+    public User(String name, String username, String email, String password,int state) {
         this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.state=state;
     }
 
  
@@ -87,6 +89,14 @@ public class User{
 
 	public void setIduser(Long iduser) {
 		this.iduser = iduser;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
 	}
 
  

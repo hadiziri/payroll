@@ -23,7 +23,7 @@ public host:string;
   }
 
   public cloturePaie() :Observable<Array<clotureFiles>>{
-    return this.httpClient.get<Array<clotureFiles>>(this.host+"generateClotureFiles");
+    return this.httpClient.get<Array<clotureFiles>>(this.host+"generateTableFiles");
   }
 
 }
