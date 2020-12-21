@@ -1,3 +1,4 @@
+import { TokenStorageService } from './../auth/token-storage.service';
 
 import { CustomerService } from './../Services/customer.service';
 import { Customer, Representative } from './../Models/costumers';
@@ -48,7 +49,7 @@ export class HomeComponent implements OnInit  {
       }
 
          
-        constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,private comService:CommunicationService) {
+        constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,private comService:CommunicationService,private token: TokenStorageService) {
          
            
           iconRegistry.addSvgIcon(
@@ -70,7 +71,20 @@ export class HomeComponent implements OnInit  {
       )
         }
 
-     
+        cloturerPaie(){
+          this.comService.cloturePaie().subscribe(
+            data=>{
+                console.log(data);
+                alert('La cloture est valide');
+            },
+            error=>{
+                console.log(error);
+            }
+          )
+        }
           
-
+        logout() {
+          this.token.signOut();
+          window.location.reload();
+        }
 }

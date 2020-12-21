@@ -1,3 +1,4 @@
+import { AuthInterceptor, httpInterceptorProviders } from './auth/auth-interceptor';
 import { HomeComponent } from './home/home.component';
 import { ErrorComponent } from './error/error.component';
 import { UpdateStructureComponent } from './update-structure/update-structure.component';
@@ -16,7 +17,12 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
-import {FormsModule} from '@angular/forms'
+import {FormsModule} from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { HeaderComponent } from './header/header.component';
+import {MatCardModule} from '@angular/material/card';
+
 
 
 
@@ -26,7 +32,7 @@ import {FormsModule} from '@angular/forms'
 @NgModule({
   declarations: [
     AppComponent,
-    FilesGeneratorComponent,AddStructureComponent,DeleteStructureComponent,UpdateStructureComponent,ErrorComponent,HomeComponent
+    FilesGeneratorComponent,AddStructureComponent,DeleteStructureComponent,UpdateStructureComponent,ErrorComponent,HomeComponent, LoginComponent, RegisterComponent, HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -34,10 +40,10 @@ import {FormsModule} from '@angular/forms'
     HttpClientModule,ROUTING, BrowserAnimationsModule, MatSortModule,
     MatTableModule,
     MatSortModule,
-    MatTableModule,MatPaginatorModule,MatIconModule,FormsModule
+    MatTableModule,MatPaginatorModule,MatIconModule,FormsModule,MatCardModule
   
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

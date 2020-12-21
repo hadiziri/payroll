@@ -1,3 +1,5 @@
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './error/error.component';
 import { UpdateStructureComponent } from './update-structure/update-structure.component';
 import { HomeComponent } from './home/home.component';
@@ -14,7 +16,10 @@ const APP_ROUTING : Routes =[
     {path :"structures", component :DeleteStructureComponent},
     {path :"", component :HomeComponent},
     {path :"updateStructure/:id", component :UpdateStructureComponent},
+    {path: 'auth/login',component: LoginComponent},
+    {path: 'signup',component: RegisterComponent},
     {path :"**", component: ErrorComponent}
+   
     
 ]
 

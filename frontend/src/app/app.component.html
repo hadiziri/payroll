@@ -1,27 +1,12 @@
 
-  <nav class="navbar navbar-inverse"  id="header">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" style="color: white; text-size-adjust: 20px;"><strong>Application Exploitation Paie</strong>  </a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li ><a [routerLink]="['/home']" routerLinkActive="router-link-active"  >Acceuil</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Gérer les structures
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a [routerLink]="['/addStructure']" routerLinkActive="router-link-active" >Ajouter structure</a></li>
-            <li><a [routerLink]="['/structures']" routerLinkActive="router-link-active" >Modifier/Supprimer structure</a></li>
-          </ul>
-        </li>
-        <li><a [routerLink]="['/FilesGenerator']" routerLinkActive="router-link-active" >Historique</a></li>
-        <li><a href="#">Paramétres</a></li>
-        <li><a href="#">Déconnexion</a></li>
-      </ul>
-    </div>
-  </nav>
-  
 
-
-
+<div *ngIf="connection ;else login">
+<app-header  ></app-header>
+ <div class="container">
 <router-outlet></router-outlet>
+</div>
+</div>
+
+<ng-template #login>
+<app-login></app-login>
+</ng-template>
