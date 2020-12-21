@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent  implements OnInit{
-  title = 'first-app';
+  title = 'Application Exploitation Paie';
   public connection:Boolean=false;
 
   constructor(private tokenStorage: TokenStorageService){

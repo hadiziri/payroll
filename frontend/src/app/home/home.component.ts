@@ -86,6 +86,8 @@ export class HomeComponent implements OnInit  {
           
         logout() {
           this.token.signOut();
+        
           this.router.navigate(['auth/login']);
+          window.location.reload();
         }
 }

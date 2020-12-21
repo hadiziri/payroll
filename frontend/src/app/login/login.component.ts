@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+  state=0;
   private loginInfo: AuthLoginInfo=new AuthLoginInfo("","");
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService,private router:Router) { }
@@ -42,6 +43,7 @@ export class LoginComponent implements OnInit {
       
 
         this.isLoginFailed = false;
+        this.state=2;
         this.isLoggedIn = true;
         this.reloadPage();
       },
@@ -58,6 +60,6 @@ export class LoginComponent implements OnInit {
   }
 
   register(){
-    this.router.navigate(["signup"]);
+    this.state=1;
   }
 }
