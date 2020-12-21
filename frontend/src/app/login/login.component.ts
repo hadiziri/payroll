@@ -56,4 +56,8 @@ export class LoginComponent implements OnInit {
   reloadPage() {
     window.location.reload();
   }
+
+  register(){
+    this.router.navigate(["signup"]);
+  }
 }

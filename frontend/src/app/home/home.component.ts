@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { TokenStorageService } from './../auth/token-storage.service';
 
 import { CustomerService } from './../Services/customer.service';
@@ -49,7 +50,7 @@ export class HomeComponent implements OnInit  {
       }
 
          
-        constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,private comService:CommunicationService,private token: TokenStorageService) {
+        constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,private comService:CommunicationService,private token: TokenStorageService,private router: Router) {
          
            
           iconRegistry.addSvgIcon(
@@ -85,6 +86,6 @@ export class HomeComponent implements OnInit  {
           
         logout() {
           this.token.signOut();
-          window.location.reload();
+          this.router.navigate(['auth/login']);
         }
 }
