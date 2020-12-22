@@ -23,6 +23,7 @@ import { RegisterComponent } from './register/register.component';
 import { HeaderComponent } from './header/header.component';
 import {MatCardModule} from '@angular/material/card';
 import { MbscModule } from '@mobiscroll/angular-lite';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -41,8 +42,7 @@ import { MbscModule } from '@mobiscroll/angular-lite';
     HttpClientModule,ROUTING, BrowserAnimationsModule, MatSortModule,
     MatTableModule,
     MatSortModule,
-    MatTableModule,MatPaginatorModule,MatIconModule,FormsModule,MatCardModule,MbscModule
-  
+    MatTableModule,MatPaginatorModule,MatIconModule,FormsModule,MatCardModule,MbscModule,MatProgressSpinnerModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

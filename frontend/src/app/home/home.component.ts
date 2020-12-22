@@ -44,6 +44,8 @@ export class HomeComponent implements OnInit  {
     theme: 'mobiscroll',
     themeVariant: 'light'
 };
+
+showSpinner:Boolean=false;
     
   
 
@@ -78,10 +80,12 @@ export class HomeComponent implements OnInit  {
         }
 
         cloturerPaie(){
+          this.showSpinner=true;
           this.comService.cloturePaie().subscribe(
             data=>{
                 console.log(data);
                 this.showAlert();
+                this.showSpinner=false;
             },
             error=>{
                 console.log(error);
