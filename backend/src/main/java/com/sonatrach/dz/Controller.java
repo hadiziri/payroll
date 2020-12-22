@@ -74,6 +74,7 @@ import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 
+
 @RestController
 @CrossOrigin("http://localhost:4200")
 public class Controller {
@@ -176,58 +177,29 @@ public class Controller {
 		 }
 		
 		}
-		return lesStructures;
-	}
 
-	@GetMapping({ "generateTableFiles" })
-	public List<CloturePaie> cloturePaie() {
-		List<CloturePaie> toutLesFichiers = new ArrayList();
-		try {
-
-			// ***************************get all files to generate and its directory path
-			toutLesFichiers = clotureRepo.findAll();
-			for (int i = 0; i < toutLesFichiers.size(); i++) {
-				String path = toutLesFichiers.get(i).getFOLDERPATH();
-				String folderName = toutLesFichiers.get(i).getFOLDERNAME();
-				String fileName = toutLesFichiers.get(i).getPREFIXFILETYPE();
-				String description = toutLesFichiers.get(i).getDESCFILETYPE().toString();
-				generateFiles(path, folderName, fileName, description);
+	 
+	 @RequestMapping(value="/api/auth/signup" ,method = RequestMethod.POST)
+		public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
+			if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+				return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
+						HttpStatus.BAD_REQUEST);
 			}
 
-		} catch (Exception e) {
-			System.out.println("Exception while generating file==>" + e);
-		}
+			if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+				return new ResponseEntity<>(new ResponseMessage("Fail -> Email is already in use!"),
+						HttpStatus.BAD_REQUEST);
+			}
 
-		return toutLesFichiers;
-	}
+			// Creating user's account
+			User user = new User(signUpRequest.getName(), signUpRequest.getUsername(), signUpRequest.getEmail(),
+					encoder.encode(signUpRequest.getPassword()),0);
 
-	@RequestMapping(value = "/api/auth/signin", method = RequestMethod.POST)
-	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
+		
 
-		Optional<User> currentUser = userRepository.findByUsername(loginRequest.getUsername());
+			userRepository.save(user);
 
-		if (currentUser.get().getState() == 1) {
-			Authentication authentication = authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-
-			String jwt = jwtProvider.generateJwtToken(authentication);
-
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
-			return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername()));
-		} else {
-			return ResponseEntity.ok(new JwtResponse("no", currentUser.get().getUsername()));
-		}
-
-	}
-
-	@RequestMapping(value = "/api/auth/signup", method = RequestMethod.POST)
-	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
-		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-			return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
-					HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
 		}
 		
 	 
@@ -357,36 +329,41 @@ public class Controller {
 			File fileRubrique = ResourceUtils.getFile("classpath:lesRubriques.jrxml");
 			JasperReport jasperReport6 = JasperCompileManager.compileReport(fileRubrique.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource6 = new JRBeanCollectionDataSource(lesRubriques);
-			JasperPrint jasperPrint6 = JasperFillManager.fillReport(jasperReport6, null, dataSource6);
+			JasperPrint jasperPrint6 = JasperFillManager.fillReport(jasperReport6,null , dataSource6);
 			JRXlsxExporter exporter6 = new JRXlsxExporter();
 			exporter6.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter6.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter6.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint6);
-			Object outputFileName6 = pathWithMounth + "\\" + fileName + " " + formatter.format(date) + ".xlsx";
+			Object outputFileName6=pathWithMounth + "\\"+fileName+" "+formatter.format(date)+".xlsx";
 			exporter6.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName6);
 			exporter6.exportReport();
 			break;
 
-		case "structure":
-			List<TabStructure> lesTabStructures = tabStructureRepo.findAll();
-			// load file and compile it
+			
+		 case "structure": 	List<TabStructure>lesTabStructures=tabStructureRepo.findAll();
+			//load file and compile it
 			File fileTabStructure = ResourceUtils.getFile("classpath:lesTabStructures.jrxml");
 			JasperReport jasperReport7 = JasperCompileManager.compileReport(fileTabStructure.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource7 = new JRBeanCollectionDataSource(lesTabStructures);
-			JasperPrint jasperPrint7 = JasperFillManager.fillReport(jasperReport7, null, dataSource7);
+			JasperPrint jasperPrint7 = JasperFillManager.fillReport(jasperReport7,null , dataSource7);
 			JRXlsxExporter exporter7 = new JRXlsxExporter();
 			exporter7.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter7.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter7.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint7);
-			Object outputFileName7 = pathWithMounth + "\\" + fileName + " " + formatter.format(date) + ".xlsx";
+			Object outputFileName7=pathWithMounth + "\\"+fileName+" "+formatter.format(date)+".xlsx";
 			exporter7.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName7);
 			exporter7.exportReport();
 			break;
-
-		default:
-			System.out.println("no match");
-
-		}
+		
+		
+        default: 
+            System.out.println("no match"); 
+        				
+        				
+        				
+        }
 	}
-
-}
+	 
+	 
+	
+	}
