@@ -324,14 +324,14 @@
 				<reportElement x="100" y="0" width="67" height="20" uuid="380af714-4dbd-4e0f-ae23-bfada0449a2f">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{mat}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{mat}==null?"":$F{mat}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="167" y="0" width="49" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[$F{str}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{str}==null?"":$F{str}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="1280" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
@@ -520,7 +520,7 @@
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[$F{nom}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nom}==null?"":$F{nom}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

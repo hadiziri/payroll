@@ -11,9 +11,6 @@ import javax.persistence.Table;
 @Table(name ="PAIE_FONCTIONS")
 public class Fonction{
 	@Id
-   
-	
-	
 	@Column(name="FON_CFCT")
 	private String fon_CFCT;
 	@Column(name="FON_DESIGNATION")

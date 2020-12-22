@@ -35,8 +35,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sonatrach.dz.banque.domain.Banque;
 import com.sonatrach.dz.banque.repo.BanqueRepo;
+import com.sonatrach.dz.chang.domain.Change;
+import com.sonatrach.dz.chang.repo.ChangRepo;
 import com.sonatrach.dz.cloturePaie.domain.CloturePaie;
 import com.sonatrach.dz.cloturePaie.repo.CloturePaieRepo;
+import com.sonatrach.dz.dep.domain.Dep;
+import com.sonatrach.dz.dep.repo.DepRepo;
 import com.sonatrach.dz.diplome.domain.Diplome;
 import com.sonatrach.dz.diplome.repo.DiplomeRepo;
 import com.sonatrach.dz.fonction.domain.Fonction;
@@ -105,12 +109,16 @@ public class Controller {
 	 PasswordEncoder encoder;
 	 @Autowired
 	 JwtProvider jwtProvider;
+	 @Autowired
+	 DepRepo depRepo;
+	 @Autowired
+	 ChangRepo changRepo;
 		
 	 
 	 //****************************************API*****************************************************************************
 	 @GetMapping({"/allBanques"})
-	 public List<Fonction> getAllBanques(){
-		 return fonctionRepo.findAll();
+	 public List<Change> getAllBanques(){
+		 return changRepo.findAll();
 	 }
 	 
 	 
@@ -355,6 +363,36 @@ public class Controller {
 			exporter7.exportReport();
 			break;
 		
+			
+		case "change": 	List<Change>lesChanges=changRepo.findAll();
+			//load file and compile it
+			File fileChange= ResourceUtils.getFile("classpath:change.jrxml");
+			JasperReport jasperReport8 = JasperCompileManager.compileReport(fileChange.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource8 = new JRBeanCollectionDataSource(lesChanges);
+			JasperPrint jasperPrint8 = JasperFillManager.fillReport(jasperReport8,null , dataSource8);
+			JRXlsxExporter exporter8 = new JRXlsxExporter();
+			exporter8.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter8.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter8.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint8);
+			Object outputFileName8=pathWithMounth + "\\"+fileName+" "+formatter.format(date)+".xlsx";
+			exporter8.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName8);
+			exporter8.exportReport();
+			break;
+			
+			  case "dep": 	List<Dep>lesDeps=depRepo.findAll();
+			//load file and compile it
+			File fileDep = ResourceUtils.getFile("classpath:dep.jrxml");
+			JasperReport jasperReport9 = JasperCompileManager.compileReport(fileDep.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource9 = new JRBeanCollectionDataSource(lesDeps);
+			JasperPrint jasperPrint9 = JasperFillManager.fillReport(jasperReport9,null , dataSource9);
+			JRXlsxExporter exporter9 = new JRXlsxExporter();
+			exporter9.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter9.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter9.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint9);
+			Object outputFileName9=pathWithMounth + "\\"+fileName+" "+formatter.format(date)+".xlsx";
+			exporter9.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName9);
+			exporter9.exportReport();
+			break;
 		
         default: 
             System.out.println("no match"); 

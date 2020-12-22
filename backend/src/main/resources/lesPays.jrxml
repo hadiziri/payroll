@@ -54,14 +54,14 @@
 				<reportElement x="152" y="0" width="143" height="20" uuid="380af714-4dbd-4e0f-ae23-bfada0449a2f">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{lib}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{lib}==null?"":$F{lib}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="295" y="0" width="138" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[$F{nationnalite}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nationnalite}==null?"":$F{nationnalite}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

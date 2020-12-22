@@ -55,14 +55,14 @@
 				<reportElement x="110" y="0" width="90" height="20" uuid="380af714-4dbd-4e0f-ae23-bfada0449a2f">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{agence}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{agence}==null?"":$F{agence}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="200" y="0" width="395" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[$F{designation}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{designation}==null?"":$F{designation}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

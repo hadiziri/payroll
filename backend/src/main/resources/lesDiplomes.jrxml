@@ -54,7 +54,7 @@
 				<reportElement x="120" y="0" width="460" height="20" uuid="380af714-4dbd-4e0f-ae23-bfada0449a2f">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{designation}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{designation}==null?"":$F{designation}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="580" y="0" width="112" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
