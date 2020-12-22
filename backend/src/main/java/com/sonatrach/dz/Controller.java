@@ -172,7 +172,8 @@ public class Controller {
 				
 				return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername()));
 		 }else {
-			 return ResponseEntity.ok(new JwtResponse("no", currentUser.get().getUsername()));
+			 String error="xx"+"."+"yy"+"."+"zz";
+			 return ResponseEntity.ok(new JwtResponse(error, currentUser.get().getUsername()));
 		 }
 		
 		}
@@ -201,6 +202,27 @@ public class Controller {
 			return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
 		}
 		
+	 
+	 @GetMapping({"getAllUsers"})
+	 public List<User>getAllUsers(){
+		 List<User>allUsers=new ArrayList();
+				 try {
+					 allUsers= userRepository.findAll();
+					 return allUsers;
+				 }catch(Exception e) {
+					 System.out.println("Exception while getting all users==>"+e.getMessage());
+				 }
+				return allUsers;
+	 }
+	 
+	 
+	 @PostMapping({"updateUser"})
+	 public Optional<User> updateUser(@PathVariable Long id) {
+		 Optional<User> currentUser=userRepository.findById(id);
+		 currentUser.get().setState(1);
+		 //implementer l'insertion au niveau de la table  ROLEUSERS
+		 return currentUser;
+	 }
 
 	 //****************************************************Methodes****************************************************************
 	 
@@ -218,12 +240,12 @@ public class Controller {
 		File fileYear=new File(pathWithYear);
 		if(!fileYear.exists()) {
 			fileYear.mkdir();
-		}else {
+		}
 			File fileMounth=new File(pathWithMounth);
 			if(!fileMounth.exists()) {
 				fileMounth.mkdir();
 			}
-		}
+		
         switch(description) {
         case "banque": 	 		List<Banque>lesBanques=banqueRepo.findAll();
         						//load file and compile it

@@ -13,6 +13,7 @@ import { Structure } from '../Models/Structure';
 import { CommunicationService } from '../Services/communication.service';
 import { error } from 'protractor';
 import { newArray, stringify } from '@angular/compiler/src/util';
+import { mobiscroll, MbscFormOptions } from '@mobiscroll/angular-lite';
 
 
 export interface PeriodicElement {
@@ -39,6 +40,10 @@ export class HomeComponent implements OnInit  {
   etat:String="";
   ELEMENT_DATA:Structure[]=[];
   dataSource :MatTableDataSource<Structure> =new MatTableDataSource(this.ELEMENT_DATA) ;
+  formSettings: MbscFormOptions = {
+    theme: 'mobiscroll',
+    themeVariant: 'light'
+};
     
   
 
@@ -76,7 +81,7 @@ export class HomeComponent implements OnInit  {
           this.comService.cloturePaie().subscribe(
             data=>{
                 console.log(data);
-                alert('La cloture est valide');
+                this.showAlert();
             },
             error=>{
                 console.log(error);
@@ -90,4 +95,15 @@ export class HomeComponent implements OnInit  {
           this.router.navigate(['auth/login']);
           window.location.reload();
         }
+        showAlert() {
+          mobiscroll.alert({
+              title: 'Cloture Paie',
+              message: "Les fichiers ont bien été générés et la paie a bien été cloturée."
+             /* ,callback: function () {
+                  mobiscroll.toast({
+                      message: 'Alert closed'
+                  });
+              }*/
+          });
+      }
 }

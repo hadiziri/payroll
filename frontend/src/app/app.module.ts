@@ -22,6 +22,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HeaderComponent } from './header/header.component';
 import {MatCardModule} from '@angular/material/card';
+import { MbscModule } from '@mobiscroll/angular-lite';
 
 
 
@@ -40,7 +41,7 @@ import {MatCardModule} from '@angular/material/card';
     HttpClientModule,ROUTING, BrowserAnimationsModule, MatSortModule,
     MatTableModule,
     MatSortModule,
-    MatTableModule,MatPaginatorModule,MatIconModule,FormsModule,MatCardModule
+    MatTableModule,MatPaginatorModule,MatIconModule,FormsModule,MatCardModule,MbscModule
   
   ],
   providers: [httpInterceptorProviders],
