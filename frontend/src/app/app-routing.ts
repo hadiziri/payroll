@@ -18,7 +18,7 @@ const APP_ROUTING : Routes =[
     {path :"updateStructure/:id", component :UpdateStructureComponent},
     {path: 'auth/login',component: LoginComponent},
     {path: 'signup',component: RegisterComponent},
-    {path :"**", component: ErrorComponent}
+    {path :"Error", component: ErrorComponent}
    
     
 ]

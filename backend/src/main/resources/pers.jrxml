@@ -1,0 +1,2090 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="text_output" pageWidth="8000" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="9a0b1db2-1ed0-44e1-960b-4626cea0097d">
+	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+	<field name="MAT" class="java.lang.String"/>
+	<field name="CSOC" class="java.lang.String"/>
+	<field name="DIV" class="java.lang.String"/>
+	<field name="SUITORG" class="java.lang.String"/>
+	<field name="LOCTRAV" class="java.lang.String"/>
+	<field name="NOM" class="java.lang.String"/>
+	<field name="ANAL" class="java.lang.String"/>
+	<field name="DATNAIS" class="java.lang.String"/>
+	<field name="LIEUNAIS" class="java.lang.String"/>
+	<field name="SEXE" class="java.lang.String"/>
+	<field name="ALGETR" class="java.lang.String"/>
+	<field name="DATREC" class="java.lang.String"/>
+	<field name="PC" class="java.lang.String"/>
+	<field name="DATSOR" class="java.lang.String"/>
+	<field name="MOTIF" class="java.lang.String"/>
+	<field name="SF" class="java.lang.String"/>
+	<field name="SCJT" class="java.lang.String"/>
+	<field name="QF" class="java.lang.String"/>
+	<field name="ENFS10" class="java.lang.String"/>
+	<field name="ENFI10" class="java.lang.String"/>
+	<field name="GSANG" class="java.lang.String"/>
+	<field name="LANG" class="java.lang.String"/>
+	<field name="FIL1" class="java.lang.String"/>
+	<field name="CORPS" class="java.lang.String"/>
+	<field name="CATIEP" class="java.lang.String"/>
+	<field name="SECIEP" class="java.lang.String"/>
+	<field name="CODIP" class="java.lang.String"/>
+	<field name="NBPTS" class="java.lang.String"/>
+	<field name="DISP" class="java.lang.String"/>
+	<field name="EXPHS" class="java.lang.String"/>
+	<field name="EXPSECT" class="java.lang.String"/>
+	<field name="ANCSH" class="java.lang.String"/>
+	<field name="GRPE" class="java.lang.String"/>
+	<field name="ECHL" class="java.lang.String"/>
+	<field name="ECHN" class="java.lang.String"/>
+	<field name="DATEFF" class="java.lang.String"/>
+	<field name="FIL2" class="java.lang.String"/>
+	<field name="PROM" class="java.lang.String"/>
+	<field name="SANCT" class="java.lang.String"/>
+	<field name="CSAL" class="java.lang.String"/>
+	<field name="SALBASE" class="java.lang.String"/>
+	<field name="SCLASS" class="java.lang.String"/>
+	<field name="CFONCT" class="java.lang.String"/>
+	<field name="LIBFONC" class="java.lang.String"/>
+	<field name="ITPISP" class="java.lang.String"/>
+	<field name="NUIS" class="java.lang.String"/>
+	<field name="CPV" class="java.lang.String"/>
+	<field name="CTRANS" class="java.lang.String"/>
+	<field name="CPAIEM" class="java.lang.String"/>
+	<field name="NUMCPT" class="java.lang.String"/>
+	<field name="CAFFECT" class="java.lang.String"/>
+	<field name="CMUT" class="java.lang.String"/>
+	<field name="CSS" class="java.lang.String"/>
+	<field name="CAF" class="java.lang.String"/>
+	<field name="CRET" class="java.lang.String"/>
+	<field name="CMOUDJ" class="java.lang.String"/>
+	<field name="NBMOUDJ" class="java.lang.String"/>
+	<field name="NSSAGT" class="java.lang.String"/>
+	<field name="NSSEMP" class="java.lang.String"/>
+	<field name="FIL4" class="java.lang.String"/>
+	<field name="MTPVOIT" class="java.lang.String"/>
+	<field name="NBMPVT" class="java.lang.String"/>
+	<field name="DATDBVT" class="java.lang.String"/>
+	<field name="CPRSOC" class="java.lang.String"/>
+	<field name="FIL5" class="java.lang.String"/>
+	<field name="MTSOC" class="java.lang.String"/>
+	<field name="NBMSSOC" class="java.lang.String"/>
+	<field name="DTDBPSOC" class="java.lang.String"/>
+	<field name="CAUTPRT" class="java.lang.String"/>
+	<field name="MTAUTPRT" class="java.lang.String"/>
+	<field name="TOTMSAUP" class="java.lang.String"/>
+	<field name="DTDBAUP" class="java.lang.String"/>
+	<field name="ADRESSE" class="java.lang.String"/>
+	<field name="LOCADR" class="java.lang.String"/>
+	<field name="SLOCADR" class="java.lang.String"/>
+	<field name="DISTADR" class="java.lang.String"/>
+	<field name="CLOGT" class="java.lang.String"/>
+	<field name="PAYNAIS" class="java.lang.String"/>
+	<field name="FIL6" class="java.lang.String"/>
+	<field name="CPOS" class="java.lang.String"/>
+	<field name="FILX" class="java.lang.String"/>
+	<field name="NORIB" class="java.lang.String"/>
+	<field name="FIL7" class="java.lang.String"/>
+	<field name="RUB1" class="java.lang.String"/>
+	<field name="SENS1" class="java.lang.String"/>
+	<field name="MONT1" class="java.lang.String"/>
+	<field name="RUB2" class="java.lang.String"/>
+	<field name="SENS2" class="java.lang.String"/>
+	<field name="MONT2" class="java.lang.String"/>
+	<field name="RUB3" class="java.lang.String"/>
+	<field name="SENS3" class="java.lang.String"/>
+	<field name="MONT3" class="java.lang.String"/>
+	<field name="RUB4" class="java.lang.String"/>
+	<field name="SENS4" class="java.lang.String"/>
+	<field name="MONT4" class="java.lang.String"/>
+	<field name="RUB5" class="java.lang.String"/>
+	<field name="SENS5" class="java.lang.String"/>
+	<field name="MONT5" class="java.lang.String"/>
+	<field name="RUB6" class="java.lang.String"/>
+	<field name="SENS6" class="java.lang.String"/>
+	<field name="MONT6" class="java.lang.String"/>
+	<field name="RUB7" class="java.lang.String"/>
+	<field name="SENS7" class="java.lang.String"/>
+	<field name="MONT7" class="java.lang.String"/>
+	<field name="RUB8" class="java.lang.String"/>
+	<field name="SENS8" class="java.lang.String"/>
+	<field name="MONT8" class="java.lang.String"/>
+	<field name="RUB9" class="java.lang.String"/>
+	<field name="SENS9" class="java.lang.String"/>
+	<field name="MONT9" class="java.lang.String"/>
+	<field name="RUB10" class="java.lang.String"/>
+	<field name="SENS10" class="java.lang.String"/>
+	<field name="MONT10" class="java.lang.String"/>
+	<field name="RUB11" class="java.lang.String"/>
+	<field name="SENS11" class="java.lang.String"/>
+	<field name="MONT11" class="java.lang.String"/>
+	<field name="RUB12" class="java.lang.String"/>
+	<field name="SENS12" class="java.lang.String"/>
+	<field name="MONT12" class="java.lang.String"/>
+	<field name="DATEMAJ" class="java.lang.String"/>
+	<field name="JOURNEE" class="java.lang.String"/>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="20" uuid="d065f8ed-0c05-47d0-a679-a392c9cfabe5">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="60" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CSOC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="570" y="0" width="70" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[LIEUNAIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="790" y="0" width="60" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="700" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ALGETR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="640" y="0" width="70" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SEXE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="60" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[LOCTRAV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ANAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="510" y="0" width="60" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATNAIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="0" width="64" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUITORG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1040" y="0" width="80" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SCJT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1120" y="0" width="80" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[QF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1680" y="0" width="80" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CATIEP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2160" y="0" width="80" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXPSECT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2240" y="0" width="80" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ANCSH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3120" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3970" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPRSOC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4870" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO_RIB]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5170" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SENS2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5920" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SENS7]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6770" y="0" width="70" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATE_MAJ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6840" y="0" width="70" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[JOURNEE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6720" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONT12]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6670" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SENS12]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6620" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUB12]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6570" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONT11]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6520" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SENS11]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6470" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUB11]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6420" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONT10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6370" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SENS10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6320" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUB10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6120" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONT8]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6270" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONT9]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6220" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SENS9]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6170" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUB9]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6070" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SENS8]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6020" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUB8]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5970" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONT7]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5870" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUB7]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5820" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONT6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5770" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SENS6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5720" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUB6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5670" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONT5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5620" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SENS5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5570" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUB5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5520" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONT4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5470" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SENS4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5420" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUB4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5370" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONT3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5320" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SENS3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5270" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUB3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5220" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONT2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5070" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONT1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5020" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SENS1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4970" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUB1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4920" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FIL7]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5120" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUB2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4820" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FILX]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4770" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4720" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FIL6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4670" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PAYNAIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4620" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLOGT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4020" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FIL5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4520" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SLOCADR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4470" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[LOCADR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4420" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADRESSE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4370" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DTDBAUP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4320" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTMSAUP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4270" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MTAUTPRT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4220" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAUTPRT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4170" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DTDBPSOC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4120" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NBMSSOC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4070" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MTSOC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4570" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DISTADR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3920" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATDBVT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3870" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NBMPVT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3820" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MTPVOIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3770" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FIL4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3720" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NSSEMP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3670" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NSSAGT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3620" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NBMOUDJ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3570" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CMOUDJ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3520" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CRET]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3470" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3420" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CSS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3370" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CMUT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3320" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAFFECT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3270" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NUMCPT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3220" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPAIEM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3170" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CTRANS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2920" y="0" width="40" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CFONCT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2810" y="0" width="60" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SALBASE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2450" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ECHN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3070" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NUIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3010" y="0" width="60" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ITPISP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2960" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[LIBFONC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2870" y="0" width="50" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SCALSS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2750" y="0" width="60" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CSAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2630" y="0" width="60" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2690" y="0" width="60" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SANCT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2560" y="0" width="70" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FIL2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2500" y="0" width="60" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATEFF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2380" y="0" width="70" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ECHL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2320" y="0" width="60" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GRPE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2080" y="0" width="80" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXPHS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2000" y="0" width="80" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DISP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1920" y="0" width="80" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NBPTS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1840" y="0" width="80" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1760" y="0" width="80" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SECIEP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1600" y="0" width="80" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CORPS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1520" y="0" width="80" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FIL1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1440" y="0" width="80" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[LANG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1360" y="0" width="80" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GSANG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1280" y="0" width="80" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ENFI10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1200" y="0" width="80" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ENFS10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="960" y="0" width="80" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="890" y="0" width="70" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MOTIF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="850" y="0" width="39" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATSOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="750" y="0" width="40" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATREC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="60" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="0" width="60" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SLOCTRAV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="0" width="76" height="20" uuid="4b1f5b5c-4c61-4159-9357-041fd8e3e775"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIV]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="80" height="20" uuid="652256e2-0f1e-4848-b1d0-d064caaa5020">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{MAT}==null?"":$F{MAT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="60" height="20" uuid="380af714-4dbd-4e0f-ae23-bfada0449a2f">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{CSOC}==null?"":$F{CSOC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="0" width="76" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{DIV}==null?"":$F{DIV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1280" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{ENFI10}==null?"":$F{ENFI10}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1840" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CODIP}==null?"":$F{CODIP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2240" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{ANCSH}==null?"":$F{ANCSH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3320" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CAFFECT}==null?"":$F{CAFFECT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4070" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{MTSOC}==null?"":$F{MTSOC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5120" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{RUB2}==null?"":$F{RUB2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5870" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{RUB7}==null?"":$F{RUB7}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6840" y="0" width="70" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{JOURNEE}==null?"":$F{JOURNEE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6770" y="0" width="70" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{DATEMAJ}==null?"":$F{DATEMAJ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6720" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{MONT12}==null?"":$F{MONT12}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6670" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SENS12}==null?"":$F{SENS12}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6620" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{RUB12}==null?"":$F{RUB12}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6570" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{MONT11}==null?"":$F{MONT11}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6520" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SENS11}==null?"":$F{SENS11}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6470" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{RUB11}==null?"":$F{RUB11}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6420" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{MONT10}==null?"":$F{MONT10}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6370" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SENS10}==null?"":$F{SENS10}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6320" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{RUB10}==null?"":$F{RUB10}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6120" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{MONT8}==null?"":$F{MONT8}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6270" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{MONT9}==null?"":$F{MONT9}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6220" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SENS9}==null?"":$F{SENS9}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6170" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{RUB9}==null?"":$F{RUB9}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6070" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SENS8}==null?"":$F{SENS8}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6020" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{RUB8}==null?"":$F{RUB8}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5970" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{MONT7}==null?"":$F{MONT7}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5920" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SENS7}==null?"":$F{SENS7}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5820" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{MONT6}==null?"":$F{MONT6}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5770" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SENS6}==null?"":$F{SENS6}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5720" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{RUB6}==null?"":$F{RUB6}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5670" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{MONT5}==null?"":$F{MONT5}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5620" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SENS5}==null?"":$F{SENS5}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5570" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{RUB5}==null?"":$F{RUB5}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5520" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{MONT4}==null?"":$F{MONT4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5470" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SENS4}==null?"":$F{SENS4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5420" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{RUB4}==null?"":$F{RUB4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5370" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{MONT3}==null?"":$F{MONT3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5320" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SENS3}==null?"":$F{SENS3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5270" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{RUB3}==null?"":$F{RUB3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5220" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{MONT2}==null?"":$F{MONT2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5170" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SENS2}==null?"":$F{SENS2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5070" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{MONT1}==null?"":$F{MONT1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5020" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SENS1}==null?"":$F{SENS1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4970" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{RUB1}==null?"":$F{RUB1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4920" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{FIL7}==null?"":$F{FIL7}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4870" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{NORIB}==null?"":$F{NORIB}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4820" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{FILX}==null?"":$F{FILX}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4770" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CPOS}==null?"":$F{CPOS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4720" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{FIL6}==null?"":$F{FIL6}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4670" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{PAYNAIS}==null?"":$F{PAYNAIS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4620" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CLOGT}==null?"":$F{CLOGT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4570" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{DISTADR}==null?"":$F{DISTADR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4520" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SLOCADR}==null?"":$F{SLOCADR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4470" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{LOCADR}==null?"":$F{LOCADR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4420" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{ADRESSE}==null?"":$F{ADRESSE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4370" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{DTDBAUP}==null?"":$F{DTDBAUP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4320" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{TOTMSAUP}==null?"":$F{TOTMSAUP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4270" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{MTAUTPRT}==null?"":$F{MTAUTPRT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4220" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CAUTPRT}==null?"":$F{CAUTPRT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4170" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{DTDBPSOC}==null?"":$F{DTDBPSOC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4120" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{NBMSSOC}==null?"":$F{NBMSSOC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4020" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{FIL5}==null?"":$F{FIL5}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3970" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CPRSOC}==null?"":$F{CPRSOC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3920" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{DATDBVT}==null?"":$F{DATDBVT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3870" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{NBMPVT}==null?"":$F{NBMPVT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3820" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{MTPVOIT}==null?"":$F{MTPVOIT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3770" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{FIL4}==null?"":$F{FIL4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3720" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{NSSEMP}==null?"":$F{NSSEMP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3670" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{NSSAGT}==null?"":$F{NSSAGT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3620" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{NBMOUDJ}==null?"":$F{NBMOUDJ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3570" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CMOUDJ}==null?"":$F{CMOUDJ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3520" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CRET}==null?"":$F{CRET}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3470" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CAF}==null?"":$F{CAF}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3420" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CSS}==null?"":$F{CSS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3370" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CMUT}==null?"":$F{CMUT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3270" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{NUMCPT}==null?"":$F{NUMCPT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3220" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CPAIEM}==null?"":$F{CPAIEM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3170" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CTRANS}==null?"":$F{CTRANS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3120" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CPV}==null?"":$F{CPV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3070" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{NUIS}==null?"":$F{NUIS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3010" y="0" width="60" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{ITPISP}==null?"":$F{ITPISP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2960" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{LIBFONC}==null?"":$F{LIBFONC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2920" y="0" width="40" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CFONCT}==null?"":$F{CFONCT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2870" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SCLASS}==null?"":$F{SCLASS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2810" y="0" width="60" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SALBASE}==null?"":$F{SALBASE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2750" y="0" width="60" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CSAL}==null?"":$F{CSAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2690" y="0" width="60" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SANCT}==null?"":$F{SANCT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2630" y="0" width="60" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{PROM}==null?"":$F{PROM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2560" y="0" width="70" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{FIL2}==null?"":$F{FIL2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2500" y="0" width="60" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{DATEFF}==null?"":$F{DATEFF}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2450" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{ECHN}==null?"":$F{ECHN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2380" y="0" width="70" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{ECHL}==null?"":$F{ECHL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2320" y="0" width="60" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{GRPE}==null?"":$F{GRPE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2160" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{EXPSECT}==null?"":$F{EXPSECT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2080" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{EXPHS}==null?"":$F{EXPHS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2000" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{DISP}==null?"":$F{DISP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1920" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{NBPTS}==null?"":$F{NBPTS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1760" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SECIEP}==null?"":$F{SECIEP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1680" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CATIEP}==null?"":$F{CATIEP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1600" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{CORPS}==null?"":$F{CORPS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1520" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{FIL1}==null?"":$F{FIL1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1440" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{LANG}==null?"":$F{LANG}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1360" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{GSANG}==null?"":$F{GSANG}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1200" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{ENFS10}==null?"":$F{ENFS10}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1040" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SCJT}==null?"":$F{SCJT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="960" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SF}==null?"":$F{SF}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1120" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{QF}==null?"":$F{QF}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="890" y="0" width="70" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{MOTIF}==null?"":$F{MOTIF}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="850" y="0" width="40" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{DATSOR}==null?"":$F{DATSOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="790" y="0" width="60" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{PC}==null?"":$F{PC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="750" y="0" width="40" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{DATREC}==null?"":$F{DATREC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="700" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{ALGETR}==null?"":$F{ALGETR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="640" y="0" width="60" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SEXE}==null?"":$F{SEXE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="570" y="0" width="70" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{LIEUNAIS}==null?"":$F{LIEUNAIS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="510" y="0" width="60" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{DATNAIS}==null?"":$F{DATNAIS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="50" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{ANAL}==null?"":$F{ANAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="60" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{NOM}==null?"":$F{NOM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="0" width="60" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{LOCTRAV}==null?"":$F{LOCTRAV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="60" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{LOCTRAV}==null?"":$F{LOCTRAV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="216" y="0" width="64" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{SUITORG}==null?"":$F{SUITORG}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

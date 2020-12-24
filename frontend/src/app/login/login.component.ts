@@ -5,6 +5,7 @@ import { AuthService } from '../auth/auth.service';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { AuthLoginInfo } from '../auth/login-info';
 import { mobiscroll, MbscFormOptions } from '@mobiscroll/angular-lite';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-login',
@@ -62,6 +63,7 @@ export class LoginComponent implements OnInit {
       error => {
         console.log(error);
         this.errorMessage = error.error.message;
+        this.state=0;
         this.isLoginFailed = true;
       }
     );

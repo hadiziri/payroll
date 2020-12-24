@@ -1,9 +1,12 @@
 import { clotureFiles } from './../Models/cloturesFiles';
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpErrorResponse} from '@angular/common/http'
 import { threadId } from 'worker_threads';
 import { Observable } from 'rxjs';
 import { Structure } from '../Models/Structure';
+
+import { throwError } from 'rxjs';
+import { catchError  } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +26,17 @@ public host:string;
   }
 
   public cloturePaie() :Observable<Array<clotureFiles>>{
-    return this.httpClient.get<Array<clotureFiles>>(this.host+"generateTableFiles");
+    return this.httpClient.get<Array<clotureFiles>>(this.host+"generateTableFiles").pipe(
+      catchError((err) => {
+        console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+    
+   
+  
   }
+
 
 }

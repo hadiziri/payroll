@@ -1,4 +1,5 @@
-import { AuthInterceptor, httpInterceptorProviders } from './auth/auth-interceptor';
+import { GlobalErrorHandlerService } from './Services/global-error-handler.service';
+import { AuthInterceptor } from './auth/auth-interceptor';
 import { HomeComponent } from './home/home.component';
 import { ErrorComponent } from './error/error.component';
 import { UpdateStructureComponent } from './update-structure/update-structure.component';
@@ -6,8 +7,9 @@ import { DeleteStructureComponent } from './delete-structure/delete-structure.co
 import { AddStructureComponent } from './add-structure/add-structure.component';
 import{ROUTING} from './app-routing';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http'
+import { NgModule, ErrorHandler } from '@angular/core';
+import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http'
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -44,7 +46,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatSortModule,
     MatTableModule,MatPaginatorModule,MatIconModule,FormsModule,MatCardModule,MbscModule,MatProgressSpinnerModule
   ],
-  providers: [httpInterceptorProviders],
+  providers: [
+    { provide: HTTP_INTERCEPTORS,    useClass: AuthInterceptor,    multi: true  },
+    { provide: ErrorHandler, useClass:GlobalErrorHandlerService}
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit  {
   icon_etat:String="vert.svg";
   etat:String="";
   ELEMENT_DATA:Structure[]=[];
+
   dataSource :MatTableDataSource<Structure> =new MatTableDataSource(this.ELEMENT_DATA) ;
   formSettings: MbscFormOptions = {
     theme: 'mobiscroll',
@@ -75,6 +76,9 @@ showSpinner:Boolean=false;
         },
         error=>{
             console.log(error);
+            alert(error);
+            throw error;
+            
         }
       )
         }
@@ -83,12 +87,21 @@ showSpinner:Boolean=false;
           this.showSpinner=true;
           this.comService.cloturePaie().subscribe(
             data=>{
-                console.log(data);
-                this.showAlert();
-                this.showSpinner=false;
+                
+                  console.log(data);
+                  this.showAlert();
+                  
+                  this.showSpinner=false;
+               
+                
+               
+              
             },
             error=>{
                 console.log(error);
+                alert(error);
+                this.showSpinner=false;
+                throw error;
             }
           )
         }
@@ -96,7 +109,7 @@ showSpinner:Boolean=false;
         logout() {
           this.token.signOut();
         
-          this.router.navigate(['auth/login']);
+          this.router.navigateByUrl("auth/login");
           window.location.reload();
         }
         showAlert() {
