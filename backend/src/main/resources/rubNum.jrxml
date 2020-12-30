@@ -20,7 +20,7 @@
 	<field name="CODEPAIE" class="java.lang.String"/>
 	<field name="NORUB" class="java.lang.String"/>
 	<field name="LIBRUB" class="java.lang.String"/>
-	<field name="CODENATUR" class="java.lang.String"/>
+	<field name="CODENATUR" class="java.lang.Integer"/>
 	<field name="DTDEB" class="java.lang.String"/>
 	<field name="DEFIN" class="java.lang.String"/>
 	<field name="MTMOIS" class="java.lang.String"/>
@@ -388,7 +388,7 @@
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[$F{CODENATUR}==null?"":$F{CODENATUR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{CODENATUR}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="1360" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">

@@ -1,3 +1,4 @@
+import { FormGroup, FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateStructureComponent implements OnInit {
 
-  constructor() { }
-
+  
   ngOnInit(): void {
+    throw new Error('Method not implemented.');
   }
 
+  
 }

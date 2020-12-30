@@ -35,7 +35,7 @@ export class AuthInterceptor implements HttpInterceptor {
                     
                   }else{
                       if(error.status==500||error.status==503||error.status==504){
-                        this.router.navigateByUrl('Error');
+                       
                         return throwError(error.status +": Le serveur ne repond pas.\nVeuillez actualiser la page ou bien contacter l'administrateur.");
                       }else{
                         this.router.navigateByUrl('Error');

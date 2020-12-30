@@ -7,6 +7,7 @@ import { Structure } from '../Models/Structure';
 
 import { throwError } from 'rxjs';
 import { catchError  } from 'rxjs/operators';
+import { FileToPrint } from '../Models/FileToPrint';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +18,26 @@ public host:string;
     this.host = 'http://localhost:8080/';
   }
 
-   public getFiles(name:String){
-     return this.httpClient.get(this.host+"generate2/"+name);
+   public getEtats():Observable<Array<clotureFiles>>{
+     return this.httpClient.get<Array<clotureFiles>>(this.host+"allEtats"+name).pipe(
+      catchError((err) => {
+        console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
    }
 
   public getAllStructures():Observable <Array<Structure>>{
-    return this.httpClient.get <Array<Structure>>(this.host+"getAllStructures");
+    return this.httpClient.get <Array<Structure>>(this.host+"getAllStructures").pipe(
+      catchError((err) => {
+        console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+    
+  
   }
 
   public cloturePaie() :Observable<Array<clotureFiles>>{
@@ -34,9 +49,16 @@ public host:string;
       })
     );
     
-   
-  
   }
 
+  public saveFileToPrint(file:FileToPrint):Observable<FileToPrint>{
+    return this.httpClient.post<FileToPrint>(this.host+"fileToPrint",file).pipe(
+      catchError((err) => {
+        console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
 
 }

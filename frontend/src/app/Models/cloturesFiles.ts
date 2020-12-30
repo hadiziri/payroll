@@ -1,9 +1,9 @@
 export interface clotureFiles{
-  IDFILETYPE :number;
-  IDFOLDER  :number;
-  IDFILECATEGORY  :number;
-  PREFIXFILETYPE :String;
-  DESCFILETYPE:String;
-  FOLDERPATH:String;
-  FOLDERNAME:String;
+ idfiletype :number;
+  idfolder  :number;
+  idfilecategory  :number;
+  prefixfiletype :String;
+  descfiletype:String;
+ folderpath:String;
+ foldername:String;
 }

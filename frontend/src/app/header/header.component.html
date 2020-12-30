@@ -13,8 +13,8 @@
             <li><a [routerLink]="['/structures']" routerLinkActive="router-link-active" >Modifier/Supprimer structure</a></li>
           </ul>
         </li>
-        <li><a [routerLink]="['/FilesGenerator']" routerLinkActive="router-link-active" >Historique</a></li>
-        <li><a href="#">Paramétres</a></li>
+        <li><a [routerLink]="['/historique']" routerLinkActive="router-link-active" >Historique</a></li>
+        <li><a [routerLink]="['/parametre']">Paramétres</a></li>
 
         <li *ngIf="!connection" class="nav-item">
           <a class="nav-link" [routerLink]="['/auth/login']">Connexion</a>

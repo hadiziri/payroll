@@ -2,10 +2,12 @@ package com.sonatrach.dz.cloturePaie.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name ="CLOTURE_PAIE")
+@NamedQuery(name = "CloturePaie.findByDesc", query = "SELECT p FROM CloturePaie p WHERE DESCFILETYPE=?1")
 public class CloturePaie {
 	@Id
 	private Integer IDFILETYPE;

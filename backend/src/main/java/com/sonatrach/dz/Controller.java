@@ -43,6 +43,8 @@ import com.sonatrach.dz.dep.domain.Dep;
 import com.sonatrach.dz.dep.repo.DepRepo;
 import com.sonatrach.dz.diplome.domain.Diplome;
 import com.sonatrach.dz.diplome.repo.DiplomeRepo;
+import com.sonatrach.dz.fileToPrint.domain.FileToPrint;
+import com.sonatrach.dz.fileToPrint.repo.FileToPrintRepo;
 import com.sonatrach.dz.fonction.domain.Fonction;
 import com.sonatrach.dz.fonction.repo.FonctionRepo;
 import com.sonatrach.dz.localite.domain.Localite;
@@ -135,12 +137,13 @@ public class Controller {
 	RubAlphRepo rubAlphRepo;
 	@Autowired
 	RubNumRepo rubNumRepo;
-	
+	@Autowired
+	FileToPrintRepo fileToPrintRepo;
 	
 	// ****************************************API*****************************************************************************
 	@GetMapping({ "/allBanques" })
-	public List<Change> getAllBanques() {
-		return changRepo.findAll();
+	public List<RubAlph>getAllBanques() {
+		return  rubAlphRepo.findAll();
 	}
 
 	@GetMapping({ "/getAllStructures" })
@@ -178,7 +181,55 @@ public class Controller {
 
 		return toutLesFichiers;
 	}
+	
+	@GetMapping({"generateFrubA"})
+	public List<CloturePaie> generateFrubA() throws FileNotFoundException, JRException {
+		List<CloturePaie> fileFrub=new ArrayList();
+		try {
+	
+					
+			fileFrub=clotureRepo.findByDesc("frubA");
+				List<RubAlph> lesFrubAlph = rubAlphRepo.findAll();
+				
+				// **********************************************get current date from payMonth
 
+							PayMonth currentDate = paymonthRepo.findByState();
+							String currentYear = currentDate.getPaymonth().substring(0, 4);
+							String currentMonth = currentDate.getPaymonth().substring(4, 6);
+							String dateFormat = currentYear + "-" + currentMonth;
+
+							// ********************************folder generation if not exist
+							String pathWithYear = fileFrub.get(0).getFOLDERPATH() + fileFrub.get(0).getFOLDERNAME() + "\\" + currentYear;
+							String pathWithMounth = pathWithYear + "\\" + dateFormat;
+							File fileYear = new File(pathWithYear);
+							if (!fileYear.exists()) {
+								fileYear.mkdir();
+							}
+							File fileMounth = new File(pathWithMounth);
+							if (!fileMounth.exists()) {
+								fileMounth.mkdir();
+							}
+				// load file and compile it
+				File filerubA = ResourceUtils.getFile("classpath:rubAlph.jrxml");
+				JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA .getAbsolutePath());
+				JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(lesFrubAlph);
+				JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, null, dataSource12);
+				JRXlsxExporter exporter12= new JRXlsxExporter();
+				exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+				exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+				exporter12.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint12);
+				Object outputFileName12 = pathWithMounth + "\\" + fileFrub.get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
+				exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
+				exporter12.exportReport();
+				return fileFrub;
+			
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage()+"==>while generating FRUBALPH");
+		}
+		return fileFrub;
+	
+	}
 	@RequestMapping(value = "/api/auth/signin", method = RequestMethod.POST)
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
@@ -241,6 +292,65 @@ public class Controller {
 		currentUser.get().setState(1);
 		// implementer l'insertion au niveau de la table ROLEUSERS
 		return currentUser;
+	}
+	
+	//for settings : changer psw
+	@PostMapping({"updatePsw"})
+	public User updatePsw(@RequestBody User u) {
+		Optional<User> currentUser =userRepository.findByUsername(u.getUsername());
+		User user= new User();
+		if(currentUser!=null) {
+			currentUser.get().setPassword(encoder.encode(u.getPassword()));
+			user.setIduser(currentUser.get().getIduser());
+			user.setEmail(currentUser.get().getEmail());
+			user.setName(currentUser.get().getName());
+			user.setPassword(currentUser.get().getPassword());
+			user.setState(currentUser.get().getState());
+			user.setUsername(currentUser.get().getUsername());
+			userRepository.save(user);
+		}
+			return user;
+		
+		
+	}
+	
+	//for settings : avoir tout les etats paie pour séléctionner les etat à imprimer
+	@GetMapping({"allEtats"})
+	public List<CloturePaie> getAllEtat(){
+		List<CloturePaie> toutLesEtats = new ArrayList();
+		try {
+
+			// ***************************get all files to generate and its directory path
+			toutLesEtats= clotureRepo.findByDesc("etat");
+			return toutLesEtats;
+
+		} catch (Exception e) {
+			
+			System.out.println("Erreur lors de la génération des fichiers:   "+e.getMessage()); 
+		}
+
+		return toutLesEtats;
+	}
+	
+	//to save file to print foreach sturucture choosed by user
+	@PostMapping({"fileToPrint"})
+	public FileToPrint saveFileToPrint(@RequestBody FileToPrint file){
+		Date date = new Date();
+		FileToPrint myFile=new FileToPrint();
+		myFile.setAddedDate(date);
+		myFile.setIdFileType(file.getIdFileType());
+		myFile.setIdStructure(file.getIdStructure());
+
+
+        try {
+        	fileToPrintRepo.save(myFile);
+        	
+        	return myFile;
+        }catch(Exception e) {
+        	System.out.println("Exception while saving file to print ==>"+e.getMessage());
+        }
+		return null;
+		
 	}
 
 	// ****************************************************Methodes****************************************************************
@@ -446,24 +556,11 @@ public class Controller {
 				exporter11.exportReport();
 				break;
 				
-			case "frubA":
-				List<RubAlph> lesFrubAlph = rubAlphRepo.findAll();
-				// load file and compile it
-				File filerubA = ResourceUtils.getFile("classpath:rubAlph.jrxml");
-				JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA .getAbsolutePath());
-				JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(lesFrubAlph);
-				JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, null, dataSource12);
-				JRXlsxExporter exporter12= new JRXlsxExporter();
-				exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
-				exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
-				exporter12.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint12);
-				Object outputFileName12 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".xlsx";
-				exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
-				exporter12.exportReport();
-				break;
+			
 				
 			case "frubN":
 				List<RubNum> lesFrubNum = rubNumRepo.findAll();
+				
 				// load file and compile it
 				File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml");
 				JasperReport jasperReport13 = JasperCompileManager.compileReport(filerubN.getAbsolutePath());
@@ -473,9 +570,9 @@ public class Controller {
 				exporter13.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 				exporter13.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 				exporter13.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint13);
-				Object outputFileName13 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".xlsx";
-				exporter13.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName13);
-				exporter13.exportReport();
+				Object outputFileName13 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".xlsx";				
+				exporter13.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName13);			
+				exporter13.exportReport();			
 				break;
 			default:
 				System.out.println("no match");

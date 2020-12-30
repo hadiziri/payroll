@@ -1,5 +1,6 @@
-<div class="container" >
-  <div class="row" >
+<body>
+<div class="container">
+  <div class="row">
     <div class="col-md-12 col-sm-9">
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="margin-top: 40px;">
 
@@ -77,7 +78,7 @@
         <svg width="25" height="25" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="40" fill="#3DBC14" />
         </svg>
-        <strong > fichiers générées et envoyées</strong>
+        <strong> fichiers générées et envoyées</strong>
       </li>
       <li>
         <svg width="25" height="25" viewBox="0 0 100 100">
@@ -103,20 +104,19 @@
   <div class="row">
     <div class="center2">
 
-    <button class="btn btn-primary btn-lg button" (click)="cloturerPaie()">Clôturer Paie</button>
-    <button class="btn btn-secondary btn-lg button" (click)="logout()">Se déconnecter</button>
-  </div>
+      <button id="new-board-btn" class="btn btn-primary btn-lg button" (click)="cloturerPaie()">Clôturer Paie</button>
+      <button class="btn btn-secondary btn-lg button" (click)="logout()">Se déconnecter</button>
+    </div>
   </div>
 
 
-  
-  
-    
+
+
+
   <div class="disable-background" *ngIf="showSpinner"></div>
-  <div class="center" *ngIf="showSpinner" >
-    <mat-progress-spinner diameter=65 
-                        mode="indeterminate"
-              >
-  </mat-progress-spinner> 
+  <div class="center" *ngIf="showSpinner">
+    <mat-progress-spinner diameter=65 mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
 </div>
-</div>
+</body>

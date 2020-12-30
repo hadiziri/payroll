@@ -71,6 +71,7 @@ showSpinner:Boolean=false;
       this.comService.getAllStructures().subscribe(
         (data)=>{
         this.ELEMENT_DATA=data;
+        console.log(data);
         this.dataSource=new MatTableDataSource(this.ELEMENT_DATA);
 
         },

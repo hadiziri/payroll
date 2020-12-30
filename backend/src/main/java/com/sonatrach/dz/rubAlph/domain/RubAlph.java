@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name ="PAIE_NEWPAIE")
+@Table(name ="PAIE_FRUB_A")
 public class RubAlph {
 	@Id
 	@Column(name="DATE_EXPL")
@@ -46,14 +46,14 @@ public class RubAlph {
 	@Column(name="LIB_RUB")
 	private String LIBRUB;
 	@Column(name="CODE_NATUR")
-	private String CODENATUR;
+	private Integer CODENATUR;
 	@Column(name="DT_DEB")
 	private String DTDEB;
-	@Column(name="DE_FIN")
+	@Column(name="DT_FIN")
 	private String DEFIN;
 	@Column(name="MT_MOIS")
 	private String MTMOIS;
-	@Column(name="MT_RAPPEL")
+	@Column(name="MT_RAPP")
 	private String MTRAPPEL;
 	@Column(name="TAUX")
 	private String TAUX;
@@ -177,10 +177,11 @@ public class RubAlph {
 	public void setLIBRUB(String lIBRUB) {
 		LIBRUB = lIBRUB;
 	}
-	public String getCODENATUR() {
+
+	public Integer getCODENATUR() {
 		return CODENATUR;
 	}
-	public void setCODENATUR(String cODENATUR) {
+	public void setCODENATUR(Integer cODENATUR) {
 		CODENATUR = cODENATUR;
 	}
 	public String getDTDEB() {

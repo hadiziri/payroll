@@ -1,3 +1,4 @@
+import { MatInputModule } from '@angular/material/input';
 import { GlobalErrorHandlerService } from './Services/global-error-handler.service';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { HomeComponent } from './home/home.component';
@@ -26,6 +27,16 @@ import { HeaderComponent } from './header/header.component';
 import {MatCardModule} from '@angular/material/card';
 import { MbscModule } from '@mobiscroll/angular-lite';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SettingsComponent } from './settings/settings.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatRippleModule } from '@angular/material/core';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { FileToPrintSettingsComponent } from './file-to-print-settings/file-to-print-settings.component';
 
 
 
@@ -36,7 +47,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
-    FilesGeneratorComponent,AddStructureComponent,DeleteStructureComponent,UpdateStructureComponent,ErrorComponent,HomeComponent, LoginComponent, RegisterComponent, HeaderComponent
+    FilesGeneratorComponent,AddStructureComponent,DeleteStructureComponent,UpdateStructureComponent,ErrorComponent,HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, SettingsComponent, FileToPrintSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +55,22 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     HttpClientModule,ROUTING, BrowserAnimationsModule, MatSortModule,
     MatTableModule,
     MatSortModule,
-    MatTableModule,MatPaginatorModule,MatIconModule,FormsModule,MatCardModule,MbscModule,MatProgressSpinnerModule
+    MatTableModule,
+    MatPaginatorModule,
+    MatIconModule,
+    FormsModule,
+    MatCardModule,
+    MbscModule,
+    MatProgressSpinnerModule,
+    MatStepperModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule,
+    MatCheckboxModule,
+    MatExpansionModule,
+    MatDividerModule,
+    MatSlideToggleModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS,    useClass: AuthInterceptor,    multi: true  },

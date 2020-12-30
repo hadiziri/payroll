@@ -1,13 +1,13 @@
 
 export interface Structure{
 
- IDSTRUCTURE:number;
- IDACTIVITY:number;
- STRUCTURENAME :string;
- STRUCTURECODELIKE:string;
-STRUCTURECODENOTLIKE:number;
-STATUSSTRUCTURE:number;
-EMAILGROUPMANAGERS:string;
+ idstructure:number;
+idactivity:number;
+ structurename :string;
+ structurecodelike:string;
+structurecodenotlike:number;
+statusstructure:number;
+emailgroupemanagers:string;
 
 
 	

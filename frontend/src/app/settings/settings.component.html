@@ -1,0 +1,68 @@
+<a style="font-size:30px;cursor:pointer" id="openSidenav" (click)="openNav()">&#9776; open</a>
+
+<div id="mySidenav" class="sidenav" [ngStyle]="{'width': isOpen==0?'250px':'0'}">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <a (click)="updatePsw()">Changer mot de passe</a>
+  <a (click)="fileToPrint()">Choisir rapports à imprimer</a>
+  <a (click)="updatePath()">Modifier chemin de stockage</a>
+</div>
+
+
+
+
+<div class="card m-3" *ngIf="psw">
+  <div class="card-body">
+
+    <mat-horizontal-stepper #stepper class="updatePsw">
+      <mat-step [stepControl]="firstFormGroup" errorMessage="Champ obligatoire">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Saisir votre nom d'utilisateur</ng-template>
+          <mat-form-field>
+            <mat-label>Nom d'utilisateur</mat-label>
+            <input matInput placeholder="nom utilisateur" type="text" formControlName="username" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Suivant</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup"
+        errorMessage="Champ invalid (mot de passe doit contenir au moins 6 caractères)">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Saisir le nouveau mot de passe</ng-template>
+          <mat-form-field>
+            <mat-label>Mot de passe</mat-label>
+            <input matInput placeholder="Nouveau mot de passe" type="password" formControlName="psw" required>
+          </mat-form-field>
+          <div>
+
+          </div>
+
+          <ng-template matStepLabel>Confirmer le mot de passe</ng-template>
+          <mat-form-field>
+            <mat-label>Confirmer le mot de passe</mat-label>
+            <input matInput placeholder="Confirmer le mot de passe" formControlName="confirm" required type="password">
+          </mat-form-field>
+          <div>
+
+
+            <button mat-button matStepperNext>suivant</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Enregistrer les modifications</ng-template>
+        <p>Enregistrer les modifications</p>
+        <div>
+          <button mat-button (click)="changerPsw()" [disabled]="isDisabled">Confirmer</button>
+
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+
+  </div>
+</div>
+
+
+
