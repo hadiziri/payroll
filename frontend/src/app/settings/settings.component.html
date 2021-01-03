@@ -1,22 +1,43 @@
-<a style="font-size:30px;cursor:pointer" id="openSidenav" (click)="openNav()">&#9776; open</a>
+<span id="openSidenav" (click)="openNav()">
+  <label class="hamburger-icon">
+  <span>&nbsp;</span>
+  <span>&nbsp;</span>
+  <span>&nbsp;</span>
+</label> 
+Cliquer pour ouvrir le menu</span>
 
-<div id="mySidenav" class="sidenav" [ngStyle]="{'width': isOpen==0?'250px':'0'}">
+<div id="mySidenav" class="sidenav" [ngStyle]="{'width': isOpen==0?'300px':'0'}">
   <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
-  <a (click)="updatePsw()">Changer mot de passe</a>
-  <a (click)="fileToPrint()">Choisir rapports à imprimer</a>
-  <a (click)="updatePath()">Modifier chemin de stockage</a>
+  <ul>
+    <li>
+      <a (click)="updatePsw()">Changer mot de passe</a>
+    </li>
+    <li>
+      <a (click)="fileToPrint()">Choisir rapports à imprimer</a>
+    </li>
+    <li>
+      <a (click)="updatePath()">Modifier chemin de stockage</a>
+    </li>
+    
+
+  </ul>
+ 
+  
+
+  
 </div>
 
 
 
 
-<div class="card m-3" *ngIf="psw">
+<div class="card m-6" *ngIf="psw" >
+  <h1 >Pour changer votre mot de passe veuillez suivre les etapes suivantes:</h1>
   <div class="card-body">
 
-    <mat-horizontal-stepper #stepper class="updatePsw">
+    <mat-horizontal-stepper #stepper class="updatePsw" style="background-color:#DAD7D8;padding-left: 90px; padding-right: 90px;">
       <mat-step [stepControl]="firstFormGroup" errorMessage="Champ obligatoire">
         <form [formGroup]="firstFormGroup">
-          <ng-template matStepLabel>Saisir votre nom d'utilisateur</ng-template>
+          <ng-template matStepLabel >Saisir votre nom d'utilisateur</ng-template>
           <mat-form-field>
             <mat-label>Nom d'utilisateur</mat-label>
             <input matInput placeholder="nom utilisateur" type="text" formControlName="username" required>
@@ -27,7 +48,7 @@
         </form>
       </mat-step>
       <mat-step [stepControl]="secondFormGroup"
-        errorMessage="Champ invalid (mot de passe doit contenir au moins 6 caractères)">
+        errorMessage="Champ invalid (les mots de passe ne sont pas identiques)">
         <form [formGroup]="secondFormGroup">
           <ng-template matStepLabel>Saisir le nouveau mot de passe</ng-template>
           <mat-form-field>

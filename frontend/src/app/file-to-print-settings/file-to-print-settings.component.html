@@ -3,30 +3,30 @@
     <div class="card-body">
     <form [formGroup]="fileToPrintFormGroup" >
   
-      <mat-accordion *ngFor="let structure of structureFormArray.controls; let j = index" style="margin: 8px;">
+      <mat-accordion *ngFor="let structure of structureFormArray.controls; let j = index" style="margin: 8px;" >
             <mat-expansion-panel (opened)="panelOpenState = true"
-                                 (closed)="panelOpenState = false">
+                                 (closed)="panelOpenState = false" (click)="updateCheckBoxes()">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                  {{strucures[j].structurename}} 
                 </mat-panel-title>
             
                 <mat-panel-description  formArrayName="structureSelected" >
-                  <mat-slide-toggle [formControlName]="j" ></mat-slide-toggle>
+                  <mat-slide-toggle [formControlName]="j"  ></mat-slide-toggle >
                   
                 </mat-panel-description>
              
   
               </mat-expansion-panel-header >
               <mat-panel-description style="display: block;">
-                <ul >
+               <ul >
               <li formArrayName="etatSelected" *ngFor="let etat of etatFormArray.controls; let i = index">
-                <mat-checkbox [formControlName]="i"  #checkboxes>
-                  {{toutLesEtats[i].prefixfiletype}}
-                 
+                <mat-checkbox [formControlName]="i"  #checkboxes (change)="updateSelectedEtatForStructure(toutLesEtats[i].idfiletype,strucures[j].idstructure)" >
+                 {{toutLesEtats[i].prefixfiletype}}
                 </mat-checkbox>
                 </li>
-              </ul>
+              </ul> 
+            
               <button  id="new-board-btn" class="btn btn-success" (click)="SelectFileToPrint()">Valider</button>
                 </mat-panel-description>
             </mat-expansion-panel>

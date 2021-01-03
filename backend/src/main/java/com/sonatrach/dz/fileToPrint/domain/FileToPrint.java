@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
@@ -14,6 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name ="FILETOPRINT")
 @IdClass(FileToPrintId.class)
+@NamedQuery(name = "FileToPrint.findByStructure", query = "SELECT p FROM FileToPrint p WHERE idStructure=?1")
 public class FileToPrint implements Serializable{
 	@Id
 	@Column(name="IDFILETYPE")

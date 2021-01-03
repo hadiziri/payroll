@@ -51,8 +51,8 @@ public host:string;
     
   }
 
-  public saveFileToPrint(file:FileToPrint):Observable<FileToPrint>{
-    return this.httpClient.post<FileToPrint>(this.host+"fileToPrint",file).pipe(
+  public saveFileToPrint(file:Array<FileToPrint>):Observable<Array<FileToPrint>>{
+    return this.httpClient.post<Array<FileToPrint>>(this.host+"saveFileToPrint",file).pipe(
       catchError((err) => {
         console.log('error caught in service')
         console.error(err);
@@ -60,5 +60,35 @@ public host:string;
       })
     );
   }
+
+  public deleteFileToPrint(file:Array<FileToPrint>):Observable<Array<FileToPrint>>{
+    return this.httpClient.post<Array<FileToPrint>>(this.host+"deleteFileToPrint",file).pipe(
+      catchError((err) => {
+        console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
+
+  public getAllFileToPrint():Observable<Array<FileToPrint>>{
+    return this.httpClient.get<Array<FileToPrint>>(this.host+"allFileToPrint").pipe(
+      catchError((err) => {
+        console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
+  public  getSelectedEtat(file:FileToPrint):Observable<Array<FileToPrint>>{
+    return this.httpClient.post<Array<FileToPrint>>(this.host+"selectedEtats",file).pipe(
+      catchError((err) => {
+        console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
+ 
 
 }

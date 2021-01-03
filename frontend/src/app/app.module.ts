@@ -37,6 +37,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FileToPrintSettingsComponent } from './file-to-print-settings/file-to-print-settings.component';
+import { GroupcheckboxesComponent } from './groupcheckboxes/groupcheckboxes.component';
 
 
 
@@ -47,7 +48,7 @@ import { FileToPrintSettingsComponent } from './file-to-print-settings/file-to-p
 @NgModule({
   declarations: [
     AppComponent,
-    FilesGeneratorComponent,AddStructureComponent,DeleteStructureComponent,UpdateStructureComponent,ErrorComponent,HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, SettingsComponent, FileToPrintSettingsComponent
+    FilesGeneratorComponent,AddStructureComponent,DeleteStructureComponent,UpdateStructureComponent,ErrorComponent,HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, SettingsComponent, FileToPrintSettingsComponent, GroupcheckboxesComponent
   ],
   imports: [
     BrowserModule,

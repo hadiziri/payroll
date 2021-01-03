@@ -75,6 +75,7 @@ import com.sonatrach.dz.structure.repo.StructureRepo;
 import com.sonatrach.dz.tabstructure.domain.TabStructure;
 import com.sonatrach.dz.tabstructure.repo.TabStructureRepo;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -89,6 +90,7 @@ import net.sf.jasperreports.engine.export.JRTextExporterParameter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
+
 /*
  * Developped by : AID FERIEL for SONATRACH --2020--
  * Email:aidferiel@gmail.com
@@ -139,11 +141,11 @@ public class Controller {
 	RubNumRepo rubNumRepo;
 	@Autowired
 	FileToPrintRepo fileToPrintRepo;
-	
+
 	// ****************************************API*****************************************************************************
 	@GetMapping({ "/allBanques" })
-	public List<RubAlph>getAllBanques() {
-		return  rubAlphRepo.findAll();
+	public List<RubAlph> getAllBanques() {
+		return rubAlphRepo.findAll();
 	}
 
 	@GetMapping({ "/getAllStructures" })
@@ -161,7 +163,7 @@ public class Controller {
 	@GetMapping({ "generateTableFiles" })
 	public List<CloturePaie> cloturePaie() {
 		List<CloturePaie> toutLesFichiers = new ArrayList();
-		
+
 		try {
 
 			// ***************************get all files to generate and its directory path
@@ -171,65 +173,66 @@ public class Controller {
 				String folderName = toutLesFichiers.get(i).getFOLDERNAME();
 				String fileName = toutLesFichiers.get(i).getPREFIXFILETYPE();
 				String description = toutLesFichiers.get(i).getDESCFILETYPE().toString();
-			    generateFiles(path, folderName, fileName, description);
+				generateFiles(path, folderName, fileName, description);
 			}
 
 		} catch (Exception e) {
-			
-			System.out.println("Erreur lors de la génération des fichiers:   "+e.getMessage()); 
+
+			System.out.println("Erreur lors de la génération des fichiers:   " + e.getMessage());
 		}
 
 		return toutLesFichiers;
 	}
-	
-	@GetMapping({"generateFrubA"})
+
+	@GetMapping({ "generateFrubA" })
 	public List<CloturePaie> generateFrubA() throws FileNotFoundException, JRException {
-		List<CloturePaie> fileFrub=new ArrayList();
+		List<CloturePaie> fileFrub = new ArrayList();
 		try {
-	
-					
-			fileFrub=clotureRepo.findByDesc("frubA");
-				List<RubAlph> lesFrubAlph = rubAlphRepo.findAll();
-				
-				// **********************************************get current date from payMonth
 
-							PayMonth currentDate = paymonthRepo.findByState();
-							String currentYear = currentDate.getPaymonth().substring(0, 4);
-							String currentMonth = currentDate.getPaymonth().substring(4, 6);
-							String dateFormat = currentYear + "-" + currentMonth;
+			fileFrub = clotureRepo.findByDesc("frubA");
+			List<RubAlph> lesFrubAlph = rubAlphRepo.findAll();
 
-							// ********************************folder generation if not exist
-							String pathWithYear = fileFrub.get(0).getFOLDERPATH() + fileFrub.get(0).getFOLDERNAME() + "\\" + currentYear;
-							String pathWithMounth = pathWithYear + "\\" + dateFormat;
-							File fileYear = new File(pathWithYear);
-							if (!fileYear.exists()) {
-								fileYear.mkdir();
-							}
-							File fileMounth = new File(pathWithMounth);
-							if (!fileMounth.exists()) {
-								fileMounth.mkdir();
-							}
-				// load file and compile it
-				File filerubA = ResourceUtils.getFile("classpath:rubAlph.jrxml");
-				JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA .getAbsolutePath());
-				JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(lesFrubAlph);
-				JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, null, dataSource12);
-				JRXlsxExporter exporter12= new JRXlsxExporter();
-				exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
-				exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
-				exporter12.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint12);
-				Object outputFileName12 = pathWithMounth + "\\" + fileFrub.get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
-				exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
-				exporter12.exportReport();
-				return fileFrub;
-			
-			
-		}catch(Exception e) {
-			System.out.println(e.getMessage()+"==>while generating FRUBALPH");
+			// **********************************************get current date from payMonth
+
+			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
+
+			// ********************************folder generation if not exist
+			String pathWithYear = fileFrub.get(0).getFOLDERPATH() + fileFrub.get(0).getFOLDERNAME() + "\\"
+					+ currentYear;
+			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			File fileYear = new File(pathWithYear);
+			if (!fileYear.exists()) {
+				fileYear.mkdir();
+			}
+			File fileMounth = new File(pathWithMounth);
+			if (!fileMounth.exists()) {
+				fileMounth.mkdir();
+			}
+			// load file and compile it
+			File filerubA = ResourceUtils.getFile("classpath:rubAlph.jrxml");
+			JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(lesFrubAlph);
+			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, null, dataSource12);
+			JRXlsxExporter exporter12 = new JRXlsxExporter();
+			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter12.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint12);
+			Object outputFileName12 = pathWithMounth + "\\" + fileFrub.get(0).getPREFIXFILETYPE() + " " + dateFormat
+					+ ".xlsx";
+			exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
+			exporter12.exportReport();
+			return fileFrub;
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage() + "==>while generating FRUBALPH");
 		}
 		return fileFrub;
-	
+
 	}
+
 	@RequestMapping(value = "/api/auth/signin", method = RequestMethod.POST)
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
@@ -293,13 +296,13 @@ public class Controller {
 		// implementer l'insertion au niveau de la table ROLEUSERS
 		return currentUser;
 	}
-	
-	//for settings : changer psw
-	@PostMapping({"updatePsw"})
+
+	// for settings : changer psw
+	@PostMapping({ "updatePsw" })
 	public User updatePsw(@RequestBody User u) {
-		Optional<User> currentUser =userRepository.findByUsername(u.getUsername());
-		User user= new User();
-		if(currentUser!=null) {
+		Optional<User> currentUser = userRepository.findByUsername(u.getUsername());
+		User user = new User();
+		if (currentUser != null) {
 			currentUser.get().setPassword(encoder.encode(u.getPassword()));
 			user.setIduser(currentUser.get().getIduser());
 			user.setEmail(currentUser.get().getEmail());
@@ -309,48 +312,92 @@ public class Controller {
 			user.setUsername(currentUser.get().getUsername());
 			userRepository.save(user);
 		}
-			return user;
-		
-		
+		return user;
+
 	}
-	
-	//for settings : avoir tout les etats paie pour séléctionner les etat à imprimer
-	@GetMapping({"allEtats"})
-	public List<CloturePaie> getAllEtat(){
+
+	// for settings : avoir tout les etats paie pour séléctionner les etat à
+	// imprimer
+	@GetMapping({ "allEtats" })
+	public List<CloturePaie> getAllEtat() {
 		List<CloturePaie> toutLesEtats = new ArrayList();
 		try {
 
 			// ***************************get all files to generate and its directory path
-			toutLesEtats= clotureRepo.findByDesc("etat");
+			toutLesEtats = clotureRepo.findByDesc("etat");
 			return toutLesEtats;
 
 		} catch (Exception e) {
-			
-			System.out.println("Erreur lors de la génération des fichiers:   "+e.getMessage()); 
+
+			System.out.println("Erreur lors de la génération des fichiers:   " + e.getMessage());
 		}
 
 		return toutLesEtats;
 	}
-	
-	//to save file to print foreach sturucture choosed by user
-	@PostMapping({"fileToPrint"})
-	public FileToPrint saveFileToPrint(@RequestBody FileToPrint file){
+
+	// for settings:pour avoir l'etat actuel des FileToPrint
+	@GetMapping({ "allFileToPrint" })
+	public List<FileToPrint> getAllFileToPrint() {
+		List<FileToPrint> files = new ArrayList();
+		try {
+			files = fileToPrintRepo.findAll();
+			return files;
+		} catch (Exception e) {
+			System.out.println("Exception while getting all file to print==>" + e.getMessage());
+		}
+		return files;
+	}
+
+	// for settings : pour avoir les etats selectionnés pour chaque structure
+	@PostMapping({ "selectedEtats" })
+	public List<FileToPrint> getSelectedEtat(@RequestBody FileToPrint f) {
+		List<FileToPrint> files = new ArrayList();
+		try {
+			files = fileToPrintRepo.findByStructure(f.getIdStructure());
+
+			return files;
+		} catch (Exception e) {
+			System.out.println("Exception while getting getSelectedEtat==>" + e.getMessage());
+		}
+		return files;
+	}
+
+	// to save file to print foreach sturucture choosed by user
+	@PostMapping({ "saveFileToPrint" })
+	public List<FileToPrint> saveFileToPrint(@RequestBody List<FileToPrint> files) {
 		Date date = new Date();
-		FileToPrint myFile=new FileToPrint();
-		myFile.setAddedDate(date);
-		myFile.setIdFileType(file.getIdFileType());
-		myFile.setIdStructure(file.getIdStructure());
+		try {
+			for (int i = 0; i < files.size(); i++) {
+				FileToPrint myFile = new FileToPrint();
+				myFile.setAddedDate(date);
+				myFile.setIdFileType(files.get(i).getIdFileType());
+				myFile.setIdStructure(files.get(i).getIdStructure());
 
+				fileToPrintRepo.save(myFile);
+			}
+			return files;
+		} catch (Exception e) {
+			System.out.println("Exception while saving file to print ==>" + e.getMessage());
+		}
 
-        try {
-        	fileToPrintRepo.save(myFile);
-        	
-        	return myFile;
-        }catch(Exception e) {
-        	System.out.println("Exception while saving file to print ==>"+e.getMessage());
-        }
 		return null;
-		
+
+	}
+
+	@PostMapping({"deleteFileToPrint"})
+	public List<FileToPrint> deleteFileToPrint(@RequestBody List<FileToPrint> files) {
+		try {
+			for (int i = 0; i < files.size(); i++) {
+			
+
+				fileToPrintRepo.delete(files.get(i));;
+			}
+			return files;
+		} catch (Exception e) {
+			System.out.println("Exception while saving file to print ==>" + e.getMessage());
+		}
+
+		return null;
 	}
 
 	// ****************************************************Methodes****************************************************************
