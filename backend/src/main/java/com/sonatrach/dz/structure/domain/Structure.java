@@ -3,14 +3,16 @@ package com.sonatrach.dz.structure.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name ="payrollstructure")
+@NamedQuery(name = "Structure.findByActivity", query = "SELECT p FROM Structure p WHERE IDACTIVITY=?1")
 public class Structure {
 	@Id
     private Long IDSTRUCTURE;
-	private Long IDACTIVITY;
+	private Integer IDACTIVITY;
 	private String STRUCTURENAME;
 	private String STRUCTURECODELIKE;
 	private int STRUCTURECODENOTLIKE;
@@ -29,11 +31,14 @@ public class Structure {
 		IDSTRUCTURE = iDSTRUCTURE;
 	}
 
-	public Long getIDACTIVITY() {
+	
+
+	
+	public Integer getIDACTIVITY() {
 		return IDACTIVITY;
 	}
 
-	public void setIDACTIVITY(Long iDACTIVITY) {
+	public void setIDACTIVITY(Integer iDACTIVITY) {
 		IDACTIVITY = iDACTIVITY;
 	}
 

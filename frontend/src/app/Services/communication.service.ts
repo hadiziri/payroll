@@ -8,6 +8,7 @@ import { Structure } from '../Models/Structure';
 import { throwError } from 'rxjs';
 import { catchError  } from 'rxjs/operators';
 import { FileToPrint } from '../Models/FileToPrint';
+import { ShActivity } from '../Models/ShActivity';
 
 @Injectable({
   providedIn: 'root'
@@ -89,6 +90,25 @@ public host:string;
       })
     );
   }
- 
+
+  public getAllShActivities():Observable <Array<ShActivity>>{
+    return this.httpClient.get <Array<ShActivity>>(this.host+"allShActivities").pipe(
+      catchError((err) => {
+        console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+    }
+
+   public getStructureByActivity(activity :ShActivity):Observable <Array<Structure>>{
+    return this.httpClient.post<Array<Structure>>(this.host+"getStructurByActivity",activity).pipe(
+      catchError((err) => {
+        console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+   }
 
 }

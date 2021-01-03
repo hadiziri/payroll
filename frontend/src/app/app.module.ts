@@ -38,6 +38,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FileToPrintSettingsComponent } from './file-to-print-settings/file-to-print-settings.component';
 import { GroupcheckboxesComponent } from './groupcheckboxes/groupcheckboxes.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 
@@ -71,7 +72,8 @@ import { GroupcheckboxesComponent } from './groupcheckboxes/groupcheckboxes.comp
     MatCheckboxModule,
     MatExpansionModule,
     MatDividerModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTabsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS,    useClass: AuthInterceptor,    multi: true  },

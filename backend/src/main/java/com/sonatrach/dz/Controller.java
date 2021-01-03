@@ -70,6 +70,8 @@ import com.sonatrach.dz.rubNum.domain.RubNumRepo;
 import com.sonatrach.dz.rubrique.domain.Rubrique;
 import com.sonatrach.dz.rubrique.repo.RubriqueRepo;
 import com.sonatrach.dz.security.jwt.JwtProvider;
+import com.sonatrach.dz.shactivity.domain.ShActivity;
+import com.sonatrach.dz.shactivity.repo.ShActivityRepo;
 import com.sonatrach.dz.structure.domain.Structure;
 import com.sonatrach.dz.structure.repo.StructureRepo;
 import com.sonatrach.dz.tabstructure.domain.TabStructure;
@@ -141,6 +143,8 @@ public class Controller {
 	RubNumRepo rubNumRepo;
 	@Autowired
 	FileToPrintRepo fileToPrintRepo;
+	@Autowired
+	ShActivityRepo shActivityRepo;
 
 	// ****************************************API*****************************************************************************
 	@GetMapping({ "/allBanques" })
@@ -153,6 +157,7 @@ public class Controller {
 		List<Structure> lesStructures = new ArrayList();
 		try {
 			lesStructures = structureRepo.findAll();
+			
 			return lesStructures;
 		} catch (Exception e) {
 			System.out.println("Exception getAllStructures()==>" + e.getMessage());
@@ -160,6 +165,18 @@ public class Controller {
 		return lesStructures;
 	}
 
+	@PostMapping({"getStructurByActivity"})
+	public List<Structure> getStructureByActivity(@RequestBody ShActivity a) {
+		List<Structure> lesStructures = new ArrayList();
+		try {
+			lesStructures = structureRepo.findByActivity(a.getIdactivity());
+			
+			return lesStructures;
+		} catch (Exception e) {
+			System.out.println("Exception getStructureByActivity()==>" + e.getMessage());
+		}
+		return lesStructures;
+	}
 	@GetMapping({ "generateTableFiles" })
 	public List<CloturePaie> cloturePaie() {
 		List<CloturePaie> toutLesFichiers = new ArrayList();
@@ -221,7 +238,7 @@ public class Controller {
 			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter12.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint12);
 			Object outputFileName12 = pathWithMounth + "\\" + fileFrub.get(0).getPREFIXFILETYPE() + " " + dateFormat
-					+ ".xlsx";
+					+ ".DBF";
 			exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
 			exporter12.exportReport();
 			return fileFrub;
@@ -316,8 +333,7 @@ public class Controller {
 
 	}
 
-	// for settings : avoir tout les etats paie pour séléctionner les etat à
-	// imprimer
+	// for settings : avoir tout les etats paie pour séléctionner les etat à imprimer
 	@GetMapping({ "allEtats" })
 	public List<CloturePaie> getAllEtat() {
 		List<CloturePaie> toutLesEtats = new ArrayList();
@@ -362,7 +378,7 @@ public class Controller {
 		return files;
 	}
 
-	// to save file to print foreach sturucture choosed by user
+	//for settings: to save file to print foreach sturucture choosed by user
 	@PostMapping({ "saveFileToPrint" })
 	public List<FileToPrint> saveFileToPrint(@RequestBody List<FileToPrint> files) {
 		Date date = new Date();
@@ -384,6 +400,7 @@ public class Controller {
 
 	}
 
+	//for settings: to delete files to print unchecked by user
 	@PostMapping({"deleteFileToPrint"})
 	public List<FileToPrint> deleteFileToPrint(@RequestBody List<FileToPrint> files) {
 		try {
@@ -394,11 +411,25 @@ public class Controller {
 			}
 			return files;
 		} catch (Exception e) {
-			System.out.println("Exception while saving file to print ==>" + e.getMessage());
+			System.out.println("Exception while deleting file to print ==>" + e.getMessage());
 		}
 
 		return null;
 	}
+	
+	//for settings: to have all shactivities 
+	@GetMapping({"allShActivities"})
+	public List<ShActivity> getAllShActivities(){
+		try {
+			return shActivityRepo.findAll();
+		} catch (Exception e) {
+			System.out.println("Exception while getting shActivities ==>" + e.getMessage());
+		}
+
+		return null;
+	}
+	
+	
 
 	// ****************************************************Methodes****************************************************************
 
@@ -582,7 +613,7 @@ public class Controller {
 				exporter10.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 				exporter10.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 				exporter10.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint10);
-				Object outputFileName10 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".xlsx";
+				Object outputFileName10 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".DBF";
 				exporter10.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName10);
 				exporter10.exportReport();
 				break;
@@ -598,7 +629,7 @@ public class Controller {
 				exporter11.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 				exporter11.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 				exporter11.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint11);
-				Object outputFileName11 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".xlsx";
+				Object outputFileName11 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".DBF";
 				exporter11.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName11);
 				exporter11.exportReport();
 				break;
@@ -617,7 +648,7 @@ public class Controller {
 				exporter13.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 				exporter13.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 				exporter13.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint13);
-				Object outputFileName13 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".xlsx";				
+				Object outputFileName13 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".DBF";				
 				exporter13.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName13);			
 				exporter13.exportReport();			
 				break;
