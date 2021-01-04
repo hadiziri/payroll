@@ -4,7 +4,7 @@
 
   .sidenav {
     height: 100%;
-    width: 0;
+    width: 300px;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -30,6 +30,7 @@
     cursor:pointer;
     color:#fff;
     height: 60px; 
+    width:305px;
     padding-top: 10px;
     position: fixed;
     

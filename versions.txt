@@ -1,0 +1,5 @@
+2.0
+---
+-Parametre:
+	selectionner fichier à imprimer (fonctionnalité finalisée)
+	Changer mot de passe	

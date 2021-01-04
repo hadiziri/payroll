@@ -1,13 +1,13 @@
-<span id="openSidenav" (click)="openNav()">
+<span id="openSidenav" >
   <label class="hamburger-icon">
   <span>&nbsp;</span>
   <span>&nbsp;</span>
   <span>&nbsp;</span>
 </label> 
-Cliquer pour ouvrir le menu</span>
+ Menu paramétres</span>
 
-<div id="mySidenav" class="sidenav" [ngStyle]="{'width': isOpen==0?'300px':'0'}">
-  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+<div id="mySidenav" class="sidenav" >
+
   <ul>
     <li>
       <a (click)="updatePsw()">Changer mot de passe</a>
