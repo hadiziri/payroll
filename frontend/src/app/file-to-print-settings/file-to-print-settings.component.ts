@@ -1,3 +1,5 @@
+import { HomeService } from './../Services/home.service';
+import { ParametreService } from './../Services/parametre.service';
 import { element } from 'protractor';
 import { map } from 'rxjs/operators';
 import { ShActivity } from './../Models/ShActivity';
@@ -6,7 +8,7 @@ import { Component, OnInit, AfterViewInit, AfterContentChecked, AfterViewChecked
 import { Structure } from '../Models/Structure';
 import { clotureFiles } from '../Models/cloturesFiles';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { CommunicationService } from './../Services/communication.service';
+
 import { ViewChildren, QueryList } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { mobiscroll, MbscFormOptions } from '@mobiscroll/angular-lite';
@@ -36,14 +38,14 @@ export class FileToPrintSettingsComponent implements OnInit{
     themeVariant: 'light'
   };
   fileToPrintFormGroup: FormGroup = new FormGroup({});
-  constructor(private _formBuilder: FormBuilder, private comService: CommunicationService) {
+  constructor(private _formBuilder: FormBuilder, private paramService:ParametreService, private homeService:HomeService) {
 
 
   }
 
   ngOnInit(): void {
 
-    this.comService.getAllStructures().subscribe(
+    this.homeService.getAllStructures().subscribe(
       (data) => {
         this.payrollstructures = data;
         console.log("allstructures");
@@ -60,7 +62,7 @@ export class FileToPrintSettingsComponent implements OnInit{
 
     //get all etats to select file to print
 
-    this.comService.getEtats().subscribe(
+    this.paramService.getEtats().subscribe(
       (data) => {
         this.tousLesEtats = data;
         //this.addToggles();
@@ -76,7 +78,7 @@ export class FileToPrintSettingsComponent implements OnInit{
     );
 
     //get all files to print
-    this.comService.getAllFileToPrint().subscribe(
+    this.paramService.getAllFileToPrint().subscribe(
       (data) => {
         
         this.tempFileToPrint = data;
@@ -94,7 +96,7 @@ export class FileToPrintSettingsComponent implements OnInit{
     );
 
     //get all files to print
-    this.comService.getAllFileToPrint().subscribe(
+    this.paramService.getAllFileToPrint().subscribe(
       (data) => {
         
         
@@ -112,7 +114,7 @@ export class FileToPrintSettingsComponent implements OnInit{
     );
 
     //get all ShActivities
-    this.comService.getAllShActivities().subscribe(
+    this.paramService.getAllShActivities().subscribe(
       (data) => {
         if(data!=null){
           this.allShActivities = data;
@@ -233,7 +235,7 @@ export class FileToPrintSettingsComponent implements OnInit{
   //sauvgarder les file to print
   SaveChangesInDB(fileToAdd:FileToPrint[],fileToDelete:FileToPrint[]) {
 
-    this.comService.saveFileToPrint(fileToAdd).subscribe(
+    this.paramService.saveFileToPrint(fileToAdd).subscribe(
       data => {
         console.log(data);
         if (data === null) {
@@ -257,7 +259,7 @@ export class FileToPrintSettingsComponent implements OnInit{
 
 
 
-    this.comService.deleteFileToPrint(fileToDelete).subscribe(
+    this.paramService.deleteFileToPrint(fileToDelete).subscribe(
       data => {
         console.log(data);
         if (data === null) {

@@ -1,5 +1,12 @@
+2.1
+---
+Header: se déconnecter 
+Cloture Paie: fonctionnalité (juste prob de synchronisation)
+Services organisés d'aprés le header
+---------------------------------------------------------------------------------------------------
 2.0
 ---
 -Parametre:
 	selectionner fichier à imprimer (fonctionnalité finalisée)
 	Changer mot de passe	
+--------------------------------------------------------------------------------------------------

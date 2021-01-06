@@ -2,13 +2,13 @@ import { Router } from '@angular/router';
 import { FileToPrint } from './../Models/FileToPrint';
 import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 import { Observable } from 'rxjs';
-import { CommunicationService } from './../Services/communication.service';
+
 import { User } from './../Models/User';
 import { UserService } from './../Services/user.service';
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
-import { MustMatch  } from '../helpers/must-match-validator';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { MustMatch } from '../helpers/must-match-validator';
 import { mobiscroll, MbscFormOptions } from '@mobiscroll/angular-lite';
 
 @Component({
@@ -16,35 +16,35 @@ import { mobiscroll, MbscFormOptions } from '@mobiscroll/angular-lite';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],
   providers: [{
-    provide: STEPPER_GLOBAL_OPTIONS, useValue: {showError: true}
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true }
   }]
 })
 export class SettingsComponent implements OnInit {
-  
+
   isLinear = false;
   firstFormGroup: FormGroup = new FormGroup({});
-  secondFormGroup: FormGroup= new FormGroup({});
- 
-  
-  isOpen:number=1;
-  psw:Boolean=false;
-  print:Boolean=false;
-  registerForm: FormGroup= new FormGroup({});
-    submitted = false;
-    formSettings: MbscFormOptions = {
-      theme: 'mobiscroll',
-      themeVariant: 'light'
+  secondFormGroup: FormGroup = new FormGroup({});
+
+
+  isOpen: number = 1;
+  psw: Boolean = false;
+  print: Boolean = false;
+  registerForm: FormGroup = new FormGroup({});
+  submitted = false;
+  formSettings: MbscFormOptions = {
+    theme: 'mobiscroll',
+    themeVariant: 'light'
   };
-  isDisabled:Boolean=false;
+  isDisabled: Boolean = false;
   panelOpenState = false;
 
 
-  constructor(private _formBuilder: FormBuilder,private userService:UserService,private route:Router) {
-   
-     
-   }
+  constructor(private _formBuilder: FormBuilder, private userService: UserService, private route: Router) {
 
- 
+
+  }
+
+
   ngOnInit(): void {
     //initialisation des forms pour le changement du psw
     this.firstFormGroup = this._formBuilder.group({
@@ -54,74 +54,53 @@ export class SettingsComponent implements OnInit {
       psw: ['', [Validators.required, Validators.minLength(6)]],
       confirm: ['', [Validators.required, Validators.minLength(6)]]
     }, {
-      validator: MustMatch('psw','confirm')}
+      validator: MustMatch('psw', 'confirm')
+    }
     );
-    
-  }
-
-
-  openNav() {
-    console.log("this.isOpen");
-    this.isOpen=0;
-    console.log(this.isOpen);
-  }
-  closeNav() {
-    this.isOpen=1;
-  }
- //pour affichage de la section updatePSW
-  updatePsw(){
-    this.psw=true;
-  }
-
-  fileToPrint(){
-    this.route.navigateByUrl("fileToPrint");
-  }
-
-   //pour affichage de la section  updatePath
-  updatePath(){
 
   }
+
 
   //chnager le mot de passe et le sauvgarder
-  changerPsw(){
-    let user : User={
-      "password":"",
-    "email":"",
-    "iduser":0,
-    "name":"",
-    "state":0,
-    "username":""
-  };
-    let username:string = this.firstFormGroup .controls['username'].value;
-    let psw:string=this.secondFormGroup.controls['psw'].value;
-    user.username=username;
-    user.password=psw;
+  changerPsw() {
+    let user: User = {
+      "password": "",
+      "email": "",
+      "iduser": 0,
+      "name": "",
+      "state": 0,
+      "username": ""
+    };
+    let username: string = this.firstFormGroup.controls['username'].value;
+    let psw: string = this.secondFormGroup.controls['psw'].value;
+    user.username = username;
+    user.password = psw;
     this.userService.updatePsw(user).subscribe(
       data => {
         console.log(data);
         this.showAlert();
-        this.isDisabled=true;
+        this.isDisabled = true;
       },
       error => {
         console.log(error);
         alert(error);
         throw error;
-        
+
       }
     );
   }
-//alert pour le changement du psw
+  //alert pour le changement du psw
   showAlert() {
     mobiscroll.alert({
-        title: 'Changement du mot de passe',
-        message: "Votre mot de passe  a bien été modifié."
-       /* ,callback: function () {
-            mobiscroll.toast({
-                message: 'Alert closed'
-            });
-        }*/
+      title: 'Changement du mot de passe',
+      message: "Votre mot de passe  a bien été modifié."
+      /* ,callback: function () {
+           mobiscroll.toast({
+               message: 'Alert closed'
+           });
+       }*/
     });
-}
+  }
 
 
 

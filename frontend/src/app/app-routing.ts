@@ -1,3 +1,5 @@
+import { CloturePaieComponent } from './cloture-paie/cloture-paie.component';
+import { StorageSettingsComponent } from './storage-settings/storage-settings.component';
 import { FileToPrintSettingsComponent } from './file-to-print-settings/file-to-print-settings.component';
 import { SettingsComponent } from './settings/settings.component';
 import { RegisterComponent } from './register/register.component';
@@ -22,6 +24,8 @@ const APP_ROUTING : Routes =[
     {path: 'signup',component: RegisterComponent},
     {path: 'parametre',component: SettingsComponent},
     {path:'fileToPrint',component:FileToPrintSettingsComponent},
+    {path:'storageSettings',component:StorageSettingsComponent},
+    {path:'cloturePaie',component:CloturePaieComponent},
     {path :"Error", component: ErrorComponent}
    
     

@@ -10,4 +10,5 @@ import com.sonatrach.dz.cloturePaie.domain.CloturePaie;
 @Repository
 public interface CloturePaieRepo extends JpaRepository<CloturePaie, Integer>{
 	List<CloturePaie> findByDesc(String desc);
+	List<CloturePaie> findByCategory(String FOLDERNAME);
 }

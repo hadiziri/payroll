@@ -4,21 +4,40 @@
         <a class="navbar-brand" style="color: white; text-size-adjust: 20px;"><strong>Application Exploitation Paie</strong>  </a>
       </div>
       <ul class="nav navbar-nav">
-        <li ><a [routerLink]="['/home']" routerLinkActive="router-link-active"  >Acceuil</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Gérer les structures
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a [routerLink]="['/addStructure']" routerLinkActive="router-link-active" >Ajouter structure</a></li>
-            <li><a [routerLink]="['/structures']" routerLinkActive="router-link-active" >Modifier/Supprimer structure</a></li>
-          </ul>
-        </li>
-        <li><a [routerLink]="['/historique']" routerLinkActive="router-link-active" >Historique</a></li>
-        <li><a [routerLink]="['/parametre']">Paramétres</a></li>
+        <li ><a [routerLink]="['/home']" routerLinkActive="router-link-active"  >Acceuil
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 
+        </a></li>
+        <li >
+          <a [routerLink]="['/cloturePaie']"routerLinkActive="router-link-active" >Clôture Paie
+            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> 
+          </a>
+          
+        </li>
+        <li><a [routerLink]="['/historique']" routerLinkActive="router-link-active" >Historique
+          <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+        </a></li>
+        <li>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Paramétres
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+          </a>
+            <ul class="dropdown-menu">
+              <li><a [routerLink]="['/parametre']"routerLinkActive="router-link-active" >Changer mot de passe</a></li>
+              <li><a [routerLink]="['/fileToPrint']" routerLinkActive="router-link-active" >Choisir les fichiers à imprimer</a></li>
+              <li><a [routerLink]="['/storageSettings']" routerLinkActive="router-link-active" >Modifier le chemin de stockage</a></li>
+              <li><a [routerLink]="['/addStructure']" routerLinkActive="router-link-active" >Ajouter structure</a></li>
+              <li><a [routerLink]="['/structures']" routerLinkActive="router-link-active" >Modifier/Supprimer structure</a></li>
+            </ul>
+          
+        </li>
+        <li><a  style="cursor: pointer;"class="nav-item" (click)="showConfirm() " routerLinkActive="router-link-active" >Se déconnecter
+          <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+        </a></li>
+        <!-- 
         <li *ngIf="!connection" class="nav-item">
           <a class="nav-link" [routerLink]="['/auth/login']">Connexion</a>
         </li>
+        --> 
         
       </ul>
     </div>

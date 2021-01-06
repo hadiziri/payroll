@@ -45,6 +45,8 @@ import com.sonatrach.dz.diplome.domain.Diplome;
 import com.sonatrach.dz.diplome.repo.DiplomeRepo;
 import com.sonatrach.dz.fileToPrint.domain.FileToPrint;
 import com.sonatrach.dz.fileToPrint.repo.FileToPrintRepo;
+import com.sonatrach.dz.folder.domain.Folder;
+import com.sonatrach.dz.folder.repo.FolderRepo;
 import com.sonatrach.dz.fonction.domain.Fonction;
 import com.sonatrach.dz.fonction.repo.FonctionRepo;
 import com.sonatrach.dz.localite.domain.Localite;
@@ -145,19 +147,23 @@ public class Controller {
 	FileToPrintRepo fileToPrintRepo;
 	@Autowired
 	ShActivityRepo shActivityRepo;
+	@Autowired
+	FolderRepo folderRepo;
 
 	// ****************************************API*****************************************************************************
+	// Api Test
 	@GetMapping({ "/allBanques" })
 	public List<RubAlph> getAllBanques() {
 		return rubAlphRepo.findAll();
 	}
 
+	// get All structures
 	@GetMapping({ "/getAllStructures" })
 	public List<Structure> getAllStructures() {
 		List<Structure> lesStructures = new ArrayList();
 		try {
 			lesStructures = structureRepo.findAll();
-			
+
 			return lesStructures;
 		} catch (Exception e) {
 			System.out.println("Exception getAllStructures()==>" + e.getMessage());
@@ -165,49 +171,300 @@ public class Controller {
 		return lesStructures;
 	}
 
-	@PostMapping({"getStructurByActivity"})
+	// get All folders pour la génération des fichiers
+	@GetMapping({ "/getAllFolders" })
+	public List<Folder> getallFolders() {
+		List<Folder> folders = new ArrayList();
+		try {
+			folders = folderRepo.findAll();
+			return folders;
+		} catch (Exception e) {
+			System.out.println("Exception getallFolders()==>" + e.getMessage());
+		}
+		return folders;
+	}
+
+	// get files by folder pour la génération des fichiers
+	@PostMapping({ "/getFilesByFolder" })
+	public List<CloturePaie> getFilesByFolder(@RequestBody Folder f) {
+		try {
+			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
+			String path;
+			List<CloturePaie> files = clotureRepo.findByCategory(f.getFOLDERNAME());
+			for (int i = 0; i < files.size(); i++) {
+				if (files.get(i).getDESCFILETYPE().equals("pers") || files.get(i).getDESCFILETYPE().equals("newpaie")
+						|| files.get(i).getDESCFILETYPE().equals("frubA")
+						|| files.get(i).getDESCFILETYPE().equals("frubN")) {
+					path = files.get(i).getFOLDERPATH() + files.get(i).getFOLDERNAME() + "\\" + currentYear + "\\"
+							+ dateFormat + "\\" + files.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".DBF";
+				} else {
+					path = files.get(i).getFOLDERPATH() + files.get(i).getFOLDERNAME() + "\\" + currentYear + "\\"
+							+ dateFormat + "\\" + files.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
+				}
+
+				files.get(i).setFOLDERPATH(path);
+
+			}
+
+			return files;
+		} catch (Exception e) {
+			System.out.println("Exception getFilesByFolder()==>" + e.getMessage());
+		}
+		return null;
+	}
+
+	// get etat files pour la génération des fichiers (recuperer les etats des
+	// fichiers généré ou non)
+	@PostMapping({ "getEtatFile" })
+	public int getEtatFile(@RequestBody CloturePaie file) {
+		File myfile = new File(file.getFOLDERPATH());
+		if (myfile.exists()) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
+	// get structure by activity
+	@PostMapping({ "getStructurByActivity" })
 	public List<Structure> getStructureByActivity(@RequestBody ShActivity a) {
 		List<Structure> lesStructures = new ArrayList();
 		try {
 			lesStructures = structureRepo.findByActivity(a.getIdactivity());
-			
+
 			return lesStructures;
 		} catch (Exception e) {
 			System.out.println("Exception getStructureByActivity()==>" + e.getMessage());
 		}
 		return lesStructures;
 	}
-	@GetMapping({ "generateTableFiles" })
-	public List<CloturePaie> cloturePaie() {
-		List<CloturePaie> toutLesFichiers = new ArrayList();
 
+	// génération des fichiers Tables
+	@GetMapping({ "generateTableFiles" })
+	public List<CloturePaie> generateTableFiles() throws FileNotFoundException, JRException {
+		List<CloturePaie> fileTables = new ArrayList();
 		try {
 
-			// ***************************get all files to generate and its directory path
-			toutLesFichiers = clotureRepo.findAll();
-			for (int i = 0; i < toutLesFichiers.size(); i++) {
-				String path = toutLesFichiers.get(i).getFOLDERPATH();
-				String folderName = toutLesFichiers.get(i).getFOLDERNAME();
-				String fileName = toutLesFichiers.get(i).getPREFIXFILETYPE();
-				String description = toutLesFichiers.get(i).getDESCFILETYPE().toString();
-				generateFiles(path, folderName, fileName, description);
+			fileTables = clotureRepo.findByCategory("TABLES");
+
+			List<Banque> lesBanques = banqueRepo.findAll();
+
+			List<Diplome> lesDiplomes = diplomeRepo.findAll();
+
+			List<Fonction> lesFonctions = fonctionRepo.findAll();
+
+			List<Localite> lesLocalites = localiteRepo.findAll();
+
+			List<Pays> lesPays = paysRepo.findAll();
+
+			List<Rubrique> lesRubriques = rubriqueRepo.findAll();
+
+			List<TabStructure> lesTabStructures = tabStructureRepo.findAll();
+
+			// **********************************************get current date from payMonth
+
+			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
+
+			// ********************************folder generation if not exist
+			String pathWithYear = fileTables.get(0).getFOLDERPATH() + fileTables.get(0).getFOLDERNAME() + "\\"
+					+ currentYear;
+			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			File fileYear = new File(pathWithYear);
+			if (!fileYear.exists()) {
+				fileYear.mkdir();
+			}
+			File fileMounth = new File(pathWithMounth);
+			if (!fileMounth.exists()) {
+				fileMounth.mkdir();
 			}
 
+			// load file and compile it
+			File file = ResourceUtils.getFile("classpath:lesBanques.jrxml");
+			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lesBanques);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			Object outputFileName = pathWithMounth + "\\" + clotureRepo.findByDesc("banque").get(0).getPREFIXFILETYPE()
+					+ " " + dateFormat + ".xlsx";
+			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
+			exporter.exportReport();
+
+			// load file and compile it
+			File fileDiplome = ResourceUtils.getFile("classpath:lesDiplomes.jrxml");
+			JasperReport jasperReport2 = JasperCompileManager.compileReport(fileDiplome.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource2 = new JRBeanCollectionDataSource(lesDiplomes);
+			JasperPrint jasperPrint2 = JasperFillManager.fillReport(jasperReport2, null, dataSource2);
+			JRXlsxExporter exporter2 = new JRXlsxExporter();
+			exporter2.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter2.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter2.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint2);
+			Object outputFileName2 = pathWithMounth + "\\"
+					+ clotureRepo.findByDesc("diplome").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
+			exporter2.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName2);
+			exporter2.exportReport();
+
+			// load file and compile it
+			File fileFonctions = ResourceUtils.getFile("classpath:lesFonctions.jrxml");
+			JasperReport jasperReport3 = JasperCompileManager.compileReport(fileFonctions.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource3 = new JRBeanCollectionDataSource(lesFonctions);
+			JasperPrint jasperPrint3 = JasperFillManager.fillReport(jasperReport3, null, dataSource3);
+			JRXlsxExporter exporter3 = new JRXlsxExporter();
+			exporter3.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter3.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter3.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint3);
+			Object outputFileName3 = pathWithMounth + "\\"
+					+ clotureRepo.findByDesc("fonction").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
+			exporter3.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName3);
+			exporter3.exportReport();
+
+			// load file and compile it
+			File fileLocalite = ResourceUtils.getFile("classpath:lesLocalites.jrxml");
+			JasperReport jasperReport4 = JasperCompileManager.compileReport(fileLocalite.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource4 = new JRBeanCollectionDataSource(lesLocalites);
+			JasperPrint jasperPrint4 = JasperFillManager.fillReport(jasperReport4, null, dataSource4);
+			JRXlsxExporter exporter4 = new JRXlsxExporter();
+			exporter4.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter4.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter4.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint4);
+			Object outputFileName4 = pathWithMounth + "\\"
+					+ clotureRepo.findByDesc("localite").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
+			exporter4.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName4);
+			exporter4.exportReport();
+
+			// load file and compile it
+			File filePays = ResourceUtils.getFile("classpath:lesPays.jrxml");
+			JasperReport jasperReport5 = JasperCompileManager.compileReport(filePays.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource5 = new JRBeanCollectionDataSource(lesPays);
+			JasperPrint jasperPrint5 = JasperFillManager.fillReport(jasperReport5, null, dataSource5);
+			JRXlsxExporter exporter5 = new JRXlsxExporter();
+			exporter5.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter5.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter5.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint5);
+			Object outputFileName5 = pathWithMounth + "\\" + clotureRepo.findByDesc("pays").get(0).getPREFIXFILETYPE()
+					+ " " + dateFormat + ".xlsx";
+			exporter5.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName5);
+			exporter5.exportReport();
+
+			// load file and compile it
+			File fileRubrique = ResourceUtils.getFile("classpath:lesRubriques.jrxml");
+			JasperReport jasperReport6 = JasperCompileManager.compileReport(fileRubrique.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource6 = new JRBeanCollectionDataSource(lesRubriques);
+			JasperPrint jasperPrint6 = JasperFillManager.fillReport(jasperReport6, null, dataSource6);
+			JRXlsxExporter exporter6 = new JRXlsxExporter();
+			exporter6.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter6.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter6.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint6);
+			Object outputFileName6 = pathWithMounth + "\\"
+					+ clotureRepo.findByDesc("rubrique").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
+			exporter6.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName6);
+			exporter6.exportReport();
+
+			// load file and compile it
+			File fileTabStructure = ResourceUtils.getFile("classpath:lesTabStructures.jrxml");
+			JasperReport jasperReport7 = JasperCompileManager.compileReport(fileTabStructure.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource7 = new JRBeanCollectionDataSource(lesTabStructures);
+			JasperPrint jasperPrint7 = JasperFillManager.fillReport(jasperReport7, null, dataSource7);
+			JRXlsxExporter exporter7 = new JRXlsxExporter();
+			exporter7.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter7.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter7.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint7);
+			Object outputFileName7 = pathWithMounth + "\\"
+					+ clotureRepo.findByDesc("structure").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
+			exporter7.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName7);
+			exporter7.exportReport();
+
+			return fileTables;
+
 		} catch (Exception e) {
-
-			System.out.println("Erreur lors de la génération des fichiers:   " + e.getMessage());
+			System.out.println(e.getMessage() + "==>generateTableFiles()");
 		}
+		return fileTables;
 
-		return toutLesFichiers;
 	}
 
-	@GetMapping({ "generateFrubA" })
-	public List<CloturePaie> generateFrubA() throws FileNotFoundException, JRException {
+	// génération des fichiers System
+	@GetMapping({ "generateSystemFiles" })
+	public List<CloturePaie> generateSystemFiles() throws FileNotFoundException, JRException {
+		List<CloturePaie> fileSys = new ArrayList();
+		try {
+
+			fileSys = clotureRepo.findByCategory("SYSTEME");
+			List<Change> lesChanges = changRepo.findAll();
+			List<Dep> lesDeps = depRepo.findAll();
+
+			// **********************************************get current date from payMonth
+
+			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
+
+			// ********************************folder generation if not exist
+			String pathWithYear = fileSys.get(0).getFOLDERPATH() + fileSys.get(0).getFOLDERNAME() + "\\" + currentYear;
+			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			File fileYear = new File(pathWithYear);
+			if (!fileYear.exists()) {
+				fileYear.mkdir();
+			}
+			File fileMounth = new File(pathWithMounth);
+			if (!fileMounth.exists()) {
+				fileMounth.mkdir();
+			}
+			// load file and compile it
+			File fileChange = ResourceUtils.getFile("classpath:change.jrxml");
+			JasperReport jasperReport8 = JasperCompileManager.compileReport(fileChange.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource8 = new JRBeanCollectionDataSource(lesChanges);
+			JasperPrint jasperPrint8 = JasperFillManager.fillReport(jasperReport8, null, dataSource8);
+			JRXlsxExporter exporter8 = new JRXlsxExporter();
+			exporter8.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter8.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter8.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint8);
+			Object outputFileName8 = pathWithMounth + "\\" + clotureRepo.findByDesc("change").get(0).getPREFIXFILETYPE()
+					+ " " + dateFormat + ".xlsx";
+			exporter8.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName8);
+			exporter8.exportReport();
+
+			// load file and compile it
+			File fileDep = ResourceUtils.getFile("classpath:dep.jrxml");
+			JasperReport jasperReport9 = JasperCompileManager.compileReport(fileDep.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource9 = new JRBeanCollectionDataSource(lesDeps);
+			JasperPrint jasperPrint9 = JasperFillManager.fillReport(jasperReport9, null, dataSource9);
+			JRXlsxExporter exporter9 = new JRXlsxExporter();
+			exporter9.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter9.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter9.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint9);
+			Object outputFileName9 = pathWithMounth + "\\" + clotureRepo.findByDesc("dep").get(0).getPREFIXFILETYPE()
+					+ " " + dateFormat + ".xlsx";
+			exporter9.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName9);
+			exporter9.exportReport();
+			return fileSys;
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage() + "==>generateSystemFiles()");
+		}
+		return fileSys;
+
+	}
+
+	// génération des fichiers FRUB
+	@GetMapping({ "generateFrubFiles" })
+	public List<CloturePaie> generateFrubFiles() throws FileNotFoundException, JRException {
 		List<CloturePaie> fileFrub = new ArrayList();
 		try {
 
-			fileFrub = clotureRepo.findByDesc("frubA");
+			fileFrub = clotureRepo.findByCategory("FRUB");
+
 			List<RubAlph> lesFrubAlph = rubAlphRepo.findAll();
+			List<RubNum> lesFrubNum = rubNumRepo.findAll();
 
 			// **********************************************get current date from payMonth
 
@@ -237,19 +494,138 @@ public class Controller {
 			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter12.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint12);
-			Object outputFileName12 = pathWithMounth + "\\" + fileFrub.get(0).getPREFIXFILETYPE() + " " + dateFormat
-					+ ".DBF";
+			Object outputFileName12 = pathWithMounth + "\\" + clotureRepo.findByDesc("frubA").get(0).getPREFIXFILETYPE()
+					+ " " + dateFormat + ".DBF";
 			exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
 			exporter12.exportReport();
+
+			// load file and compile it
+			File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml");
+			JasperReport jasperReport13 = JasperCompileManager.compileReport(filerubN.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource13 = new JRBeanCollectionDataSource(lesFrubNum);
+			JasperPrint jasperPrint13 = JasperFillManager.fillReport(jasperReport13, null, dataSource13);
+			JRXlsxExporter exporter13 = new JRXlsxExporter();
+			exporter13.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter13.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter13.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint13);
+			Object outputFileName13 = pathWithMounth + "\\" + clotureRepo.findByDesc("frubN").get(0).getPREFIXFILETYPE()
+					+ " " + dateFormat + ".DBF";
+			exporter13.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName13);
+			exporter13.exportReport();
 			return fileFrub;
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage() + "==>while generating FRUBALPH");
+			System.out.println(e.getMessage() + "==>generateFrubFiles() ");
 		}
 		return fileFrub;
 
 	}
+	
 
+	// génération des fichiers NewPaie
+	@GetMapping({ "generateNewPaieFiles" })
+	public List<CloturePaie> generateNewPaieFiles() throws FileNotFoundException, JRException {
+		List<CloturePaie> fileNewPaie = new ArrayList();
+		try {
+
+			fileNewPaie = clotureRepo.findByCategory("NEWPAIE");
+
+			List<NewPaie> lesNewpaie = newPaieRepo.findAll();
+			
+
+			// **********************************************get current date from payMonth
+
+			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
+
+			// ********************************folder generation if not exist
+			String pathWithYear = fileNewPaie.get(0).getFOLDERPATH() + fileNewPaie.get(0).getFOLDERNAME() + "\\"
+					+ currentYear;
+			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			File fileYear = new File(pathWithYear);
+			if (!fileYear.exists()) {
+				fileYear.mkdir();
+			}
+			File fileMounth = new File(pathWithMounth);
+			if (!fileMounth.exists()) {
+				fileMounth.mkdir();
+			}
+			File fileNewpaie = ResourceUtils.getFile("classpath:newPaie.jrxml");
+			JasperReport jasperReport10 = JasperCompileManager.compileReport(fileNewpaie .getAbsolutePath());
+			JRBeanCollectionDataSource dataSource10 = new JRBeanCollectionDataSource(lesNewpaie);
+			JasperPrint jasperPrint10 = JasperFillManager.fillReport(jasperReport10, null, dataSource10);
+			JRXlsxExporter exporter10= new JRXlsxExporter();
+			exporter10.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter10.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter10.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint10);
+			Object outputFileName10 = pathWithMounth + "\\" + clotureRepo.findByDesc("newpaie").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".DBF";
+			exporter10.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName10);
+			exporter10.exportReport();
+			return fileNewPaie;
+		} catch (Exception e) {
+			System.out.println(e.getMessage() + "==>generateNewPaieFiles()");
+		}
+		return fileNewPaie;
+
+	}
+	
+	
+	// génération des fichiers Pers
+	@GetMapping({ "generatePersFiles" })
+	public List<CloturePaie> generatePersFiles() throws FileNotFoundException, JRException {
+		List<CloturePaie> filesPers = new ArrayList();
+		try {
+
+			filesPers = clotureRepo.findByCategory("PERS");
+
+			
+			List<Pers> lesPers = persRepo.findAll();
+
+			// **********************************************get current date from payMonth
+
+			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
+
+			// ********************************folder generation if not exist
+			String pathWithYear = filesPers.get(0).getFOLDERPATH() + filesPers.get(0).getFOLDERNAME() + "\\"
+					+ currentYear;
+			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			File fileYear = new File(pathWithYear);
+			if (!fileYear.exists()) {
+				fileYear.mkdir();
+			}
+			File fileMounth = new File(pathWithMounth);
+			if (!fileMounth.exists()) {
+				fileMounth.mkdir();
+			}
+		
+			
+			// load file and compile it
+			File filePers = ResourceUtils.getFile("classpath:pers.jrxml");
+			JasperReport jasperReport11 = JasperCompileManager.compileReport(filePers .getAbsolutePath());
+			JRBeanCollectionDataSource dataSource11 = new JRBeanCollectionDataSource(lesPers);
+			JasperPrint jasperPrint11 = JasperFillManager.fillReport(jasperReport11, null, dataSource11);
+			JRXlsxExporter exporter11= new JRXlsxExporter();
+			exporter11.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter11.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter11.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint11);
+			Object outputFileName11 = pathWithMounth + "\\" + clotureRepo.findByDesc("pers").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".DBF";
+			exporter11.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName11);
+			exporter11.exportReport();
+			
+			return filesPers;
+		} catch (Exception e) {
+			System.out.println(e.getMessage() + "==>generatePersFiles()");
+		}
+		return filesPers ;
+
+	}
+
+	// Connexion
 	@RequestMapping(value = "/api/auth/signin", method = RequestMethod.POST)
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
@@ -273,6 +649,7 @@ public class Controller {
 
 	}
 
+	// Inscription
 	@RequestMapping(value = "/api/auth/signup", method = RequestMethod.POST)
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -333,7 +710,8 @@ public class Controller {
 
 	}
 
-	// for settings : avoir tout les etats paie pour séléctionner les etat à imprimer
+	// for settings : avoir tout les etats paie pour séléctionner les etat à
+	// imprimer
 	@GetMapping({ "allEtats" })
 	public List<CloturePaie> getAllEtat() {
 		List<CloturePaie> toutLesEtats = new ArrayList();
@@ -378,7 +756,7 @@ public class Controller {
 		return files;
 	}
 
-	//for settings: to save file to print foreach sturucture choosed by user
+	// for settings: to save file to print foreach sturucture choosed by user
 	@PostMapping({ "saveFileToPrint" })
 	public List<FileToPrint> saveFileToPrint(@RequestBody List<FileToPrint> files) {
 		Date date = new Date();
@@ -400,14 +778,14 @@ public class Controller {
 
 	}
 
-	//for settings: to delete files to print unchecked by user
-	@PostMapping({"deleteFileToPrint"})
+	// for settings: to delete files to print unchecked by user
+	@PostMapping({ "deleteFileToPrint" })
 	public List<FileToPrint> deleteFileToPrint(@RequestBody List<FileToPrint> files) {
 		try {
 			for (int i = 0; i < files.size(); i++) {
-			
 
-				fileToPrintRepo.delete(files.get(i));;
+				fileToPrintRepo.delete(files.get(i));
+				;
 			}
 			return files;
 		} catch (Exception e) {
@@ -416,10 +794,10 @@ public class Controller {
 
 		return null;
 	}
-	
-	//for settings: to have all shactivities 
-	@GetMapping({"allShActivities"})
-	public List<ShActivity> getAllShActivities(){
+
+	// for settings: to have all shactivities
+	@GetMapping({ "allShActivities" })
+	public List<ShActivity> getAllShActivities() {
 		try {
 			return shActivityRepo.findAll();
 		} catch (Exception e) {
@@ -428,236 +806,6 @@ public class Controller {
 
 		return null;
 	}
-	
-	
 
-	// ****************************************************Methodes****************************************************************
-
-	// ----To generate Table files (DIN-DRH==>cloture paie)------
-	private void generateFiles(String path, String folderName, String fileName, String description)
-			throws FileNotFoundException, JRException {
-
-		
-			// **********************************************get current date from payMonth
-
-			PayMonth currentDate = paymonthRepo.findByState();
-			String currentYear = currentDate.getPaymonth().substring(0, 4);
-			String currentMonth = currentDate.getPaymonth().substring(4, 6);
-			String dateFormat = currentYear + "-" + currentMonth;
-
-			// ********************************folder generation if not exist
-			String pathWithYear = path + folderName + "\\" + currentYear;
-			String pathWithMounth = pathWithYear + "\\" + dateFormat;
-			File fileYear = new File(pathWithYear);
-			if (!fileYear.exists()) {
-				fileYear.mkdir();
-			}
-			File fileMounth = new File(pathWithMounth);
-			if (!fileMounth.exists()) {
-				fileMounth.mkdir();
-			}
-
-			switch (description) {
-			case "banque":
-				List<Banque> lesBanques = banqueRepo.findAll();
-				// load file and compile it
-				File file = ResourceUtils.getFile("classpath:lesBanques.jrxml");
-				JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-				JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lesBanques);
-				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-				JRXlsxExporter exporter = new JRXlsxExporter();
-				exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
-				exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
-				exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-				Object outputFileName = pathWithMounth + "\\" + fileName + " " + dateFormat + ".xlsx";
-				exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
-				exporter.exportReport();
-				break;
-
-			case "diplome":
-				List<Diplome> lesDiplomes = diplomeRepo.findAll();
-				// load file and compile it
-				File fileDiplome = ResourceUtils.getFile("classpath:lesDiplomes.jrxml");
-				JasperReport jasperReport2 = JasperCompileManager.compileReport(fileDiplome.getAbsolutePath());
-				JRBeanCollectionDataSource dataSource2 = new JRBeanCollectionDataSource(lesDiplomes);
-				JasperPrint jasperPrint2 = JasperFillManager.fillReport(jasperReport2, null, dataSource2);
-				JRXlsxExporter exporter2 = new JRXlsxExporter();
-				exporter2.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
-				exporter2.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
-				exporter2.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint2);
-				Object outputFileName2 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".xlsx";
-				exporter2.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName2);
-				exporter2.exportReport();
-				break;
-
-			case "fonction":
-				List<Fonction> lesFonctions = fonctionRepo.findAll();
-				// load file and compile it
-				File fileFonctions = ResourceUtils.getFile("classpath:lesFonctions.jrxml");
-				JasperReport jasperReport3 = JasperCompileManager.compileReport(fileFonctions.getAbsolutePath());
-				JRBeanCollectionDataSource dataSource3 = new JRBeanCollectionDataSource(lesFonctions);
-				JasperPrint jasperPrint3 = JasperFillManager.fillReport(jasperReport3, null, dataSource3);
-				JRXlsxExporter exporter3 = new JRXlsxExporter();
-				exporter3.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
-				exporter3.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
-				exporter3.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint3);
-				Object outputFileName3 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".xlsx";
-				exporter3.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName3);
-				exporter3.exportReport();
-				break;
-
-			case "localite":
-				List<Localite> lesLocalites = localiteRepo.findAll();
-				// load file and compile it
-				File fileLocalite = ResourceUtils.getFile("classpath:lesLocalites.jrxml");
-				JasperReport jasperReport4 = JasperCompileManager.compileReport(fileLocalite.getAbsolutePath());
-				JRBeanCollectionDataSource dataSource4 = new JRBeanCollectionDataSource(lesLocalites);
-				JasperPrint jasperPrint4 = JasperFillManager.fillReport(jasperReport4, null, dataSource4);
-				JRXlsxExporter exporter4 = new JRXlsxExporter();
-				exporter4.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
-				exporter4.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
-				exporter4.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint4);
-				Object outputFileName4 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".xlsx";
-				exporter4.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName4);
-				exporter4.exportReport();
-				break;
-
-			case "pays":
-				List<Pays> lesPays = paysRepo.findAll();
-				// load file and compile it
-				File filePays = ResourceUtils.getFile("classpath:lesPays.jrxml");
-				JasperReport jasperReport5 = JasperCompileManager.compileReport(filePays.getAbsolutePath());
-				JRBeanCollectionDataSource dataSource5 = new JRBeanCollectionDataSource(lesPays);
-				JasperPrint jasperPrint5 = JasperFillManager.fillReport(jasperReport5, null, dataSource5);
-				JRXlsxExporter exporter5 = new JRXlsxExporter();
-				exporter5.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
-				exporter5.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
-				exporter5.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint5);
-				Object outputFileName5 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".xlsx";
-				exporter5.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName5);
-				exporter5.exportReport();
-				break;
-
-			case "rubrique":
-				List<Rubrique> lesRubriques = rubriqueRepo.findAll();
-				// load file and compile it
-				File fileRubrique = ResourceUtils.getFile("classpath:lesRubriques.jrxml");
-				JasperReport jasperReport6 = JasperCompileManager.compileReport(fileRubrique.getAbsolutePath());
-				JRBeanCollectionDataSource dataSource6 = new JRBeanCollectionDataSource(lesRubriques);
-				JasperPrint jasperPrint6 = JasperFillManager.fillReport(jasperReport6, null, dataSource6);
-				JRXlsxExporter exporter6 = new JRXlsxExporter();
-				exporter6.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
-				exporter6.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
-				exporter6.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint6);
-				Object outputFileName6 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".xlsx";
-				exporter6.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName6);
-				exporter6.exportReport();
-				break;
-
-			case "structure":
-				List<TabStructure> lesTabStructures = tabStructureRepo.findAll();
-				// load file and compile it
-				File fileTabStructure = ResourceUtils.getFile("classpath:lesTabStructures.jrxml");
-				JasperReport jasperReport7 = JasperCompileManager.compileReport(fileTabStructure.getAbsolutePath());
-				JRBeanCollectionDataSource dataSource7 = new JRBeanCollectionDataSource(lesTabStructures);
-				JasperPrint jasperPrint7 = JasperFillManager.fillReport(jasperReport7, null, dataSource7);
-				JRXlsxExporter exporter7 = new JRXlsxExporter();
-				exporter7.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
-				exporter7.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
-				exporter7.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint7);
-				Object outputFileName7 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".xlsx";
-				exporter7.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName7);
-				exporter7.exportReport();
-				break;
-
-			case "change":
-				List<Change> lesChanges = changRepo.findAll();
-				// load file and compile it
-				File fileChange = ResourceUtils.getFile("classpath:change.jrxml");
-				JasperReport jasperReport8 = JasperCompileManager.compileReport(fileChange.getAbsolutePath());
-				JRBeanCollectionDataSource dataSource8 = new JRBeanCollectionDataSource(lesChanges);
-				JasperPrint jasperPrint8 = JasperFillManager.fillReport(jasperReport8, null, dataSource8);
-				JRXlsxExporter exporter8 = new JRXlsxExporter();
-				exporter8.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
-				exporter8.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
-				exporter8.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint8);
-				Object outputFileName8 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".xlsx";
-				exporter8.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName8);
-				exporter8.exportReport();
-				break;
-
-			case "dep":
-				List<Dep> lesDeps = depRepo.findAll();
-				// load file and compile it
-				File fileDep = ResourceUtils.getFile("classpath:dep.jrxml");
-				JasperReport jasperReport9 = JasperCompileManager.compileReport(fileDep.getAbsolutePath());
-				JRBeanCollectionDataSource dataSource9 = new JRBeanCollectionDataSource(lesDeps);
-				JasperPrint jasperPrint9 = JasperFillManager.fillReport(jasperReport9, null, dataSource9);
-				JRXlsxExporter exporter9 = new JRXlsxExporter();
-				exporter9.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
-				exporter9.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
-				exporter9.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint9);
-				Object outputFileName9 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".xlsx";
-				exporter9.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName9);
-				exporter9.exportReport();
-				break;
-
-			case "newpaie":
-				List<NewPaie> lesNewpaie = newPaieRepo.findAll();
-				// load file and compile it
-				File fileNewpaie = ResourceUtils.getFile("classpath:newPaie.jrxml");
-				JasperReport jasperReport10 = JasperCompileManager.compileReport(fileNewpaie .getAbsolutePath());
-				JRBeanCollectionDataSource dataSource10 = new JRBeanCollectionDataSource(lesNewpaie);
-				JasperPrint jasperPrint10 = JasperFillManager.fillReport(jasperReport10, null, dataSource10);
-				JRXlsxExporter exporter10= new JRXlsxExporter();
-				exporter10.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
-				exporter10.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
-				exporter10.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint10);
-				Object outputFileName10 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".DBF";
-				exporter10.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName10);
-				exporter10.exportReport();
-				break;
-				
-			case "pers":
-				List<Pers> lesPers = persRepo.findAll();
-				// load file and compile it
-				File filePers = ResourceUtils.getFile("classpath:pers.jrxml");
-				JasperReport jasperReport11 = JasperCompileManager.compileReport(filePers .getAbsolutePath());
-				JRBeanCollectionDataSource dataSource11 = new JRBeanCollectionDataSource(lesPers);
-				JasperPrint jasperPrint11 = JasperFillManager.fillReport(jasperReport11, null, dataSource11);
-				JRXlsxExporter exporter11= new JRXlsxExporter();
-				exporter11.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
-				exporter11.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
-				exporter11.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint11);
-				Object outputFileName11 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".DBF";
-				exporter11.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName11);
-				exporter11.exportReport();
-				break;
-				
-			
-				
-			case "frubN":
-				List<RubNum> lesFrubNum = rubNumRepo.findAll();
-				
-				// load file and compile it
-				File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml");
-				JasperReport jasperReport13 = JasperCompileManager.compileReport(filerubN.getAbsolutePath());
-				JRBeanCollectionDataSource dataSource13 = new JRBeanCollectionDataSource(lesFrubNum);
-				JasperPrint jasperPrint13 = JasperFillManager.fillReport(jasperReport13, null, dataSource13);
-				JRXlsxExporter exporter13= new JRXlsxExporter();
-				exporter13.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
-				exporter13.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
-				exporter13.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint13);
-				Object outputFileName13 = pathWithMounth + "\\" + fileName + " " + dateFormat + ".DBF";				
-				exporter13.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName13);			
-				exporter13.exportReport();			
-				break;
-			default:
-				System.out.println("no match");
-
-			
-			
-		}
-	}
 
 }

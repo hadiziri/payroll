@@ -39,6 +39,10 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FileToPrintSettingsComponent } from './file-to-print-settings/file-to-print-settings.component';
 import { GroupcheckboxesComponent } from './groupcheckboxes/groupcheckboxes.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { StorageSettingsComponent } from './storage-settings/storage-settings.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { CloturePaieComponent } from './cloture-paie/cloture-paie.component';
+
 
 
 
@@ -49,7 +53,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   declarations: [
     AppComponent,
-    FilesGeneratorComponent,AddStructureComponent,DeleteStructureComponent,UpdateStructureComponent,ErrorComponent,HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, SettingsComponent, FileToPrintSettingsComponent, GroupcheckboxesComponent
+    FilesGeneratorComponent,AddStructureComponent,DeleteStructureComponent,UpdateStructureComponent,ErrorComponent,HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, SettingsComponent, FileToPrintSettingsComponent, GroupcheckboxesComponent, StorageSettingsComponent, CloturePaieComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +77,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatExpansionModule,
     MatDividerModule,
     MatSlideToggleModule,
-    MatTabsModule
+    MatTabsModule,
+    MatGridListModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS,    useClass: AuthInterceptor,    multi: true  },
