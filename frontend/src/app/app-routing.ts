@@ -1,3 +1,4 @@
+import { CloturerMoisComponent } from './cloturer-mois/cloturer-mois.component';
 import { CloturePaieComponent } from './cloture-paie/cloture-paie.component';
 import { StorageSettingsComponent } from './storage-settings/storage-settings.component';
 import { FileToPrintSettingsComponent } from './file-to-print-settings/file-to-print-settings.component';
@@ -26,6 +27,7 @@ const APP_ROUTING : Routes =[
     {path:'fileToPrint',component:FileToPrintSettingsComponent},
     {path:'storageSettings',component:StorageSettingsComponent},
     {path:'cloturePaie',component:CloturePaieComponent},
+    {path:'clotureMois',component:CloturerMoisComponent},
     {path :"Error", component: ErrorComponent}
    
     

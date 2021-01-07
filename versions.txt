@@ -1,3 +1,9 @@
+2.2
+---
+ClotureMois:OK
+CloturePaie:OK
+Home==>EtatPaie:tri ok
+---------------------------------------------------------------------------------------------------
 2.1
 ---
 Header: se déconnecter 

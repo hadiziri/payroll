@@ -3,12 +3,15 @@ package com.sonatrach.dz.paymonth.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name ="PAYMONTH")
-@NamedQuery(name = "PayMonth.findByState", query = "SELECT p FROM PayMonth p WHERE state=1")
+@NamedQueries({@NamedQuery(name = "PayMonth.findByState", query = "SELECT p FROM PayMonth p WHERE state=1"),
+	@NamedQuery(name = "PayMonth.findByPaymonth", query = "SELECT p FROM PayMonth p WHERE paymonth=?1")})
+
 public class PayMonth {
 
 	@Id

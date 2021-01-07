@@ -1,6 +1,6 @@
 export interface Folder{
- idfolder:number;
- folderpath:string;
- foldername:string;
- statusfolder:number;
-}
+    idfolder:number;
+    folderpath:string;
+    foldername:string;
+    statusfolder:number;
+   }

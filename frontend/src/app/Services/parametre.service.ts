@@ -8,7 +8,7 @@ import { throwError } from 'rxjs';
 import { catchError  } from 'rxjs/operators';
 import { FileToPrint } from '../Models/FileToPrint';
 import { ShActivity } from '../Models/ShActivity';
-import { Folder } from '../Models/folder';
+
 import { clotureFiles } from './../Models/cloturesFiles';
 
 

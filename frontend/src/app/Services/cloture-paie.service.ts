@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 import { catchError  } from 'rxjs/operators';
 
-import { Folder } from '../Models/folder';
+import { Folder } from '../Models/Folder';
 import { clotureFiles } from './../Models/cloturesFiles';
 
 @Injectable({
@@ -96,6 +96,16 @@ export class CloturePaieService {
 
  public generatePersFiles():Observable<Array<clotureFiles>>{
   return this.httpClient.get<Array<clotureFiles>>(this.host+"generatePersFiles").pipe(
+    catchError((err) => {
+      console.log('error caught in service')
+      console.error(err);
+      return throwError(err);
+    })
+  );
+ }
+
+ public getAllCloturePaie():Observable<Array<clotureFiles>>{
+  return this.httpClient.get<Array<clotureFiles>>(this.host+"getAllCloturePaie").pipe(
     catchError((err) => {
       console.log('error caught in service')
       console.error(err);

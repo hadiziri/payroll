@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -183,6 +185,35 @@ public class Controller {
 		}
 		return folders;
 	}
+	
+	//confirmation cloture mois (update paymonth)
+	@GetMapping({"/updatePayMonth"})
+	public PayMonth updatePayMonth() {
+		try {
+			PayMonth currentPaymonth = paymonthRepo.findByState();
+			currentPaymonth.setState(0);
+			paymonthRepo.save(currentPaymonth);
+			String currentYear = currentPaymonth.getPaymonth().substring(0, 4);
+			String currentMonth = currentPaymonth.getPaymonth().substring(4, 6);
+			// get next month
+			 Calendar calendar = new GregorianCalendar(Integer.valueOf(currentYear), Integer.valueOf(currentMonth)-1, 31, 23, 30, 0);
+	
+			    calendar.add(Calendar.MONTH, 1);
+			    Date nextMonth = calendar.getTime();
+			    SimpleDateFormat formatter = new SimpleDateFormat("yyyyMM");
+		
+			    
+			  PayMonth nextPaymonth=paymonthRepo.findByPaymonth(formatter.format(nextMonth));
+			  nextPaymonth.setState(1);
+			  paymonthRepo.save( nextPaymonth);
+			  return nextPaymonth;
+		}catch(Exception e) {
+			System.out.println("Exception  updatePayMonth()==>" + e.getMessage());
+		}
+
+		  
+		return null;
+	}
 
 	// get files by folder pour la génération des fichiers
 	@PostMapping({ "/getFilesByFolder" })
@@ -226,6 +257,39 @@ public class Controller {
 		} else {
 			return 0;
 		}
+	}
+	//pour avoir tt les fichiers pour verifier l'etat de chacun (Cloture Paie Menu)
+	@GetMapping({"getAllCloturePaie"})
+	public List<CloturePaie>getAllCloturePaie(){
+		List<CloturePaie> toutLesCloturePaie=new ArrayList();
+		try {
+			toutLesCloturePaie=clotureRepo.findAll();
+			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
+			String path;
+		
+			for (int i = 0; i < toutLesCloturePaie.size(); i++) {
+				if (toutLesCloturePaie.get(i).getDESCFILETYPE().equals("pers") || toutLesCloturePaie.get(i).getDESCFILETYPE().equals("newpaie")
+						|| toutLesCloturePaie.get(i).getDESCFILETYPE().equals("frubA")
+						|| toutLesCloturePaie.get(i).getDESCFILETYPE().equals("frubN")) {
+					path = toutLesCloturePaie.get(i).getFOLDERPATH() + toutLesCloturePaie.get(i).getFOLDERNAME() + "\\" + currentYear + "\\"
+							+ dateFormat + "\\" + toutLesCloturePaie.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".DBF";
+				} else {
+					path = toutLesCloturePaie.get(i).getFOLDERPATH() +toutLesCloturePaie.get(i).getFOLDERNAME() + "\\" + currentYear + "\\"
+							+ dateFormat + "\\" + toutLesCloturePaie.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
+				}
+
+				toutLesCloturePaie.get(i).setFOLDERPATH(path);
+
+			}
+			return toutLesCloturePaie;
+		}catch(Exception e) {
+			System.out.println("Exception getAllCloturePaie()==>" + e.getMessage());
+		}
+		return toutLesCloturePaie;
+		
 	}
 
 	// get structure by activity

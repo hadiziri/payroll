@@ -9,4 +9,5 @@ import com.sonatrach.dz.paymonth.domain.PayMonth;
 @Repository
 public interface PayMonthRepo extends JpaRepository<PayMonth ,Integer > {
 public PayMonth findByState();
+public PayMonth findByPaymonth(String paymonth);
 }

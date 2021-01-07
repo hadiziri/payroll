@@ -42,6 +42,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { StorageSettingsComponent } from './storage-settings/storage-settings.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CloturePaieComponent } from './cloture-paie/cloture-paie.component';
+import { CloturerMoisComponent } from './cloturer-mois/cloturer-mois.component';
 
 
 
@@ -53,15 +54,14 @@ import { CloturePaieComponent } from './cloture-paie/cloture-paie.component';
 @NgModule({
   declarations: [
     AppComponent,
-    FilesGeneratorComponent,AddStructureComponent,DeleteStructureComponent,UpdateStructureComponent,ErrorComponent,HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, SettingsComponent, FileToPrintSettingsComponent, GroupcheckboxesComponent, StorageSettingsComponent, CloturePaieComponent
+    FilesGeneratorComponent,AddStructureComponent,DeleteStructureComponent,UpdateStructureComponent,ErrorComponent,HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, SettingsComponent, FileToPrintSettingsComponent, GroupcheckboxesComponent, StorageSettingsComponent, CloturePaieComponent, CloturerMoisComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,ROUTING, BrowserAnimationsModule, MatSortModule,
+    HttpClientModule,ROUTING, BrowserAnimationsModule,
     MatTableModule,
     MatSortModule,
-    MatTableModule,
     MatPaginatorModule,
     MatIconModule,
     FormsModule,
@@ -79,6 +79,7 @@ import { CloturePaieComponent } from './cloture-paie/cloture-paie.component';
     MatSlideToggleModule,
     MatTabsModule,
     MatGridListModule
+ 
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS,    useClass: AuthInterceptor,    multi: true  },

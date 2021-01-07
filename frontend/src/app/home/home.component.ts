@@ -35,7 +35,7 @@ export interface PeriodicElement {
 })
 export class HomeComponent implements OnInit {
 
-  displayedColumns: string[] = ['IDSTRUCTURE', 'STRUCTURENAME', 'STRUCTURECODELIKE', 'EMAILGROUPMANAGERS', 'STATUSSTRUCTURE', 'action'];
+  displayedColumns: string[] = ['idstructure', 'structurename', 'STRUCTURECODELIKE', 'EMAILGROUPMANAGERS', 'STATUSSTRUCTURE', 'action'];
 
   icon_etat: String = "vert.svg";
   etat: String = "";

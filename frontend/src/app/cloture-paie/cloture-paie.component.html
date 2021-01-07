@@ -10,7 +10,7 @@
                     <!-- Position Column -->
                     <ng-container matColumnDef="IDFILE">
                       <th mat-header-cell *matHeaderCellDef class="header_table"> No. </th>
-                      <td mat-cell *matCellDef="let element"> {{element.idfiletype}}</td>
+                      <td mat-cell *matCellDef="let element" > {{element.idfiletype}}</td>
                     </ng-container>
   
                     <!-- Position Column -->
@@ -23,7 +23,7 @@
                     <!-- Name Column -->
                     <ng-container matColumnDef="FOLDERPATH">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header class="header_table"> Chemin de stockage </th>
-                      <td mat-cell *matCellDef="let element"> {{element.folderpath}} </td>
+                      <td mat-cell *matCellDef="let element"> {{element.folderpath}}</td>
                     </ng-container>
   
   
@@ -32,8 +32,8 @@
                     <ng-container matColumnDef="STATUSFILE">
                       <th mat-header-cell *matHeaderCellDef class="header_table"> Etat Fichier </th>
                       <td mat-cell *matCellDef="let element; let i = index;">
-                        
-                            <div  [ngSwitch]="array[i].etat">
+                           
+                            <div  [ngSwitch]="getStatusFile(element.idfiletype)">
                                 <svg width="25" height="25" viewBox="0 0 100 100" *ngSwitchCase="1">
                                   <circle cx="60" cy="60" r="40" style="fill:#3DBC14" />
                                 </svg>
@@ -45,7 +45,7 @@
         
                               </div>
                          
-                       
+                           
   
                       </td>
                     </ng-container>
