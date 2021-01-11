@@ -1,0 +1,46 @@
+<div class="container">
+    <h1>Pour modifier la structure,veuillez remplir les champs suivants:</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" novalidate>
+    <div class="example-container">
+      <mat-form-field style="margin: 10px;">
+        
+        <input matInput placeholder="Nom structure" formControlName="structurename" value="{{structureArchive.archstructurename}}">
+      </mat-form-field>
+
+      <mat-form-field style="margin: 10px;">
+        <input matInput  placeholder="Code structure" formControlName="structurecodelike" value={{structureArchive.archstructurecodelike}}>
+      </mat-form-field>
+
+
+
+      <mat-form-field style="margin: 10px;">
+        <input matInput  placeholder="Code not like structure" formControlName="structurecodenotlike" value={{structureArchive.archstructurecodenotlike}}>
+      </mat-form-field>
+
+      <mat-form-field style="margin: 10px;">
+        <input matInput  placeholder="Email groupe gestionnaire" formControlName="emailgroupemanagers" value="{{structureArchive.archemailgroupemanagers}}">
+        <mat-error *ngIf="!formGroup.controls['emailgroupemanagers'].valid && formGroup.controls['emailgroupemanagers'].touched">
+            {{getErrorEmail()}}
+          </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field style="margin: 10px;">
+        <input type="text" placeholder="Sélectionnez une activité" aria-label="Number" matInput formControlName="idactivity"
+          [matAutocomplete]="auto" >
+        <mat-autocomplete #auto="matAutocomplete" >
+          <mat-option *ngFor="let activity of allShActivities" [value]="activity.idactivity">
+            {{activity.descactivity}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <button [disabled]="!formGroup.valid" mat-raised-button class="btn btn-success btn-lg" mat-button>Enregistrer les
+        modifications</button>
+    </div>
+  </form>
+  </div>
+</div>
+</div>

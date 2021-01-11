@@ -43,6 +43,9 @@ import { StorageSettingsComponent } from './storage-settings/storage-settings.co
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CloturePaieComponent } from './cloture-paie/cloture-paie.component';
 import { CloturerMoisComponent } from './cloturer-mois/cloturer-mois.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 
 
@@ -78,7 +81,9 @@ import { CloturerMoisComponent } from './cloturer-mois/cloturer-mois.component';
     MatDividerModule,
     MatSlideToggleModule,
     MatTabsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule,
+    MatAutocompleteModule
  
   ],
   providers: [

@@ -35,6 +35,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sonatrach.dz.archiveStructure.domain.ArchiveStructure;
+import com.sonatrach.dz.archiveStructure.repo.ArchiveStructureRepo;
 import com.sonatrach.dz.banque.domain.Banque;
 import com.sonatrach.dz.banque.repo.BanqueRepo;
 import com.sonatrach.dz.chang.domain.Change;
@@ -151,6 +153,8 @@ public class Controller {
 	ShActivityRepo shActivityRepo;
 	@Autowired
 	FolderRepo folderRepo;
+	@Autowired
+	ArchiveStructureRepo archiveStructureRepo;
 
 	// ****************************************API*****************************************************************************
 	// Api Test
@@ -164,7 +168,7 @@ public class Controller {
 	public List<Structure> getAllStructures() {
 		List<Structure> lesStructures = new ArrayList();
 		try {
-			lesStructures = structureRepo.findAll();
+			lesStructures = structureRepo.findByStatus(-1);
 
 			return lesStructures;
 		} catch (Exception e) {
@@ -173,6 +177,116 @@ public class Controller {
 		return lesStructures;
 	}
 
+	
+	//update structure
+	@PostMapping({"/updateStructure"})
+	public Structure updateStructure(@RequestBody Structure structure) {
+		Optional<Structure> structureToUpdate = null;
+		try {
+			structureToUpdate=structureRepo.findById(structure.getIDSTRUCTURE());
+			if(structureToUpdate.get()!=null) {
+				if(structure.getEMAILGROUPMANAGERS()!="") {
+					structureToUpdate.get().setEMAILGROUPMANAGERS(structure.getEMAILGROUPMANAGERS());
+				}
+				if(structure.getIDACTIVITY()!=0) {
+					structureToUpdate.get().setIDACTIVITY(structure.getIDACTIVITY());
+				}
+				if(structure.getSTRUCTURENAME()!="") {
+					structureToUpdate.get().setSTRUCTURENAME(structure.getSTRUCTURENAME());
+				}
+				if(structure.getSTRUCTURECODELIKE()!="") {
+					structureToUpdate.get().setSTRUCTURECODELIKE(structure.getSTRUCTURECODELIKE());
+				}
+				if(structure.getSTRUCTURECODENOTLIKE()!="") {
+					structureToUpdate.get().setSTRUCTURECODENOTLIKE(structure.getSTRUCTURECODENOTLIKE());
+				}
+				//System.out.println(structureToUpdate.get().getIDACTIVITY()+"   "+structureToUpdate.get().getIDSTRUCTURE());
+				structureRepo.save(structureToUpdate.get());
+				return structureToUpdate.get();
+			}
+		}catch(Exception e) {
+			System.out.println("Exception updateStructure()==>" + e.getMessage());
+		}
+		return null;
+	}
+	
+	//update structure Archive
+	@PostMapping({"/updateStructureArchive"})
+	public ArchiveStructure updateStructureArchive(@RequestBody ArchiveStructure archivateStructure) {
+		try {
+			archiveStructureRepo.save(archivateStructure);
+			return archivateStructure;
+		}catch(Exception e) {
+			System.out.println("Exception updateStructureArchive()==>" + e.getMessage());
+		}
+		return null;
+	}
+	
+	@PostMapping({"/addStructure"})
+	public Structure addStructure(@RequestBody Structure structure) {
+		try {
+			structureRepo.save(structure);
+			return structure;
+		}catch(Exception e) {
+			System.out.println("Exception addStructure()==>" + e.getMessage());
+		}
+		
+		return null;
+		
+	}
+	
+	@PostMapping({"/addArchiveStructure"})
+	public ArchiveStructure addArchiveStructure(@RequestBody ArchiveStructure structure) {
+		try {
+			Structure currentStructure=structureRepo.findByName(structure.getArchstructurename());
+			if(currentStructure !=null) {
+				structure.setIdstructure(currentStructure.getIDSTRUCTURE());
+				archiveStructureRepo.save(structure);
+				return structure;
+			}
+			
+			
+		}catch(Exception e) {
+			System.out.println("Exception addStructure()==>" + e.getMessage());
+		}
+		
+		return null;
+		
+	}
+	
+	//delete structure 
+	@PostMapping({"deleteStructure"})
+	public Structure deleteStructure(@RequestBody ArchiveStructure structure) {
+		try {
+			Optional<Structure> deletedStructure=structureRepo.findById(structure.getIdstructure());
+			
+			if(deletedStructure.get()!=null) {
+				//System.out.println(deletedStructure.get().getEMAILGROUPMANAGERS());
+				archiveStructureRepo.save(structure);
+				deletedStructure.get().setSTATUSSTRUCTURE(-1);
+				structureRepo.save(deletedStructure.get());
+				
+				return deletedStructure.get();
+			}
+		}catch(Exception e) {
+			System.out.println("Exception deleteStructure()==>" + e.getMessage());
+		}
+		return null;
+	}
+	//get User by username
+	@PostMapping({"getUserByUserName"})
+	public User  getUserByUserName(@RequestBody User u) {
+		try {
+			Optional<User> user=userRepository.findByUsername(u.getUsername());
+			if(user.get()!=null) {
+				//System.out.println(user.get().getIduser());
+				return user.get();
+			}
+		}catch(Exception e) {
+			System.out.println("Exception getUserByUserName()==>" + e.getMessage());
+		}
+		return null;
+	}
 	// get All folders pour la génération des fichiers
 	@GetMapping({ "/getAllFolders" })
 	public List<Folder> getallFolders() {

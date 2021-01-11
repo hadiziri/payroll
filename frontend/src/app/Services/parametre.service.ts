@@ -1,3 +1,5 @@
+import { User } from './../Models/User';
+import { ArchiveStructure } from './../Models/ArchiveStructure';
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http'
 import { threadId } from 'worker_threads';
@@ -18,7 +20,7 @@ import { clotureFiles } from './../Models/cloturesFiles';
 export class ParametreService {
   public host:string;
   constructor(private httpClient:HttpClient) { 
-    this.host = 'http://localhost:8080/';
+    this.host = 'http://10.100.105.81:8080/';
   }
 
    public getEtats():Observable<Array<clotureFiles>>{
@@ -94,4 +96,63 @@ export class ParametreService {
    }
 
 
+   public updateStructure(structure:Structure):Observable<Structure>{
+     return this.httpClient.post<Structure>(this.host+"updateStructure",structure).pipe(
+      catchError((err) => {
+        console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+   }
+
+   public updateStructureArchive(archiveStructure:ArchiveStructure):Observable<ArchiveStructure>{
+    return this.httpClient.post<ArchiveStructure>(this.host+"updateStructureArchive",archiveStructure).pipe(
+      catchError((err) => {
+        console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+   }
+
+   public getUserByUserName(u:User ):Observable<User>{
+     return this.httpClient.post<User>(this.host+"getUserByUserName",u).pipe(
+      catchError((err) => {
+        console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+   }
+
+   public deleteStructure(structure:ArchiveStructure):Observable<Structure>{
+     return this.httpClient.post<Structure>(this.host+"deleteStructure",structure).pipe(
+      catchError((err) => {
+        console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+   }
+
+   public addStructure(structure:Structure):Observable<Structure>{
+    return this.httpClient.post<Structure>(this.host+"addStructure",structure).pipe(
+     catchError((err) => {
+       console.log('error caught in service')
+       console.error(err);
+       return throwError(err);
+     })
+   );
+}
+
+public addArchiveStructure(structure:ArchiveStructure):Observable<ArchiveStructure>{
+  return this.httpClient.post<ArchiveStructure>(this.host+"addArchiveStructure",structure).pipe(
+    catchError((err) => {
+      console.log('error caught in service')
+      console.error(err);
+      return throwError(err);
+    })
+  );
+ }
 }

@@ -11,7 +11,7 @@ import { catchError  } from 'rxjs/operators';
 export class HomeService {
   public host:string;
   constructor(private httpClient:HttpClient) { 
-    this.host = 'http://localhost:8080/';
+    this.host = 'http://10.100.105.81:8080/';
   }
   public getAllStructures():Observable <Array<Structure>>{
     return this.httpClient.get <Array<Structure>>(this.host+"getAllStructures").pipe(

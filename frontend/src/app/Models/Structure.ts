@@ -5,9 +5,9 @@ export interface Structure{
 idactivity:number;
  structurename :string;
  structurecodelike:string;
-structurecodenotlike:number;
+structurecodenotlike:string;
 statusstructure:number;
-emailgroupemanagers:string;
+emailgroupmanagers:string;
 
 
 	

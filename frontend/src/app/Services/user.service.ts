@@ -11,9 +11,9 @@ import { User } from '../Models/User';
 export class UserService {
 
 
-  private userUrl = 'http://localhost:8080/';
-  private pmUrl = 'http://localhost:8080/api/test/pm';
-  private adminUrl = 'http://localhost:8080/api/test/admin';
+  private userUrl = 'http://10.100.105.81:8080/';
+  private pmUrl = 'http://10.100.105.81:8080/api/test/pm';
+  private adminUrl = 'http://10.100.105.81:8080/api/test/admin';
 
   constructor(private http: HttpClient) { }
 

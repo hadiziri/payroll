@@ -108,7 +108,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
       (data) => {
         
         //console.log(data);
-        if(this.EtatArray.length!=0){
+        if(this.EtatArray.length>0){
           
           
           for(let i=0;i<this.EtatArray.length;i++){

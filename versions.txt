@@ -1,3 +1,10 @@
+2.3
+---
+Parametrage Structure : 
+-Add structure
+-Delete structure
+-Update structure
+---------------------------------------------------------------------------------------------------
 2.2
 ---
 ClotureMois:OK
