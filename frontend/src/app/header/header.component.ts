@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
     }
   }
   logout() {
-    console.log("deconnexion")
+    //console.log("deconnexion")
     this.connection=false;
     this.tokenStorage.signOut();
   

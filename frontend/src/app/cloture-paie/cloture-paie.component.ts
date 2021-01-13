@@ -38,6 +38,8 @@ export class CloturePaieComponent implements OnInit {
   ELEMENT_DATA: clotureFiles[] = [];
   folderCategories: Folder[] = [];
   state: number = -1;
+  FrubAlph: Boolean = false;
+  FrubNum: Boolean = false;
   EtatArray = Array<EtatElement>();
   showSpinner: Boolean = false;
 
@@ -70,9 +72,9 @@ export class CloturePaieComponent implements OnInit {
 
       (data) => {
 
-        console.log(data);
-        if(data!=null){
-          for(let i=0;i<data.length;i++){
+        //console.log(data);
+        if (data != null) {
+          for (let i = 0; i < data.length; i++) {
             this.getEtatFile(data[i]);
           }
         }
@@ -80,7 +82,7 @@ export class CloturePaieComponent implements OnInit {
 
       },
       error => {
-        console.log(error);
+       // console.log(error);
         alert(error);
         throw error;
 
@@ -97,20 +99,20 @@ export class CloturePaieComponent implements OnInit {
     this.clotureService.getallFolders().subscribe(
       (data) => {
         if (data != null) {
-          console.log(data);
-          for(let i=0;i<data.length;i++){
-            if(data[i].foldername!="ETAT"){
+          //console.log(data);
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].foldername != "ETAT") {
               this.folderCategories.push(data[i]);
             }
           }
-         
+
 
         } else {
           alert("Une erreur s'est produite.Veuillez réessayer plus tard");
         }
       },
       (error) => {
-        console.log(error);
+       // console.log(error);
         alert(error);
         throw error;
       }
@@ -118,32 +120,32 @@ export class CloturePaieComponent implements OnInit {
 
     );
   }
-  getStatusFile(idFile:number){
-   /* this.EtatArray.forEach(
-      (element)=>{
-        console.log(element)
-        if(element.idFile==idFile){
-          return element.etat;
-          
-        }else{
-          return -1
-        }
-      }
-      );*/
+  getStatusFile(idFile: number) {
+    /* this.EtatArray.forEach(
+       (element)=>{
+         console.log(element)
+         if(element.idFile==idFile){
+           return element.etat;
+           
+         }else{
+           return -1
+         }
+       }
+       );*/
 
-      for(let i=0;i<this.EtatArray.length;i++){
-        if(this.EtatArray[i].idFile==idFile){
-          return this.EtatArray[i].etat;
-        }
+    for (let i = 0; i < this.EtatArray.length; i++) {
+      if (this.EtatArray[i].idFile == idFile) {
+        return this.EtatArray[i].etat;
       }
-      return -1;
+    }
+    return -1;
 
   }
   getFiles(event: any) {
 
     this.ELEMENT_DATA = [];
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-    console.log(this.EtatArray)
+    //console.log(this.EtatArray)
 
     let folder: Folder = { "idfolder": 0, "foldername": event.tab.textLabel, "folderpath": "", "statusfolder": 0 };
 
@@ -152,12 +154,12 @@ export class CloturePaieComponent implements OnInit {
         //console.log(data);
         this.ELEMENT_DATA = data;
         this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-     
+
 
 
       },
       (error) => {
-        console.log(error);
+       // console.log(error);
         alert(error);
         throw error;
       }
@@ -175,13 +177,13 @@ export class CloturePaieComponent implements OnInit {
         //console.log(data);
         this.state = data;
         this.EtatArray.push({ "idFile": file.idfiletype, "etat": this.state })
-        
+
         //console.log(this.dataSource)
-        
+
 
       },
       (error) => {
-        console.log(error);
+        //console.log(error);
         alert(error);
         throw error;
       }
@@ -192,25 +194,25 @@ export class CloturePaieComponent implements OnInit {
   }
 
   generateFiles(description: string) {
-    console.log(description);
+    //console.log(description);
     this.showSpinner = true;
     switch (description) {
       case "TABLES":
         this.clotureService.generateTableFiles().subscribe(
           (data) => {
             if (data != null) {
-              console.log(data);
+              //console.log(data);
               let msg = "Les fichiers tables ont bien été générés et la paie a bien été cloturée.";
               this.showSpinner = false;
               this.showAlert(msg);
             } else {
-              alert("Une erreur s'est produite.Veuillez réessayer plus tard");
+              alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
             }
 
           },
 
           (error) => {
-            console.log(error);
+            //console.log(error);
             alert(error);
             throw error;
           }
@@ -224,18 +226,19 @@ export class CloturePaieComponent implements OnInit {
         this.clotureService.generateSystemFiles().subscribe(
           (data) => {
             if (data != null) {
-              console.log(data);
+              //console.log(data);
               let msg = "Les fichiers systèmes ont bien été générés et la paie a bien été cloturée.";
               this.showSpinner = false;
               this.showAlert(msg);
             } else {
-              alert("Une erreur s'est produite.Veuillez réessayer plus tard");
+              this.showSpinner = false;
+              alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
             }
 
           },
 
           (error) => {
-            console.log(error);
+            //console.log(error);
             alert(error);
             throw error;
           }
@@ -245,21 +248,38 @@ export class CloturePaieComponent implements OnInit {
         break;
 
       case "FRUB":
-        this.clotureService.generateFrubFiles().subscribe(
+        this.clotureService.generateFrubAlph().subscribe(
           (data) => {
             if (data != null) {
-              console.log(data);
-              let msg = "Les fichiers frub ont bien été générés et la paie a bien été cloturée.";
-              this.showSpinner = false;
-              this.showAlert(msg);
+              //console.log(data);
+              this.FrubAlph = true;
+              this.showAlertFRUB();
             } else {
-              alert("Une erreur s'est produite.Veuillez réessayer plus tard");
+              alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
             }
 
           },
 
           (error) => {
-            console.log(error);
+            //console.log(error);
+            alert(error);
+            throw error;
+          }
+        );
+        this.clotureService.generateFrubNum().subscribe(
+          (data) => {
+            if (data != null) {
+              //console.log(data);
+
+              this.FrubNum = true;
+              this.showAlertFRUB();
+            } else {
+              alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
+            }
+
+          },
+          (error) => {
+            //console.log(error);
             alert(error);
             throw error;
           }
@@ -271,18 +291,18 @@ export class CloturePaieComponent implements OnInit {
 
           (data) => {
             if (data != null) {
-              console.log(data);
+              //console.log(data);
               let msg = "Les fichiers pers ont bien été générés et la paie a bien été cloturée.";
               this.showSpinner = false;
               this.showAlert(msg);
             } else {
-              alert("Une erreur s'est produite.Veuillez réessayer plus tard");
+              alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
             }
 
           },
 
           (error) => {
-            console.log(error);
+            //console.log(error);
             alert(error);
             throw error;
           }
@@ -294,18 +314,18 @@ export class CloturePaieComponent implements OnInit {
         this.clotureService.generateNewPaieFiles().subscribe(
           (data) => {
             if (data != null) {
-              console.log(data);
+              //console.log(data);
               let msg = "Les fichiers newpaie ont bien été générés et la paie a bien été cloturée.";
               this.showSpinner = false;
               this.showAlert(msg);
             } else {
-              alert("Une erreur s'est produite.Veuillez réessayer plus tard");
+              alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
             }
 
           },
 
           (error) => {
-            console.log(error);
+            //console.log(error);
             alert(error);
             throw error;
           }
@@ -325,6 +345,21 @@ export class CloturePaieComponent implements OnInit {
         window.location.reload();
       }
     });
+
+  }
+  showAlertFRUB() {
+    if (this.FrubAlph && this.FrubNum) {
+      this.showSpinner = false;
+      mobiscroll.alert({
+        title: 'Cloture Paie',
+        message: " Les fichiers frub ont bien été générés et la paie a bien été cloturée."
+
+        , callback: function () {
+          window.location.reload();
+        }
+      });
+    }
+
 
   }
 }

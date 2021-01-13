@@ -173,6 +173,7 @@ public class Controller {
 			return lesStructures;
 		} catch (Exception e) {
 			System.out.println("Exception getAllStructures()==>" + e.getMessage());
+			lesStructures=null;
 		}
 		return lesStructures;
 	}
@@ -206,6 +207,7 @@ public class Controller {
 			}
 		}catch(Exception e) {
 			System.out.println("Exception updateStructure()==>" + e.getMessage());
+			structureToUpdate = null;
 		}
 		return null;
 	}
@@ -296,6 +298,7 @@ public class Controller {
 			return folders;
 		} catch (Exception e) {
 			System.out.println("Exception getallFolders()==>" + e.getMessage());
+			folders=null;
 		}
 		return folders;
 	}
@@ -401,6 +404,7 @@ public class Controller {
 			return toutLesCloturePaie;
 		}catch(Exception e) {
 			System.out.println("Exception getAllCloturePaie()==>" + e.getMessage());
+			toutLesCloturePaie=null;
 		}
 		return toutLesCloturePaie;
 		
@@ -416,6 +420,7 @@ public class Controller {
 			return lesStructures;
 		} catch (Exception e) {
 			System.out.println("Exception getStructureByActivity()==>" + e.getMessage());
+			lesStructures=null;
 		}
 		return lesStructures;
 	}
@@ -564,6 +569,7 @@ public class Controller {
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage() + "==>generateTableFiles()");
+			fileTables=null;
 		}
 		return fileTables;
 
@@ -626,23 +632,24 @@ public class Controller {
 			exporter9.exportReport();
 			return fileSys;
 
-		} catch (Exception e) {
+		}catch (Exception e) {
 			System.out.println(e.getMessage() + "==>generateSystemFiles()");
+			fileSys=null;
 		}
 		return fileSys;
 
 	}
 
 	// génération des fichiers FRUB
-	@GetMapping({ "generateFrubFiles" })
-	public List<CloturePaie> generateFrubFiles() throws FileNotFoundException, JRException {
+	@GetMapping({ "generateFrubAlph" })
+	public List<CloturePaie> generateFrubAlph() throws FileNotFoundException, JRException {
 		List<CloturePaie> fileFrub = new ArrayList();
 		try {
 
 			fileFrub = clotureRepo.findByCategory("FRUB");
 
 			List<RubAlph> lesFrubAlph = rubAlphRepo.findAll();
-			List<RubNum> lesFrubNum = rubNumRepo.findAll();
+			//List<RubNum> lesFrubNum = rubNumRepo.findAll();
 
 			// **********************************************get current date from payMonth
 
@@ -664,7 +671,7 @@ public class Controller {
 				fileMounth.mkdir();
 			}
 			// load file and compile it
-			File filerubA = ResourceUtils.getFile("classpath:rubAlph.jrxml");
+			 File filerubA = ResourceUtils.getFile("classpath:rubAlph.jrxml");
 			JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(lesFrubAlph);
 			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, null, dataSource12);
@@ -678,7 +685,7 @@ public class Controller {
 			exporter12.exportReport();
 
 			// load file and compile it
-			File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml");
+			/*File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml");
 			JasperReport jasperReport13 = JasperCompileManager.compileReport(filerubN.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource13 = new JRBeanCollectionDataSource(lesFrubNum);
 			JasperPrint jasperPrint13 = JasperFillManager.fillReport(jasperReport13, null, dataSource13);
@@ -689,17 +696,84 @@ public class Controller {
 			Object outputFileName13 = pathWithMounth + "\\" + clotureRepo.findByDesc("frubN").get(0).getPREFIXFILETYPE()
 					+ " " + dateFormat + ".DBF";
 			exporter13.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName13);
-			exporter13.exportReport();
+			exporter13.exportReport();*/
 			return fileFrub;
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage() + "==>generateFrubFiles() ");
+			fileFrub=null;
 		}
 		return fileFrub;
 
 	}
 	
+	// génération des fichiers FRUB
+		@GetMapping({ "generateFrubNum" })
+		public List<CloturePaie> generateFrubNum() throws FileNotFoundException, JRException {
+			List<CloturePaie> fileFrub = new ArrayList();
+			try {
 
+				fileFrub = clotureRepo.findByCategory("FRUB");
+
+				//List<RubAlph> lesFrubAlph = rubAlphRepo.findAll();
+				List<RubNum> lesFrubNum = rubNumRepo.findAll();
+
+				// **********************************************get current date from payMonth
+
+				PayMonth currentDate = paymonthRepo.findByState();
+				String currentYear = currentDate.getPaymonth().substring(0, 4);
+				String currentMonth = currentDate.getPaymonth().substring(4, 6);
+				String dateFormat = currentYear + "-" + currentMonth;
+
+				// ********************************folder generation if not exist
+				String pathWithYear = fileFrub.get(0).getFOLDERPATH() + fileFrub.get(0).getFOLDERNAME() + "\\"
+						+ currentYear;
+				String pathWithMounth = pathWithYear + "\\" + dateFormat;
+				File fileYear = new File(pathWithYear);
+				if (!fileYear.exists()) {
+					fileYear.mkdir();
+				}
+				File fileMounth = new File(pathWithMounth);
+				if (!fileMounth.exists()) {
+					fileMounth.mkdir();
+				}
+				// load file and compile it
+				/* File filerubA = ResourceUtils.getFile("classpath:rubAlph.jrxml");
+				JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA.getAbsolutePath());
+				JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(lesFrubAlph);
+				JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, null, dataSource12);
+				JRXlsxExporter exporter12 = new JRXlsxExporter();
+				exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+				exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+				exporter12.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint12);
+				Object outputFileName12 = pathWithMounth + "\\" + clotureRepo.findByDesc("frubA").get(0).getPREFIXFILETYPE()
+						+ " " + dateFormat + ".DBF";
+				exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
+				exporter12.exportReport();*/
+
+				// load file and compile it
+				File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml");
+				JasperReport jasperReport13 = JasperCompileManager.compileReport(filerubN.getAbsolutePath());
+				JRBeanCollectionDataSource dataSource13 = new JRBeanCollectionDataSource(lesFrubNum);
+				JasperPrint jasperPrint13 = JasperFillManager.fillReport(jasperReport13, null, dataSource13);
+				JRXlsxExporter exporter13 = new JRXlsxExporter();
+				exporter13.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+				exporter13.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+				exporter13.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint13);
+				Object outputFileName13 = pathWithMounth + "\\" + clotureRepo.findByDesc("frubN").get(0).getPREFIXFILETYPE()
+						+ " " + dateFormat + ".DBF";
+				exporter13.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName13);
+				exporter13.exportReport();
+				return fileFrub;
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage() + "==>generateFrubFiles() ");
+				fileFrub=null;
+			}
+			return fileFrub;
+
+		}
+		
 	// génération des fichiers NewPaie
 	@GetMapping({ "generateNewPaieFiles" })
 	public List<CloturePaie> generateNewPaieFiles() throws FileNotFoundException, JRException {
@@ -744,6 +818,7 @@ public class Controller {
 			return fileNewPaie;
 		} catch (Exception e) {
 			System.out.println(e.getMessage() + "==>generateNewPaieFiles()");
+			fileNewPaie=null;
 		}
 		return fileNewPaie;
 
@@ -798,6 +873,7 @@ public class Controller {
 			return filesPers;
 		} catch (Exception e) {
 			System.out.println(e.getMessage() + "==>generatePersFiles()");
+			filesPers =null;
 		}
 		return filesPers ;
 
@@ -857,6 +933,7 @@ public class Controller {
 			return allUsers;
 		} catch (Exception e) {
 			System.out.println("Exception while getting all users==>" + e.getMessage());
+			 allUsers=null;
 		}
 		return allUsers;
 	}
@@ -872,17 +949,24 @@ public class Controller {
 	// for settings : changer psw
 	@PostMapping({ "updatePsw" })
 	public User updatePsw(@RequestBody User u) {
-		Optional<User> currentUser = userRepository.findByUsername(u.getUsername());
 		User user = new User();
-		if (currentUser != null) {
-			currentUser.get().setPassword(encoder.encode(u.getPassword()));
-			user.setIduser(currentUser.get().getIduser());
-			user.setEmail(currentUser.get().getEmail());
-			user.setName(currentUser.get().getName());
-			user.setPassword(currentUser.get().getPassword());
-			user.setState(currentUser.get().getState());
-			user.setUsername(currentUser.get().getUsername());
-			userRepository.save(user);
+		try {
+			Optional<User> currentUser = userRepository.findByUsername(u.getUsername());
+			
+			if (currentUser != null) {
+				currentUser.get().setPassword(encoder.encode(u.getPassword()));
+				user.setIduser(currentUser.get().getIduser());
+				user.setEmail(currentUser.get().getEmail());
+				user.setName(currentUser.get().getName());
+				user.setPassword(currentUser.get().getPassword());
+				user.setState(currentUser.get().getState());
+				user.setUsername(currentUser.get().getUsername());
+				userRepository.save(user);
+			}
+			return user;
+		}catch(Exception e) {
+			System.out.println("Exception while updating Psw==>" + e.getMessage());
+			user=null;
 		}
 		return user;
 
@@ -902,6 +986,7 @@ public class Controller {
 		} catch (Exception e) {
 
 			System.out.println("Erreur lors de la génération des fichiers:   " + e.getMessage());
+			toutLesEtats=null;
 		}
 
 		return toutLesEtats;
@@ -916,6 +1001,7 @@ public class Controller {
 			return files;
 		} catch (Exception e) {
 			System.out.println("Exception while getting all file to print==>" + e.getMessage());
+			files=null;
 		}
 		return files;
 	}
@@ -930,6 +1016,7 @@ public class Controller {
 			return files;
 		} catch (Exception e) {
 			System.out.println("Exception while getting getSelectedEtat==>" + e.getMessage());
+			files=null;
 		}
 		return files;
 	}

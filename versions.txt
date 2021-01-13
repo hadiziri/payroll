@@ -1,3 +1,10 @@
+2.5
+---
+-Suppression de tt les console.log
+-Disable all unused items in menu(etat paie ,historique,changer path)
+-check if usename is correct while updating psw
+-backend:add try catch ,review returns and using 2 API to genberate FrubAlph & FrubNum
+---------------------------------------------------------------------------------------------------
 2.4
 ---
 -Design (tables with scroll and fixed header)

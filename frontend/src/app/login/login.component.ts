@@ -30,13 +30,14 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      this.router.navigate(["/home"]);
+      //this.router.navigate(["/home"]);
+      this.router.navigate(["cloturePaie"]);
 
     }
   }
 
   onSubmit() {
-    console.log(this.form);
+    //console.log(this.form);
 
     this.loginInfo = new AuthLoginInfo(
       this.form.username,
@@ -61,7 +62,7 @@ export class LoginComponent implements OnInit {
       
       },
       error => {
-        console.log(error);
+       // console.log(error);
         this.errorMessage = error.error.message;
         this.state=0;
         this.isLoginFailed = true;

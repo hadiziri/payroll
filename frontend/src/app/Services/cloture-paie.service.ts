@@ -75,8 +75,18 @@ export class CloturePaieService {
   );
  }
  
- public generateFrubFiles():Observable<Array<clotureFiles>>{
-  return this.httpClient.get<Array<clotureFiles>>(this.host+"generateFrubFiles").pipe(
+ public generateFrubAlph():Observable<Array<clotureFiles>>{
+  return this.httpClient.get<Array<clotureFiles>>(this.host+"generateFrubAlph").pipe(
+    catchError((err) => {
+      console.log('error caught in service')
+      console.error(err);
+      return throwError(err);
+    })
+  );
+ }
+
+ public generateFrubNum():Observable<Array<clotureFiles>>{
+  return this.httpClient.get<Array<clotureFiles>>(this.host+"generateFrubNum").pipe(
     catchError((err) => {
       console.log('error caught in service')
       console.error(err);

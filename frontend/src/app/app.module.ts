@@ -1,3 +1,4 @@
+import { CommunService } from './Services/commun.service';
 import { MatInputModule } from '@angular/material/input';
 import { GlobalErrorHandlerService } from './Services/global-error-handler.service';
 import { AuthInterceptor } from './auth/auth-interceptor';
@@ -8,7 +9,7 @@ import { DeleteStructureComponent } from './delete-structure/delete-structure.co
 import { AddStructureComponent } from './add-structure/add-structure.component';
 import{ROUTING} from './app-routing';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, APP_INITIALIZER } from '@angular/core';
 import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http'
 
 
@@ -46,6 +47,7 @@ import { CloturerMoisComponent } from './cloturer-mois/cloturer-mois.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {  initConfig } from './/Services/commun.service';
 
 
 
@@ -90,6 +92,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS,    useClass: AuthInterceptor,    multi: true  },
+    CommunService,
+    {provide: APP_INITIALIZER, useFactory: initConfig,deps: [CommunService],multi: true},
     { provide: ErrorHandler, useClass:GlobalErrorHandlerService}
 ],
   bootstrap: [AppComponent]

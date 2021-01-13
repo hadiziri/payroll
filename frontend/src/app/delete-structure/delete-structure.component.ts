@@ -83,12 +83,12 @@ export class DeleteStructureComponent implements OnInit {
     this.homeService.getAllStructures().subscribe(
       (data) => {
         this.ELEMENT_DATA = data;
-        console.log(data);
+        //console.log(data);
         this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
       },
       error => {
-        console.log(error);
+        //console.log(error);
         alert(error);
         throw error;
 
@@ -96,19 +96,19 @@ export class DeleteStructureComponent implements OnInit {
     );
     //get currentUser
 this.currentUser.username=this.token.getUsername();
-console.log(this.currentUser)
+//console.log(this.currentUser)
 this.paramService.getUserByUserName(this.currentUser).subscribe(
   data=>{
     if(data!=null){
       
-      console.log(data);
+      //console.log(data);
       this.currentUser.iduser=data.iduser;
     }else{
       alert("Une erreur s'est produite.Veuillez réessayer plus tard");
     }
   },
   error=>{
-    console.log(error);
+    //console.log(error);
     alert(error);
     throw error;
   }
@@ -120,7 +120,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
  
 
   updateStructure(element:Structure){
-    console.log(element)
+   // console.log(element)
     let navigationExtras: NavigationExtras = {
       queryParams: {
         "idstructure":element.idstructure,
@@ -147,7 +147,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
     this.structureArchive.archstructurename=element.structurename;
     this.structureArchive.idactivity=element.idactivity;
     
-    console.log(this.structureArchive)
+    //console.log(this.structureArchive)
     this.showConfirm();
   
   }
@@ -167,7 +167,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
         data=>{
           if(data!=null){
             
-            console.log(data);
+            //console.log(data);
             this.showAlert();
            
           }else{
@@ -175,7 +175,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
           }
         },
         error=>{
-          console.log(error);
+          //console.log(error);
           alert(error);
           throw error;
         }

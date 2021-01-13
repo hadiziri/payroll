@@ -72,12 +72,12 @@ export class HomeComponent implements OnInit {
     this.homeService.getAllStructures().subscribe(
       (data) => {
         this.ELEMENT_DATA = data;
-        console.log(data);
+        //console.log(data);
         this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
       },
       error => {
-        console.log(error);
+        //console.log(error);
         alert(error);
         throw error;
 

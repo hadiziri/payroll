@@ -1,4 +1,4 @@
 {
-    "host":"http://10.100.105.81:8080/",
-    "app":"Application Exploitation Paie"
+    "url":"http://10.100.105.81:8080/"
+  
 }

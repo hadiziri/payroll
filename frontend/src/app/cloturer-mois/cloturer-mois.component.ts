@@ -44,7 +44,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
     this.clotureService.getallFolders().subscribe(
       (data) => {
         if (data != null) {
-          console.log(data);
+          //console.log(data);
           this.folderCategories = data;
 
         this.dataSource = new MatTableDataSource(this.folderCategories);
@@ -55,7 +55,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
         }
       },
       (error) => {
-        console.log(error);
+        //console.log(error);
         alert(error);
         throw error;
       }
@@ -67,7 +67,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
 
       (data) => {
 
-        console.log(data);
+        //console.log(data);
         if(data!=null){
           for(let i=0;i<data.length;i++){
             this.getEtatFile(data[i]);
@@ -77,7 +77,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
 
       },
       error => {
-        console.log(error);
+       // console.log(error);
         alert(error);
         throw error;
 
@@ -93,7 +93,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
   }
   ngAfterViewInit() {
    if(this.folderCategories.length!=0){
-     console.log(this.folderCategories)
+    // console.log(this.folderCategories)
     this.dataSource.sort = this.sort;
    }
     
@@ -137,7 +137,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
 
       },
       (error) => {
-        console.log(error);
+        //console.log(error);
         alert(error);
         throw error;
       }
@@ -197,7 +197,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
   }
 
   confirmClotureMois(){
-    console.log("yes")
+    //console.log("yes")
     this.clotureMoisService.updatePayMonth().subscribe(
       data=>{
         if(data!=null){
@@ -207,7 +207,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
         }
       },
       (error) => {
-        console.log(error);
+        //console.log(error);
         alert(error);
         throw error;
       }

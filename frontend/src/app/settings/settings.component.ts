@@ -1,3 +1,5 @@
+import { TokenStorageService } from './../auth/token-storage.service';
+import { ParametreService } from './../Services/parametre.service';
 import { Router } from '@angular/router';
 import { FileToPrint } from './../Models/FileToPrint';
 import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
@@ -8,7 +10,7 @@ import { UserService } from './../Services/user.service';
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { MustMatch } from '../helpers/must-match-validator';
+import { MustExist, MustMatch } from '../helpers/must-match-validator';
 import { mobiscroll, MbscFormOptions } from '@mobiscroll/angular-lite';
 
 @Component({
@@ -37,19 +39,23 @@ export class SettingsComponent implements OnInit {
   };
   isDisabled: Boolean = false;
   panelOpenState = false;
+ username:string="";
 
-
-  constructor(private _formBuilder: FormBuilder, private userService: UserService, private route: Router) {
+  constructor(private _formBuilder: FormBuilder, private userService: UserService,private token: TokenStorageService) {
 
 
   }
 
 
   ngOnInit(): void {
+  //get currentUser
+this.username=this.token.getUsername();
+//console.log(this.username)
     //initialisation des forms pour le changement du psw
     this.firstFormGroup = this._formBuilder.group({
       username: ['', Validators.required]
-    });
+    },
+    {validator :MustExist(this.username,'username')});
     this.secondFormGroup = this._formBuilder.group({
       psw: ['', [Validators.required, Validators.minLength(6)]],
       confirm: ['', [Validators.required, Validators.minLength(6)]]
@@ -77,12 +83,12 @@ export class SettingsComponent implements OnInit {
     user.password = psw;
     this.userService.updatePsw(user).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         this.showAlert();
         this.isDisabled = true;
       },
       error => {
-        console.log(error);
+        //console.log(error);
         alert(error);
         throw error;
 
