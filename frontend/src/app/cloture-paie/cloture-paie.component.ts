@@ -98,7 +98,12 @@ export class CloturePaieComponent implements OnInit {
       (data) => {
         if (data != null) {
           console.log(data);
-          this.folderCategories = data;
+          for(let i=0;i<data.length;i++){
+            if(data[i].foldername!="ETAT"){
+              this.folderCategories.push(data[i]);
+            }
+          }
+         
 
         } else {
           alert("Une erreur s'est produite.Veuillez réessayer plus tard");

@@ -1,3 +1,4 @@
+import { CommunService } from './commun.service';
 import { User } from './../Models/User';
 import { ArchiveStructure } from './../Models/ArchiveStructure';
 import { Injectable } from '@angular/core';
@@ -18,9 +19,9 @@ import { clotureFiles } from './../Models/cloturesFiles';
   providedIn: 'root'
 })
 export class ParametreService {
-  public host:string;
-  constructor(private httpClient:HttpClient) { 
-    this.host = 'http://10.100.105.81:8080/';
+  public host:String;
+  constructor(private httpClient:HttpClient,communService:CommunService) { 
+    this.host = communService.getHost();
   }
 
    public getEtats():Observable<Array<clotureFiles>>{

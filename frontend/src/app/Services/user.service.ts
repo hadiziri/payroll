@@ -1,3 +1,4 @@
+import { CommunService } from './commun.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -11,11 +12,12 @@ import { User } from '../Models/User';
 export class UserService {
 
 
-  private userUrl = 'http://10.100.105.81:8080/';
-  private pmUrl = 'http://10.100.105.81:8080/api/test/pm';
-  private adminUrl = 'http://10.100.105.81:8080/api/test/admin';
+  private userUrl:String;
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient,communService:CommunService) {
+    this.userUrl=communService.getHost();
+   }
 
   updatePsw(user:User): Observable<User> {
     return this.http.post<User>(this.userUrl+"updatePsw",user).pipe(

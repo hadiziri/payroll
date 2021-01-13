@@ -1,3 +1,4 @@
+import { CommunService } from './commun.service';
 import { Structure } from './../Models/Structure';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -9,9 +10,9 @@ import { catchError  } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class HomeService {
-  public host:string;
-  constructor(private httpClient:HttpClient) { 
-    this.host = 'http://10.100.105.81:8080/';
+  public host:String;
+  constructor(private httpClient:HttpClient,communService:CommunService) { 
+    this.host = communService.getHost();
   }
   public getAllStructures():Observable <Array<Structure>>{
     return this.httpClient.get <Array<Structure>>(this.host+"getAllStructures").pipe(

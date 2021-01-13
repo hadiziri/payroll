@@ -1,3 +1,4 @@
+import { CommunService } from './commun.service';
 import { PayMonth } from './../Models/PayMonth';
 import { catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -9,9 +10,9 @@ import { throwError, Observable } from 'rxjs';
 })
 export class ClotureMoisService {
 
-  public host:string;
-  constructor(private httpClient:HttpClient) { 
-    this.host = 'http://10.100.105.81:8080/';
+  public host:String;
+  constructor(private httpClient:HttpClient,communService:CommunService) { 
+    this.host = communService.getHost();
   }
 
   public updatePayMonth():Observable<PayMonth>{

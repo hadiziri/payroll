@@ -1,3 +1,4 @@
+import { CommunService } from './commun.service';
 import { Injectable } from '@angular/core';
 
 import {HttpClient, HttpErrorResponse} from '@angular/common/http'
@@ -16,9 +17,9 @@ import { clotureFiles } from './../Models/cloturesFiles';
 })
 export class CloturePaieService {
 
-  public host:string;
-  constructor(private httpClient:HttpClient) { 
-    this.host = 'http://10.100.105.81:8080/';
+  public host:String;
+  constructor(private httpClient:HttpClient,communService:CommunService) { 
+    this.host = communService.getHost();
   }
 
 

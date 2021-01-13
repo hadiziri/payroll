@@ -104,7 +104,7 @@ import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
  * Email:aidferiel@gmail.com
  */
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("*")
 public class Controller {
 	// **********************************************repositories************************************************************
 	@Autowired

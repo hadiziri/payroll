@@ -1,3 +1,4 @@
+import { CommunService } from './../Services/commun.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -15,10 +16,12 @@ const httpOptions = {
 })
 export class AuthService {
 
-  private loginUrl = 'http://10.100.105.81:8080/api/auth/signin';
-  private signupUrl = 'http://10.100.105.81:8080/api/auth/signup';
+  private loginUrl ;
+  private signupUrl ;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,communService:CommunService) {
+    this.loginUrl = communService.getHost()+'api/auth/signin';
+    this.signupUrl=communService.getHost()+'api/auth/signup';
   }
 
   attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {

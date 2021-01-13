@@ -1,8 +1,8 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-md-12 col-sm-9">
-        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="margin-top: 40px;">
+      <div class="example-container">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" >
   
   
           <!-- Position Column -->
@@ -65,7 +65,7 @@
               
             </td>
           </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
         <mat-paginator [pageSizeOptions]="[10, 15,20]"></mat-paginator>

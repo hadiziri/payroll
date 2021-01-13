@@ -1,3 +1,8 @@
+2.4
+---
+-Design (tables with scroll and fixed header)
+-Commun service added
+---------------------------------------------------------------------------------------------------
 2.3
 ---
 Parametrage Structure : 

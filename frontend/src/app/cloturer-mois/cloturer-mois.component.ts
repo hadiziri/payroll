@@ -226,4 +226,8 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
 
   }
 
+  openfolder(){
+    window.open("file:\\\\\localhost\C:\DIN_DRH");
+    }
+    
 }

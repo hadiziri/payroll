@@ -45,6 +45,7 @@ import { CloturePaieComponent } from './cloture-paie/cloture-paie.component';
 import { CloturerMoisComponent } from './cloturer-mois/cloturer-mois.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 
@@ -83,7 +84,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatTabsModule,
     MatGridListModule,
     MatDialogModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatToolbarModule
  
   ],
   providers: [
