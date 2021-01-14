@@ -54,8 +54,7 @@ this.username=this.token.getUsername();
     //initialisation des forms pour le changement du psw
     this.firstFormGroup = this._formBuilder.group({
       username: ['', Validators.required]
-    },
-    {validator :MustExist(this.username,'username')});
+    });
     this.secondFormGroup = this._formBuilder.group({
       psw: ['', [Validators.required, Validators.minLength(6)]],
       confirm: ['', [Validators.required, Validators.minLength(6)]]
@@ -77,14 +76,46 @@ this.username=this.token.getUsername();
       "state": 0,
       "username": ""
     };
-    let username: string = this.firstFormGroup.controls['username'].value;
-    let psw: string = this.secondFormGroup.controls['psw'].value;
-    user.username = username;
-    user.password = psw;
+    
+    let ancienPsw: string = this.firstFormGroup.controls['username'].value;
+    //console.log(ancienPsw)
+    let psw:string=this.secondFormGroup.controls['psw'].value;
+    //console.log(psw)
+    user.username = this.username;
+    user.password = ancienPsw;
+    this.userService.comparePsw(user).subscribe(
+      data => {
+        if(data!=null){
+          if(data.state==1){
+            user.password=psw;
+              this.updatePsw(user)
+          }else{
+              this.showAlert("Votre ancien mot de passe est incorrect.Veuillez le modifier et réessayer.")
+          }
+        }
+      },
+      error => {
+        //console.log(error);
+        alert(error);
+        throw error;
+
+      }
+
+    );
+
+
+
+
+
+
+  }
+
+  updatePsw(user:User){
+
     this.userService.updatePsw(user).subscribe(
       data => {
         //console.log(data);
-        this.showAlert();
+        this.showAlert("Votre mot de passe  a bien été modifié.");
         this.isDisabled = true;
       },
       error => {
@@ -96,10 +127,10 @@ this.username=this.token.getUsername();
     );
   }
   //alert pour le changement du psw
-  showAlert() {
+  showAlert(msg:String) {
     mobiscroll.alert({
       title: 'Changement du mot de passe',
-      message: "Votre mot de passe  a bien été modifié."
+      message: msg
       /* ,callback: function () {
            mobiscroll.toast({
                message: 'Alert closed'

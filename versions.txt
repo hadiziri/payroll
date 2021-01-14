@@ -1,3 +1,9 @@
+2.6
+---
+-Update psw : ajout de l'ancien avec confirmation que c l'ancien psw
+-génération FeubAlph et FrubNum en 8mn (utilisation de la vue pour les 2 Frub).
+note: cette version est la 1ere version qui peut etre utiliser (reste plus de tests)
+---------------------------------------------------------------------------------------------------
 2.5
 ---
 -Suppression de tt les console.log

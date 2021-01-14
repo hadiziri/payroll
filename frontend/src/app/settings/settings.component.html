@@ -4,12 +4,12 @@
 
     <mat-horizontal-stepper #stepper class="updatePsw"
       style="background-color:#DAD7D8;padding-left: 90px; padding-right: 90px;">
-      <mat-step [stepControl]="firstFormGroup" errorMessage="Champ invalid(veuillez vérifier votre nom d'utilisateur)">
+      <mat-step [stepControl]="firstFormGroup" errorMessage="Champ obligatoire">
         <form [formGroup]="firstFormGroup">
-          <ng-template matStepLabel>Saisir votre nom d'utilisateur</ng-template>
+          <ng-template matStepLabel>Saisir votre mot de passe actuel</ng-template>
           <mat-form-field>
-            <mat-label>Nom d'utilisateur</mat-label>
-            <input matInput placeholder="nom utilisateur" type="text" formControlName="username" required>
+            <mat-label>Mot de passe actuel</mat-label>
+            <input matInput placeholder="mot de passe actuel" type="password" formControlName="username" required>
           </mat-form-field>
           <div>
             <button mat-button matStepperNext>Suivant</button>

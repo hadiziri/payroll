@@ -972,6 +972,30 @@ public class Controller {
 
 	}
 
+	// for settings : changer psw (comparer l'ancien psw pour permettre l'update du psw
+	@PostMapping({ "comparePsw" })
+	public User comparePsw(@RequestBody User u) {
+		User user = new User();
+		try {
+			Optional<User> currentUser = userRepository.findByUsername(u.getUsername());
+			
+			if (currentUser != null) {
+				String ancienPsw=encoder.encode(u.getPassword());
+				if(currentUser.get().getPassword()==ancienPsw) {
+					user.setState(1);;
+				}else {
+					user.setState(-1);
+				}
+				return user;
+			}
+			
+		}catch(Exception e) {
+			System.out.println("Exception while updating Psw==>" + e.getMessage());
+			user=null;
+		}
+		return user;
+
+	}
 	// for settings : avoir tout les etats paie pour séléctionner les etat à
 	// imprimer
 	@GetMapping({ "allEtats" })
