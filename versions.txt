@@ -1,3 +1,8 @@
+2.7
+---
+-fichier à imprimer:Ajout d'un toggle pour choisir type affichage (par activité ou tableau complet qui affiche la situation seulement(pas d’actions))
+-génération FrubAlph en 25mn sans le FrubNUm(avec la vue)
+---------------------------------------------------------------------------------------------------
 2.6
 ---
 -Update psw : ajout de l'ancien avec confirmation que c l'ancien psw

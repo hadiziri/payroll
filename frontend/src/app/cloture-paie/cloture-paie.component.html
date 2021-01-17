@@ -1,9 +1,9 @@
 <div class="card m-3">
   <div class="card-body">
     <form [formGroup]="fileToPrintFormGroup">
-        <mat-tab-group mat-align-tabs="center" style="margin-top: 25px;" (selectedTabChange)=" getFiles($event)" >
+        <mat-tab-group mat-align-tabs="center" style="margin-top: 25px;" (selectedTabChange)=" getFiles($event)"  >
             <mat-tab *ngFor="let structure of folderCategories; let j = index" label="{{folderCategories[j].foldername}}" >
-
+             
                 <table mat-table  [dataSource]="dataSource" matSort class="mat-elevation-z8" style="margin-top: 40px;">
 
 

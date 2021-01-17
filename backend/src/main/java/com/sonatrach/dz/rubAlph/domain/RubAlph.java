@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name ="PAIE_FRUB_N")
+@Table(name ="PAIE_FRUB_A")
 //PAIE_FRUB_A_TABLE 
 public class RubAlph {
 	@Id

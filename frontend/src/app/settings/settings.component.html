@@ -44,7 +44,7 @@
         <ng-template matStepLabel>Enregistrer les modifications</ng-template>
         <p>Enregistrer les modifications</p>
         <div>
-          <button mat-button (click)="changerPsw()" [disabled]="isDisabled">Confirmer</button>
+          <button mat-button (click)="changerPsw()" [disabled]="!secondFormGroup.valid||!firstFormGroup.valid">Confirmer</button>
 
         </div>
       </mat-step>

@@ -32,6 +32,7 @@ export class FileToPrintSettingsComponent implements OnInit{
   tempFileToPrint: FileToPrint[] = [];
   messageAdded:Boolean=false;
   messageDeleted:Boolean=false;
+  selectFiles:Boolean=false;
  
   formSettings: MbscFormOptions = {
     theme: 'mobiscroll',

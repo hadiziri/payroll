@@ -42,3 +42,16 @@ h1 {
   color: white;
   text-align: center;
 }
+
+.file-to-print-card {
+  width: 250px;
+  background-color: #F6F7F8;
+  margin: 8px;
+  
+}
+
+.file-to-print-header-image {
+  background-image: url('/assets/img/sonatrach.svg');
+  background-size: cover;
+
+}

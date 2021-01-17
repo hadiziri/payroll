@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { TokenStorageService } from './../auth/token-storage.service';
 
 
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -24,13 +24,18 @@ export interface EtatElement {
   idFile: number,
   etat: number
 }
+export interface EtatFolder {
+  idFolder: number,
+  etat: number
+}
 @Component({
   selector: 'app-cloture-paie',
   templateUrl: './cloture-paie.component.html',
-  styleUrls: ['./cloture-paie.component.css']
+  styleUrls: ['./cloture-paie.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
-export class CloturePaieComponent implements OnInit {
+export class CloturePaieComponent implements OnInit,AfterViewInit {
 
   displayedColumns: string[] = ['IDFILE', 'FILENAME', 'FOLDERPATH', 'STATUSFILE'];
 
@@ -42,6 +47,8 @@ export class CloturePaieComponent implements OnInit {
   FrubNum: Boolean = false;
   EtatArray = Array<EtatElement>();
   showSpinner: Boolean = false;
+  //globalFolderStatus:number=-1;
+
 
   dataSource: MatTableDataSource<clotureFiles> = new MatTableDataSource(this.ELEMENT_DATA);
   formSettings: MbscFormOptions = {
@@ -66,8 +73,12 @@ export class CloturePaieComponent implements OnInit {
       sanitizer.bypassSecurityTrustResourceUrl('assets/img/' + this.icon_etat));
 
   }
+  ngAfterViewInit(): void {
+    
+  }
 
   ngOnInit() {
+    
     this.clotureService.getAllCloturePaie().subscribe(
 
       (data) => {
@@ -154,7 +165,7 @@ export class CloturePaieComponent implements OnInit {
         //console.log(data);
         this.ELEMENT_DATA = data;
         this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-
+      //this.globalStatusFolder(data,folder.foldername);
 
 
       },
@@ -167,7 +178,28 @@ export class CloturePaieComponent implements OnInit {
 
     );
   }
-
+ /* globalStatusFolder(data: clotureFiles[], foldername: string) {
+    
+   let i=0;
+   let exist:boolean=false;
+   while(i<data.length){
+    
+     if(this.getStatusFile(data[i].idfiletype)==1){
+       i++;
+     }else{
+        exist=true;
+        i++;
+     }
+   }
+   if(exist){
+    this.globalFolderStatus=0;
+   }else{
+    this.globalFolderStatus=1;
+   }
+   
+   console.log(this.globalFolderStatus)
+  }
+*/
 
   getEtatFile(file: clotureFiles) {
     this.EtatArray.splice(0, this.EtatArray.length)
