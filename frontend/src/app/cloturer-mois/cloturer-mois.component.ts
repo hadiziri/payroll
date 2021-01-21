@@ -1,3 +1,5 @@
+import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import { ClotureMoisService } from './../Services/cloture-mois.service';
 import { mobiscroll, MbscFormOptions } from '@mobiscroll/angular-lite';
 
@@ -37,7 +39,8 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,
     private clotureService: CloturePaieService,
-    private clotureMoisService:ClotureMoisService) { }
+    private clotureMoisService:ClotureMoisService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -51,7 +54,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
         this.ngAfterViewInit();
 
         } else {
-          alert("Une erreur s'est produite.Veuillez réessayer plus tard");
+          this.openDialog();
         }
       },
       (error) => {
@@ -72,6 +75,8 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
           for(let i=0;i<data.length;i++){
             this.getEtatFile(data[i]);
           }
+        }else{
+          this.openDialog();
         }
 
 
@@ -203,7 +208,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
         if(data!=null){
           this.showAlert("Le mois a bien été cloturé.");
         }else{
-          alert("Une erreur s'est produite.Veuillez réessayer plus tard");
+          this.openDialog();
         }
       },
       (error) => {
@@ -230,4 +235,12 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
     window.open("file:\\\\\localhost\C:\DIN_DRH");
     }
     
+    openDialog() {
+      const dialogRef = this.dialog.open(AlertDialogComponent);
+  
+      dialogRef.afterClosed().subscribe(result => {
+        window.location.reload();
+      });
+    }
+  
 }

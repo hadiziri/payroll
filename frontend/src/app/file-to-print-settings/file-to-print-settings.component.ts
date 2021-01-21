@@ -1,3 +1,5 @@
+import { MatDialog } from '@angular/material/dialog';
+import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
 import { HomeService } from './../Services/home.service';
 import { ParametreService } from './../Services/parametre.service';
 import { element } from 'protractor';
@@ -39,7 +41,7 @@ export class FileToPrintSettingsComponent implements OnInit{
     themeVariant: 'light'
   };
   fileToPrintFormGroup: FormGroup = new FormGroup({});
-  constructor(private _formBuilder: FormBuilder, private paramService:ParametreService, private homeService:HomeService) {
+  constructor(private _formBuilder: FormBuilder, private paramService:ParametreService, private homeService:HomeService,public dialog: MatDialog) {
 
 
   }
@@ -48,10 +50,15 @@ export class FileToPrintSettingsComponent implements OnInit{
 
     this.homeService.getAllStructures().subscribe(
       (data) => {
-        this.payrollstructures = data;
-        //console.log("allstructures");
-       // console.log(data);
-        //this.getAllSelectedEtatWithStructure();
+        if(data!=null){
+          this.payrollstructures = data;
+          //console.log("allstructures");
+         // console.log(data);
+          //this.getAllSelectedEtatWithStructure();
+        }else{
+          this.openDialog();
+        }
+    
       },
       error => {
         //console.log(error);
@@ -65,11 +72,16 @@ export class FileToPrintSettingsComponent implements OnInit{
 
     this.paramService.getEtats().subscribe(
       (data) => {
-        this.tousLesEtats = data;
-        //this.addToggles();
-        //this.getAllSelectedEtatWithStructure();
-       // console.log("touslesetats");
-       // console.log(data);
+        if(data!=null){
+          this.tousLesEtats = data;
+          //this.addToggles();
+          //this.getAllSelectedEtatWithStructure();
+         // console.log("touslesetats");
+         // console.log(data);
+        }else{
+          this.openDialog();
+        }
+       
       },
       error => {
         //console.log(error);
@@ -81,13 +93,17 @@ export class FileToPrintSettingsComponent implements OnInit{
     //get all files to print
     this.paramService.getAllFileToPrint().subscribe(
       (data) => {
-        
-        this.tempFileToPrint = data;
+        if(data!=null){
+          this.tempFileToPrint = data;
         
         
              
-        //console.log("allfiletoprint");
-       // console.log(data);
+          //console.log("allfiletoprint");
+         // console.log(data);
+        }else{
+          this.openDialog();
+        }
+        
       },
       error => {
        // console.log(error);
@@ -100,12 +116,16 @@ export class FileToPrintSettingsComponent implements OnInit{
     this.paramService.getAllFileToPrint().subscribe(
       (data) => {
         
-        
-        this.allFileToPrint = data;
+        if(data!=null){
+          this.allFileToPrint = data;
         
              
-       // console.log("allfiletoprint");
-        //console.log(data);
+          // console.log("allfiletoprint");
+           //console.log(data);
+        }else{
+          this.openDialog();
+        }
+        
       },
       error => {
        // console.log(error);
@@ -123,7 +143,7 @@ export class FileToPrintSettingsComponent implements OnInit{
           //console.log("allshavtivities");
          // console.log(data);
         }else{
-          alert("Une erreur s'est produite.Veuillez réessayer plus tard");
+          this.openDialog();
         } 
       },
       error => {
@@ -240,10 +260,7 @@ export class FileToPrintSettingsComponent implements OnInit{
       data => {
        // console.log(data);
         if (data === null) {
-          alert("Une erreur s'est produite.Veuillez réessayer plus tard");
-          setTimeout(function () {
-            window.location.reload();
-          }, 2000);
+          this.openDialog();
         } else {
           this.messageAdded=true;
          this.showAlert();
@@ -264,10 +281,7 @@ export class FileToPrintSettingsComponent implements OnInit{
       data => {
         //console.log(data);
         if (data === null) {
-          alert("Une erreur s'est produite.Veuillez réessayer plus tard");
-          setTimeout(function () {
-            window.location.reload();
-          }, 2000);
+          this.openDialog();
         } else {
           this.messageDeleted=true;
           this.showAlert();
@@ -288,7 +302,13 @@ export class FileToPrintSettingsComponent implements OnInit{
   
   }
 
- 
+  openDialog() {
+    const dialogRef = this.dialog.open(AlertDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
+  }
 
 
 

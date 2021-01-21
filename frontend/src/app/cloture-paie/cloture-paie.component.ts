@@ -1,3 +1,5 @@
+import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import { HomeService } from './../Services/home.service';
 import { FormGroup } from '@angular/forms';
 
@@ -35,7 +37,7 @@ export interface EtatFolder {
   encapsulation: ViewEncapsulation.None
 })
 
-export class CloturePaieComponent implements OnInit,AfterViewInit {
+export class CloturePaieComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['IDFILE', 'FILENAME', 'FOLDERPATH', 'STATUSFILE'];
 
@@ -65,6 +67,7 @@ export class CloturePaieComponent implements OnInit,AfterViewInit {
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,
     private clotureService: CloturePaieService,
     private homeService: HomeService,
+    public dialog: MatDialog
   ) {
 
 
@@ -74,11 +77,11 @@ export class CloturePaieComponent implements OnInit,AfterViewInit {
 
   }
   ngAfterViewInit(): void {
-    
+
   }
 
   ngOnInit() {
-    
+
     this.clotureService.getAllCloturePaie().subscribe(
 
       (data) => {
@@ -88,12 +91,15 @@ export class CloturePaieComponent implements OnInit,AfterViewInit {
           for (let i = 0; i < data.length; i++) {
             this.getEtatFile(data[i]);
           }
+        } else {
+          this.openDialog();
         }
+
 
 
       },
       error => {
-       // console.log(error);
+        // console.log(error);
         alert(error);
         throw error;
 
@@ -119,11 +125,11 @@ export class CloturePaieComponent implements OnInit,AfterViewInit {
 
 
         } else {
-          alert("Une erreur s'est produite.Veuillez réessayer plus tard");
+          this.openDialog();
         }
       },
       (error) => {
-       // console.log(error);
+        // console.log(error);
         alert(error);
         throw error;
       }
@@ -162,15 +168,20 @@ export class CloturePaieComponent implements OnInit,AfterViewInit {
 
     this.clotureService.getFilesByFolder(folder).subscribe(
       (data) => {
-        //console.log(data);
-        this.ELEMENT_DATA = data;
-        this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-      //this.globalStatusFolder(data,folder.foldername);
+        if (data != null) {
+          //console.log(data);
+          this.ELEMENT_DATA = data;
+          this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+          //this.globalStatusFolder(data,folder.foldername);
+        } else {
+          this.openDialog();
+        }
+
 
 
       },
       (error) => {
-       // console.log(error);
+        // console.log(error);
         alert(error);
         throw error;
       }
@@ -178,39 +189,44 @@ export class CloturePaieComponent implements OnInit,AfterViewInit {
 
     );
   }
- /* globalStatusFolder(data: clotureFiles[], foldername: string) {
-    
-   let i=0;
-   let exist:boolean=false;
-   while(i<data.length){
-    
-     if(this.getStatusFile(data[i].idfiletype)==1){
-       i++;
-     }else{
-        exist=true;
+  /* globalStatusFolder(data: clotureFiles[], foldername: string) {
+     
+    let i=0;
+    let exist:boolean=false;
+    while(i<data.length){
+     
+      if(this.getStatusFile(data[i].idfiletype)==1){
         i++;
-     }
+      }else{
+         exist=true;
+         i++;
+      }
+    }
+    if(exist){
+     this.globalFolderStatus=0;
+    }else{
+     this.globalFolderStatus=1;
+    }
+    
+    console.log(this.globalFolderStatus)
    }
-   if(exist){
-    this.globalFolderStatus=0;
-   }else{
-    this.globalFolderStatus=1;
-   }
-   
-   console.log(this.globalFolderStatus)
-  }
-*/
+ */
 
   getEtatFile(file: clotureFiles) {
     this.EtatArray.splice(0, this.EtatArray.length)
     this.clotureService.getEtatFile(file).subscribe(
 
       (data) => {
-        //console.log(data);
-        this.state = data;
-        this.EtatArray.push({ "idFile": file.idfiletype, "etat": this.state })
+        if (data != null) {
+          //console.log(data);
+          this.state = data;
+          this.EtatArray.push({ "idFile": file.idfiletype, "etat": this.state })
 
-        //console.log(this.dataSource)
+          //console.log(this.dataSource)
+        } else {
+          this.openDialog();
+        }
+
 
 
       },
@@ -238,7 +254,8 @@ export class CloturePaieComponent implements OnInit,AfterViewInit {
               this.showSpinner = false;
               this.showAlert(msg);
             } else {
-              alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
+              this.showSpinner = false;
+              this.openDialog();
             }
 
           },
@@ -264,7 +281,8 @@ export class CloturePaieComponent implements OnInit,AfterViewInit {
               this.showAlert(msg);
             } else {
               this.showSpinner = false;
-              alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
+              this.openDialog();
+              // alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
             }
 
           },
@@ -283,11 +301,14 @@ export class CloturePaieComponent implements OnInit,AfterViewInit {
         this.clotureService.generateFrubAlph().subscribe(
           (data) => {
             if (data != null) {
+              this.showSpinner = false;
               //console.log(data);
               this.FrubAlph = true;
               this.showAlertFRUB();
             } else {
-              alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
+              this.showSpinner = false;
+              this.openDialog();
+              // alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
             }
 
           },
@@ -302,11 +323,13 @@ export class CloturePaieComponent implements OnInit,AfterViewInit {
           (data) => {
             if (data != null) {
               //console.log(data);
-
+              this.showSpinner = false;
               this.FrubNum = true;
               this.showAlertFRUB();
             } else {
-              alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
+              this.showSpinner = false;
+              this.openDialog();
+              //alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
             }
 
           },
@@ -328,7 +351,9 @@ export class CloturePaieComponent implements OnInit,AfterViewInit {
               this.showSpinner = false;
               this.showAlert(msg);
             } else {
-              alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
+              this.showSpinner = false;
+              this.openDialog();
+              //alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
             }
 
           },
@@ -351,7 +376,9 @@ export class CloturePaieComponent implements OnInit,AfterViewInit {
               this.showSpinner = false;
               this.showAlert(msg);
             } else {
-              alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
+              this.showSpinner = false;
+              this.openDialog();
+              //alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
             }
 
           },
@@ -384,7 +411,7 @@ export class CloturePaieComponent implements OnInit,AfterViewInit {
       this.showSpinner = false;
       mobiscroll.alert({
         title: 'Cloture Paie',
-        message: " Les fichiers frub ont bien été générés et la paie a bien été cloturée."
+        message: " Les fichiers Frub ont bien été générés et la paie a bien été cloturée."
 
         , callback: function () {
           window.location.reload();
@@ -393,5 +420,13 @@ export class CloturePaieComponent implements OnInit,AfterViewInit {
     }
 
 
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(AlertDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
   }
 }

@@ -48,7 +48,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {  initConfig } from './/Services/commun.service';
-
+import { AlertDialogComponent } from './alert-dialog/alert-dialog.component';
+import { GenerateTableFilesComponent } from './generate-table-files/generate-table-files.component';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -60,8 +62,10 @@ import {  initConfig } from './/Services/commun.service';
 @NgModule({
   declarations: [
     AppComponent,
-    FilesGeneratorComponent,AddStructureComponent,DeleteStructureComponent,UpdateStructureComponent,ErrorComponent,HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, SettingsComponent, FileToPrintSettingsComponent, GroupcheckboxesComponent, StorageSettingsComponent, CloturePaieComponent, CloturerMoisComponent
+    FilesGeneratorComponent,AddStructureComponent,DeleteStructureComponent,UpdateStructureComponent,ErrorComponent,HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, SettingsComponent, FileToPrintSettingsComponent, GroupcheckboxesComponent, StorageSettingsComponent, CloturePaieComponent, CloturerMoisComponent, 
+    AlertDialogComponent, GenerateTableFilesComponent
   ],
+  entryComponents: [AlertDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -87,7 +91,8 @@ import {  initConfig } from './/Services/commun.service';
     MatGridListModule,
     MatDialogModule,
     MatAutocompleteModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatButtonModule
  
   ],
   providers: [

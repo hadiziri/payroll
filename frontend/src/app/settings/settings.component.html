@@ -1,54 +1,60 @@
+
 <div class="card m-6">
   <h1>Pour changer votre mot de passe veuillez suivre les etapes suivantes:</h1>
   <div class="card-body">
+   
+        <mat-vertical-stepper #stepper 
+          style="background-color:#ECEDEE;padding-left: 90px; padding-right: 90px;margin-top: 50px;">
+          <mat-step [stepControl]="firstFormGroup" errorMessage="Champ obligatoire">
+            <form [formGroup]="firstFormGroup">
+              <ng-template matStepLabel>Saisir votre mot de passe actuel</ng-template>
+              <mat-form-field>
+                <mat-label>Mot de passe actuel</mat-label>
+                <input matInput placeholder="mot de passe actuel" type="password" formControlName="username" required>
+              </mat-form-field>
+              <div>
+                <button mat-button matStepperNext>Suivant</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="secondFormGroup"
+            errorMessage="Champ invalid (les mots de passe ne sont pas identiques)">
+            <form [formGroup]="secondFormGroup">
+              <ng-template matStepLabel>Saisir le nouveau mot de passe</ng-template>
+              <mat-form-field>
+                <mat-label>Mot de passe</mat-label>
+                <input matInput placeholder="Nouveau mot de passe" type="password" formControlName="psw" required>
+              </mat-form-field>
+              <div>
 
-    <mat-horizontal-stepper #stepper class="updatePsw"
-      style="background-color:#DAD7D8;padding-left: 90px; padding-right: 90px;">
-      <mat-step [stepControl]="firstFormGroup" errorMessage="Champ obligatoire">
-        <form [formGroup]="firstFormGroup">
-          <ng-template matStepLabel>Saisir votre mot de passe actuel</ng-template>
-          <mat-form-field>
-            <mat-label>Mot de passe actuel</mat-label>
-            <input matInput placeholder="mot de passe actuel" type="password" formControlName="username" required>
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperNext>Suivant</button>
-          </div>
-        </form>
-      </mat-step>
-      <mat-step [stepControl]="secondFormGroup" errorMessage="Champ invalid (les mots de passe ne sont pas identiques)">
-        <form [formGroup]="secondFormGroup">
-          <ng-template matStepLabel>Saisir le nouveau mot de passe</ng-template>
-          <mat-form-field>
-            <mat-label>Mot de passe</mat-label>
-            <input matInput placeholder="Nouveau mot de passe" type="password" formControlName="psw" required>
-          </mat-form-field>
-          <div>
+              </div>
 
-          </div>
-
-          <ng-template matStepLabel>Confirmer le mot de passe</ng-template>
-          <mat-form-field>
-            <mat-label>Confirmer le mot de passe</mat-label>
-            <input matInput placeholder="Confirmer le mot de passe" formControlName="confirm" required type="password">
-          </mat-form-field>
-          <div>
+              <ng-template matStepLabel>Confirmer le mot de passe</ng-template>
+              <mat-form-field>
+                <mat-label>Confirmer le mot de passe</mat-label>
+                <input matInput placeholder="Confirmer le mot de passe" formControlName="confirm" required
+                  type="password">
+              </mat-form-field>
+              <div>
 
 
-            <button mat-button matStepperNext>suivant</button>
-          </div>
-        </form>
-      </mat-step>
+                <button mat-button matStepperNext>suivant</button>
+              </div>
+            </form>
+          </mat-step>
 
-      <mat-step>
-        <ng-template matStepLabel>Enregistrer les modifications</ng-template>
-        <p>Enregistrer les modifications</p>
-        <div>
-          <button mat-button (click)="changerPsw()" [disabled]="!secondFormGroup.valid||!firstFormGroup.valid">Confirmer</button>
+          <mat-step>
+            <ng-template matStepLabel>Enregistrer les modifications</ng-template>
+            <p>Enregistrer les modifications</p>
+            <div>
+              <button mat-button (click)="changerPsw()"
+                [disabled]="!secondFormGroup.valid||!firstFormGroup.valid">Confirmer</button>
 
-        </div>
-      </mat-step>
-    </mat-horizontal-stepper>
-
+            </div>
+          </mat-step>
+        </mat-vertical-stepper>
+     
   </div>
+  
+
 </div>

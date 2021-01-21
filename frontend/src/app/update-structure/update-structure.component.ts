@@ -1,3 +1,5 @@
+import { MatDialog } from '@angular/material/dialog';
+import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
 import { stringify } from '@angular/compiler/src/util';
 import { User } from './../Models/User';
 import { ArchiveStructure } from './../Models/ArchiveStructure';
@@ -58,7 +60,8 @@ export class UpdateStructureComponent implements OnInit {
     theme: 'mobiscroll',
     themeVariant: 'light'
 };
-  constructor(private paramService:ParametreService,private token: TokenStorageService, private router: Router,private activatedRoute:ActivatedRoute,private formBuilder: FormBuilder) {
+  constructor(private paramService:ParametreService,private token: TokenStorageService, private router: Router,private activatedRoute:ActivatedRoute,private formBuilder: FormBuilder,
+    public dialog: MatDialog) {
 
     this.formGroup = new FormGroup({
       structurename: new FormControl(''),
@@ -97,7 +100,7 @@ export class UpdateStructureComponent implements OnInit {
      // console.log("allshavtivities");
      // console.log(data);
     }else{
-      alert("Une erreur s'est produite.Veuillez réessayer plus tard");
+      this.openDialog();
     } 
   },
   error => {
@@ -118,7 +121,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
      // console.log(data);
       this.currentUser.iduser=data.iduser;
     }else{
-      alert("Une erreur s'est produite.Veuillez réessayer plus tard");
+      this.openDialog();
     }
   },
   error=>{
@@ -175,7 +178,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
             // console.log(data)
              this.showAlert();
            }else{
-             alert("Une erreur s'est produite.Veuillez réessayer plus tard");
+            this.openDialog();
            }
          },
          error=>{
@@ -198,7 +201,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
              //console.log(data)
              this.showAlert();
            }else{
-             alert("Une erreur s'est produite.Veuillez réessayer plus tard");
+            this.openDialog();
            }
          },
          error=>{
@@ -227,6 +230,13 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
       )
     }
    
+  }
+  openDialog() {
+    const dialogRef = this.dialog.open(AlertDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
   }
 
 }

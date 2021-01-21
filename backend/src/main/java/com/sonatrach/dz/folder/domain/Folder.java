@@ -2,9 +2,11 @@ package com.sonatrach.dz.folder.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 @Entity
 @Table(name ="FOLDER")
+@NamedQuery(name = "Folder.findByFolderName", query = "SELECT p FROM Folder p WHERE FOLDERNAME=?1")
 public class Folder {
 	@Id
 	private Integer IDFOLDER;

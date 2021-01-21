@@ -15,6 +15,11 @@ table {
     margin-left: 20px;
   }
 
+  #second_btn{
+    margin-left: 20px;
+    background-color: orange;
+    color: white;
+  }
  
   button:hover{
     transform: translateY(-3px);

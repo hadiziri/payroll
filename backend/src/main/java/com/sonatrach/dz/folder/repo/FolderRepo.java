@@ -8,5 +8,5 @@ import com.sonatrach.dz.folder.domain.Folder;
 
 @Repository
 public interface FolderRepo  extends JpaRepository<Folder, Integer> {
-
+Folder findByFolderName(String name);
 }

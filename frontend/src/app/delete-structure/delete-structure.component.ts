@@ -1,3 +1,5 @@
+import { MatDialog } from '@angular/material/dialog';
+import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
 import { ArchiveStructure } from './../Models/ArchiveStructure';
 import { ParametreService } from './../Services/parametre.service';
 import { User } from './../Models/User';
@@ -70,7 +72,8 @@ export class DeleteStructureComponent implements OnInit {
   }
 
 
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private homeService:HomeService, private token: TokenStorageService, private router: Router,private paramService:ParametreService) {
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private homeService:HomeService, private token: TokenStorageService, private router: Router,
+    private paramService:ParametreService,public dialog: MatDialog) {
 
 
     iconRegistry.addSvgIcon(
@@ -82,9 +85,14 @@ export class DeleteStructureComponent implements OnInit {
   ngOnInit() {
     this.homeService.getAllStructures().subscribe(
       (data) => {
-        this.ELEMENT_DATA = data;
-        //console.log(data);
-        this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+        if(data!=null){
+          this.ELEMENT_DATA = data;
+          //console.log(data);
+          this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+        }else{
+          this.openDialog();
+        }
+       
 
       },
       error => {
@@ -104,7 +112,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
       //console.log(data);
       this.currentUser.iduser=data.iduser;
     }else{
-      alert("Une erreur s'est produite.Veuillez réessayer plus tard");
+      this.openDialog();
     }
   },
   error=>{
@@ -155,7 +163,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
   showConfirm() {
  
     mobiscroll.confirm({
-      title: 'Suppression',
+      title: 'Suppression de structure',
       message: 'Etes vous sur de vouloir supprimer la structure?',
       okText: 'Supprimer',
       cancelText: 'Annuler'
@@ -171,7 +179,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
             this.showAlert();
            
           }else{
-            alert("Une erreur s'est produite.Veuillez réessayer plus tard");
+            this.openDialog();
           }
         },
         error=>{
@@ -200,7 +208,18 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
       }
       )
     }
-   
+    applyFilter(event: Event) {
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+
+    openDialog() {
+      const dialogRef = this.dialog.open(AlertDialogComponent);
+  
+      dialogRef.afterClosed().subscribe(result => {
+        window.location.reload();
+      });
+    }
   
 
 }

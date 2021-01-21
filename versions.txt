@@ -1,3 +1,16 @@
+2.8
+---
+==>Etat paie:
+-Envoie des emails et sauvgarde de l'email et de l'archive sent file
+-update etat structure apres anvoie email
+-suspendre structure et update de son etat
+-activer structure et update de son etat
+==> Changer mot de passe
+-changement du desing (version verticale)
+==>Ajout de la barre de recherche pour etat paie et parametre(modifier/supprimer structure)
+==>Modification de l'alert (utilisation d'une alerte personnalisée)
+==>Ajout d'un module envoie des fichiers tables par email
+---------------------------------------------------------------------------------------------------
 2.7
 ---
 -fichier à imprimer:Ajout d'un toggle pour choisir type affichage (par activité ou tableau complet qui affiche la situation seulement(pas d’actions))

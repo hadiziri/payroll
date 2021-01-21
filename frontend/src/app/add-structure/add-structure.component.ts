@@ -1,3 +1,5 @@
+import { MatDialog } from '@angular/material/dialog';
+import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
 import { MbscFormOptions, mobiscroll } from '@mobiscroll/angular-lite';
 import { Structure } from './../Models/Structure';
 import { ArchiveStructure } from './../Models/ArchiveStructure';
@@ -54,7 +56,8 @@ export class AddStructureComponent implements OnInit {
     theme: 'mobiscroll',
     themeVariant: 'light'
   };
-  constructor(private paramService: ParametreService, private token: TokenStorageService, private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) {
+  constructor(private paramService: ParametreService, private token: TokenStorageService, private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder
+    ,public dialog: MatDialog) {
 
     this.formGroup = new FormGroup({
       structurename: new FormControl('', [Validators.required]),
@@ -77,7 +80,7 @@ export class AddStructureComponent implements OnInit {
           //console.log("allshavtivities");
           //console.log(data);
         } else {
-          alert("Une erreur s'est produite.Veuillez réessayer plus tard");
+          this.openDialog();
         }
       },
       error => {
@@ -197,6 +200,13 @@ export class AddStructureComponent implements OnInit {
       )
     }
 
+  }
+  openDialog() {
+    const dialogRef = this.dialog.open(AlertDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
   }
 
 }

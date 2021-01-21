@@ -1,8 +1,11 @@
 package com.sonatrach.dz;
 
-import java.io.File;
-
+import java.io.File
+;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,6 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.validation.Valid;
 
@@ -35,6 +40,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sonatrach.dz.archiveSentFiles.domain.ArchiveSentFiles;
+import com.sonatrach.dz.archiveSentFiles.repo.ArchiveSentFilesRepo;
 import com.sonatrach.dz.archiveStructure.domain.ArchiveStructure;
 import com.sonatrach.dz.archiveStructure.repo.ArchiveStructureRepo;
 import com.sonatrach.dz.banque.domain.Banque;
@@ -47,6 +54,13 @@ import com.sonatrach.dz.dep.domain.Dep;
 import com.sonatrach.dz.dep.repo.DepRepo;
 import com.sonatrach.dz.diplome.domain.Diplome;
 import com.sonatrach.dz.diplome.repo.DiplomeRepo;
+import com.sonatrach.dz.efile.domain.Efile;
+import com.sonatrach.dz.efile.repo.EfileRepo;
+import com.sonatrach.dz.email.domain.MailRequest;
+import com.sonatrach.dz.email.domain.MailResponse;
+import com.sonatrach.dz.email.service.EmailService;
+import com.sonatrach.dz.emailDB.domain.EmailDB;
+import com.sonatrach.dz.emailDB.repo.EmailDbRepo;
 import com.sonatrach.dz.fileToPrint.domain.FileToPrint;
 import com.sonatrach.dz.fileToPrint.repo.FileToPrintRepo;
 import com.sonatrach.dz.folder.domain.Folder;
@@ -155,6 +169,14 @@ public class Controller {
 	FolderRepo folderRepo;
 	@Autowired
 	ArchiveStructureRepo archiveStructureRepo;
+	@Autowired
+	EmailDbRepo emailDbRepo;
+	@Autowired
+	EfileRepo efileRepo;
+	@Autowired
+	private EmailService service;
+	@Autowired
+	ArchiveSentFilesRepo archiveSentFilesRepo;
 
 	// ****************************************API*****************************************************************************
 	// Api Test
@@ -162,8 +184,203 @@ public class Controller {
 	public List<RubAlph> getAllBanques() {
 		return rubAlphRepo.findAll();
 	}
+	
+	
+	// get structure by activity
+		@PostMapping({ "getStructurByActivity" })
+		public List<Structure> getStructureByActivity(@RequestBody ShActivity a) {
+			List<Structure> lesStructures = new ArrayList();
+			try {
+				lesStructures = structureRepo.findByActivity(a.getIdactivity());
 
-	// get All structures
+				return lesStructures;
+			} catch (Exception e) {
+				System.out.println("Exception getStructureByActivity()==>" + e.getMessage());
+				lesStructures=null;
+			}
+			return lesStructures;
+		}
+		
+/******************************************************Send Table files (email)************************************************************************************************/
+		@PostMapping({"sendEmailFiles"})
+		public MailResponse sendEmailFiles(@RequestBody MailRequest request) {
+			try {
+				//to get folder path
+				Folder folder=folderRepo.findByFolderName("TABLES");
+				
+				// *********get current date from payMonth
+
+				PayMonth currentDate = paymonthRepo.findByState();
+				String currentYear = currentDate.getPaymonth().substring(0, 4);
+				String currentMonth = currentDate.getPaymonth().substring(4, 6);
+				String dateFormat = currentYear + "-" + currentMonth;
+				
+				
+		
+				
+				String []files=request.getFilesName();
+				String []fileNames =new String [files.length];
+				for(int i=0;i<files.length;i++) {
+					fileNames[i]=files[i]+" "+dateFormat+".xlsx";
+				}
+				if(folder!=null) {
+					String path=folder.getFOLDERPATH()+"TABLES"+"\\"+currentYear+"\\"+dateFormat+"\\";
+						Map<String, Object> model = new HashMap<>();
+						model.put("msg", request.getMsg());
+						
+						MailResponse response=service.sendEmailFiles(request, path,fileNames,model);
+						return response;
+					
+				}
+				return null;
+			}catch(Exception e) {
+				System.out.println("Exception while sending email files==>"+e.getMessage());
+			}
+			return null;
+		}
+		
+		
+/*****************************************************Etat Paie***************************************************************************************************************/
+		//************************************************compresser le fichier zip*******************************************************************
+		public String compressDirectory(String zipName,String path) {
+			 String sourceFile = path;
+	       FileOutputStream fos = null;
+			try {
+				fos = new FileOutputStream(zipName);
+				  ZipOutputStream zipOut = new ZipOutputStream(fos);
+			        File fileToZip = new File(sourceFile);
+			        zipFile(fileToZip, fileToZip.getName(), zipOut);
+			        zipOut.close();
+			    	fos.close();
+			    	return zipName;
+			} catch (FileNotFoundException e1) {
+				 System.out.println("exception in compressDirectory e1==>"+e1.getMessage());
+			}catch (IOException e2) {
+				 System.out.println("exception in compressDirectory e2==>"+e2.getMessage());
+			}catch(Exception e3) {
+				 System.out.println("exception in compressDirectory e3==>"+e3.getMessage());
+			}
+	     
+			return "error";
+	      
+	   }
+		
+		   public void zipFile(File fileToZip, String fileName, ZipOutputStream zipOut) throws IOException {
+			   try {
+				   if (fileToZip.isHidden()) {
+			            return;
+			        }
+			        if (fileToZip.isDirectory()) {
+			            if (fileName.endsWith("/")) {
+			                zipOut.putNextEntry(new ZipEntry(fileName));
+			                zipOut.closeEntry();
+			            } else {
+			                zipOut.putNextEntry(new ZipEntry(fileName + "/"));
+			                zipOut.closeEntry();
+			            }
+			            File[] children = fileToZip.listFiles();
+			            for (File childFile : children) {
+			                zipFile(childFile, fileName + "/" + childFile.getName(), zipOut);
+			            }
+			            return;
+			        }
+			        FileInputStream fis = new FileInputStream(fileToZip);
+			        ZipEntry zipEntry = new ZipEntry(fileName);
+			        zipOut.putNextEntry(zipEntry);
+			        byte[] bytes = new byte[1024];
+			        int length;
+			        while ((length = fis.read(bytes)) >= 0) {
+			            zipOut.write(bytes, 0, length);
+			        }
+			        fis.close();
+			   }catch(Exception e) {
+				   System.out.println("exception in method zipFile==>"+e.getMessage());
+			   }
+		       
+		    }
+	//**********************************************************Envoyer les etats des structures par mail (Etat paie)***************************************************
+	@PostMapping({"sendEmailZip"})
+	public MailResponse sendEmailZip(@RequestBody MailRequest request) {
+		try {
+			//to get folder path
+			Folder folder=folderRepo.findByFolderName("ETAT");
+			
+			// *********get current date from payMonth
+
+			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
+			
+			
+			if(folder!=null) {
+				String path=folder.getFOLDERPATH()+"ETAT"+"\\"+currentYear+"\\"+dateFormat+"\\"+request.getSturcturename()+" "+dateFormat;
+				String zipPathWithName=folder.getFOLDERPATH()+"ETAT"+"\\"+currentYear+"\\"+dateFormat+"\\"+request.getSturcturename()+" "+dateFormat+".zip";
+				String zipName=request.getSturcturename()+" "+dateFormat+".zip";
+				String compressedDir=compressDirectory(zipPathWithName,path);
+				if(!compressedDir.equals("error")) {
+					Map<String, Object> model = new HashMap<>();
+					model.put("msg", request.getMsg());
+					MailResponse response=service.sendEmailZip(request, compressedDir,zipName,model);
+					return response;
+				}
+			}
+			return null;
+		}catch(Exception e) {
+			System.out.println("Exception while sending email zip==>"+e.getMessage());
+		}
+		return null;
+	}
+	
+
+	
+	//*************************************************sauvgarder dans la BD l'email ***********************************************************
+	@PostMapping({"SaveSentEmail"})
+	public EmailDB saveSentEmail(@RequestBody EmailDB email) {
+		try {
+			
+			return emailDbRepo.save(email);
+			
+		}catch(Exception e) {
+			System.out.println("Exception while saving sent email==>"+e.getMessage());
+		}
+		return null;
+		
+	}
+			
+			
+	//***********************************************sauvgarder dans la BDarchiveSentFiles***********************************************************
+	@PostMapping({"SaveArchiveSentFiles"})
+	public List<ArchiveSentFiles> SaveArchiveSentFiles(@RequestBody List<ArchiveSentFiles> files){
+		
+			for(int i=0;i<files.size();i++) {
+				try {
+				archiveSentFilesRepo.save(files.get(i));
+			}catch(Exception e) {
+				System.out.println("Exception while saving ArchiveSentFiles==>"+e.getMessage());
+				return null;
+			}
+			}
+		
+		return files;
+		
+	}
+	
+	//***************************************get Efiles for choosed struture (find search efiles by id structure)*******************************************
+	@PostMapping({"getEfiles"})
+	public List<Efile>getEfiles(@RequestBody Structure structure){
+		try {
+			List<Efile> files=efileRepo.findByIdStructure(structure.getIDSTRUCTURE());
+			if(files!=null) {
+				return files;
+			}
+		}catch(Exception e) {
+			System.out.println("Exception whilegetting Efiles{ getEfiles()}==>"+e.getMessage());
+		}
+		return null;
+	}
+	
+	//********************************************************** get All structures*********************************************************************
 	@GetMapping({ "/getAllStructures" })
 	public List<Structure> getAllStructures() {
 		List<Structure> lesStructures = new ArrayList();
@@ -178,131 +395,42 @@ public class Controller {
 		return lesStructures;
 	}
 
-	
-	//update structure
-	@PostMapping({"/updateStructure"})
-	public Structure updateStructure(@RequestBody Structure structure) {
-		Optional<Structure> structureToUpdate = null;
-		try {
-			structureToUpdate=structureRepo.findById(structure.getIDSTRUCTURE());
-			if(structureToUpdate.get()!=null) {
-				if(structure.getEMAILGROUPMANAGERS()!="") {
-					structureToUpdate.get().setEMAILGROUPMANAGERS(structure.getEMAILGROUPMANAGERS());
-				}
-				if(structure.getIDACTIVITY()!=0) {
-					structureToUpdate.get().setIDACTIVITY(structure.getIDACTIVITY());
-				}
-				if(structure.getSTRUCTURENAME()!="") {
-					structureToUpdate.get().setSTRUCTURENAME(structure.getSTRUCTURENAME());
-				}
-				if(structure.getSTRUCTURECODELIKE()!="") {
-					structureToUpdate.get().setSTRUCTURECODELIKE(structure.getSTRUCTURECODELIKE());
-				}
-				if(structure.getSTRUCTURECODENOTLIKE()!="") {
-					structureToUpdate.get().setSTRUCTURECODENOTLIKE(structure.getSTRUCTURECODENOTLIKE());
-				}
-				//System.out.println(structureToUpdate.get().getIDACTIVITY()+"   "+structureToUpdate.get().getIDSTRUCTURE());
-				structureRepo.save(structureToUpdate.get());
-				return structureToUpdate.get();
-			}
-		}catch(Exception e) {
-			System.out.println("Exception updateStructure()==>" + e.getMessage());
-			structureToUpdate = null;
-		}
-		return null;
-	}
-	
-	//update structure Archive
-	@PostMapping({"/updateStructureArchive"})
-	public ArchiveStructure updateStructureArchive(@RequestBody ArchiveStructure archivateStructure) {
-		try {
-			archiveStructureRepo.save(archivateStructure);
-			return archivateStructure;
-		}catch(Exception e) {
-			System.out.println("Exception updateStructureArchive()==>" + e.getMessage());
-		}
-		return null;
-	}
-	
-	@PostMapping({"/addStructure"})
-	public Structure addStructure(@RequestBody Structure structure) {
+	//**************************************************update structure status***************************************
+	@PostMapping({"updateStructureStatus"})
+	public Structure updateStructureStatus(@RequestBody Structure structure) {
 		try {
 			structureRepo.save(structure);
 			return structure;
 		}catch(Exception e) {
-			System.out.println("Exception addStructure()==>" + e.getMessage());
+			System.out.println("Exception updateStructureStatus()==>" + e.getMessage());
 		}
-		
 		return null;
-		
+	}
+	//*********************************************Suspendre Structure**********************************************************************************
+	@PostMapping({"suspendreStructure"})
+	public Structure suspendreStructure(@RequestBody Structure structure) {
+		try {
+			structureRepo.save(structure);
+			return structure;
+		}catch(Exception e) {
+			System.out.println("Exception suspendreStructure()==>" + e.getMessage());
+		}
+		return null;
 	}
 	
-	@PostMapping({"/addArchiveStructure"})
-	public ArchiveStructure addArchiveStructure(@RequestBody ArchiveStructure structure) {
+	//************************************Réactivation de la structure*********************************************************************************
+	@PostMapping({"activerStructure"})
+	public Structure activerStructure(@RequestBody Structure structure) {
 		try {
-			Structure currentStructure=structureRepo.findByName(structure.getArchstructurename());
-			if(currentStructure !=null) {
-				structure.setIdstructure(currentStructure.getIDSTRUCTURE());
-				archiveStructureRepo.save(structure);
-				return structure;
-			}
-			
-			
+			structureRepo.save(structure);
+			return structure;
 		}catch(Exception e) {
-			System.out.println("Exception addStructure()==>" + e.getMessage());
+			System.out.println("Exception activerStructure()==>" + e.getMessage());
 		}
-		
 		return null;
-		
 	}
 	
-	//delete structure 
-	@PostMapping({"deleteStructure"})
-	public Structure deleteStructure(@RequestBody ArchiveStructure structure) {
-		try {
-			Optional<Structure> deletedStructure=structureRepo.findById(structure.getIdstructure());
-			
-			if(deletedStructure.get()!=null) {
-				//System.out.println(deletedStructure.get().getEMAILGROUPMANAGERS());
-				archiveStructureRepo.save(structure);
-				deletedStructure.get().setSTATUSSTRUCTURE(-1);
-				structureRepo.save(deletedStructure.get());
-				
-				return deletedStructure.get();
-			}
-		}catch(Exception e) {
-			System.out.println("Exception deleteStructure()==>" + e.getMessage());
-		}
-		return null;
-	}
-	//get User by username
-	@PostMapping({"getUserByUserName"})
-	public User  getUserByUserName(@RequestBody User u) {
-		try {
-			Optional<User> user=userRepository.findByUsername(u.getUsername());
-			if(user.get()!=null) {
-				//System.out.println(user.get().getIduser());
-				return user.get();
-			}
-		}catch(Exception e) {
-			System.out.println("Exception getUserByUserName()==>" + e.getMessage());
-		}
-		return null;
-	}
-	// get All folders pour la génération des fichiers
-	@GetMapping({ "/getAllFolders" })
-	public List<Folder> getallFolders() {
-		List<Folder> folders = new ArrayList();
-		try {
-			folders = folderRepo.findAll();
-			return folders;
-		} catch (Exception e) {
-			System.out.println("Exception getallFolders()==>" + e.getMessage());
-			folders=null;
-		}
-		return folders;
-	}
-	
+/***************************************************************Cloture Mois*****************************************************************************************************/	
 	//confirmation cloture mois (update paymonth)
 	@GetMapping({"/updatePayMonth"})
 	public PayMonth updatePayMonth() {
@@ -332,6 +460,26 @@ public class Controller {
 		return null;
 	}
 
+
+	
+
+	
+/*************************************************************Cloture paie***************************************************************************************/
+	
+	// get All folders pour la génération des fichiers
+		@GetMapping({ "/getAllFolders" })
+		public List<Folder> getallFolders() {
+			List<Folder> folders = new ArrayList();
+			try {
+				folders = folderRepo.findAll();
+				return folders;
+			} catch (Exception e) {
+				System.out.println("Exception getallFolders()==>" + e.getMessage());
+				folders=null;
+			}
+			return folders;
+		}
+	
 	// get files by folder pour la génération des fichiers
 	@PostMapping({ "/getFilesByFolder" })
 	public List<CloturePaie> getFilesByFolder(@RequestBody Folder f) {
@@ -364,17 +512,22 @@ public class Controller {
 		return null;
 	}
 
+	
+	
+	
 	// get etat files pour la génération des fichiers (recuperer les etats des
-	// fichiers généré ou non)
-	@PostMapping({ "getEtatFile" })
-	public int getEtatFile(@RequestBody CloturePaie file) {
-		File myfile = new File(file.getFOLDERPATH());
-		if (myfile.exists()) {
-			return 1;
-		} else {
-			return 0;
+		// fichiers généré ou non)
+		@PostMapping({ "getEtatFile" })
+		public int getEtatFile(@RequestBody CloturePaie file) {
+			File myfile = new File(file.getFOLDERPATH());
+			if (myfile.exists()) {
+				return 1;
+			} else {
+				return 0;
+			}
 		}
-	}
+
+	
 	//pour avoir tt les fichiers pour verifier l'etat de chacun (Cloture Paie Menu)
 	@GetMapping({"getAllCloturePaie"})
 	public List<CloturePaie>getAllCloturePaie(){
@@ -409,22 +562,9 @@ public class Controller {
 		return toutLesCloturePaie;
 		
 	}
-
-	// get structure by activity
-	@PostMapping({ "getStructurByActivity" })
-	public List<Structure> getStructureByActivity(@RequestBody ShActivity a) {
-		List<Structure> lesStructures = new ArrayList();
-		try {
-			lesStructures = structureRepo.findByActivity(a.getIdactivity());
-
-			return lesStructures;
-		} catch (Exception e) {
-			System.out.println("Exception getStructureByActivity()==>" + e.getMessage());
-			lesStructures=null;
-		}
-		return lesStructures;
-	}
-
+	
+	
+	
 	// génération des fichiers Tables
 	@GetMapping({ "generateTableFiles" })
 	public List<CloturePaie> generateTableFiles() throws FileNotFoundException, JRException {
@@ -640,7 +780,7 @@ public class Controller {
 
 	}
 
-	// génération des fichiers FRUB
+	// génération des fichiers FRUBA
 	@GetMapping({ "generateFrubAlph" })
 	public List<CloturePaie> generateFrubAlph() throws FileNotFoundException, JRException {
 		List<CloturePaie> fileFrub = new ArrayList();
@@ -707,7 +847,7 @@ public class Controller {
 
 	}
 	
-	// génération des fichiers FRUB
+	// génération des fichiers FRUBN
 		@GetMapping({ "generateFrubNum" })
 		public List<CloturePaie> generateFrubNum() throws FileNotFoundException, JRException {
 			List<CloturePaie> fileFrub = new ArrayList();
@@ -878,6 +1018,8 @@ public class Controller {
 		return filesPers ;
 
 	}
+	
+	/***********************************************Login/subscribe*********************************************************************************************************/
 
 	// Connexion
 	@RequestMapping(value = "/api/auth/signin", method = RequestMethod.POST)
@@ -925,6 +1067,7 @@ public class Controller {
 		return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
 	}
 
+	/****************************************gestion users (plus tard)************************************************************************************************/
 	@GetMapping({ "getAllUsers" })
 	public List<User> getAllUsers() {
 		List<User> allUsers = new ArrayList();
@@ -946,6 +1089,22 @@ public class Controller {
 		return currentUser;
 	}
 
+	
+	/***************************************************Parametres*****************************************************************************************************/
+	//get User by username
+	@PostMapping({"getUserByUserName"})
+	public User  getUserByUserName(@RequestBody User u) {
+		try {
+			Optional<User> user=userRepository.findByUsername(u.getUsername());
+			if(user.get()!=null) {
+				//System.out.println(user.get().getIduser());
+				return user.get();
+			}
+		}catch(Exception e) {
+			System.out.println("Exception getUserByUserName()==>" + e.getMessage());
+		}
+		return null;
+	}
 	// for settings : changer psw
 	@PostMapping({ "updatePsw" })
 	public User updatePsw(@RequestBody User u) {
@@ -1096,5 +1255,102 @@ public class Controller {
 		return null;
 	}
 
+	
+	//update structure
+		@PostMapping({"/updateStructure"})
+		public Structure updateStructure(@RequestBody Structure structure) {
+			Optional<Structure> structureToUpdate = null;
+			try {
+				structureToUpdate=structureRepo.findById(structure.getIDSTRUCTURE());
+				if(structureToUpdate.get()!=null) {
+					if(structure.getEMAILGROUPMANAGERS()!="") {
+						structureToUpdate.get().setEMAILGROUPMANAGERS(structure.getEMAILGROUPMANAGERS());
+					}
+					if(structure.getIDACTIVITY()!=0) {
+						structureToUpdate.get().setIDACTIVITY(structure.getIDACTIVITY());
+					}
+					if(structure.getSTRUCTURENAME()!="") {
+						structureToUpdate.get().setSTRUCTURENAME(structure.getSTRUCTURENAME());
+					}
+					if(structure.getSTRUCTURECODELIKE()!="") {
+						structureToUpdate.get().setSTRUCTURECODELIKE(structure.getSTRUCTURECODELIKE());
+					}
+					if(structure.getSTRUCTURECODENOTLIKE()!="") {
+						structureToUpdate.get().setSTRUCTURECODENOTLIKE(structure.getSTRUCTURECODENOTLIKE());
+					}
+					//System.out.println(structureToUpdate.get().getIDACTIVITY()+"   "+structureToUpdate.get().getIDSTRUCTURE());
+					structureRepo.save(structureToUpdate.get());
+					return structureToUpdate.get();
+				}
+			}catch(Exception e) {
+				System.out.println("Exception updateStructure()==>" + e.getMessage());
+				structureToUpdate = null;
+			}
+			return null;
+		}
+		
+		//update structure Archive
+		@PostMapping({"/updateStructureArchive"})
+		public ArchiveStructure updateStructureArchive(@RequestBody ArchiveStructure archivateStructure) {
+			try {
+				archiveStructureRepo.save(archivateStructure);
+				return archivateStructure;
+			}catch(Exception e) {
+				System.out.println("Exception updateStructureArchive()==>" + e.getMessage());
+			}
+			return null;
+		}
+		
+		@PostMapping({"/addStructure"})
+		public Structure addStructure(@RequestBody Structure structure) {
+			try {
+				structureRepo.save(structure);
+				return structure;
+			}catch(Exception e) {
+				System.out.println("Exception addStructure()==>" + e.getMessage());
+			}
+			
+			return null;
+			
+		}
+		//archivage add structure
+		@PostMapping({"/addArchiveStructure"})
+		public ArchiveStructure addArchiveStructure(@RequestBody ArchiveStructure structure) {
+			try {
+				Structure currentStructure=structureRepo.findByName(structure.getArchstructurename());
+				if(currentStructure !=null) {
+					structure.setIdstructure(currentStructure.getIDSTRUCTURE());
+					archiveStructureRepo.save(structure);
+					return structure;
+				}
+				
+				
+			}catch(Exception e) {
+				System.out.println("Exception addStructure()==>" + e.getMessage());
+			}
+			
+			return null;
+			
+		}
+		
+		//delete structure 
+		@PostMapping({"deleteStructure"})
+		public Structure deleteStructure(@RequestBody ArchiveStructure structure) {
+			try {
+				Optional<Structure> deletedStructure=structureRepo.findById(structure.getIdstructure());
+				
+				if(deletedStructure.get()!=null) {
+					//System.out.println(deletedStructure.get().getEMAILGROUPMANAGERS());
+					archiveStructureRepo.save(structure);
+					deletedStructure.get().setSTATUSSTRUCTURE(-1);
+					structureRepo.save(deletedStructure.get());
+					
+					return deletedStructure.get();
+				}
+			}catch(Exception e) {
+				System.out.println("Exception deleteStructure()==>" + e.getMessage());
+			}
+			return null;
+		}
 
 }

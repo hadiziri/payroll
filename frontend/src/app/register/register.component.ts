@@ -1,3 +1,5 @@
+import { MatDialog } from '@angular/material/dialog';
+import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
 import { error } from 'protractor';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +19,7 @@ export class RegisterComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,public dialog: MatDialog) { }
 
   ngOnInit() { }
 
@@ -42,5 +44,8 @@ export class RegisterComponent implements OnInit {
         this.isSignUpFailed = true;
       }
     );
+  }
+  openDialog() {
+    this.dialog.open(AlertDialogComponent);
   }
 }

@@ -13,6 +13,7 @@ import { DeleteStructureComponent } from './delete-structure/delete-structure.co
 import { AddStructureComponent } from './add-structure/add-structure.component';
 import {Routes, RouterModule}from '@angular/router';
 import { FilesGeneratorComponent } from './files-generator/files-generator.component';
+import { GenerateTableFilesComponent } from './generate-table-files/generate-table-files.component';
 
 const APP_ROUTING : Routes =[
     {path:'home', component:HomeComponent },
@@ -28,7 +29,8 @@ const APP_ROUTING : Routes =[
     {path:'storageSettings',component:StorageSettingsComponent},
     {path:'cloturePaie',component:CloturePaieComponent},
     {path:'clotureMois',component:CloturerMoisComponent},
-    {path :"Error", component: ErrorComponent}
+    {path :"Error", component: ErrorComponent},
+    {path :"generateTableFiles", component: GenerateTableFilesComponent}
    
     
 ]

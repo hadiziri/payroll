@@ -1,3 +1,4 @@
+import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
 import { TokenStorageService } from './../auth/token-storage.service';
 import { ParametreService } from './../Services/parametre.service';
 import { Router } from '@angular/router';
@@ -12,6 +13,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MustExist, MustMatch } from '../helpers/must-match-validator';
 import { mobiscroll, MbscFormOptions } from '@mobiscroll/angular-lite';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-settings',
@@ -41,7 +43,7 @@ export class SettingsComponent implements OnInit {
   panelOpenState = false;
  username:string="";
 
-  constructor(private _formBuilder: FormBuilder, private userService: UserService,private token: TokenStorageService) {
+  constructor(private _formBuilder: FormBuilder, private userService: UserService,private token: TokenStorageService,public dialog: MatDialog) {
 
 
   }
@@ -92,6 +94,8 @@ this.username=this.token.getUsername();
           }else{
               this.showAlert("Votre ancien mot de passe est incorrect.Veuillez le modifier et réessayer.")
           }
+        }else{
+          this.openDialog();
         }
       },
       error => {
@@ -114,9 +118,14 @@ this.username=this.token.getUsername();
 
     this.userService.updatePsw(user).subscribe(
       data => {
-        //console.log(data);
-        this.showAlert("Votre mot de passe  a bien été modifié.");
-        this.isDisabled = true;
+        if(data!=null){
+      //console.log(data);
+      this.showAlert("Votre mot de passe  a bien été modifié.");
+      this.isDisabled = true;
+        }else{
+          this.openDialog();
+        }
+        
       },
       error => {
         //console.log(error);
@@ -139,6 +148,9 @@ this.username=this.token.getUsername();
     });
   }
 
+  openDialog() {
+    this.dialog.open(AlertDialogComponent);
+  }
 
 
 

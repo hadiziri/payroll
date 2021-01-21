@@ -1,0 +1,58 @@
+<mat-card  style="background-color:#F3F3F3 ; margin-top: 50px;"  > 
+    <mat-card-header>
+      <mat-card-title style="text-shadow: 2px 2px 5px #33A158;font-size:x-large;text-align: center;
+      font-family: serif;">Veuillez sélectionner les fichiers à envoyer en indiquant l'adresse email (ou bien les adresses email) </mat-card-title>
+    </mat-card-header>
+    <mat-card-content style="margin-top: 8px;">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" novalidate >
+      
+        <mat-form-field appearance="outline" style="margin:3px;" formArrayName="emailgroupemanagers" *ngFor="let element of emails().controls; let i = index">
+          <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" [formControlName]="i" >
+            <mat-icon matSuffix> email</mat-icon>
+            <mat-error
+              *ngIf="!formGroup.controls['emailgroupemanagers'].valid && formGroup.controls['emailgroupemanagers'].touched">
+              {{getErrorEmail()}}
+            </mat-error>
+          </mat-form-field>
+
+          <button mat-flat-button color="warn"  disabled style="margin-left: 5px;" >Ajouter adresse email
+            <mat-icon aria-hidden="false"  style="cursor: pointer; " (click)="addInput()">add_circle</mat-icon>
+          </button>
+          <br>
+          <mat-form-field appearance="outline" style="margin:3px;" >
+            <mat-label>Objet</mat-label>
+              <input matInput placeholder="Object" formControlName="object" >
+              <mat-icon matSuffix> short_text</mat-icon>
+              <mat-error
+                *ngIf="!formGroup.controls['object'].valid && formGroup.controls['object'].touched">
+                Champ obligatoire
+              </mat-error>
+            </mat-form-field>
+            <br>
+          <mat-form-field appearance="outline" style="margin:3px;" >
+            <mat-label>Message</mat-label>
+              <input matInput placeholder="Message" formControlName="message" >
+              <mat-icon matSuffix> message</mat-icon>
+              <mat-error
+                *ngIf="!formGroup.controls['message'].valid && formGroup.controls['message'].touched">
+                Champ obligatoire
+              </mat-error>
+            </mat-form-field>
+            <br>
+           
+         
+          <h3 >Sélectionner des fichiers</h3>
+        <ul >
+            <li  *ngFor="let etat of allTableFiles; let i = index">
+                <mat-checkbox (change)="updateCheckedFiles(allTableFiles[i])"   >
+                {{allTableFiles[i].descfiletype}}
+                </mat-checkbox>
+            </li>
+        </ul> 
+        
+        <button [disabled]="!formGroup.valid" mat-raised-button class="btn btn-success" mat-button>Envoyer les fichiers</button>
+            </form>
+    </mat-card-content>
+   
+  </mat-card>

@@ -1,3 +1,5 @@
+import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Router, Routes } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -25,7 +27,7 @@ export class LoginComponent implements OnInit {
     themeVariant: 'light'
 };
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService,private router:Router) { }
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService,private router:Router,public dialog: MatDialog) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
@@ -88,5 +90,8 @@ export class LoginComponent implements OnInit {
             });
         }*/
     });
+}
+openDialog() {
+  this.dialog.open(AlertDialogComponent);
 }
 }
