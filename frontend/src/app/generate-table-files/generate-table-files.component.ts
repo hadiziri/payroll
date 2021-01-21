@@ -57,6 +57,7 @@ export class GenerateTableFilesComponent implements OnInit {
     //this.formGroup.setControl()
     let folder: Folder = { "idfolder": 0, "foldername": "TABLES", "folderpath": "", "statusfolder": 0 };
 
+    //get all table files
     this.clotureService.getFilesByFolder(folder).subscribe(
       (data) => {
         if (data != null) {
@@ -109,6 +110,8 @@ export class GenerateTableFilesComponent implements OnInit {
       window.location.reload();
     });
   }
+
+  //check if file is checked or not
   ischekedindex(file:clotureFiles){
    
       return this.tempTableFiles.indexOf(file);
@@ -116,6 +119,7 @@ export class GenerateTableFilesComponent implements OnInit {
     
   }
 
+  //update list of checked files
   updateCheckedFiles(file:clotureFiles){
     console.log(file)
     if(this.tempTableFiles.length>0){
@@ -132,6 +136,7 @@ export class GenerateTableFilesComponent implements OnInit {
     console.log(this.tempTableFiles)
   }
 
+  //to print email error
   getErrorEmail() {
     let object = this.formGroup.get('emailgroupemanagers');
     if (object != null) {
@@ -141,11 +146,14 @@ export class GenerateTableFilesComponent implements OnInit {
     }
 
   }
+
+  //submit action
   onSubmit(post: any) {
+    //check if at leat one file is selected
    if(this.tempTableFiles.length==0){
     this.showAlert("Envoie email","Vous devez sélectionner au moins un fichier à envoyer!")
    }else{
-    console.log(post)
+     /**************initialisation of mail request************************************* */
     this.mailRequest.subject=post.object;
     this.mailRequest.msg=post.message;
     this.mailRequest.to=post.emailgroupemanagers;
@@ -162,11 +170,13 @@ export class GenerateTableFilesComponent implements OnInit {
      for(let i=0;i<this.mailRequest.to.length;i++){
        this.email.receiver=this.email.receiver.concat(this.mailRequest.to[i]+";");
      }
+      /**************send email************************************* */
     this.SendTableFilesService.sendEmailFiles(this.mailRequest).subscribe(
       (data) => {
         if(data!=null){
           //console.log(data);
           if(data.status==true){
+             /************** save email in DB************************************* */
             this.saveEmailDB();
           }
         }else{
@@ -251,11 +261,9 @@ saveArchiveSentFiles(){
         mobiscroll.alert({
           title: title,
           message: msg
-          /* ,callback: function () {
-               mobiscroll.toast({
-                   message: 'Alert closed'
-               });
-           }*/
+          ,callback: function () {
+            window.location.reload();
+           }
         });
       
      

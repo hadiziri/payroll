@@ -4,16 +4,20 @@
     <div class="panel-body">
       <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" novalidate>
         <div class="example-container">
-          <mat-form-field style="margin: 10px;">
-            <input matInput placeholder="Nom structure" formControlName="structurename">
+          <mat-form-field style="margin: 10px;" appearance="outline">
+            <mat-label>Nom structure</mat-label>
+            <input matInput placeholder="Nom structure" formControlName="structurename" >
+            <mat-icon matSuffix> message</mat-icon>
             <mat-error
               *ngIf="!formGroup.controls['structurename'].valid && formGroup.controls['structurename'].touched">
               {{ titleAlert }}
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field style="margin: 10px;">
-            <input matInput placeholder="Code structure" formControlName="structurecodelike">
+          <mat-form-field style="margin: 10px;" appearance="outline"> 
+            <mat-label>Code structure</mat-label>
+            <input matInput placeholder="Code structure" formControlName="structurecodelike" >
+            <mat-icon matSuffix> offline_pin</mat-icon>
             <mat-error
               *ngIf="!formGroup.controls['structurecodelike'].valid && formGroup.controls['structurecodelike'].touched">
               {{ titleAlert }}
@@ -22,16 +26,20 @@
 
 
 
-          <mat-form-field style="margin: 10px;">
-            <input matInput placeholder="Code not like structure" formControlName="structurecodenotlike">
+          <mat-form-field style="margin: 10px;" appearance="outline">
+            <mat-label>Code not like structure</mat-label>
+            <input matInput placeholder="Code not like structure" formControlName="structurecodenotlike" >
+            <mat-icon matSuffix>highlight_off</mat-icon>
             <mat-error
               *ngIf="!formGroup.controls['structurecodenotlike'].valid && formGroup.controls['structurecodenotlike'].touched">
               {{ titleAlert }}
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field style="margin: 10px;">
-            <input matInput placeholder="Email groupe gestionnaire" formControlName="emailgroupemanagers">
+          <mat-form-field style="margin: 10px;" appearance="outline">
+            <mat-label>Email groupe gestionnaire</mat-label>
+            <input matInput placeholder="Email groupe gestionnaire" formControlName="emailgroupemanagers" >
+            <mat-icon matSuffix>email</mat-icon>
             <mat-error
               *ngIf="!formGroup.controls['emailgroupemanagers'].valid && formGroup.controls['emailgroupemanagers'].touched">
               {{getErrorEmail()}}
@@ -39,9 +47,11 @@
           </mat-form-field>
 
 
-          <mat-form-field style="margin: 10px;">
-            <input type="text" placeholder="Sélectionnez une activité" aria-label="Number" matInput
+          <mat-form-field style="margin: 10px;" appearance="outline">
+            <mat-label>Activité</mat-label>
+            <input type="text" placeholder="Sélectionnez une activité" aria-label="Number" matInput 
               formControlName="idactivity" [matAutocomplete]="auto">
+              <mat-icon matSuffix> short_text</mat-icon>
             <mat-error *ngIf="!formGroup.controls['idactivity'].valid && formGroup.controls['idactivity'].touched">
               {{ titleAlert }}
             </mat-error>

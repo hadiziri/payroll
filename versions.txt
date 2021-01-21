@@ -1,3 +1,10 @@
+2.9
+---
+-update design add structure
+-update design update structure
+-update design update psw
+-update design send table files
+---------------------------------------------------------------------------------------------------
 2.8
 ---
 ==>Etat paie:

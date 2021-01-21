@@ -6,20 +6,7 @@
     <mat-card-content style="margin-top: 8px;">
         <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" novalidate >
       
-        <mat-form-field appearance="outline" style="margin:3px;" formArrayName="emailgroupemanagers" *ngFor="let element of emails().controls; let i = index">
-          <mat-label>Email</mat-label>
-            <input matInput placeholder="Email" [formControlName]="i" >
-            <mat-icon matSuffix> email</mat-icon>
-            <mat-error
-              *ngIf="!formGroup.controls['emailgroupemanagers'].valid && formGroup.controls['emailgroupemanagers'].touched">
-              {{getErrorEmail()}}
-            </mat-error>
-          </mat-form-field>
-
-          <button mat-flat-button color="warn"  disabled style="margin-left: 5px;" >Ajouter adresse email
-            <mat-icon aria-hidden="false"  style="cursor: pointer; " (click)="addInput()">add_circle</mat-icon>
-          </button>
-          <br>
+       
           <mat-form-field appearance="outline" style="margin:3px;" >
             <mat-label>Objet</mat-label>
               <input matInput placeholder="Object" formControlName="object" >
@@ -41,7 +28,20 @@
             </mat-form-field>
             <br>
            
-         
+            <mat-form-field appearance="outline" style="margin:3px;" formArrayName="emailgroupemanagers" *ngFor="let element of emails().controls; let i = index">
+              <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" [formControlName]="i" >
+                <mat-icon matSuffix> email</mat-icon>
+                <mat-error
+                  *ngIf="!formGroup.controls['emailgroupemanagers'].valid && formGroup.controls['emailgroupemanagers'].touched">
+                  {{getErrorEmail()}}
+                </mat-error>
+              </mat-form-field>
+    
+              <button mat-flat-button color="warn"  disabled style="margin-left: 5px;" >Ajouter adresse email
+                <mat-icon aria-hidden="false"  style="cursor: pointer; " (click)="addInput()">add_circle</mat-icon>
+              </button>
+              <br>
           <h3 >Sélectionner des fichiers</h3>
         <ul >
             <li  *ngFor="let etat of allTableFiles; let i = index">
