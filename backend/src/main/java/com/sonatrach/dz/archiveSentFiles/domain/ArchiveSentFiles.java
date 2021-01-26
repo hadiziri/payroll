@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
@@ -12,6 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name ="ARCHIVESENTFILES")
 @IdClass(ArchiveSentFilesId.class)
+@NamedQuery(name = "ArchiveSentFiles.findByIdEmail", query = "SELECT p FROM ArchiveSentFiles p WHERE idemail=?1")
 public class ArchiveSentFiles implements Serializable  {
 	@Id
 	Integer idfile  ;

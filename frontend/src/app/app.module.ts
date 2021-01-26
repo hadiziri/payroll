@@ -38,7 +38,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FileToPrintSettingsComponent } from './file-to-print-settings/file-to-print-settings.component';
-import { GroupcheckboxesComponent } from './groupcheckboxes/groupcheckboxes.component';
+
 import {MatTabsModule} from '@angular/material/tabs';
 import { StorageSettingsComponent } from './storage-settings/storage-settings.component';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -51,6 +51,9 @@ import {  initConfig } from './/Services/commun.service';
 import { AlertDialogComponent } from './alert-dialog/alert-dialog.component';
 import { GenerateTableFilesComponent } from './generate-table-files/generate-table-files.component';
 import {MatButtonModule} from '@angular/material/button';
+import { UpdateStorageSettingsComponent } from './update-storage-settings/update-storage-settings.component';
+import { AddStorageSettingsComponent } from './add-storage-settings/add-storage-settings.component';
+import { NavigationHistoryComponent } from './navigation-history/navigation-history.component';
 
 
 
@@ -62,10 +65,10 @@ import {MatButtonModule} from '@angular/material/button';
 @NgModule({
   declarations: [
     AppComponent,
-    FilesGeneratorComponent,AddStructureComponent,DeleteStructureComponent,UpdateStructureComponent,ErrorComponent,HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, SettingsComponent, FileToPrintSettingsComponent, GroupcheckboxesComponent, StorageSettingsComponent, CloturePaieComponent, CloturerMoisComponent, 
-    AlertDialogComponent, GenerateTableFilesComponent
+    FilesGeneratorComponent,AddStructureComponent,DeleteStructureComponent,UpdateStructureComponent,ErrorComponent,HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, SettingsComponent, FileToPrintSettingsComponent,  StorageSettingsComponent, CloturePaieComponent, CloturerMoisComponent, 
+    AlertDialogComponent, GenerateTableFilesComponent, UpdateStorageSettingsComponent, AddStorageSettingsComponent, NavigationHistoryComponent
   ],
-  entryComponents: [AlertDialogComponent],
+  entryComponents: [AlertDialogComponent,UpdateStorageSettingsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

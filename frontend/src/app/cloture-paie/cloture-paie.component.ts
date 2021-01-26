@@ -164,7 +164,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
     //console.log(this.EtatArray)
 
-    let folder: Folder = { "idfolder": 0, "foldername": event.tab.textLabel, "folderpath": "", "statusfolder": 0 };
+    let folder: Folder = { "idfolder": 0, "foldername": event.tab.textLabel, "folderpath": "", "statusfolder": 0 ,"displayedfolderpath":""};
 
     this.clotureService.getFilesByFolder(folder).subscribe(
       (data) => {

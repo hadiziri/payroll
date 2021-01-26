@@ -3,4 +3,6 @@ export interface Folder{
     folderpath:string;
     foldername:string;
     statusfolder:number;
+    displayedfolderpath:String;
+    
    }

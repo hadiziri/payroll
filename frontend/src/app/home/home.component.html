@@ -2,13 +2,13 @@
 <div class="container">
  
   <div class="row">
-
+    <h1> Générer des etats de paie et les envoyer aux gestionnaires par émail  </h1>
     <mat-form-field appearance="fill" style="width: 100%; ">
       <mat-label style="font-size: large;"><span class="glyphicon glyphicon-search" aria-hidden="true" style="margin-right: 8px;"></span>Chercher</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="nom structure" #input>
       
     </mat-form-field>
-    <div class="example-container">
+    <div class="table-container">
      
    
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">

@@ -1,3 +1,5 @@
+<h1> Sélectionner des fichiers table et les envoyer  aux gestionnaires par émail </h1>
+
 <mat-card  style="background-color:#F3F3F3 ; margin-top: 50px;"  > 
     <mat-card-header>
       <mat-card-title style="text-shadow: 2px 2px 5px #33A158;font-size:x-large;text-align: center;
@@ -8,7 +10,7 @@
       
        
           <mat-form-field appearance="outline" style="margin:3px;" >
-            <mat-label>Objet</mat-label>
+            <mat-label>Objet*</mat-label>
               <input matInput placeholder="Object" formControlName="object" >
               <mat-icon matSuffix> short_text</mat-icon>
               <mat-error
@@ -18,7 +20,7 @@
             </mat-form-field>
             <br>
           <mat-form-field appearance="outline" style="margin:3px;" >
-            <mat-label>Message</mat-label>
+            <mat-label>Message*</mat-label>
               <input matInput placeholder="Message" formControlName="message" >
               <mat-icon matSuffix> message</mat-icon>
               <mat-error
@@ -29,7 +31,7 @@
             <br>
            
             <mat-form-field appearance="outline" style="margin:3px;" formArrayName="emailgroupemanagers" *ngFor="let element of emails().controls; let i = index">
-              <mat-label>Email</mat-label>
+              <mat-label>Email*</mat-label>
                 <input matInput placeholder="Email" [formControlName]="i" >
                 <mat-icon matSuffix> email</mat-icon>
                 <mat-error

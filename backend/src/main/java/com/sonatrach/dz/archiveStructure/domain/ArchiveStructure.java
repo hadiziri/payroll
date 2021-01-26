@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.sonatrach.dz.fileToPrint.domain.FileToPrintId;
@@ -14,6 +15,7 @@ import com.sonatrach.dz.fileToPrint.domain.FileToPrintId;
 @Entity
 @Table(name ="PAYROLLSTRUCTUREARCHIVE")
 @IdClass(ArchiveStructureId.class)
+@NamedQuery(name = "ArchiveStructure.findByOperation", query = "SELECT p FROM ArchiveStructure  p WHERE structureoperation=?1")
 public class ArchiveStructure implements Serializable{
 	@Id
 	 Integer  idstructure ;
@@ -27,6 +29,7 @@ public class ArchiveStructure implements Serializable{
 	 String  archstructurecodenotlike;
 	 int  archstatusstructure ;
 	 String archemailgroupemanagers;
+	 String structureoperation;
 	 
 	 public ArchiveStructure() {
 		 
@@ -104,6 +107,15 @@ public class ArchiveStructure implements Serializable{
 	public void setArchstructurecodenotlike(String archstructurecodenotlike) {
 		this.archstructurecodenotlike = archstructurecodenotlike;
 	}
+
+	public String getStructureoperation() {
+		return structureoperation;
+	}
+
+	public void setStructureoperation(String structureoperation) {
+		this.structureoperation = structureoperation;
+	}
 	 
+	
 	 
 }

@@ -3,9 +3,9 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" novalidate>
-        <div class="example-container">
+        <div class="table-container">
           <mat-form-field style="margin: 10px;" appearance="outline">
-            <mat-label>Nom structure</mat-label>
+            <mat-label>Nom structure*</mat-label>
             <input matInput placeholder="Nom structure" formControlName="structurename" >
             <mat-icon matSuffix> message</mat-icon>
             <mat-error
@@ -15,7 +15,7 @@
           </mat-form-field>
 
           <mat-form-field style="margin: 10px;" appearance="outline"> 
-            <mat-label>Code structure</mat-label>
+            <mat-label>Code structure*</mat-label>
             <input matInput placeholder="Code structure" formControlName="structurecodelike" >
             <mat-icon matSuffix> offline_pin</mat-icon>
             <mat-error
@@ -27,7 +27,7 @@
 
 
           <mat-form-field style="margin: 10px;" appearance="outline">
-            <mat-label>Code not like structure</mat-label>
+            <mat-label>Code not like structure*</mat-label>
             <input matInput placeholder="Code not like structure" formControlName="structurecodenotlike" >
             <mat-icon matSuffix>highlight_off</mat-icon>
             <mat-error
@@ -37,7 +37,7 @@
           </mat-form-field>
 
           <mat-form-field style="margin: 10px;" appearance="outline">
-            <mat-label>Email groupe gestionnaire</mat-label>
+            <mat-label>Email groupe gestionnaire*</mat-label>
             <input matInput placeholder="Email groupe gestionnaire" formControlName="emailgroupemanagers" >
             <mat-icon matSuffix>email</mat-icon>
             <mat-error
@@ -48,7 +48,7 @@
 
 
           <mat-form-field style="margin: 10px;" appearance="outline">
-            <mat-label>Activité</mat-label>
+            <mat-label>Activité*</mat-label>
             <input type="text" placeholder="Sélectionnez une activité" aria-label="Number" matInput 
               formControlName="idactivity" [matAutocomplete]="auto">
               <mat-icon matSuffix> short_text</mat-icon>

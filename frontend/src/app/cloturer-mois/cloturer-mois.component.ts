@@ -70,7 +70,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
 
       (data) => {
 
-        //console.log(data);
+        console.log(data);
         if(data!=null){
           for(let i=0;i<data.length;i++){
             this.getEtatFile(data[i]);
@@ -112,7 +112,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
     
       (data) => {
         
-        //console.log(data);
+        console.log(data);
         if(this.EtatArray.length>0){
           
           
@@ -128,7 +128,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
         }
             if(!exist){
               this.state=[];
-              //console.log(this.state)
+             // console.log(this.state)
               this.state.push (data);
               this.EtatArray.push({ "idFolder":file.idfolder, "etat": this.state })
             }

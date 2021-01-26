@@ -1,4 +1,5 @@
 <div *ngIf="!selectFiles">
+    <h1>Voici les états paie à imprimer pour chaque structure</h1>
 <mat-tab-group mat-align-tabs="center" style="margin-top: 25px;" >
     <mat-tab *ngFor="let activity of allShActivities; let k=index" label="{{allShActivities[k].descactivity}}" >
         <div  *ngFor="let structure of payrollstructures; let j = index"  style="display: inline-block;margin: auto; margin-top: 15px;">

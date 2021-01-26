@@ -1,0 +1,44 @@
+<div class="container">
+    <h1>Pour ajouter un dossier,veuillez remplir les champs suivants:</h1>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" novalidate>
+          <div class="table-container">
+            <mat-form-field style="margin: 10px;" appearance="outline">
+              <mat-label>Nom dossier*</mat-label>
+              <input matInput placeholder="Nom dossier" formControlName="foldername" >
+              <mat-icon matSuffix> message</mat-icon>
+              <mat-error
+                *ngIf="!formGroup.controls['foldername'].valid && formGroup.controls['foldername'].touched">
+                {{ titleAlert }}
+              </mat-error>
+            </mat-form-field>
+  
+            <mat-form-field style="margin: 10px;" appearance="outline"> 
+              <mat-label>Chemin de stockage*</mat-label>
+              <input matInput placeholder="Chemin de stockage" formControlName="folderpath" >
+              <mat-icon matSuffix> folder</mat-icon>
+              <mat-error
+                *ngIf="!formGroup.controls['folderpath'].valid && formGroup.controls['folderpath'].touched">
+                {{ titleAlert }}
+              </mat-error>
+            </mat-form-field>
+  
+  
+            <h3 style="margin-left: 10px;">Sélectionner des fichiers</h3>
+            <ul >
+                <li  *ngFor="let file of allFiles; let i = index">
+                    <mat-checkbox (change)="updateCheckedFiles(allFiles[i])"   >
+                    {{allFiles[i].prefixfiletype}}
+                    </mat-checkbox>
+                </li>
+            </ul> 
+  
+            <button [disabled]="!formGroup.valid" mat-raised-button class="btn btn-primary btn-lg" mat-button style="background-color: #71BED1;">Ajouter un
+              dossier</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

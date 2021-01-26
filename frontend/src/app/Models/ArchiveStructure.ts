@@ -7,5 +7,6 @@ export interface ArchiveStructure{
       archstructurecodelike:String;
       archstructurecodenotlike:String;
 	  archstatusstructure :number;
-	 archemailgroupemanagers:String;
+      archemailgroupemanagers:String;
+      structureoperation:String;
 }

@@ -52,7 +52,8 @@ export class UpdateStructureComponent implements OnInit {
     "archstructurename":"",
     "idstructure":0,
     "iduser":0,
-    "structurearchiveddate":new Date()
+    "structurearchiveddate":new Date(),
+    "structureoperation":""
   }
   messageAdded:Boolean=false;
   messageArchive:Boolean=false;
@@ -81,6 +82,7 @@ export class UpdateStructureComponent implements OnInit {
      this.structureArchive.idstructure=params["idstructure"];
      this.structureArchive.archstructurecodenotlike=params["structurecodenotlike"];
      this.structureArchive.idactivity=params["idactivity"];
+     this.structureArchive.structureoperation="update"
 
   });
   }
@@ -192,7 +194,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
        this.structureArchive.idstructure=this.activatedRoute.snapshot.params.id;
         // console.log(this.currentUser)
          this.structureArchive.iduser=this.currentUser.iduser;
-
+         console.log(this.structureArchive)
        this.paramService.updateStructureArchive(this.structureArchive).subscribe(
    
          data=>{

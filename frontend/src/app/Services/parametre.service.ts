@@ -1,3 +1,6 @@
+import { FileTypeToFolder } from './../Models/FileTypeToFolder';
+import { FolderArchive } from './../Models/FolderArchive';
+import { Folder } from './../Models/Folder';
 import { CommunService } from './commun.service';
 import { User } from './../Models/User';
 import { ArchiveStructure } from './../Models/ArchiveStructure';
@@ -13,6 +16,7 @@ import { FileToPrint } from '../Models/FileToPrint';
 import { ShActivity } from '../Models/ShActivity';
 
 import { clotureFiles } from './../Models/cloturesFiles';
+import { FileType } from '../Models/FileType';
 
 
 @Injectable({
@@ -156,4 +160,74 @@ public addArchiveStructure(structure:ArchiveStructure):Observable<ArchiveStructu
     })
   );
  }
+
+ public deleteFolderPath(folderArchive:FolderArchive):Observable<Folder>{
+   return this.httpClient.post<Folder>(this.host+"deleteFolderPath",folderArchive).pipe(
+    catchError((err) => {
+      console.log('error caught in service')
+      console.error(err);
+      return throwError(err);
+    })
+  );
+ }
+ public updateFolderPath(folder:Folder):Observable<Folder>{
+   return this.httpClient.post<Folder>(this.host+"updateFolderPath",folder).pipe(
+    catchError((err) => {
+      console.log('error caught in service')
+      console.error(err);
+      return throwError(err);
+    })
+  );
+ }
+
+ public updateFolderPathArchive(folderArchive:FolderArchive):Observable<FolderArchive>{
+  return this.httpClient.post<FolderArchive>(this.host+"updateFolderPathArchive",folderArchive).pipe(
+   catchError((err) => {
+     console.log('error caught in service')
+     console.error(err);
+     return throwError(err);
+   })
+ );
+}
+
+public addNewFolder(folder:Folder):Observable<Folder>{
+  return this.httpClient.post<Folder>(this.host+"addNewFolder",folder).pipe(
+   catchError((err) => {
+     console.log('error caught in service')
+     console.error(err);
+     return throwError(err);
+   })
+ );
+}
+
+public addNewFolderArchive(folderArchive:FolderArchive):Observable<FolderArchive>{
+  return this.httpClient.post<FolderArchive>(this.host+"addNewFolderArchive",folderArchive).pipe(
+   catchError((err) => {
+     console.log('error caught in service')
+     console.error(err);
+     return throwError(err);
+   })
+ );
+}
+
+public addFilesToNewFolder(files:Array<FileTypeToFolder>):Observable<Array<FileTypeToFolder>>{
+  return this.httpClient.post<Array<FileTypeToFolder>>(this.host+"addFilesToNewFolder",files).pipe(
+    catchError((err) => {
+      console.log('error caught in service')
+      console.error(err);
+      return throwError(err);
+    })
+  );
+}
+
+public getAllFileType():Observable<Array<FileType>>{
+  return this.httpClient.get<Array<FileType>>(this.host+"getAllFileType").pipe(
+    catchError((err) => {
+      console.log('error caught in service')
+      console.error(err);
+      return throwError(err);
+    })
+  );
+}
+
 }

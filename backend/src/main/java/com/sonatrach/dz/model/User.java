@@ -27,7 +27,7 @@ public class User{
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="APPUSERS_ID_SEQ")
 	@Column(name="IDUSER")
-    private Long iduser;
+    private Integer iduser;
 	@Column(name="NAME")
     private String name;
 	@Column(name="USERNAME", unique = true)
@@ -83,11 +83,13 @@ public class User{
         this.password = password;
     }
 
-	public Long getIduser() {
+	
+
+	public Integer getIduser() {
 		return iduser;
 	}
 
-	public void setIduser(Long iduser) {
+	public void setIduser(Integer iduser) {
 		this.iduser = iduser;
 	}
 

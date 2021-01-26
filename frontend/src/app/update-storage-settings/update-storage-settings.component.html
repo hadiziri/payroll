@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Modification du chemin de stockage</h1>
+<div mat-dialog-content>
+  <p>Entrez le nouveau chemin de stockage</p>
+  <form [formGroup]="formGroup"  novalidate>
+    <mat-form-field appearance="fill">
+      <mat-label>Chemin de stockage</mat-label>
+      <input matInput placeholder="Placeholder" [(ngModel)]="data.path" formControlName="path">
+      <mat-icon matSuffix>folder</mat-icon>
+      <mat-error
+      *ngIf="!formGroup.controls['path'].valid && formGroup.controls['path'].touched">
+      Champ obligatoire
+    </mat-error>
+    </mat-form-field>
+  </form>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onNoClick()">Annuler</button>
+  <button mat-raised-button color="primary" [disabled]="!formGroup.valid" [mat-dialog-close]="data.path" >Valider</button>
+</div>

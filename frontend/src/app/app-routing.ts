@@ -1,3 +1,5 @@
+import { NavigationHistoryComponent } from './navigation-history/navigation-history.component';
+import { AddStorageSettingsComponent } from './add-storage-settings/add-storage-settings.component';
 import { CloturerMoisComponent } from './cloturer-mois/cloturer-mois.component';
 import { CloturePaieComponent } from './cloture-paie/cloture-paie.component';
 import { StorageSettingsComponent } from './storage-settings/storage-settings.component';
@@ -17,7 +19,7 @@ import { GenerateTableFilesComponent } from './generate-table-files/generate-tab
 
 const APP_ROUTING : Routes =[
     {path:'home', component:HomeComponent },
-    {path :'historique',component:FilesGeneratorComponent},
+    {path :'historique',component:NavigationHistoryComponent},
     {path :'addStructure',component:AddStructureComponent},
     {path :"structures", component :DeleteStructureComponent},
     {path :"", component :HomeComponent},
@@ -30,7 +32,8 @@ const APP_ROUTING : Routes =[
     {path:'cloturePaie',component:CloturePaieComponent},
     {path:'clotureMois',component:CloturerMoisComponent},
     {path :"Error", component: ErrorComponent},
-    {path :"generateTableFiles", component: GenerateTableFilesComponent}
+    {path :"generateTableFiles", component: GenerateTableFilesComponent},
+    {path :"addNewFolder", component: AddStorageSettingsComponent}
    
     
 ]

@@ -92,7 +92,7 @@ table {
 
 
 
-.example-container {
+.table-container {
   position: relative;
   max-height: 600px;
   overflow: auto;
@@ -101,3 +101,12 @@ table {
 }
 
 
+h1 {
+  
+  text-align: center;
+  font-family: "serif";
+  font-size: 30px;
+  border-style: groove;
+  padding: 8px;
+  text-shadow: 2px 2px 5px #888586;
+}

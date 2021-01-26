@@ -63,8 +63,14 @@ import com.sonatrach.dz.emailDB.domain.EmailDB;
 import com.sonatrach.dz.emailDB.repo.EmailDbRepo;
 import com.sonatrach.dz.fileToPrint.domain.FileToPrint;
 import com.sonatrach.dz.fileToPrint.repo.FileToPrintRepo;
+import com.sonatrach.dz.fileType.domain.FileType;
+import com.sonatrach.dz.fileType.repo.FileTypeRepo;
+import com.sonatrach.dz.fileTypeToFolder.domain.FileTypeToFolder;
+import com.sonatrach.dz.fileTypeToFolder.repo.FileTypeToFolderRepo;
 import com.sonatrach.dz.folder.domain.Folder;
 import com.sonatrach.dz.folder.repo.FolderRepo;
+import com.sonatrach.dz.folderArchive.domain.FolderArchive;
+import com.sonatrach.dz.folderArchive.repo.FolderArchiveRepo;
 import com.sonatrach.dz.fonction.domain.Fonction;
 import com.sonatrach.dz.fonction.repo.FonctionRepo;
 import com.sonatrach.dz.localite.domain.Localite;
@@ -177,12 +183,18 @@ public class Controller {
 	private EmailService service;
 	@Autowired
 	ArchiveSentFilesRepo archiveSentFilesRepo;
-
+	@Autowired
+	FileTypeToFolderRepo  fileTypeToFolderRepo;
+	@Autowired
+	FolderArchiveRepo folderArchiveRepo;
+	@Autowired
+	FileTypeRepo fileTypeRepo;
+	
 	// ****************************************API*****************************************************************************
 	// Api Test
-	@GetMapping({ "/allBanques" })
-	public List<RubAlph> getAllBanques() {
-		return rubAlphRepo.findAll();
+	@GetMapping({ "/test" })
+	public List<CloturePaie> getAllBanques() {
+		return clotureRepo.findAll();
 	}
 	
 	
@@ -201,6 +213,76 @@ public class Controller {
 			return lesStructures;
 		}
 		
+/*****************************************************************Historique****************************************************************************************************/
+//get all emails sent by user
+@PostMapping({"getAllEmails"})
+public List<EmailDB>getAllEmails(@RequestBody User user){
+	ArrayList emails=new ArrayList();
+	try {
+		emails=emailDbRepo.findByIdUser(user.getIduser());
+		if(emails.size()>0) {
+			return emails;
+		}
+	}catch(Exception e) {
+		System.out.println("Exception getAllEmails()==>" + e.getMessage());
+	}
+	return null;
+}
+
+//getFiles sent with email by user
+@PostMapping({"getSentFiles"})
+public String[] getSentFiles(@RequestBody EmailDB email) {
+	try {
+		ArrayList<ArchiveSentFiles> fileIds=archiveSentFilesRepo.findByIdEmail(email.getIdemail());
+		
+		if(fileIds!=null) {
+			String [] fileNames=new String[fileIds.size()];
+			for(int i=0;i<fileIds.size();i++) {
+				Optional<Efile> sentFile=efileRepo.findById(fileIds.get(i).getIdfile());
+				if(sentFile.get()!=null) {
+					fileNames[i]=sentFile.get().getFilename();
+				}
+			}
+			return fileNames;
+		}
+	}catch(Exception e) {
+		System.out.println("Exception  getSentFiles()==>" + e.getMessage());
+	}
+	
+	return null;
+}
+		
+//get structure archive with operation
+@PostMapping({"getArchiveStructure"})
+public List<ArchiveStructure> getArchiveStructure(@RequestBody String operation){
+	try {
+		ArrayList<ArchiveStructure> archiveStructure=archiveStructureRepo.findByOperation(operation);
+		
+		if(archiveStructure!=null) {
+			
+			return archiveStructure;
+		}
+	}catch(Exception e) {
+		System.out.println("Exception  getArchiveStructure()==>" + e.getMessage());
+	}
+	return null;
+}
+
+//get folder archive with operation
+@PostMapping({"getArchiveFolder"})
+public List<FolderArchive> getArchiveFolder(@RequestBody String operation){
+	try {
+		ArrayList<FolderArchive> archiveFolder=folderArchiveRepo.findByOperation(operation);
+		
+		if(archiveFolder!=null) {
+			
+			return archiveFolder;
+		}
+	}catch(Exception e) {
+		System.out.println("Exception  getArchiveStructure()==>" + e.getMessage());
+	}
+	return null;
+}
 /******************************************************Send Table files (email)************************************************************************************************/
 		@PostMapping({"sendEmailFiles"})
 		public MailResponse sendEmailFiles(@RequestBody MailRequest request) {
@@ -471,7 +553,7 @@ public class Controller {
 		public List<Folder> getallFolders() {
 			List<Folder> folders = new ArrayList();
 			try {
-				folders = folderRepo.findAll();
+				folders = folderRepo.findByStatus(-1);
 				return folders;
 			} catch (Exception e) {
 				System.out.println("Exception getallFolders()==>" + e.getMessage());
@@ -1082,7 +1164,7 @@ public class Controller {
 	}
 
 	@PostMapping({ "updateUser" })
-	public Optional<User> updateUser(@PathVariable Long id) {
+	public Optional<User> updateUser(@PathVariable Integer id) {
 		Optional<User> currentUser = userRepository.findById(id);
 		currentUser.get().setState(1);
 		// implementer l'insertion au niveau de la table ROLEUSERS
@@ -1155,8 +1237,7 @@ public class Controller {
 		return user;
 
 	}
-	// for settings : avoir tout les etats paie pour séléctionner les etat à
-	// imprimer
+	// for settings : avoir tout les etats paie pour séléctionner les etat à imprimer(file to print)
 	@GetMapping({ "allEtats" })
 	public List<CloturePaie> getAllEtat() {
 		List<CloturePaie> toutLesEtats = new ArrayList();
@@ -1189,7 +1270,7 @@ public class Controller {
 		return files;
 	}
 
-	// for settings : pour avoir les etats selectionnés pour chaque structure
+	// for settings : pour avoir les etats selectionnés pour chaque structure (file to print)
 	@PostMapping({ "selectedEtats" })
 	public List<FileToPrint> getSelectedEtat(@RequestBody FileToPrint f) {
 		List<FileToPrint> files = new ArrayList();
@@ -1243,7 +1324,7 @@ public class Controller {
 		return null;
 	}
 
-	// for settings: to have all shactivities
+	// for settings: to have all shactivities (file to print)
 	@GetMapping({ "allShActivities" })
 	public List<ShActivity> getAllShActivities() {
 		try {
@@ -1301,6 +1382,7 @@ public class Controller {
 			return null;
 		}
 		
+		//add structure
 		@PostMapping({"/addStructure"})
 		public Structure addStructure(@RequestBody Structure structure) {
 			try {
@@ -1333,7 +1415,7 @@ public class Controller {
 			
 		}
 		
-		//delete structure 
+		//delete structure with archive
 		@PostMapping({"deleteStructure"})
 		public Structure deleteStructure(@RequestBody ArchiveStructure structure) {
 			try {
@@ -1352,5 +1434,132 @@ public class Controller {
 			}
 			return null;
 		}
+		
+		//get all folders(MAJ path )
+		//on trouve cette api dans la section cloture paie
+		
+		
+		//get all files to select and put in folder
+		@GetMapping({"getAllFileType"})
+		public List<FileType> getAllFileType(){
+			try {
+				return fileTypeRepo.findAll();
+			}catch(Exception e) {
+				System.out.println("Exception getAllFileType()==>" + e.getMessage());
+			}
+			return null;
+		}
+		
+		
+		//delete folder path
+		@PostMapping({"deleteFolderPath"})
+		public Folder deleteFolderPath(@RequestBody FolderArchive folderArchive){
+			try {
+			
+				folderArchiveRepo.save(folderArchive);
+				Folder folder=folderRepo.findByFolderName(folderArchive.getArchfoldername());
+				folder.setSTATUSFOLDER(-1);
+				folderRepo.save(folder);
+				List<FileTypeToFolder> allTypeToFolder=fileTypeToFolderRepo.findByIdFolder(folder.getIDFOLDER());
+				if(allTypeToFolder!=null) {
+					for(int i=0;i<allTypeToFolder.size();i++) {
+						fileTypeToFolderRepo.delete(allTypeToFolder.get(i));
+					}
+					return folder;
+				}
+				
+			}catch(Exception e) {
+				System.out.println("Exception deleteFolderPath()==>" + e.getMessage());
+			}
+			return null;
+		}
+		
+		//update Folder path
+		@PostMapping({"updateFolderPath"})
+		public Folder updateFolderPath(@RequestBody Folder folder){
+			try {
+			
+			
+				folderRepo.save(folder);
+				
+					return folder;
+				
+			
+			}catch(Exception e) {
+				System.out.println("Exception updateFolderPath()==>" + e.getMessage());
+			}
+			return null;
+		}
+		
+		@PostMapping({"updateFolderPathArchive"})
+		public FolderArchive updateFolderPathArchive(@RequestBody FolderArchive folderArchive){
+			try {
+			
+			
+				folderArchiveRepo.save(folderArchive);
+				return folderArchive;
+				
+			
+			}catch(Exception e) {
+				System.out.println("Exception updateFolderPath()==>" + e.getMessage());
+			}
+			return null;
+		}
+		
+		@PostMapping({"addNewFolder"})
+		public Folder addNewFolder(@RequestBody Folder folder) {
+			try {
+				
+				
+				folderRepo.save(folder);
+				
+					return folder;
+				
+			
+			}catch(Exception e) {
+				System.out.println("Exception addNewFolder()==>" + e.getMessage());
+			}
+			return null;
+		}
+		
+		@PostMapping({"addNewFolderArchive"})
+		public FolderArchive addNewFolderArchive(@RequestBody FolderArchive folderArchive){
+			try {
+			
+				Folder folder=folderRepo.findByFolderName(folderArchive.getArchfoldername());
+				if(folder!=null) {
+					folderArchive.setIdfolder(folder.getIDFOLDER());
+					folderArchiveRepo.save(folderArchive);
+					return folderArchive;
+				}
+				
+				
+			
+				
+			
+			}catch(Exception e) {
+				System.out.println("Exception addNewFolderArchive()==>" + e.getMessage());
+			}
+			return null;
+		}
+		
+		@PostMapping({"addFilesToNewFolder"})
+		public List<FileTypeToFolder> addFilesToNewFolder(@RequestBody List<FileTypeToFolder> files ){
+			try {
+				
+				for(int i=0;i<files.size();i++) {
+					fileTypeToFolderRepo.save(files.get(i));
+				}
+				return files;
+				
+			
+				
+			
+			}catch(Exception e) {
+				System.out.println("Exception addFilesToNewFolder()==>" + e.getMessage());
+			}
+			return null;
+		}
+		
 
 }

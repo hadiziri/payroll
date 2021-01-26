@@ -55,7 +55,7 @@ export class GenerateTableFilesComponent implements OnInit {
   }
   ngOnInit(): void {
     //this.formGroup.setControl()
-    let folder: Folder = { "idfolder": 0, "foldername": "TABLES", "folderpath": "", "statusfolder": 0 };
+    let folder: Folder = { "idfolder": 0, "foldername": "TABLES", "folderpath": "", "statusfolder": 0 ,"displayedfolderpath":""};
 
     //get all table files
     this.clotureService.getFilesByFolder(folder).subscribe(

@@ -22,7 +22,7 @@
           <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
         </a></li>
        
-      <li><a class="nav-link disabled" style="cursor: pointer;">Historique
+      <li><a [routerLink]="['/historique']" routerLinkActive="router-link-active">Historique
           <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
         </a></li>
       <li>
@@ -33,7 +33,7 @@
           <li><a [routerLink]="['/parametre']" routerLinkActive="router-link-active">Changer mot de passe</a></li>
           <li><a [routerLink]="['/fileToPrint']" routerLinkActive="router-link-active">Choisir les fichiers à
               imprimer</a></li>
-          <li><a class="nav-link disabled" style="cursor: pointer;">Modifier le chemin de stockage</a></li>
+          <li><a [routerLink]="['/storageSettings']" routerLinkActive="router-link-active">Modifier le chemin de stockage</a></li>
           <li><a [routerLink]="['/addStructure']" routerLinkActive="router-link-active">Ajouter structure</a></li>
           <li><a [routerLink]="['/structures']" routerLinkActive="router-link-active">Modifier/Supprimer structure</a>
           </li>

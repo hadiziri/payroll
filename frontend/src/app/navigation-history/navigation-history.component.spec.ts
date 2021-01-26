@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GroupcheckboxesComponent } from './groupcheckboxes.component';
+import { NavigationHistoryComponent } from './navigation-history.component';
 
-describe('GroupcheckboxesComponent', () => {
-  let component: GroupcheckboxesComponent;
-  let fixture: ComponentFixture<GroupcheckboxesComponent>;
+describe('NavigationHistoryComponent', () => {
+  let component: NavigationHistoryComponent;
+  let fixture: ComponentFixture<NavigationHistoryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GroupcheckboxesComponent ]
+      declarations: [ NavigationHistoryComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GroupcheckboxesComponent);
+    fixture = TestBed.createComponent(NavigationHistoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

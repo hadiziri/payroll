@@ -51,7 +51,8 @@ export class DeleteStructureComponent implements OnInit {
     "archstructurename":"",
     "idstructure":0,
     "iduser":0,
-    "structurearchiveddate":new Date()
+    "structurearchiveddate":new Date(),
+    "structureoperation":""
   }
 
   dataSource: MatTableDataSource<Structure> = new MatTableDataSource(this.ELEMENT_DATA);
@@ -154,7 +155,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
     this.structureArchive.archstructurecodenotlike=element.structurecodenotlike;
     this.structureArchive.archstructurename=element.structurename;
     this.structureArchive.idactivity=element.idactivity;
-    
+    this.structureArchive.structureoperation="delete";
     //console.log(this.structureArchive)
     this.showConfirm();
   

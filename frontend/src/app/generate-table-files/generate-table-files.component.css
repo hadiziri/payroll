@@ -2,4 +2,12 @@
   ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate, .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
     background-color: #10B974 !important; 
   }
+  h1 {
   
+    text-align: center;
+    font-family: "serif";
+    font-size: 30px;
+    border-style: groove;
+    padding: 8px;
+    text-shadow: 2px 2px 5px #888586;
+  }

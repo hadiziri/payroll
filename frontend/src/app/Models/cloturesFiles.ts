@@ -6,4 +6,5 @@ export interface clotureFiles{
   descfiletype:String;
  folderpath:String;
  foldername:String;
+ displayedfolderpath:String;
 }

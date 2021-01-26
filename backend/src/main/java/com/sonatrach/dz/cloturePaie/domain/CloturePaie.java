@@ -2,44 +2,60 @@ package com.sonatrach.dz.cloturePaie.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.sonatrach.dz.fileTypeToFolder.domain.FileTypeToFolderId;
+
 @Entity
 @Table(name ="CLOTURE_PAIE")
+@IdClass(FileTypeToFolderId.class)
 @NamedQueries({@NamedQuery(name = "CloturePaie.findByDesc", query = "SELECT p FROM CloturePaie p WHERE DESCFILETYPE=?1"),
 		@NamedQuery(name = "CloturePaie.findByCategory", query = "SELECT p FROM CloturePaie p WHERE FOLDERNAME=?1")})
 		
 public class CloturePaie {
 	@Id
-	private Integer IDFILETYPE;
-	private Integer IDFOLDER;
+	private Integer idfiletype;
+	@Id
+	private Integer idfolder;
 	private Integer IDFILECATEGORY;
 	private String PREFIXFILETYPE;
 	private String DESCFILETYPE;
 	private String FOLDERPATH;
 	private String FOLDERNAME;
+	private String DISPLAYEDFOLDERPATH;
 
 	public CloturePaie() {
 		
 	}
 
-	public Integer getIDFILETYPE() {
-		return IDFILETYPE;
+
+
+	public Integer getIdfiletype() {
+		return idfiletype;
 	}
 
-	public void setIDFILETYPE(Integer iDFILETYPE) {
-		IDFILETYPE = iDFILETYPE;
+
+
+	public void setIdfiletype(Integer idfiletype) {
+		this.idfiletype = idfiletype;
 	}
 
-	public Integer getIDFOLDER() {
-		return IDFOLDER;
+
+
+	public Integer getIdfolder() {
+		return idfolder;
 	}
 
-	public void setIDFOLDER(Integer iDFOLDER) {
-		IDFOLDER = iDFOLDER;
+
+
+	public void setIdfolder(Integer idfolder) {
+		this.idfolder = idfolder;
 	}
+
+
 
 	public Integer getIDFILECATEGORY() {
 		return IDFILECATEGORY;
@@ -80,6 +96,15 @@ public class CloturePaie {
 	public void setFOLDERNAME(String fOLDERNAME) {
 		FOLDERNAME = fOLDERNAME;
 	}
+
+	public String getDISPLAYEDFOLDERPATH() {
+		return DISPLAYEDFOLDERPATH;
+	}
+
+	public void setDISPLAYEDFOLDERPATH(String dISPLAYEDFOLDERPATH) {
+		DISPLAYEDFOLDERPATH = dISPLAYEDFOLDERPATH;
+	}
+	
 	
 	
 }

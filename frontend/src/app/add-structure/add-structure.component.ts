@@ -39,7 +39,8 @@ export class AddStructureComponent implements OnInit {
     "archstructurename": "",
     "idstructure": 0,
     "iduser": 0,
-    "structurearchiveddate": new Date()
+    "structurearchiveddate": new Date(),
+    "structureoperation":""
   }
   currentUser: User = {
     "email": "",
@@ -99,7 +100,7 @@ export class AddStructureComponent implements OnInit {
           // console.log(data);
           this.currentUser.iduser = data.iduser;
         } else {
-          alert("Une erreur s'est produite.Veuillez réessayer plus tard");
+          this.openDialog();
         }
       },
       error => {
@@ -138,7 +139,7 @@ export class AddStructureComponent implements OnInit {
     this.structureArchive.archemailgroupemanagers = post.emailgroupemanagers;
     this.structureArchive.iduser = this.currentUser.iduser;
     this.structureArchive.idactivity = post.idactivity;
-
+    this.structureArchive.structureoperation="add";
     this.paramService.addStructure(this.StructureToAdd).subscribe(
       data => {
         if (data != null) {
