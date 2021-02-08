@@ -3,15 +3,20 @@ package com.sonatrach.dz.efile.domain;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name ="EFILE")
+@SequenceGenerator(name="EFILE_ID_SEQ",initialValue=3, allocationSize=1)
 @NamedQuery(name = "Efile.findByIdStructure", query = "SELECT p FROM Efile  p WHERE idstructure=?1")
 public class Efile {
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EFILE_ID_SEQ")
 	Integer idfile  ;
 	Integer  idfiletype;
 	Integer  idstructure ;

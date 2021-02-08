@@ -1,3 +1,9 @@
+3.1
+---
+-Génération etat de paie
+-Reste les etats de paie(design des fichiers)
+-Reste application design ,controls ,tests
+---------------------------------------------------------------------------------------------------
 3.0
 ---
 -Historique

@@ -64,7 +64,7 @@
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>6.4.0</version>
+			<version>6.11.0</version>
 		</dependency>
 		<!-- For Working with Json Web Tokens (JWT) -->
 		<dependency>

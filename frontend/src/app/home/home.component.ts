@@ -1,3 +1,8 @@
+import { EtatRet } from './../Models/EtatRet';
+import { EtatRecap } from './../Models/EtatRecap';
+import { EtatMip } from './../Models/EtatMip';
+import { EtatMand } from './../Models/EtatMand';
+import { EtatJournal } from './../Models/EtatJournal';
 import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ArchiveSentFiles } from './../Models/ArchiveSentFiles';
@@ -47,6 +52,7 @@ export class HomeComponent implements OnInit {
   icon_etat: String = "vert.svg";
   etat: String = "";
   ELEMENT_DATA: Structure[] = [];
+  
 
   dataSource: MatTableDataSource<Structure> = new MatTableDataSource(this.ELEMENT_DATA);
   formSettings: MbscFormOptions = {
@@ -54,7 +60,7 @@ export class HomeComponent implements OnInit {
     themeVariant: 'light'
   };
 
-  showSpinner: Boolean = false;
+  showSpinner: Boolean = true;
   mailRequest:MailRequest={"from":"","msg":"","sturcturename":"","subject":"","to":[],"filesName":[]};
   currentUser:User={"email":"","iduser":0,"name":"","password":"","state":0,"username":""};
   email:EmailDB={"emailgenerationdate":new Date(),"emailobject":"","idemail":0,"iduser":0,"msg":"","receiver":"","sender":""};
@@ -62,6 +68,24 @@ export class HomeComponent implements OnInit {
   archiveSentFilesSaved:Boolean=false;
   eFiles:Efile[]=[];
   archiveSentFiles:ArchiveSentFiles[]=[];
+  allEtatJournal:EtatJournal[]=[];
+  allEtatMand:EtatMand[]=[];
+  allEtatMip:EtatMip[]=[];
+  allEtatRecap:EtatRecap[]=[];
+  allEtatRet:EtatRet[]=[];
+  filteredEtatJournal:EtatJournal[]=[];
+  filteredEtatMand:EtatMand[]=[];
+  filteredEtatMip:EtatMip[]=[];
+  filteredEtatRecap:EtatRecap[]=[];
+  filteredEtatRet:EtatRet[]=[];
+  codeStructure:string[]=[];
+  codeNotLike:string[]=[];
+  efiles:Efile[]=[];
+  mand:Boolean=false;
+  jour:Boolean=false;
+  ret:Boolean=false;
+  recap:Boolean=false;
+  mip:Boolean=false;
   updatedStructure:Structure={
     "idstructure":0,
     "idactivity":0,
@@ -140,7 +164,109 @@ export class HomeComponent implements OnInit {
         throw error;
 
       }
-    )
+    );
+
+    //get all etat paie filtered by paymonth
+      this.homeService.getEtatJournal().subscribe(
+        (data) => {
+          if(data!=null){
+            console.log(data);
+            this.allEtatJournal=data;
+            
+          }else{
+            this.openDialog();
+          }
+          
+          
+        },
+        error => {
+          //console.log(error);
+          alert(error);
+          throw error;
+  
+        }
+      );
+
+      this.homeService.getEtatMand().subscribe(
+        (data) => {
+          if(data!=null){
+            console.log(data);
+            this.allEtatMand=data;
+            
+          }else{
+            this.openDialog();
+          }
+          
+          
+        },
+        error => {
+          //console.log(error);
+          alert(error);
+          throw error;
+  
+        }
+      );
+
+      this.homeService.getEtatMip().subscribe(
+        (data) => {
+          if(data!=null){
+            console.log(data);
+            this.allEtatMip=data;
+            
+          }else{
+            this.openDialog();
+          }
+          
+          
+        },
+        error => {
+          //console.log(error);
+          alert(error);
+          throw error;
+  
+        }
+      );
+
+      this.homeService.getEtatRecap().subscribe(
+        (data) => {
+          if(data!=null){
+            console.log(data);
+            this.allEtatRecap=data;
+            
+          }else{
+            this.openDialog();
+          }
+          
+          
+        },
+        error => {
+          //console.log(error);
+          alert(error);
+          throw error;
+  
+        }
+      );
+
+      this.homeService.getEtatRet().subscribe(
+        (data) => {
+          if(data!=null){
+            console.log(data);
+            this.allEtatRet=data;
+            this.showSpinner=false;
+          }else{
+            this.openDialog();
+          }
+          
+          
+        },
+        error => {
+          //console.log(error);
+          alert(error);
+          throw error;
+  
+        }
+      );
+     
   }
 
 //---------------------------------------------------------------------SEND EMAIL----------------------------------------------------------------------------------------------
@@ -373,7 +499,413 @@ export class HomeComponent implements OnInit {
 
     )
   }
+  
+    //----------------------------------------------------------------générer fichiers-----------------------------------------------------------------------
+    genererFichier(structure:Structure){
+      this.codeStructure=[];
+     if(structure.structurecodelike.includes("/")){
+       this.codeStructure=structure.structurecodelike.split("/");
+       
+     }else{
+        this.codeStructure.push(structure.structurecodelike);
+     }
+     console.log(this.codeStructure);
+     if(this.allEtatJournal.length==0||this.allEtatMand.length==0||this.allEtatMip.length==0||this.allEtatRecap.length==0||this.allEtatRet.length==0){
+        this.showAlertInit("Initialisation des données","Veuillez patienter un petit moment s'il vous plait pour générer les fichiers");
+     }else{
+        this.filtrerEtats(this.codeStructure,structure);
+     }
+    }
+      
+    showAlertInit(title:String,msg:String) {
+      mobiscroll.alert({
+        title: title,
+        message: msg
+      });
+    
+  }
 
+   
+    filtrerEtats(codeLike:string[],str:Structure){
+      this.filteredEtatJournal=[];
+      this.filteredEtatMand=[];
+      this.filteredEtatMip=[];
+      this.filteredEtatRecap=[];
+      this.filteredEtatRet=[];
+      if(str.structurecodenotlike!="0"){
+         this.codeNotLike=str.structurecodenotlike.split("/");
+       console.log(this.codeNotLike);
+      }
+      //filtrer journal
+      for(let i=0;i<this.allEtatJournal.length;i++){
+        
+        if(codeLike.length==1){
+          if(this.allEtatJournal[i].cstr.startsWith(codeLike[0])){
+            this.filteredEtatJournal.push(this.allEtatJournal[i]);
+          }
+        }else{
+          for(let j=0;j<codeLike.length;j++){
+            if(this.allEtatJournal[i].cstr.startsWith(codeLike[j])){
+              this.filteredEtatJournal.push(this.allEtatJournal[i]);
+            }
+          }
+        }
+
+       
+      }
+    //  console.log(this.filteredEtatJournal);
+    if(str.structurecodenotlike!="0"){
+      this.filteredEtatJournal=this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike)
+      
+      //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
+    }
+    console.log(this.filteredEtatJournal)
+     
+      //filtrer mand
+      for(let i=0;i<this.allEtatMand.length;i++){
+        if(codeLike.length==1){
+          if(this.allEtatMand[i].dir.startsWith(codeLike[0])){
+            this.filteredEtatMand.push(this.allEtatMand[i]);
+          }
+        }else{
+          for(let j=0;j<codeLike.length;j++){
+            if(this.allEtatMand[i].dir.startsWith(codeLike[j])){
+              this.filteredEtatMand.push(this.allEtatMand[i]);
+            }
+          }
+        }
+      }
+      if(str.structurecodenotlike!="0"){
+     // console.log(this.filteredEtatMand);
+      this.filteredEtatMand=this.isExistCodeNotLike(this.filteredEtatMand,this.codeNotLike)
+      //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
+      }
+      console.log(this.filteredEtatMand)
+
+      //filtrer mip
+      for(let i=0;i<this.allEtatMip.length;i++){
+        if(codeLike.length==1){
+          if(this.allEtatMip[i].dir.startsWith(codeLike[0])){
+            this.filteredEtatMip.push(this.allEtatMip[i]);
+          }
+        }else{
+          for(let j=0;j<codeLike.length;j++){
+            if(this.allEtatMip[i].dir.startsWith(codeLike[j])){
+              this.filteredEtatMip.push(this.allEtatMip[i]);
+            }
+          }
+        }
+      }
+      if(str.structurecodenotlike!="0"){
+     // console.log(this.filteredEtatMip);
+      this.filteredEtatMip=this.isExistCodeNotLike(this.filteredEtatMip,this.codeNotLike)
+      //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
+      }
+      console.log(this.filteredEtatMip)
+
+      //filtrer recap
+      for(let i=0;i<this.allEtatRecap.length;i++){
+        if(codeLike.length==1){
+          if(this.allEtatRecap[i].dir.startsWith(codeLike[0])){
+            this.filteredEtatRecap.push(this.allEtatRecap[i]);
+          }
+        }else{
+          for(let j=0;j<codeLike.length;j++){
+            if(this.allEtatRecap[i].dir.startsWith(codeLike[j])){
+              this.filteredEtatRecap.push(this.allEtatRecap[i]);
+            }
+          }
+        }
+      }
+      if(str.structurecodenotlike!="0"){
+     // console.log(this.filteredEtatRecap);
+      this.filteredEtatRecap=this.isExistCodeNotLike(this.filteredEtatRecap,this.codeNotLike)
+      //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
+      }
+      console.log(this.filteredEtatRecap)
+
+      //filter ret
+      for(let i=0;i<this.allEtatRet.length;i++){
+        if(codeLike.length==1){
+          if(this.allEtatRet[i].dir.startsWith(codeLike[0])){
+            this.filteredEtatRet.push(this.allEtatRet[i]);
+          }
+        }else{
+          for(let j=0;j<codeLike.length;j++){
+            if(this.allEtatRet[i].dir.startsWith(codeLike[j])){
+              this.filteredEtatRet.push(this.allEtatRet[i]);
+            }
+          }
+        }
+      }
+      if(str.structurecodenotlike!="0"){
+      //console.log(this.filteredEtatRet);
+      this.filteredEtatRet=this.isExistCodeNotLike(this.filteredEtatRet,this.codeNotLike)
+      //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
+      }
+      console.log(this.filteredEtatRet)
+      this.generateEtatFiles(str);
+     
+    }
+    isExistCodeNotLike(etatArray:any,codeNotLike:string[]){
+      let test:EtatJournal[]=[];
+      if(codeNotLike.length==1){
+        for(let i=0;i< etatArray.length;i++){
+          if(etatArray[i].dir.startsWith(codeNotLike[0])){
+            
+            test.push(etatArray[i])
+          }
+        }
+      }else{
+        for(let i=0;i< etatArray.length;i++){
+        for(let j=0;j<codeNotLike.length;j++){
+          
+         
+            if(etatArray[i].dir.startsWith(codeNotLike[j])){
+             
+              test.push(etatArray[i])
+
+            }
+            
+          }
+        }
+      }
+      console.log(test)
+      etatArray=etatArray.filter( ( el:any ) => !test.includes( el ) );
+      return etatArray;
+    }
+  generateEtatFiles(structure:Structure){
+    console.log("generation des fichiers")
+    this.homeService.generateMand(this.filteredEtatMand,structure.structurename).subscribe(
+      (data) => {
+      
+        console.log("mand")
+        console.log(data);
+        if(data!=null){
+          let efile:Efile={
+            "idfile":0,
+            "filename":"MAND",
+            "filegenerationdate":new Date(),
+            "idfiletype":0,
+            "idpaymonth":0,
+            "idstructure":structure.idstructure,
+            "iduser":this.currentUser.iduser,
+            "validatedflag":1
+          }
+          this.efiles.push(efile);
+          this.mand=true;
+          this.saveGeneratedFilesInDB(structure);
+          //this.showAlert("Activation Structure","La structure a bien été activée");
+        }else{
+          
+          
+          this.openDialog();
+        }
+
+      },
+      error => {
+        console.log(error);
+        alert(error);
+        throw error;
+
+      }
+    );
+    this.homeService.generateJournal(this.filteredEtatJournal,structure.structurename).subscribe(
+      (data) => {
+        console.log("jour")
+        console.log(data);
+        if(data!=null){
+          let efile:Efile={
+            "idfile":0,
+            "filename":"JOUR",
+            "filegenerationdate":new Date(),
+            "idfiletype":0,
+            "idpaymonth":0,
+            "idstructure":structure.idstructure,
+            "iduser":this.currentUser.iduser,
+            "validatedflag":1
+          }
+          this.efiles.push(efile);
+          this.jour=true;
+          this.saveGeneratedFilesInDB(structure);
+          //this.showAlert("Activation Structure","La structure a bien été activée");
+        }else{
+          
+          
+          this.openDialog();
+        }
+
+      },
+      error => {
+        console.log(error);
+        alert(error);
+        throw error;
+
+      }
+    );
+
+    this.homeService.generateMip(this.filteredEtatMip,structure.structurename).subscribe(
+      (data) => {
+      
+        console.log("mip")
+        console.log(data);
+        if(data!=null){
+          let efile:Efile={
+            "idfile":0,
+            "filename":"MIP",
+            "filegenerationdate":new Date(),
+            "idfiletype":0,
+            "idpaymonth":0,
+            "idstructure":structure.idstructure,
+            "iduser":this.currentUser.iduser,
+            "validatedflag":1
+          }
+          this.efiles.push(efile);
+          this.mip=true;
+          this.saveGeneratedFilesInDB(structure);
+          //this.showAlert("Activation Structure","La structure a bien été activée");
+        }else{
+          
+          
+          this.openDialog();
+        }
+
+      },
+      error => {
+        console.log(error);
+        alert(error);
+        throw error;
+
+      }
+    );
+
+    this.homeService.generateRet(this.filteredEtatRet,structure.structurename).subscribe(
+      (data) => {
+      
+        console.log("ret")
+        console.log(data);
+        if(data!=null){
+          let efile:Efile={
+            "idfile":0,
+            "filename":"RET",
+            "filegenerationdate":new Date(),
+            "idfiletype":0,
+            "idpaymonth":0,
+            "idstructure":structure.idstructure,
+            "iduser":this.currentUser.iduser,
+            "validatedflag":1
+          }
+          this.efiles.push(efile);
+          this.ret=true;
+          this.saveGeneratedFilesInDB(structure);
+          //this.showAlert("Activation Structure","La structure a bien été activée");
+        }else{
+          
+          
+          this.openDialog();
+        }
+
+      },
+      error => {
+        console.log(error);
+        alert(error);
+        throw error;
+
+      }
+    );
+
+    this.homeService.generateRecap(this.filteredEtatRecap,structure.structurename).subscribe(
+      (data) => {
+      
+        console.log("recap")
+        console.log(data);
+        if(data!=null){
+          let efile:Efile={
+            "idfile":0,
+            "filename":"REC",
+            "filegenerationdate":new Date(),
+            "idfiletype":0,
+            "idpaymonth":0,
+            "idstructure":structure.idstructure,
+            "iduser":this.currentUser.iduser,
+            "validatedflag":1
+          }
+          this.efiles.push(efile);
+          this.recap=true;
+          this.saveGeneratedFilesInDB(structure);
+          //this.showAlert("Activation Structure","La structure a bien été activée");
+        }else{
+          
+          
+          this.openDialog();
+        }
+
+      },
+      error => {
+        console.log(error);
+        alert(error);
+        throw error;
+
+      }
+    );
+    
+  }
+
+  //********************************************SaveGeneratedFilesInDB************************************************************************************************* */
+saveGeneratedFilesInDB(structure:Structure){
+if(this.jour&&this.mip&&this.mand&&this.ret&&this.recap){
+this.homeService.saveGeneratedFiles(this.efiles).subscribe(
+  (data) => {
+      
+    console.log("save generated files in db")
+    console.log(data);
+    if(data!=null){
+      this.updateStatusStructure(structure);
+      //this.showAlert("Activation Structure","La structure a bien été activée");
+    }else{
+      
+      
+      this.openDialog();
+    }
+
+  },
+  error => {
+    console.log(error);
+    alert(error);
+    throw error;
+
+  }
+);
+}
+
+}
+
+updateStatusStructure(structure:Structure){
+  this.homeService.updateStructureFilesGenerated(structure).subscribe(
+    (data) => {
+      
+      console.log("updateStatusStructure")
+      console.log(data);
+      if(data!=null){
+        
+        this.showAlert("Génération etats paie","Les etats ont bien été généré.");
+      }else{
+        
+        
+        this.openDialog();
+      }
+  
+    },
+    error => {
+      console.log(error);
+      alert(error);
+      throw error;
+  
+    }
+  );
+}
+
+  //****************************************************POUR LA RECHERCHE ET LES ERRURS ****************************************************************** */
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -385,4 +917,6 @@ export class HomeComponent implements OnInit {
       window.location.reload();
     });
   }
+
+  
 }

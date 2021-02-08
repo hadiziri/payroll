@@ -2,10 +2,12 @@ package com.sonatrach.dz.fileType.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name ="FILETYPE")
+@NamedQuery(name = "FileType.findByPrefixFile", query = "SELECT p.idfiletype FROM FileType  p WHERE prefixfiletype=?1")
 public class FileType {
 @Id
 Integer idfiletype;

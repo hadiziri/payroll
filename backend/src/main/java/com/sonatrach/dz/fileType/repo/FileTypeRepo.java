@@ -8,5 +8,5 @@ import com.sonatrach.dz.fileType.domain.FileType;
 
 @Repository
 public interface FileTypeRepo extends JpaRepository<FileType,Integer > {
-
+Integer findByPrefixFile(String prefix);
 }
