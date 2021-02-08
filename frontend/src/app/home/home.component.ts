@@ -694,7 +694,7 @@ export class HomeComponent implements OnInit {
           }
           this.efiles.push(efile);
           this.mand=true;
-          this.saveGeneratedFilesInDB(structure);
+         // this.saveGeneratedFilesInDB(structure);
           //this.showAlert("Activation Structure","La structure a bien été activée");
         }else{
           
@@ -727,7 +727,7 @@ export class HomeComponent implements OnInit {
           }
           this.efiles.push(efile);
           this.jour=true;
-          this.saveGeneratedFilesInDB(structure);
+        //  this.saveGeneratedFilesInDB(structure);
           //this.showAlert("Activation Structure","La structure a bien été activée");
         }else{
           
@@ -762,7 +762,7 @@ export class HomeComponent implements OnInit {
           }
           this.efiles.push(efile);
           this.mip=true;
-          this.saveGeneratedFilesInDB(structure);
+         // this.saveGeneratedFilesInDB(structure);
           //this.showAlert("Activation Structure","La structure a bien été activée");
         }else{
           
@@ -797,7 +797,7 @@ export class HomeComponent implements OnInit {
           }
           this.efiles.push(efile);
           this.ret=true;
-          this.saveGeneratedFilesInDB(structure);
+         // this.saveGeneratedFilesInDB(structure);
           //this.showAlert("Activation Structure","La structure a bien été activée");
         }else{
           
@@ -832,7 +832,7 @@ export class HomeComponent implements OnInit {
           }
           this.efiles.push(efile);
           this.recap=true;
-          this.saveGeneratedFilesInDB(structure);
+         // this.saveGeneratedFilesInDB(structure);
           //this.showAlert("Activation Structure","La structure a bien été activée");
         }else{
           

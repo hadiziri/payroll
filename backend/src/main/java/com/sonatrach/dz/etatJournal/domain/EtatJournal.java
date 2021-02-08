@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
 
 @Entity
 @Table(name ="PAIE_ETAT_JOURNAL")
@@ -35,7 +36,7 @@ public class EtatJournal {
 	@Column(name="BUL_ENFANTMOIN10")
 	Integer bulenfantmoin10;
 	@Column(name="MOIS_PAIE")
-	String moispaie;
+	String moispaie;	
 	@Column(name="BUL_GAINSIMP")
 	BigDecimal bulgainsimp;
 	@Column(name="BUL_GAINSNIMP")

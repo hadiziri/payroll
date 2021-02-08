@@ -642,7 +642,7 @@ public class Controller {
 			}
 			
 			// load file and compile it
-			File file = ResourceUtils.getFile("classpath:etatJournal.jrxml");
+			File file = ResourceUtils.getFile("classpath:etatJour.jrxml");
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(journal);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
