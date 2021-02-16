@@ -22,4 +22,9 @@ export interface EtatRecap {
     mtbase: number;
 
     mtrub: number;
+    divdes:String;
+    dirdes:String;
+    css:String;
+    report:String;
+    
 }

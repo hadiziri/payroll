@@ -13,10 +13,13 @@ export interface EtatRet {
 
     rubimp: String;
 
+    
     rubdesignation: String;
 
     dbulrappel: number;
 
 
     dbulmontant: number;
+    divdes:String;
+    dirdes:String;
 }

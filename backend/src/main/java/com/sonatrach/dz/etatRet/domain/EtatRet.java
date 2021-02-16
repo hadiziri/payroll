@@ -1,6 +1,7 @@
 package com.sonatrach.dz.etatRet.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name ="PAIE_ETAT_RETIMPOSABLES")
 @IdClass(EtatRetId.class)
-@NamedQuery(name = "EtatRet.findByPayMonth", query = "SELECT p FROM EtatRet  p WHERE moisexp=?1 AND anneeexp=?2 order by divop")
+@NamedQuery(name = "EtatRet.findByPayMonth", query = "SELECT p FROM EtatRet  p WHERE moisexp=?1 AND anneeexp=?2 order by divdes,dirdes,rubdesignation")
 public class EtatRet implements Serializable{
 	@Column(name="MOIS_EXP")
 	String moisexp;
@@ -35,9 +36,13 @@ public class EtatRet implements Serializable{
 	@Column(name="RUB_DESIGNATION")
 	String rubdesignation;
 	@Column(name="DBUL_RAPPEL")
-	Float dbulrappel;
+	BigDecimal dbulrappel;
 	@Column(name="DBUL_MONTANT")
-	Float dbulmontant;
+	BigDecimal dbulmontant;
+	@Column(name="DIV_DESIGNATION")
+	String divdes;
+	@Column(name="DIR_DESIGNATION")
+	String dirdes;
 	
 	public EtatRet() {
 		
@@ -107,21 +112,39 @@ public class EtatRet implements Serializable{
 		this.rubdesignation = rubdesignation;
 	}
 
-	public Float getDbulrappel() {
+	public BigDecimal getDbulrappel() {
 		return dbulrappel;
 	}
 
-	public void setDbulrappel(Float dbulrappel) {
+	public void setDbulrappel(BigDecimal dbulrappel) {
 		this.dbulrappel = dbulrappel;
 	}
 
-	public Float getDbulmontant() {
+	public BigDecimal getDbulmontant() {
 		return dbulmontant;
 	}
 
-	public void setDbulmontant(Float dbulmontant) {
+	public void setDbulmontant(BigDecimal dbulmontant) {
 		this.dbulmontant = dbulmontant;
 	}
+
+	public String getDivdes() {
+		return divdes;
+	}
+
+	public void setDivdes(String divdes) {
+		this.divdes = divdes;
+	}
+
+	public String getDirdes() {
+		return dirdes;
+	}
+
+	public void setDirdes(String dirdes) {
+		this.dirdes = dirdes;
+	}
+
+
 
 
 	

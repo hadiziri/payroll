@@ -1,68 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="etatPaieTest" pageWidth="2200" pageHeight="970" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="20" uuid="4c233b78-b328-4b8e-9812-f441c15bb481">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="etatPaieTest" pageWidth="2200" pageHeight="970" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="4c233b78-b328-4b8e-9812-f441c15bb481">
 	<field name="moisexp" class="java.lang.String"/>
 	<field name="bulmatricule" class="java.lang.String"/>
 	<field name="agtnom" class="java.lang.String"/>
-	<field name="montant460" class="java.lang.Float"/>
-	<field name="rapp460" class="java.lang.Float"/>
+	<field name="montant460" class="java.math.BigDecimal"/>
+	<field name="rapp460" class="java.math.BigDecimal"/>
 	<field name="dateeffet" class="java.lang.String"/>
 	<field name="anneeexp" class="java.lang.String"/>
 	<field name="divop" class="java.lang.String"/>
-	<variable name="bulmatricule1" class="java.lang.Integer" resetType="Group" resetGroup="grpdep" calculation="Count">
+	<field name="dir" class="java.lang.String"/>
+	<field name="dirdes" class="java.lang.String"/>
+	<field name="divdes" class="java.lang.String"/>
+	<variable name="bulmatricule1" class="java.lang.Integer" resetType="Group" resetGroup="grpdep" calculation="DistinctCount">
 		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
 	</variable>
-	<variable name="montant4601" class="java.lang.Float" resetType="Group" resetGroup="grpdep" calculation="Sum">
+	<variable name="montant4601" class="java.math.BigDecimal" resetType="Group" resetGroup="grpdep" calculation="Sum">
 		<variableExpression><![CDATA[$F{montant460}]]></variableExpression>
 	</variable>
-	<variable name="rapp4601" class="java.lang.Float" resetType="Group" resetGroup="grpdep" calculation="Sum">
+	<variable name="rapp4601" class="java.math.BigDecimal" resetType="Group" resetGroup="grpdep" calculation="Sum">
 		<variableExpression><![CDATA[$F{rapp460}]]></variableExpression>
 	</variable>
-	<group name="grpdep" keepTogether="true">
-		<groupExpression><![CDATA[$F{divop}]]></groupExpression>
-		<groupHeader>
-			<band>
-				<property name="com.jaspersoft.studio.unit.height" value="px"/>
-			</band>
-		</groupHeader>
+	<variable name="bulmatricule2" class="java.lang.Integer" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
+	</variable>
+	<variable name="montant4602" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{montant460}]]></variableExpression>
+	</variable>
+	<variable name="rapp4602" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{rapp460}]]></variableExpression>
+	</variable>
+	<group name="grpdep" isStartNewColumn="true">
+		<groupExpression><![CDATA[$F{dirdes}]]></groupExpression>
 		<groupFooter>
-			<band height="74">
+			<band height="113" splitType="Prevent">
 				<staticText>
-					<reportElement x="-10" y="10" width="1510" height="13" uuid="79aca049-94c0-42b3-8d7d-c988835eddbb"/>
+					<reportElement x="-10" y="30" width="1510" height="13" uuid="79aca049-94c0-42b3-8d7d-c988835eddbb"/>
 					<text><![CDATA[+---------------------------+-----------------------------------+-------------+----------------+---------------------------+]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="-10" y="30" width="181" height="18" uuid="6942c5c9-2e3f-4a56-8033-b52fb7dff296">
+					<reportElement x="-10" y="50" width="181" height="18" uuid="6942c5c9-2e3f-4a56-8033-b52fb7dff296">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<text><![CDATA[effectif :]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="260" y="30" width="100" height="18" uuid="a7b420aa-3464-46a2-8011-9cae36081e3f">
+					<reportElement x="260" y="50" width="150" height="18" uuid="a7b420aa-3464-46a2-8011-9cae36081e3f">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[$V{bulmatricule1}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="-10" y="50" width="1510" height="14" uuid="d50190b9-29b0-4d47-8ce8-30b660e52420">
+					<reportElement x="-10" y="70" width="1510" height="14" uuid="d50190b9-29b0-4d47-8ce8-30b660e52420">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<text><![CDATA[+---------------------------+-----------------------------------+-------------+----------------+---------------------------+]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="630" y="30" width="110" height="18" uuid="e260e1a3-b093-46e6-89a6-078128ca3964"/>
+					<reportElement x="630" y="50" width="110" height="18" uuid="e260e1a3-b093-46e6-89a6-078128ca3964"/>
 					<text><![CDATA[totaux  :]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="780" y="30" width="170" height="18" uuid="98581f0f-90ea-4c5e-b28d-e025aa11c8ec"/>
-					<textElement textAlignment="Center"/>
-					<textFieldExpression><![CDATA[$V{montant4601}]]></textFieldExpression>
+					<reportElement x="780" y="50" width="160" height="18" uuid="98581f0f-90ea-4c5e-b28d-e025aa11c8ec"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{montant4601}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{montant4601})]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="940" y="30" width="210" height="18" uuid="c55c15d2-1b3d-46a5-9dc1-6e4c3735dfb9"/>
-					<textElement textAlignment="Left"/>
-					<textFieldExpression><![CDATA["!"+"      "+$V{rapp4601}]]></textFieldExpression>
+					<reportElement x="950" y="50" width="200" height="18" uuid="c55c15d2-1b3d-46a5-9dc1-6e4c3735dfb9"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{rapp4601}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{rapp4601})]]></textFieldExpression>
 				</textField>
+				<staticText>
+					<reportElement x="940" y="50" width="9" height="18" uuid="58dab7aa-7ef7-4684-a69e-38c621e41d4f">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<text><![CDATA[!]]></text>
+				</staticText>
 			</band>
 		</groupFooter>
 	</group>
@@ -113,18 +126,6 @@
     )+" "+$F{anneeexp}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="660" y="70" width="360" height="15" uuid="d8d6365f-872b-49ad-8d45-ee0838e25817">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<text><![CDATA[D I R E C T I O N :COMPLEXE G L 1 K]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="1090" y="70" width="100" height="20" uuid="c64fddd4-7eea-4eee-af31-6f6ee26477b0">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<text><![CDATA[ DEPT: ]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="-10" y="70" width="210" height="15" uuid="125acc07-6073-414e-b66e-c05330058689">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -139,24 +140,28 @@
 				</box>
 				<text><![CDATA[DATE:]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="200" y="70" width="389" height="30" uuid="df228840-78a7-41f7-b9cb-e062f8f12e0a">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<text><![CDATA[DIVISION LIQUEFACTION ET SEPARATION DES GAZ]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="1190" y="70" width="100" height="20" uuid="3337020d-a46f-48c9-98ca-97ee33d603cf"/>
-				<textFieldExpression><![CDATA[$F{divop}]]></textFieldExpression>
-			</textField>
 			<textField pattern="MMMMM dd, yyyy">
 				<reportElement x="1370" y="20" width="300" height="15" uuid="b4dc4a5f-f24f-45b0-8c52-1677bad48efe"/>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="200" y="70" width="440" height="20" uuid="9396dd58-5bb2-41f2-9668-99dfacf1c81d"/>
+				<textFieldExpression><![CDATA[$F{divdes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="710" y="70" width="150" height="15" uuid="f1d14d38-4440-4383-ac61-a6c569230c47">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[DIRECTION:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="860" y="70" width="360" height="15" uuid="72aa1609-c759-4686-8616-d25c841be5d7"/>
+				<textFieldExpression><![CDATA[$F{dirdes}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="73" splitType="Stretch">
+		<band height="73" splitType="Prevent">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
 				<reportElement x="-10" y="19" width="350" height="31" uuid="d065f8ed-0c05-47d0-a679-a392c9cfabe5">
@@ -225,7 +230,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="21">
+		<band height="21" splitType="Stretch">
 			<textField>
 				<reportElement x="-10" y="0" width="350" height="20" uuid="1324277f-1cf1-4cc2-a5f3-88ededc0ff6e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>
@@ -251,16 +256,16 @@
 				<textFieldExpression><![CDATA[$F{agtnom}==null?" ":"!"+$F{agtnom}.substring( 0, 27 )]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="780" y="0" width="160" height="20" uuid="72ac64bb-1484-4b8a-8bdb-6ddcf6c57c70">
+				<reportElement x="790" y="0" width="150" height="20" uuid="72ac64bb-1484-4b8a-8bdb-6ddcf6c57c70">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aafde1ac-9f21-4267-b383-ffd18072315c"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.0" lineStyle="Dashed"/>
 				</box>
-				<textElement textAlignment="Left">
+				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["!"+"   "+$F{montant460}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{montant460}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{montant460})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="1150" y="0" width="350" height="20" uuid="c7d9f004-ba41-4c99-9a6c-cfbf3173864a">
@@ -272,36 +277,89 @@
 				<textElement textAlignment="Left">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{dateeffet}==null?" ":"!"+$F{dateeffet}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{dateeffet}==null?"! ":"!"+$F{dateeffet}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="940" y="0" width="210" height="20" uuid="c7d9f004-ba41-4c99-9a6c-cfbf3173864a">
+			<textField isBlankWhenNull="false">
+				<reportElement x="950" y="0" width="200" height="20" uuid="c7d9f004-ba41-4c99-9a6c-cfbf3173864a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c05cb4c4-7321-464e-b20b-38a19f892a19"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.0" lineStyle="Dashed"/>
 				</box>
-				<textElement textAlignment="Left">
+				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["!"+"      "+$F{rapp460}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{rapp460}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{rapp460})]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="780" y="0" width="9" height="20" uuid="f70a4d0b-88be-4717-b81a-5b48cfe93c68">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[!]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="940" y="0" width="9" height="20" uuid="81bf57d3-54e8-4060-afde-877dc2b08e78">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[!]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="24" splitType="Stretch">
-			<staticText>
-				<reportElement x="960" y="5" width="30" height="14" uuid="80fc3f9a-b985-4338-b132-fee793b04270"/>
-				<text><![CDATA[---]]></text>
-			</staticText>
+		<band splitType="Prevent">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 		</band>
 	</columnFooter>
 	<pageFooter>
-		<band height="30" splitType="Stretch">
+		<band height="30" splitType="Prevent">
 			<textField>
-				<reportElement x="-20" y="5" width="70" height="20" uuid="f3185dd5-2c4c-4329-914a-3f18d6837647"/>
-				<textFieldExpression><![CDATA["\u2191"]]></textFieldExpression>
+				<reportElement x="-20" y="5" width="70" height="20" uuid="487db28f-7dbc-4501-910b-ac176af09c3c"/>
+				<textFieldExpression><![CDATA["\f"]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="114" splitType="Prevent">
+			<staticText>
+				<reportElement x="-10" y="30" width="1510" height="13" uuid="36e423b2-5c83-4949-b432-cf7324fa4093"/>
+				<text><![CDATA[+---------------------------+-----------------------------------+-------------+----------------+---------------------------+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-10" y="50" width="220" height="18" uuid="20fa3507-eb7f-4caf-94aa-8b91b48dff8e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[total effectif:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-10" y="70" width="1510" height="14" uuid="30959aed-4956-40a5-908d-ffd48aae3e11">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[+---------------------------+-----------------------------------+-------------+----------------+---------------------------+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="50" width="110" height="18" uuid="6161fc71-0089-4e3f-ad7c-e16eedaaf019"/>
+				<text><![CDATA[totaux  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="940" y="50" width="9" height="18" uuid="d896eecb-3595-45c7-95e9-02289f04daa3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[!]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="260" y="50" width="150" height="18" uuid="72438085-4019-4219-8960-28c2c970d5d1"/>
+				<textFieldExpression><![CDATA[$V{bulmatricule2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="780" y="50" width="160" height="18" uuid="7b32e6ca-49a0-490c-8db8-d356459cddc1"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{montant4602}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{montant4602})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="950" y="50" width="200" height="18" uuid="9de5a3d8-e3bc-4a3b-9cf2-f13b4b029cbc"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{rapp4602}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{rapp4602})]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
 </jasperReport>

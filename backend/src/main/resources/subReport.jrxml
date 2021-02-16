@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="text_output" pageWidth="1600" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9a0b1db2-1ed0-44e1-960b-4626cea0097d">
+	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+	<field name="ban_cban" class="java.lang.String"/>
+	<field name="age_cagc" class="java.lang.String"/>
+	<field name="age_designation" class="java.lang.String"/>
+	<detail>
+		<band height="108" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="20" width="341" height="20" uuid="595758cf-4be5-470f-8610-981d992d8d0e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[TOTAL CAISSE SS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="501" y="20" width="161" height="20" uuid="7a23e598-d6f0-4e7a-9779-5c6858a16b60"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[CASORAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="341" height="20" uuid="979079eb-930c-4e81-ad05-2f98b1bbdfb7"/>
+				<text><![CDATA[COTISATION:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="60" width="340" height="20" uuid="9034b63f-e0d5-4b5f-8309-78e2aaa7ed6f"/>
+				<text><![CDATA[BASE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="801" y="20" width="161" height="20" uuid="63fc13a9-60fa-4fb7-b517-be39754e9d49"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[CASORAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1101" y="20" width="161" height="20" uuid="258f7edf-991e-461e-a19d-c11368a8eab1"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[CASOREC]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="391" y="40" width="270" height="20" uuid="944e5f95-a75f-4d5d-86f8-1663fe0955fe"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{cotisation}.intValue()==0?"":
+new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{cotisation})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="391" y="60" width="271" height="20" uuid="032f9083-6f64-43ba-bc41-10ad8b52661c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{gainImp}.subtract($V{GainNonCotis}))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="692" y="40" width="270" height="20" uuid="7d272fef-ca31-46ef-b455-3ae254ead06c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{cotisation2}.intValue()==0?"":
+new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{cotisation2})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="692" y="60" width="271" height="20" uuid="f073f74a-1035-4ea1-98a6-67f524d7b56a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{gainImp}.subtract($V{GainNonCotis}))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="991" y="40" width="270" height="20" uuid="c1c7df50-36a7-4c99-9f22-dbcf592d2fa1"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{cotisation3}.intValue()==0?"":
+new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{cotisation3})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="991" y="60" width="271" height="20" uuid="35b82a55-9422-4006-b6ac-e3b247c088bf"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{gainImp}.subtract($V{GainNonCotis}))]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

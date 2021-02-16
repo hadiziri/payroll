@@ -13,5 +13,5 @@ import com.sonatrach.dz.etatMand.domain.EtatMand;
 
 @Repository
 public interface EtatMandRepo  extends JpaRepository<EtatMand, String>{
-ArrayList<EtatMand>findByPayMonth(Date sysDate);
+ArrayList<EtatMand>findByPayMonth();
 }

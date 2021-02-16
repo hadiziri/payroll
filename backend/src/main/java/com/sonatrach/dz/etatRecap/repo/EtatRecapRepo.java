@@ -1,6 +1,7 @@
 package com.sonatrach.dz.etatRecap.repo;
 
 import java.util.Date;
+import java.util.List;
 import java.util.ArrayList;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +14,6 @@ import com.sonatrach.dz.etatRecap.domain.EtatRecapId;
 
 @Repository
 public interface EtatRecapRepo extends JpaRepository<EtatRecap, EtatRecapId> {
-	ArrayList<EtatRecap>findByPayMonth(Date date);
+	List<EtatRecap>findByPayMonth();
+	List<EtatRecap>findByReport(String report);
 }

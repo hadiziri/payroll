@@ -19,5 +19,7 @@ export interface EtatMip {
     montant460: number;
 
     rapp460: number;
+    divdes:String;
+    dirdes:String;
 
 }

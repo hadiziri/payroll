@@ -38,7 +38,7 @@
 	<variable name="bulnet1" class="java.math.BigDecimal" resetType="Group" resetGroup="grpdep" calculation="Sum">
 		<variableExpression><![CDATA[$F{bulnet}]]></variableExpression>
 	</variable>
-	<variable name="bulmatricule1" class="java.lang.Integer" resetType="Group" resetGroup="grpdep" calculation="Count">
+	<variable name="bulmatricule1" class="java.lang.Integer" resetType="Group" resetGroup="grpdep" calculation="DistinctCount">
 		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
 	</variable>
 	<variable name="cstr1" class="java.lang.Integer" resetType="Group" resetGroup="grpdep" calculation="Count">
@@ -47,7 +47,7 @@
 	<variable name="dir1" class="java.lang.Integer" resetType="Group" resetGroup="grpeDir" calculation="Count">
 		<variableExpression><![CDATA[$F{dir}]]></variableExpression>
 	</variable>
-	<variable name="bulmatricule2" class="java.lang.Integer" resetType="Group" resetGroup="grpeDir" calculation="Count">
+	<variable name="bulmatricule2" class="java.lang.Integer" resetType="Group" resetGroup="grpeDir" calculation="DistinctCount">
 		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
 	</variable>
 	<variable name="bulgainsimp2" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
@@ -56,7 +56,7 @@
 	<variable name="div1" class="java.lang.Integer" resetType="Group" resetGroup="grpDiv" calculation="Count">
 		<variableExpression><![CDATA[$F{div}]]></variableExpression>
 	</variable>
-	<variable name="bulmatricule3" class="java.lang.Integer" resetType="Group" resetGroup="grpDiv" calculation="Count">
+	<variable name="bulmatricule3" class="java.lang.Integer" resetType="Group" resetGroup="grpDiv" calculation="DistinctCount">
 		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
 	</variable>
 	<variable name="strdes1" class="java.lang.Integer" resetType="Group" resetGroup="grpdep" calculation="Count">
@@ -101,7 +101,7 @@
 	<variable name="divdes2" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{divdes}]]></variableExpression>
 	</variable>
-	<variable name="bulmatricule4" class="java.lang.Integer" calculation="Count">
+	<variable name="bulmatricule4" class="java.lang.Integer" calculation="DistinctCount">
 		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
 	</variable>
 	<variable name="div2" class="java.lang.Integer" calculation="DistinctCount">
@@ -193,25 +193,25 @@
 					<textElement textAlignment="Left"/>
 					<text><![CDATA[NET  A PAYER ]]></text>
 				</staticText>
-				<textField pattern="#,##0.00">
+				<textField>
 					<reportElement x="520" y="100" width="180" height="16" uuid="3050b0a8-90c7-40e8-af64-7abc17ccd94e"/>
-					<textFieldExpression><![CDATA[$V{bulgainsimp3}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulgainsimp3})]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0.00">
+				<textField>
 					<reportElement x="700" y="100" width="220" height="16" uuid="24545095-9e21-41a6-94c8-3b1daf211cbd"/>
-					<textFieldExpression><![CDATA[$V{bulgainsnimp2}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulgainsnimp2})]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0.00">
+				<textField>
 					<reportElement x="920" y="100" width="220" height="16" uuid="d03990f8-9910-4322-b296-e2948d00bb43"/>
-					<textFieldExpression><![CDATA[$V{bulretimp2}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulretimp2})]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0.00">
+				<textField>
 					<reportElement x="1140" y="99" width="215" height="17" uuid="63dcd951-930a-4770-ac13-ffe17483c084"/>
-					<textFieldExpression><![CDATA[$V{bulretnimp2}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulretnimp2})]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0.00">
+				<textField>
 					<reportElement x="1355" y="99" width="225" height="17" uuid="fc02c50f-32bf-4143-b136-0aa635821a4a"/>
-					<textFieldExpression><![CDATA[$V{bulnet2}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulnet2})]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="260" y="119" width="140" height="16" uuid="695d86e5-d7c5-4dfd-8bab-9d9822a1452b"/>
@@ -281,25 +281,25 @@
 					<textElement textAlignment="Left"/>
 					<text><![CDATA[NET  A PAYER ]]></text>
 				</staticText>
-				<textField pattern="#,##0.00">
+				<textField>
 					<reportElement x="520" y="100" width="180" height="16" uuid="bf2a7621-fc3b-46ea-a0e8-6c1386d3b416"/>
-					<textFieldExpression><![CDATA[$V{bulgainsimp4}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulgainsimp4})]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0.00">
+				<textField>
 					<reportElement x="700" y="99" width="220" height="17" uuid="a1702838-81bc-48f1-ad38-7a0fb9a08f89"/>
-					<textFieldExpression><![CDATA[$V{bulgainsnimp3}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulgainsnimp3})]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0.00">
+				<textField>
 					<reportElement x="920" y="99" width="220" height="17" uuid="59355d9a-6a5c-413f-b1d1-0e5d353b4c47"/>
-					<textFieldExpression><![CDATA[$V{bulretimp3}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulretimp3})]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0.00">
+				<textField>
 					<reportElement x="1140" y="99" width="215" height="17" uuid="b2b440bb-1df1-4f83-bac3-29df8d13b3e1"/>
-					<textFieldExpression><![CDATA[$V{bulgainsnimp4}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulgainsnimp4})]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0.00">
+				<textField>
 					<reportElement x="1355" y="99" width="225" height="17" uuid="0cbd1d1b-52b6-4e46-8f43-7b45bf39c149"/>
-					<textFieldExpression><![CDATA[$V{bulnet3}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulnet3})]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="250" y="120" width="170" height="16" uuid="10146640-0d98-4c17-89fc-86a90aa2a5e0"/>
@@ -318,35 +318,35 @@
 		<groupFooter>
 			<band height="114">
 				<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				<textField pattern="#,##0.00">
+				<textField>
 					<reportElement x="540" y="53" width="180" height="19" uuid="34e01230-70bc-435b-b8d5-b2fa05277956">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
-					<textFieldExpression><![CDATA[$V{bulgainsimp1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulgainsimp1})]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0.00">
+				<textField>
 					<reportElement x="720" y="53" width="220" height="19" uuid="788ee468-d058-486d-b9fa-cbd36d0241ae">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
-					<textFieldExpression><![CDATA[$V{bulgainsnimp1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulgainsnimp1})]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0.00">
+				<textField>
 					<reportElement x="940" y="53" width="220" height="20" uuid="dc3a2250-67a1-4650-86b9-72dc1c0ac4c2">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
-					<textFieldExpression><![CDATA[$V{bulretimp1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulretimp1})]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0.00">
+				<textField>
 					<reportElement x="1160" y="53" width="215" height="20" uuid="d94c5e64-e35f-4d1a-872b-bc54cc69dee4">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
-					<textFieldExpression><![CDATA[$V{bulretnimp1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulretnimp1})]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0.00">
+				<textField>
 					<reportElement x="1375" y="53" width="225" height="20" uuid="b1448b02-39c1-42ee-8827-7335803ebe46">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
-					<textFieldExpression><![CDATA[$V{bulnet1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulnet1})]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="40" y="52" width="250" height="16" uuid="5f0969da-449d-4a65-a1af-e87cd29c4c53">
@@ -680,7 +680,7 @@
 				<textElement textAlignment="Left">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{bulnom}==null?" ":"!"+$F{bulnom}.substring( 0, 30 )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{bulnom}==null?" ":"!"+$F{bulnom}.substring( 0, 25 )]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
 				<reportElement x="330" y="0" width="150" height="20" uuid="72ac64bb-1484-4b8a-8bdb-6ddcf6c57c70">
@@ -707,7 +707,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{bulechelle}==null?"":"!"+" "+$F{bulechelle}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" pattern="#,##0.00">
+			<textField textAdjust="StretchHeight">
 				<reportElement x="1429" y="0" width="180" height="20" uuid="c7d9f004-ba41-4c99-9a6c-cfbf3173864a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c05cb4c4-7321-464e-b20b-38a19f892a19"/>
 				</reportElement>
@@ -717,9 +717,9 @@
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{bulnet}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{bulnet})]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" pattern="#,##0.00">
+			<textField textAdjust="StretchHeight">
 				<reportElement x="1289" y="0" width="130" height="20" uuid="c7d9f004-ba41-4c99-9a6c-cfbf3173864a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c05cb4c4-7321-464e-b20b-38a19f892a19"/>
 				</reportElement>
@@ -729,9 +729,9 @@
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{bulretnimp}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{bulretnimp})]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" pattern="#,##0.00">
+			<textField textAdjust="StretchHeight">
 				<reportElement x="1149" y="0" width="130" height="20" uuid="c7d9f004-ba41-4c99-9a6c-cfbf3173864a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c05cb4c4-7321-464e-b20b-38a19f892a19"/>
 				</reportElement>
@@ -741,9 +741,9 @@
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{bulretimp}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.000#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{bulretimp})]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" pattern="#,##0.00">
+			<textField textAdjust="StretchHeight">
 				<reportElement x="1009" y="0" width="130" height="20" uuid="c7d9f004-ba41-4c99-9a6c-cfbf3173864a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c05cb4c4-7321-464e-b20b-38a19f892a19"/>
 				</reportElement>
@@ -753,9 +753,9 @@
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{bulgainsnimp}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{bulgainsnimp})]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" pattern="#,##0.00">
+			<textField textAdjust="StretchHeight">
 				<reportElement x="869" y="0" width="130" height="20" uuid="c7d9f004-ba41-4c99-9a6c-cfbf3173864a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c05cb4c4-7321-464e-b20b-38a19f892a19"/>
 				</reportElement>
@@ -765,7 +765,7 @@
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{bulgainsimp}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.000#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{bulgainsimp})]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
 				<reportElement x="760" y="0" width="100" height="20" uuid="c7d9f004-ba41-4c99-9a6c-cfbf3173864a">
@@ -930,25 +930,25 @@
 				<reportElement x="250" y="90" width="158" height="18" uuid="cefa1879-f608-4941-bf2c-67af94da70a3"/>
 				<textFieldExpression><![CDATA[$V{bulmatricule5}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField>
 				<reportElement x="510" y="70" width="180" height="16" uuid="7ae1a4ee-bea8-4397-b5bf-ed780c523c4d"/>
-				<textFieldExpression><![CDATA[$V{bulgainsimp5}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulgainsimp5})]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField>
 				<reportElement x="690" y="70" width="220" height="16" uuid="42a0bcdd-e914-48f5-8451-b030dce4d0e9"/>
-				<textFieldExpression><![CDATA[$V{bulgainsnimp5}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulgainsnimp5})]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField>
 				<reportElement x="910" y="70" width="220" height="16" uuid="c345fc1a-a7ab-4bac-9027-aca2451acd5d"/>
-				<textFieldExpression><![CDATA[$V{bulretimp4}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulretimp4})]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField>
 				<reportElement x="1130" y="70" width="215" height="16" uuid="568e35f1-2461-432b-8b2f-7ce4bfeccffe"/>
-				<textFieldExpression><![CDATA[$V{bulretnimp3}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulretnimp3})]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField>
 				<reportElement x="1345" y="70" width="225" height="16" uuid="6f58c2aa-51c7-4d0c-9014-f81362a4f0cc"/>
-				<textFieldExpression><![CDATA[$V{bulnet4}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulnet4})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

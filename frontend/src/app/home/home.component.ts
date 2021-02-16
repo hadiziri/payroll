@@ -230,9 +230,9 @@ export class HomeComponent implements OnInit {
       this.homeService.getEtatRecap().subscribe(
         (data) => {
           if(data!=null){
-            console.log(data);
+           
             this.allEtatRecap=data;
-            
+            console.log(this.allEtatRecap);
           }else{
             this.openDialog();
           }
@@ -604,11 +604,15 @@ export class HomeComponent implements OnInit {
       console.log(this.filteredEtatMip)
 
       //filtrer recap
+     
       for(let i=0;i<this.allEtatRecap.length;i++){
         if(codeLike.length==1){
-          if(this.allEtatRecap[i].dir.startsWith(codeLike[0])){
-            this.filteredEtatRecap.push(this.allEtatRecap[i]);
-          }
+    
+        if(this.allEtatRecap[i].dir.startsWith(codeLike[0])){
+          this.filteredEtatRecap.push(this.allEtatRecap[i]);
+        }
+      
+          
         }else{
           for(let j=0;j<codeLike.length;j++){
             if(this.allEtatRecap[i].dir.startsWith(codeLike[j])){
@@ -634,6 +638,7 @@ export class HomeComponent implements OnInit {
           for(let j=0;j<codeLike.length;j++){
             if(this.allEtatRet[i].dir.startsWith(codeLike[j])){
               this.filteredEtatRet.push(this.allEtatRet[i]);
+              
             }
           }
         }
@@ -648,7 +653,7 @@ export class HomeComponent implements OnInit {
      
     }
     isExistCodeNotLike(etatArray:any,codeNotLike:string[]){
-      let test:EtatJournal[]=[];
+      let test: any[]=[];
       if(codeNotLike.length==1){
         for(let i=0;i< etatArray.length;i++){
           if(etatArray[i].dir.startsWith(codeNotLike[0])){
@@ -914,7 +919,7 @@ updateStatusStructure(structure:Structure){
     const dialogRef = this.dialog.open(AlertDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+      //window.location.reload();
     });
   }
 

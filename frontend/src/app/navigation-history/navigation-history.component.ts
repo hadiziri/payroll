@@ -1,6 +1,6 @@
 import { FolderArchive } from './../Models/FolderArchive';
 import { ArchiveStructure } from './../Models/ArchiveStructure';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MbscFormOptions } from '@mobiscroll/angular-lite';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,6 +12,7 @@ import { User } from './../Models/User';
 import { TokenStorageService } from './../auth/token-storage.service';
 import { HistoriqueService } from './../Services/historique.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 export interface FileElement {
   
@@ -48,6 +49,7 @@ export class NavigationHistoryComponent implements OnInit {
   dataSourceEmail: MatTableDataSource<EmailDB> = new MatTableDataSource(this.ELEMENT_DATA);
   dataSourceStructure :MatTableDataSource<ArchiveStructure> = new MatTableDataSource(this.archiveStructure);
   dataSourceFolder:MatTableDataSource<FolderArchive> = new MatTableDataSource(this.archiveFolder);
+  
   formSettings: MbscFormOptions = {
     theme: 'mobiscroll',
     themeVariant: 'light'
@@ -61,7 +63,8 @@ export class NavigationHistoryComponent implements OnInit {
   @ViewChild(MatPaginator) set matPaginator(paginator: MatPaginator) {
     this.dataSourceEmail.paginator = paginator;
   }
-
+ 
+ 
   
   constructor(public dialog: MatDialog,private paramService: ParametreService,private token: TokenStorageService,private historiqueService:HistoriqueService) { }
 
@@ -102,7 +105,6 @@ export class NavigationHistoryComponent implements OnInit {
         }
 
 
-
       },
       (error) => {
         // console.log(error);
@@ -121,7 +123,6 @@ export class NavigationHistoryComponent implements OnInit {
         } else {
           this.openDialog();
         }
-
 
 
       },
@@ -150,7 +151,6 @@ export class NavigationHistoryComponent implements OnInit {
         }
 
 
-
       },
       (error) => {
         // console.log(error);
@@ -172,7 +172,6 @@ export class NavigationHistoryComponent implements OnInit {
         } else {
           this.openDialog();
         }
-
 
 
       },
@@ -221,11 +220,13 @@ export class NavigationHistoryComponent implements OnInit {
          
            console.log(data)
          this.archiveStructure=data;
+         
+       
          this.dataSourceStructure= new MatTableDataSource(this.archiveStructure);
+         
         } else {
           this.openDialog();
         }
-
 
 
       },
@@ -254,11 +255,11 @@ export class NavigationHistoryComponent implements OnInit {
          
            console.log(data)
         this.archiveFolder=data;
+        
          this.dataSourceFolder= new MatTableDataSource(this.archiveFolder);
         } else {
           this.openDialog();
         }
-
 
 
       },
@@ -270,3 +271,5 @@ export class NavigationHistoryComponent implements OnInit {
     )
   }
 }
+
+

@@ -1,5 +1,6 @@
 package com.sonatrach.dz.etatMip.domain;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -10,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name ="PAIE_ETAT_MIP")
-@NamedQuery(name = "EtatMip.findByPayMonth", query = "SELECT p FROM EtatMip  p WHERE moisexp=?1 AND anneeexp=?2 order by divop")
+@NamedQuery(name = "EtatMip.findByPayMonth", query = "SELECT p FROM EtatMip  p WHERE moisexp=?1 AND anneeexp=?2 order by dirdes")
 public class EtatMip {
 	@Id
 	@Column(name="BUL_MATRICULE")
@@ -30,9 +31,13 @@ public class EtatMip {
 	@Column(name="DATE_EFFET")
 	String dateeffet;
 	@Column(name="MONTANT_460")
-	Float montant460;
+	BigDecimal montant460;
 	@Column(name="RAPP_460")
-	Float rapp460;
+	BigDecimal rapp460;
+	@Column(name="DIV_DESIGNATION")
+	String divdes;
+	@Column(name="DIR_DESIGNATION")
+	String dirdes;
 	
 	public EtatMip() {
 		
@@ -102,21 +107,38 @@ public class EtatMip {
 		this.dateeffet = dateeffet;
 	}
 
-	public Float getMontant460() {
+	public BigDecimal getMontant460() {
 		return montant460;
 	}
 
-	public void setMontant460(Float montant460) {
+	public void setMontant460(BigDecimal montant460) {
 		this.montant460 = montant460;
 	}
 
-	public Float getRapp460() {
+	public BigDecimal getRapp460() {
 		return rapp460;
 	}
 
-	public void setRapp460(Float rapp460) {
+	public void setRapp460(BigDecimal rapp460) {
 		this.rapp460 = rapp460;
 	}
+
+	public String getDivdes() {
+		return divdes;
+	}
+
+	public void setDivdes(String divdes) {
+		this.divdes = divdes;
+	}
+
+	public String getDirdes() {
+		return dirdes;
+	}
+
+	public void setDirdes(String dirdes) {
+		this.dirdes = dirdes;
+	}
+
 
 
 	

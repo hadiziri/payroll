@@ -73,6 +73,7 @@ import com.sonatrach.dz.etatMand.repo.EtatMandRepo;
 import com.sonatrach.dz.etatMip.domain.EtatMip;
 import com.sonatrach.dz.etatMip.repo.EtatMipRepo;
 import com.sonatrach.dz.etatRecap.domain.EtatRecap;
+import com.sonatrach.dz.etatRecap.domain.EtatRecap1;
 import com.sonatrach.dz.etatRecap.repo.EtatRecapRepo;
 import com.sonatrach.dz.etatRet.domain.EtatRet;
 import com.sonatrach.dz.etatRet.repo.EtatRetRepo;
@@ -119,6 +120,7 @@ import com.sonatrach.dz.tabstructure.domain.TabStructure;
 import com.sonatrach.dz.tabstructure.repo.TabStructureRepo;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -558,7 +560,7 @@ public class Controller {
 			String date = "01/04/2016";
 			Date sysDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
 			// System.out.println(sysDate);
-			return etatMandRepo.findByPayMonth(sysDate);
+			return etatMandRepo.findByPayMonth();
 		} catch (Exception e) {
 			System.out.println("Exception getEtatJournal()==>" + e.getMessage());
 		}
@@ -589,7 +591,7 @@ public class Controller {
 			String date = "01/04/2016";
 			Date sysDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
 			// System.out.println(sysDate);
-			return etatRecapRepo.findByPayMonth(sysDate);
+			return etatRecapRepo.findByPayMonth();
 		} catch (Exception e) {
 			System.out.println("Exception getEtatJournal()==>" + e.getMessage());
 		}
@@ -740,12 +742,44 @@ public class Controller {
 			if(!fileStructure.exists()) {
 				fileStructure.mkdir();
 			}
-
+			/*List<EtatRecap> mainReportData=new ArrayList();
+			List<EtatRecap1> mainReportDataTotaux=new ArrayList();
+			for(int i=0;i<recap.size();i++) {
+				if(recap.get(i).getReport().equals("0")) {
+					mainReportData.add(recap.get(i));
+				}
+				if(recap.get(i).getReport().equals("1")) {
+					EtatRecap1 recap1 = new EtatRecap1();
+					recap1.setAgtcptanal1(recap.get(i).getAgtcptanal());
+					recap1.setBulmoispaie1(recap.get(i).getBulmoispaie());
+					recap1.setCss1(recap.get(i).getCss());
+					recap1.setDbulcrub1(recap.get(i).getDbulcrub());
+					recap1.setDbuldesignrub1(recap.get(i).getDbuldesignrub());
+					recap1.setDbulimp1(recap.get(i).getDbulimp());
+					recap1.setDbulnature1(recap.get(i).getDbulnature());
+					recap1.setDir1(recap.get(i).getDir());
+					recap1.setDirdes1(recap.get(i).getDirdes());
+					recap1.setDiv1(recap.get(i).getDiv());
+					recap1.setDivdes1(recap.get(i).getDivdes());
+					recap1.setMtbase1(recap.get(i).getMtbase());
+					recap1.setMtrub1(recap.get(i).getMtrub());
+					recap1.setReport1(recap.get(i).getReport());
+					mainReportDataTotaux.add(recap1);
+					
+				}
+			}*/
+			
 			// load file and compile it
 			File file = ResourceUtils.getFile("classpath:etatRecap.jrxml");
+			File file2 = ResourceUtils.getFile("classpath:subReport2.jrxml");
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(recap);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+			Map<String, Object> parameters = new HashMap<>();
+			JasperReport subReport = JasperCompileManager.compileReport(file2.getAbsolutePath());
+			parameters.put("subReport",subReport );
+			//parameters.put("datasource1",mainReportDataTotaux );
+			
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters,  dataSource);
 			 JRTextExporter exporter = new  JRTextExporter();
 			exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 180);
 			exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
@@ -822,7 +856,9 @@ public class Controller {
 			String currentYear = currentDate.getPaymonth().substring(0, 4);
 			String currentMonth = currentDate.getPaymonth().substring(4, 6);
 			String dateFormat = currentYear + "-" + currentMonth;
-
+			//String date="01"+"/"+currentMonth+"/"+currentYear;
+			String date = "01/04/2016";//for test
+			Date sysDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
 			//******************************************get Folder path 
 			Folder folder=folderRepo.findByFolderName("ETAT");
 			// ********************************folder generation if not exist
@@ -848,8 +884,9 @@ public class Controller {
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 			
 			JRBeanCollectionDataSource data = new JRBeanCollectionDataSource(mand);
-			
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, data);
+			Map<String, Object> parameters = new HashMap<>();
+			parameters.put("currenntMonth",sysDate );
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, data);
 			
 			 JRTextExporter exporter = new  JRTextExporter();
 			
@@ -859,7 +896,7 @@ public class Controller {
 			
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 			
-			Object outputFileName = pathWithStructure + "\\" + "MAND"+" "+structure.toString()+ dateFormat + ".SPL";
+			Object outputFileName = pathWithStructure + "\\" + "MAND"+" "+structure.toString()+ " "+ dateFormat + ".SPL";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
 			
 			exporter.exportReport();

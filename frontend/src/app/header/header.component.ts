@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
     this.tokenStorage.signOut();
   
     this.router.navigateByUrl("auth/login");
-    //window.location.reload();
+    window.location.reload();
   }
   showConfirm() {
  

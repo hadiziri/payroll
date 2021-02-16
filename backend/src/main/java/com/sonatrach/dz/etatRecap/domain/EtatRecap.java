@@ -1,13 +1,14 @@
 package com.sonatrach.dz.etatRecap.domain;
 
 import java.io.Serializable;
-
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -16,35 +17,52 @@ import javax.persistence.Table;
 @Entity
 @Table(name ="PAIE_ETAT_RECAP")
 @IdClass(EtatRecapId.class)
-@NamedQuery(name = "EtatRecap.findByPayMonth", query = "SELECT p FROM EtatRecap  p WHERE bulmoispaie=?1 order by div")
-public class EtatRecap implements Serializable {
+@NamedQueries({@NamedQuery(name = "EtatRecap.findByPayMonth", query = "SELECT  p FROM EtatRecap  p order by divdes,dirdes,bulmoispaie,agtcptanal,dbulcrub,report "),
+	@NamedQuery(name = "EtatRecap.findByReport", query = "SELECT  p FROM EtatRecap  p where report=?1 order by divdes,dirdes,bulmoispaie,agtcptanal,dbulcrub,report ")
+})
 
+public class EtatRecap implements Serializable {
+	
 	@Column(name="DIV")
 	String div;
 	@Id
 	@Column(name="DIR")
 	String dir;
+	@Id
 	@Column(name="DBUL_MOIS_PAIE")
 	Date bulmoispaie;
-	
+	@Id
 	@Column(name="AGT_CPTANAL")
 	String agtcptanal;
 	@Id
 	@Column(name="DBUL_CRUB")
 	String dbulcrub;
+	@Id
+	@Column(name="DBUL_RAPPEL")
+	Integer dbulrappel;
+	
+	
 	@Column(name="DBUL_DESIGN_RUB")
 	String dbuldesignrub;
 	@Column(name="DBUL_NATURE")
 	String dbulnature;
 	@Column(name="DBUL_IMP")
-	Float dbulimp;
-	@Column(name="DBUL_RAPPEL")
-	Float dbulrappel;
+	Integer dbulimp;
+
 	@Column(name="MT_BASE")
-	Float mtbase;
+	BigDecimal mtbase;
 	@Column(name="MT_RUB")
-	Float mtrub;
+	BigDecimal mtrub;
+	@Column(name="DIV_DESIGNATION")
+	String divdes;
+	@Column(name="DIR_DESIGNATION")
+	String dirdes;
 	
+	@Column(name="CSS")
+	String css;
+	@Id
+	@Column(name="REPORT")
+	String report;
 	public EtatRecap() {
 		
 	}
@@ -105,37 +123,73 @@ public class EtatRecap implements Serializable {
 		this.dbulnature = dbulnature;
 	}
 
-	public Float getDbulimp() {
+
+
+	public Integer getDbulimp() {
 		return dbulimp;
 	}
 
-	public void setDbulimp(Float dbulimp) {
+	public void setDbulimp(Integer dbulimp) {
 		this.dbulimp = dbulimp;
 	}
 
-	public Float getDbulrappel() {
+	public Integer getDbulrappel() {
 		return dbulrappel;
 	}
 
-	public void setDbulrappel(Float dbulrappel) {
+	public void setDbulrappel(Integer dbulrappel) {
 		this.dbulrappel = dbulrappel;
 	}
 
-	public Float getMtbase() {
+	public BigDecimal getMtbase() {
 		return mtbase;
 	}
 
-	public void setMtbase(Float mtbase) {
+	public void setMtbase(BigDecimal mtbase) {
 		this.mtbase = mtbase;
 	}
 
-	public Float getMtrub() {
+	public BigDecimal getMtrub() {
 		return mtrub;
 	}
 
-	public void setMtrub(Float mtrub) {
+	public void setMtrub(BigDecimal mtrub) {
 		this.mtrub = mtrub;
 	}
+
+	public String getDivdes() {
+		return divdes;
+	}
+
+	public void setDivdes(String divdes) {
+		this.divdes = divdes;
+	}
+
+	public String getDirdes() {
+		return dirdes;
+	}
+
+	public void setDirdes(String dirdes) {
+		this.dirdes = dirdes;
+	}
+
+	public String getCss() {
+		return css;
+	}
+
+	public void setCss(String css) {
+		this.css = css;
+	}
+
+	public String getReport() {
+		return report;
+	}
+
+	public void setReport(String report) {
+		this.report = report;
+	}
+
+
 
 
 	

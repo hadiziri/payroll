@@ -19,5 +19,8 @@ export interface EtatMand {
     dir: String;
 
     bulmatricule: String;
-
+    divdes:String;
+    dirdes:String;
+    bandes:String;
+    agedes:String;
 }

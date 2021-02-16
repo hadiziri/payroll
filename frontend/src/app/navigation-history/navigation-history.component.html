@@ -64,7 +64,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumnsEmail;"></tr>
         </table>
         </div>
-        <mat-paginator [pageSizeOptions]="[5, 10]"></mat-paginator>
+        <mat-paginator matPaginator [pageSizeOptions]="[5, 10]"></mat-paginator>
   <!-- #docregion action-bar -->
       <mat-action-row>
         <button class="btn btn-secondary" id="next_btn" (click)="nextStep()">Suivant</button>
@@ -88,7 +88,6 @@
          
             
             <table mat-table  [dataSource]="dataSourceStructure" matSort class="mat-elevation-z8" style="margin-top: 40px;" >
-
 
                
               <!-- Position Column -->
@@ -141,10 +140,10 @@
   
   
         
-                  <tr mat-header-row *matHeaderRowDef="displayedColumnsStructure"></tr>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsStructure;sticky: true"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumnsStructure;"></tr>
                 </table>
-             
+          
            
               
                 
@@ -171,7 +170,6 @@
       <mat-tab-group mat-align-tabs="center" style="margin-top: 25px;" (selectedTabChange)=" getFolder($event)"  >
         <mat-tab *ngFor="let operation of operationsFolder; let j = index" label="{{operationsFolder[j]}}" >
       <table mat-table  [dataSource]="dataSourceFolder" matSort class="mat-elevation-z8" style="margin-top: 40px;" >
-
 
         <!-- Position Column
         <ng-container matColumnDef="idfolder">
@@ -201,9 +199,10 @@
     
     
     
-        <tr mat-header-row *matHeaderRowDef="displayedColumnsFolder"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsFolder;sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumnsFolder;"></tr>
       </table>
+      
   </mat-tab>
   </mat-tab-group>
       <mat-action-row>
@@ -213,3 +212,4 @@
     </mat-expansion-panel>
   
   </mat-accordion>
+
