@@ -11,6 +11,7 @@ public class EtatRecapId implements Serializable{
 private String dbulcrub;
 private Integer dbulrappel;
 private String report;
+private String css;
 
 
 
@@ -50,6 +51,12 @@ public String getReport() {
 }
 public void setReport(String report) {
 	this.report = report;
+}
+public String getCss() {
+	return css;
+}
+public void setCss(String css) {
+	this.css = css;
 }
 
 

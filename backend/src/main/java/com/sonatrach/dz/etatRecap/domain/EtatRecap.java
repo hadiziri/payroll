@@ -57,7 +57,7 @@ public class EtatRecap implements Serializable {
 	String divdes;
 	@Column(name="DIR_DESIGNATION")
 	String dirdes;
-	
+	@Id
 	@Column(name="CSS")
 	String css;
 	@Id

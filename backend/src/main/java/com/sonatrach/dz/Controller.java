@@ -742,14 +742,14 @@ public class Controller {
 			if(!fileStructure.exists()) {
 				fileStructure.mkdir();
 			}
-			/*List<EtatRecap> mainReportData=new ArrayList();
-			List<EtatRecap1> mainReportDataTotaux=new ArrayList();
-			for(int i=0;i<recap.size();i++) {
+			List<EtatRecap> mainReportData=new ArrayList();
+			List<EtatRecap> mainReportDataTotaux=new ArrayList();
+			for(int i=0;i<2000;i++) {
 				if(recap.get(i).getReport().equals("0")) {
 					mainReportData.add(recap.get(i));
-				}
+				}else  {
 				if(recap.get(i).getReport().equals("1")) {
-					EtatRecap1 recap1 = new EtatRecap1();
+					/*EtatRecap1 recap1 = new EtatRecap1();
 					recap1.setAgtcptanal1(recap.get(i).getAgtcptanal());
 					recap1.setBulmoispaie1(recap.get(i).getBulmoispaie());
 					recap1.setCss1(recap.get(i).getCss());
@@ -764,20 +764,26 @@ public class Controller {
 					recap1.setMtbase1(recap.get(i).getMtbase());
 					recap1.setMtrub1(recap.get(i).getMtrub());
 					recap1.setReport1(recap.get(i).getReport());
-					mainReportDataTotaux.add(recap1);
+					mainReportDataTotaux.add(recap1);*/
+					mainReportDataTotaux.add(recap.get(i));
 					
 				}
-			}*/
-			
+				}
+				
+				
+			}
+			//System.out.println(mainReportData.size());
+	
 			// load file and compile it
 			File file = ResourceUtils.getFile("classpath:etatRecap.jrxml");
-			File file2 = ResourceUtils.getFile("classpath:subReport2.jrxml");
+			File file2 = ResourceUtils.getFile("classpath:subReport.jrxml");
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(recap);
+			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(mainReportData);
+			JRBeanCollectionDataSource dataSource2 = new JRBeanCollectionDataSource(mainReportDataTotaux);
 			Map<String, Object> parameters = new HashMap<>();
 			JasperReport subReport = JasperCompileManager.compileReport(file2.getAbsolutePath());
 			parameters.put("subReport",subReport );
-			//parameters.put("datasource1",mainReportDataTotaux );
+			parameters.put("totaux1",dataSource2 );
 			
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters,  dataSource);
 			 JRTextExporter exporter = new  JRTextExporter();
