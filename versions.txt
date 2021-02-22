@@ -1,3 +1,8 @@
+3.2
+---
+-Génération des 5 états paie
+-Toutes les fonctionnalités marchent 
+---------------------------------------------------------------------------------------------------
 3.1
 ---
 -Génération etat de paie

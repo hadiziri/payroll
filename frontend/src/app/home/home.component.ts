@@ -1,3 +1,4 @@
+import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
 import { EtatRet } from './../Models/EtatRet';
 import { EtatRecap } from './../Models/EtatRecap';
 import { EtatMip } from './../Models/EtatMip';
@@ -86,6 +87,7 @@ export class HomeComponent implements OnInit {
   ret:Boolean=false;
   recap:Boolean=false;
   mip:Boolean=false;
+  
   updatedStructure:Structure={
     "idstructure":0,
     "idactivity":0,
@@ -137,7 +139,8 @@ export class HomeComponent implements OnInit {
       },
       error => {
         console.log(error);
-        alert(error);
+        
+        this.openDialogError(error);
         throw error;
 
       }
@@ -160,7 +163,7 @@ export class HomeComponent implements OnInit {
       },
       error => {
         //console.log(error);
-        alert(error);
+        this.openDialogError(error);
         throw error;
 
       }
@@ -181,7 +184,7 @@ export class HomeComponent implements OnInit {
         },
         error => {
           //console.log(error);
-          alert(error);
+          this.openDialogError(error);
           throw error;
   
         }
@@ -201,7 +204,7 @@ export class HomeComponent implements OnInit {
         },
         error => {
           //console.log(error);
-          alert(error);
+          this.openDialogError(error);
           throw error;
   
         }
@@ -221,7 +224,7 @@ export class HomeComponent implements OnInit {
         },
         error => {
           //console.log(error);
-          alert(error);
+          this.openDialogError(error);
           throw error;
   
         }
@@ -233,6 +236,7 @@ export class HomeComponent implements OnInit {
            
             this.allEtatRecap=data;
             console.log(this.allEtatRecap);
+            this.showSpinner=false;
           }else{
             this.openDialog();
           }
@@ -241,7 +245,7 @@ export class HomeComponent implements OnInit {
         },
         error => {
           //console.log(error);
-          alert(error);
+          this.openDialogError(error);
           throw error;
   
         }
@@ -252,7 +256,7 @@ export class HomeComponent implements OnInit {
           if(data!=null){
             console.log(data);
             this.allEtatRet=data;
-            this.showSpinner=false;
+           
           }else{
             this.openDialog();
           }
@@ -261,7 +265,7 @@ export class HomeComponent implements OnInit {
         },
         error => {
           //console.log(error);
-          alert(error);
+          this.openDialogError(error);
           throw error;
   
         }
@@ -313,7 +317,8 @@ export class HomeComponent implements OnInit {
       },
       error => {
         console.log(error);
-        alert(error);
+        this.openDialogError(error);
+        
         throw error;
 
       }
@@ -342,7 +347,7 @@ export class HomeComponent implements OnInit {
       },
       error => {
         console.log(error);
-        alert(error);
+        this.openDialogError(error);
         throw error;
 
       }
@@ -371,7 +376,7 @@ export class HomeComponent implements OnInit {
       },
       error => {
         console.log(error);
-        alert(error);
+        this.openDialogError(error);
         throw error;
 
       }
@@ -392,7 +397,7 @@ export class HomeComponent implements OnInit {
       },
       error => {
         console.log(error);
-        alert(error);
+        this.openDialogError(error);
         throw error;
 
       }
@@ -415,7 +420,7 @@ export class HomeComponent implements OnInit {
       },
       error => {
         console.log(error);
-        alert(error);
+        this.openDialogError(error);
         throw error;
 
       }
@@ -458,7 +463,7 @@ export class HomeComponent implements OnInit {
       },
       error => {
         console.log(error);
-        alert(error);
+        this.openDialogError(error);
         throw error;
 
       }
@@ -490,7 +495,7 @@ export class HomeComponent implements OnInit {
       },
       error => {
         console.log(error);
-        alert(error);
+        this.openDialogError(error);
         throw error;
 
       }
@@ -638,7 +643,7 @@ export class HomeComponent implements OnInit {
           for(let j=0;j<codeLike.length;j++){
             if(this.allEtatRet[i].dir.startsWith(codeLike[j])){
               this.filteredEtatRet.push(this.allEtatRet[i]);
-              
+
             }
           }
         }
@@ -699,7 +704,7 @@ export class HomeComponent implements OnInit {
           }
           this.efiles.push(efile);
           this.mand=true;
-         // this.saveGeneratedFilesInDB(structure);
+         this.saveGeneratedFilesInDB(structure);
           //this.showAlert("Activation Structure","La structure a bien été activée");
         }else{
           
@@ -710,7 +715,7 @@ export class HomeComponent implements OnInit {
       },
       error => {
         console.log(error);
-        alert(error);
+        this.openDialogError(error);
         throw error;
 
       }
@@ -732,7 +737,7 @@ export class HomeComponent implements OnInit {
           }
           this.efiles.push(efile);
           this.jour=true;
-        //  this.saveGeneratedFilesInDB(structure);
+          this.saveGeneratedFilesInDB(structure);
           //this.showAlert("Activation Structure","La structure a bien été activée");
         }else{
           
@@ -743,7 +748,7 @@ export class HomeComponent implements OnInit {
       },
       error => {
         console.log(error);
-        alert(error);
+        this.openDialogError(error);
         throw error;
 
       }
@@ -767,7 +772,7 @@ export class HomeComponent implements OnInit {
           }
           this.efiles.push(efile);
           this.mip=true;
-         // this.saveGeneratedFilesInDB(structure);
+          this.saveGeneratedFilesInDB(structure);
           //this.showAlert("Activation Structure","La structure a bien été activée");
         }else{
           
@@ -778,7 +783,7 @@ export class HomeComponent implements OnInit {
       },
       error => {
         console.log(error);
-        alert(error);
+        this.openDialogError(error);
         throw error;
 
       }
@@ -802,7 +807,7 @@ export class HomeComponent implements OnInit {
           }
           this.efiles.push(efile);
           this.ret=true;
-         // this.saveGeneratedFilesInDB(structure);
+          this.saveGeneratedFilesInDB(structure);
           //this.showAlert("Activation Structure","La structure a bien été activée");
         }else{
           
@@ -813,7 +818,7 @@ export class HomeComponent implements OnInit {
       },
       error => {
         console.log(error);
-        alert(error);
+        this.openDialogError(error);
         throw error;
 
       }
@@ -837,7 +842,7 @@ export class HomeComponent implements OnInit {
           }
           this.efiles.push(efile);
           this.recap=true;
-         // this.saveGeneratedFilesInDB(structure);
+          this.saveGeneratedFilesInDB(structure);
           //this.showAlert("Activation Structure","La structure a bien été activée");
         }else{
           
@@ -848,7 +853,7 @@ export class HomeComponent implements OnInit {
       },
       error => {
         console.log(error);
-        alert(error);
+        this.openDialogError(error);
         throw error;
 
       }
@@ -876,7 +881,7 @@ this.homeService.saveGeneratedFiles(this.efiles).subscribe(
   },
   error => {
     console.log(error);
-    alert(error);
+    this.openDialogError(error);
     throw error;
 
   }
@@ -903,7 +908,7 @@ updateStatusStructure(structure:Structure){
     },
     error => {
       console.log(error);
-      alert(error);
+      this.openDialogError(error);
       throw error;
   
     }
@@ -919,9 +924,18 @@ updateStatusStructure(structure:Structure){
     const dialogRef = this.dialog.open(AlertDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      //window.location.reload();
+      window.location.reload();
     });
   }
 
-  
+  openDialogError(error:String): void {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '650px',
+      data: {message: error}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
+  }
 }

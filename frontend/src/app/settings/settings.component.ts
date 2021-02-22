@@ -1,3 +1,4 @@
+import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
 import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
 import { TokenStorageService } from './../auth/token-storage.service';
 import { ParametreService } from './../Services/parametre.service';
@@ -100,7 +101,7 @@ this.username=this.token.getUsername();
       },
       error => {
         //console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
 
       }
@@ -129,7 +130,7 @@ this.username=this.token.getUsername();
       },
       error => {
         //console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
 
       }
@@ -151,7 +152,16 @@ this.username=this.token.getUsername();
   openDialog() {
     this.dialog.open(AlertDialogComponent);
   }
+  openDialogError(error:String): void {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '650px',
+      data: {message: error}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
+  }
 
 
 }

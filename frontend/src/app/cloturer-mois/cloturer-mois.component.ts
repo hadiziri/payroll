@@ -1,3 +1,4 @@
+import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
 import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ClotureMoisService } from './../Services/cloture-mois.service';
@@ -59,7 +60,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
       },
       (error) => {
         //console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
       }
 
@@ -83,7 +84,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
       },
       error => {
        // console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
 
       }
@@ -143,7 +144,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
       },
       (error) => {
         //console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
       }
 
@@ -213,7 +214,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
       },
       (error) => {
         //console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
       }
     )
@@ -242,5 +243,14 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
         window.location.reload();
       });
     }
+    openDialogError(error:String): void {
+      const dialogRef = this.dialog.open(ErrorDialogComponent, {
+        width: '650px',
+        data: {message: error}
+      });
   
+      dialogRef.afterClosed().subscribe(result => {
+        window.location.reload();
+      });
+    }
 }

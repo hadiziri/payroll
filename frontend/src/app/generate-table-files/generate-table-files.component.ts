@@ -1,3 +1,4 @@
+import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
 import { HomeService } from './../Services/home.service';
 import { ArchiveSentFiles } from './../Models/ArchiveSentFiles';
 import { EmailDB } from './../Models/EmailDB';
@@ -73,7 +74,7 @@ export class GenerateTableFilesComponent implements OnInit {
       },
       (error) => {
         // console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
       }
 
@@ -95,7 +96,7 @@ export class GenerateTableFilesComponent implements OnInit {
       },
       error => {
         console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
 
       }
@@ -187,7 +188,7 @@ export class GenerateTableFilesComponent implements OnInit {
         },
         error => {
           console.log(error);
-          alert(error);
+           this.openDialogError(error);;
           throw error;
   
         }
@@ -216,7 +217,7 @@ saveEmailDB(){
     },
     error => {
       console.log(error);
-      alert(error);
+       this.openDialogError(error);;
       throw error;
 
     }
@@ -241,7 +242,7 @@ saveArchiveSentFiles(){
     },
     error => {
       console.log(error);
-      alert(error);
+       this.openDialogError(error);;
       throw error;
 
     }
@@ -267,5 +268,15 @@ saveArchiveSentFiles(){
         });
       
      
+    }
+    openDialogError(error:String): void {
+      const dialogRef = this.dialog.open(ErrorDialogComponent, {
+        width: '650px',
+        data: {message: error}
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        window.location.reload();
+      });
     }
 }

@@ -1,3 +1,4 @@
+import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
 import { UpdateStorageSettingsComponent } from './../update-storage-settings/update-storage-settings.component';
 import { FolderArchive } from './../Models/FolderArchive';
 import { User } from './../Models/User';
@@ -107,7 +108,7 @@ export class StorageSettingsComponent implements OnInit {
       },
       error => {
         //console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
       }
 
@@ -128,7 +129,7 @@ export class StorageSettingsComponent implements OnInit {
       },
       (error) => {
         // console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
       }
 
@@ -187,7 +188,7 @@ export class StorageSettingsComponent implements OnInit {
           },
           error => {
             //console.log(error);
-            alert(error);
+             this.openDialogError(error);;
             throw error;
           }
 
@@ -241,7 +242,7 @@ export class StorageSettingsComponent implements OnInit {
           },
           error => {
             console.log(error);
-            alert(error);
+             this.openDialogError(error);;
             throw error;
           }
 
@@ -260,7 +261,7 @@ export class StorageSettingsComponent implements OnInit {
           },
           error => {
             //console.log(error);
-            alert(error);
+             this.openDialogError(error);;
             throw error;
           }
         );
@@ -284,6 +285,16 @@ export class StorageSettingsComponent implements OnInit {
 
   addNewFolder(){
     this.router.navigateByUrl("addNewFolder");
+  }
+  openDialogError(error:String): void {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '650px',
+      data: {message: error}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
   }
 }
 

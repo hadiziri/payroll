@@ -1,3 +1,4 @@
+import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
 import { FileTypeToFolder } from './../Models/FileTypeToFolder';
 import { FolderArchive } from './../Models/FolderArchive';
 import { Folder } from './../Models/Folder';
@@ -87,7 +88,7 @@ export class AddStorageSettingsComponent implements OnInit {
        },
        error => {
          //console.log(error);
-         alert(error);
+          this.openDialogError(error);;
          throw error;
        }
  
@@ -109,7 +110,7 @@ export class AddStorageSettingsComponent implements OnInit {
         },
         error => {
           // console.log(error);
-          alert(error);
+           this.openDialogError(error);;
           throw error;
   
         }
@@ -183,7 +184,7 @@ export class AddStorageSettingsComponent implements OnInit {
         },
         error => {
           // console.log(error);
-          alert(error);
+           this.openDialogError(error);;
           throw error;
   
         }
@@ -223,7 +224,7 @@ saveFilesToFolder(files:Array<FileTypeToFolder>){
     },
     error => {
       // console.log(error);
-      alert(error);
+       this.openDialogError(error);;
       throw error;
 
     }
@@ -251,7 +252,7 @@ saveAddedFolderArchive(archiveFolder:FolderArchive){
     },
     error => {
       // console.log(error);
-      alert(error);
+       this.openDialogError(error);;
       throw error;
 
     }
@@ -274,5 +275,15 @@ saveAddedFolderArchive(archiveFolder:FolderArchive){
    
   
  
+}
+openDialogError(error:String): void {
+  const dialogRef = this.dialog.open(ErrorDialogComponent, {
+    width: '650px',
+    data: {message: error}
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    window.location.reload();
+  });
 }
 }

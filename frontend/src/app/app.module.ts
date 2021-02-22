@@ -54,6 +54,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { UpdateStorageSettingsComponent } from './update-storage-settings/update-storage-settings.component';
 import { AddStorageSettingsComponent } from './add-storage-settings/add-storage-settings.component';
 import { NavigationHistoryComponent } from './navigation-history/navigation-history.component';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+
 
 
 
@@ -66,9 +68,9 @@ import { NavigationHistoryComponent } from './navigation-history/navigation-hist
   declarations: [
     AppComponent,
     FilesGeneratorComponent,AddStructureComponent,DeleteStructureComponent,UpdateStructureComponent,ErrorComponent,HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, SettingsComponent, FileToPrintSettingsComponent,  StorageSettingsComponent, CloturePaieComponent, CloturerMoisComponent, 
-    AlertDialogComponent, GenerateTableFilesComponent, UpdateStorageSettingsComponent, AddStorageSettingsComponent, NavigationHistoryComponent
+    AlertDialogComponent, GenerateTableFilesComponent, UpdateStorageSettingsComponent, AddStorageSettingsComponent, NavigationHistoryComponent, ErrorDialogComponent
   ],
-  entryComponents: [AlertDialogComponent,UpdateStorageSettingsComponent],
+  entryComponents: [AlertDialogComponent,UpdateStorageSettingsComponent,ErrorDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

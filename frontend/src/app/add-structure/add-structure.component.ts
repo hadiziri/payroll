@@ -1,3 +1,4 @@
+import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
 import { MbscFormOptions, mobiscroll } from '@mobiscroll/angular-lite';
@@ -86,7 +87,7 @@ export class AddStructureComponent implements OnInit {
       },
       error => {
         //console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
       }
     );
@@ -105,7 +106,7 @@ export class AddStructureComponent implements OnInit {
       },
       error => {
         //console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
       }
 
@@ -152,7 +153,7 @@ export class AddStructureComponent implements OnInit {
       },
       error => {
         //console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
       }
 
@@ -178,7 +179,7 @@ export class AddStructureComponent implements OnInit {
       },
       error => {
         //console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
       }
 
@@ -204,6 +205,16 @@ export class AddStructureComponent implements OnInit {
   }
   openDialog() {
     const dialogRef = this.dialog.open(AlertDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
+  }
+  openDialogError(error:String): void {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '650px',
+      data: {message: error}
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       window.location.reload();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="text_output" pageWidth="1600" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9a0b1db2-1ed0-44e1-960b-4626cea0097d">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="text_output" pageWidth="1600" pageHeight="1000" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9a0b1db2-1ed0-44e1-960b-4626cea0097d">
 	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 	<parameter name="mois" class="java.util.Date"/>
 	<parameter name="page" class="java.lang.Integer"/>
@@ -41,13 +41,11 @@ $F{mtrub}:0)
 	<variable name="retNimp" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDiv" calculation="Sum">
 		<variableExpression><![CDATA[$F{dbulnature}.equals( "R" )?
 ($F{dbulimp}==0?
-$F{mtrub}:0):0
-]]></variableExpression>
+$F{mtrub}:0):0]]></variableExpression>
 	</variable>
 	<variable name="chargeEmp" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDiv" calculation="Sum">
 		<variableExpression><![CDATA[$F{dbulnature}.equals( "C" )?
-$F{mtrub}:0
-]]></variableExpression>
+$F{mtrub}:0]]></variableExpression>
 	</variable>
 	<group name="grpDiv" isStartNewColumn="true">
 		<groupExpression><![CDATA[]]></groupExpression>
@@ -160,18 +158,18 @@ $F{mtrub}:0
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[(  new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("01") ? "Janvier" : 
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("02") ? "Février" :
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("03") ? "Mars" :
-        new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("04") ? "Avril" :
-        new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("05") ? "Mai" :
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("06") ? "Juin" :
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("07") ? "Juillet" :
-        new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("08") ? "Aout" :
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("09") ? "Septembre" :
-        new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("10") ? "Octobre" : 
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("11") ? "Novembre" : "Decembre"
-    )+" "+new SimpleDateFormat("yyyy").format($F{bulmoispaie})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[(  new SimpleDateFormat("MM").format($P{mois}).equals("01") ? "Janvier" : 
+         new SimpleDateFormat("MM").format($P{mois}).equals("02") ? "Février" :
+         new SimpleDateFormat("MM").format($P{mois}).equals("03") ? "Mars" :
+        new SimpleDateFormat("MM").format($P{mois}).equals("04") ? "Avril" :
+        new SimpleDateFormat("MM").format($P{mois}).equals("05") ? "Mai" :
+         new SimpleDateFormat("MM").format($P{mois}).equals("06") ? "Juin" :
+         new SimpleDateFormat("MM").format($P{mois}).equals("07") ? "Juillet" :
+        new SimpleDateFormat("MM").format($P{mois}).equals("08") ? "Aout" :
+         new SimpleDateFormat("MM").format($P{mois}).equals("09") ? "Septembre" :
+        new SimpleDateFormat("MM").format($P{mois}).equals("10") ? "Octobre" : 
+         new SimpleDateFormat("MM").format($P{mois}).equals("11") ? "Novembre" : "Decembre"
+    )+" "+new SimpleDateFormat("yyyy").format($P{mois})]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

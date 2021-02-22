@@ -1,3 +1,4 @@
+import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
 import { stringify } from '@angular/compiler/src/util';
@@ -107,7 +108,7 @@ export class UpdateStructureComponent implements OnInit {
   },
   error => {
    // console.log(error);
-    alert(error);
+     this.openDialogError(error);;
     throw error;
   }
 );
@@ -128,7 +129,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
   },
   error=>{
    // console.log(error);
-    alert(error);
+     this.openDialogError(error);;
     throw error;
   }
 
@@ -185,7 +186,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
          },
          error=>{
           // console.log(error);
-           alert(error);
+            this.openDialogError(error);;
            throw error;
          }
    
@@ -208,7 +209,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
          },
          error=>{
            //console.log(error);
-           alert(error);
+            this.openDialogError(error);;
            throw error;
          }
    
@@ -240,5 +241,14 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
       window.location.reload();
     });
   }
+  openDialogError(error:String): void {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '650px',
+      data: {message: error}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
+  }
 }

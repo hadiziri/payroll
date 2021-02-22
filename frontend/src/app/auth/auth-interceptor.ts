@@ -39,7 +39,7 @@ export class AuthInterceptor implements HttpInterceptor {
                         return throwError(error.status +": Le serveur ne repond pas.\nVeuillez actualiser la page ou bien contacter l'administrateur.");
                       }else{
                        
-                        return throwError("Erreur.Veuillez actualiser la page ou bien contacter l'administrateur.\n"+error.message);
+                        return throwError("Veuillez actualiser la page ou bien contacter l'administrateur.\n");
                       }
                   
                   }

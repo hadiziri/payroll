@@ -1,3 +1,4 @@
+import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
 import { FolderArchive } from './../Models/FolderArchive';
 import { ArchiveStructure } from './../Models/ArchiveStructure';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -85,7 +86,7 @@ export class NavigationHistoryComponent implements OnInit {
        },
        error => {
          //console.log(error);
-         alert(error);
+          this.openDialogError(error);;
          throw error;
        }
  
@@ -108,7 +109,7 @@ export class NavigationHistoryComponent implements OnInit {
       },
       (error) => {
         // console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
       }
     );
@@ -128,7 +129,7 @@ export class NavigationHistoryComponent implements OnInit {
       },
       (error) => {
         // console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
       }
     )
@@ -154,7 +155,7 @@ export class NavigationHistoryComponent implements OnInit {
       },
       (error) => {
         // console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
       }
 
@@ -177,7 +178,7 @@ export class NavigationHistoryComponent implements OnInit {
       },
       (error) => {
         // console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
       }
     )
@@ -232,7 +233,7 @@ export class NavigationHistoryComponent implements OnInit {
       },
       (error) => {
         // console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
       }
     )
@@ -265,10 +266,20 @@ export class NavigationHistoryComponent implements OnInit {
       },
       (error) => {
         // console.log(error);
-        alert(error);
+         this.openDialogError(error);;
         throw error;
       }
     )
+  }
+  openDialogError(error:String): void {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      width: '650px',
+      data: {message: error}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
   }
 }
 
