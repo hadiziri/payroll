@@ -18,12 +18,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Date;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -72,6 +74,8 @@ import com.sonatrach.dz.etatMand.domain.EtatMand;
 import com.sonatrach.dz.etatMand.repo.EtatMandRepo;
 import com.sonatrach.dz.etatMip.domain.EtatMip;
 import com.sonatrach.dz.etatMip.repo.EtatMipRepo;
+import com.sonatrach.dz.etatRecap.domain.DbulcrubSorter;
+import com.sonatrach.dz.etatRecap.domain.DivSorter;
 import com.sonatrach.dz.etatRecap.domain.EtatRecap;
 import com.sonatrach.dz.etatRecap.domain.EtatRecap1;
 import com.sonatrach.dz.etatRecap.repo.EtatRecapRepo;
@@ -120,6 +124,7 @@ import com.sonatrach.dz.tabstructure.domain.TabStructure;
 import com.sonatrach.dz.tabstructure.repo.TabStructureRepo;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
+import io.jsonwebtoken.lang.Collections;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
@@ -743,11 +748,18 @@ public class Controller {
 				fileStructure.mkdir();
 			}
 			List<EtatRecap> mainReportData=new ArrayList();
-			List<EtatRecap> mainReportDataTotaux=new ArrayList();
-			for(int i=0;i<2000;i++) {
+			List<EtatRecap> mainReportDataTotaux=new ArrayList();//first subreport (calcul base cotisation totaux analytique)
+			List<EtatRecap> subReportMonthData=new ArrayList();
+			List<EtatRecap> subReportMonthCssData=new ArrayList();
+			List<EtatRecap> subReportDirData=new ArrayList();
+			List<EtatRecap> subReportDirCssData=new ArrayList();
+			List<EtatRecap> subReportDivData=new ArrayList ();
+			List<EtatRecap> subReportDivCssData=new ArrayList();
+			for(int i=0;i<recap.size();i++) {
 				if(recap.get(i).getReport().equals("0")) {
 					mainReportData.add(recap.get(i));
-				}else  {
+					subReportDivData.add(recap.get(i));
+				}
 				if(recap.get(i).getReport().equals("1")) {
 					/*EtatRecap1 recap1 = new EtatRecap1();
 					recap1.setAgtcptanal1(recap.get(i).getAgtcptanal());
@@ -766,25 +778,160 @@ public class Controller {
 					recap1.setReport1(recap.get(i).getReport());
 					mainReportDataTotaux.add(recap1);*/
 					mainReportDataTotaux.add(recap.get(i));
+					subReportDivCssData.add(recap.get(i));
 					
 				}
+				if(recap.get(i).getReport().equals("2")) {
+					subReportMonthData.add(recap.get(i));
 				}
+				if(recap.get(i).getReport().equals("3")) {
+					subReportMonthCssData.add(recap.get(i));
+						
+				}
+				if(recap.get(i).getReport().equals("4")) {
+					subReportDirData.add(recap.get(i));
+		
+					
+				
+						
+				}
+				if(recap.get(i).getReport().equals("5")) {
+					subReportDirCssData.add(recap.get(i));
+					
+						
+				}
+				/*if(recap.get(i).getReport().equals("6")) {
+					subReportDivData.add(recap.get(i));
+						
+				}
+				if(recap.get(i).getReport().equals("7")) {
+					subReportDivCssData.add(recap.get(i));
+						
+				}*/
+				
+				
 				
 				
 			}
-			//System.out.println(mainReportData.size());
+			//transform div data without css and sort by div
+			 List<EtatRecap> transform = subReportDivData.stream().collect(
+					 Collectors.groupingBy(foo ->getGroupingByKey(foo))) 
+					 .entrySet().stream()
+			            .map(e -> e.getValue().stream()
+			                .reduce((f1,f2) -> new EtatRecap(f1.getDiv(),f1.getDir(),f1.getBulmoispaie(),f1.getAgtcptanal(),f1.getDbulcrub(),f1.getDbulrappel(),f1.getDbuldesignrub(),
+			                		f1.getDbulnature(),f1.getDbulimp(),f1.getMtbase().add(f2.getMtbase()),f1.getMtrub().add(f2.getMtrub()) ,f1.getDivdes(),f1.getDirdes(),f1.getCss(),f1.getReport()
+			                		)))
+			                .map(f -> f.get())
+			                .collect(Collectors.toList());
+			 
+			 
+			 java.util.Collections.sort(transform,new DivSorter() );   
+			//transform div data with css and sort by div
+			 List<EtatRecap> transform2 = subReportDivCssData.stream().collect(
+					 Collectors.groupingBy(foo ->getGroupingByKey(foo))) 
+					 .entrySet().stream()
+			            .map(e -> e.getValue().stream()
+			                .reduce((f1,f2) -> new EtatRecap(f1.getDiv(),f1.getDir(),f1.getBulmoispaie(),f1.getAgtcptanal(),f1.getDbulcrub(),f1.getDbulrappel(),f1.getDbuldesignrub(),
+			                		f1.getDbulnature(),f1.getDbulimp(),f1.getMtbase().add(f2.getMtbase()),f1.getMtrub().add(f2.getMtrub()) ,f1.getDivdes(),f1.getDirdes(),f1.getCss(),f1.getReport())))
+			                .map(f -> f.get())
+			                .collect(Collectors.toList());
+			 
+			 
+			 java.util.Collections.sort(transform2,new DivSorter() );  
+			//transform entreprise data without css and sort by crub
+			 List<EtatRecap> entreprise = subReportDivData.stream().collect(
+					 Collectors.groupingBy(foo ->getGroupingByKey2(foo))) 
+					 .entrySet().stream()
+			            .map(e -> e.getValue().stream()
+			                .reduce((f1,f2) -> new EtatRecap(f1.getDiv(),f1.getDir(),f1.getBulmoispaie(),f1.getAgtcptanal(),f1.getDbulcrub(),f1.getDbulrappel(),f1.getDbuldesignrub(),
+			                		f1.getDbulnature(),f1.getDbulimp(),f1.getMtbase().add(f2.getMtbase()),f1.getMtrub().add(f2.getMtrub()) ,f1.getDivdes(),f1.getDirdes(),f1.getCss(),f1.getReport()
+			                		)))
+			                .map(f -> f.get())
+			                .collect(Collectors.toList());
+			 
+			 java.util.Collections.sort(entreprise,new DbulcrubSorter() );  
+			 //j'ai pas besoin d'utiliser le group by jasper s'occupe de calculer les sommes
+			/* List<EtatRecap> entrepriseCss = subReportDivCssData.stream().collect(
+					 Collectors.groupingBy(foo ->getGroupingByKey3(foo))) 
+					 .entrySet().stream()
+			            .map(e -> e.getValue().stream()
+			                .reduce((f1,f2) -> new EtatRecap(f1.getDiv(),f1.getDir(),f1.getBulmoispaie(),f1.getAgtcptanal(),f1.getDbulcrub(),f1.getDbulrappel(),f1.getDbuldesignrub(),
+			                		f1.getDbulnature(),f1.getDbulimp(),f1.getMtbase().add(f2.getMtbase()),f1.getMtrub().add(f2.getMtrub()) ,f1.getDivdes(),f1.getDirdes(),f1.getCss(),f1.getReport()
+			                		)))
+			                .map(f -> f.get())
+			                .collect(Collectors.toList());
+			 
+			 java.util.Collections.sort(entrepriseCss,new DbulcrubSorter() );  
+			//transform  entreprise data with css and sort by div
+			 
+			System.out.println(entrepriseCss.size());
+			for(int i=0;i<entrepriseCss.size();i++) {
+				System.out.println(entrepriseCss.get(i).getDbulcrub()+"         "+entrepriseCss.get(i).getCss()+"      "+entrepriseCss.get(i).getMtbase()+"           "+entrepriseCss.get(i).getMtrub());
+			}
+			//System.out.println(subReportDivCssData.size());*/
+			 
+
 	
 			// load file and compile it
+			//get path files
 			File file = ResourceUtils.getFile("classpath:etatRecap.jrxml");
 			File file2 = ResourceUtils.getFile("classpath:subReport.jrxml");
+			File fileMonth=ResourceUtils.getFile("classpath:subReportMonth.jrxml");
+			File fileMonthCss=ResourceUtils.getFile("classpath:subReportMonthCss.jrxml");
+			File fileDir=ResourceUtils.getFile("classpath:subReportDir.jrxml");
+			File fileDirCss=ResourceUtils.getFile("classpath:subReportDirCss.jrxml");
+			File fileDiv=ResourceUtils.getFile("classpath:subReportDiv.jrxml");
+			File fileDivCss=ResourceUtils.getFile("classpath:subReportDivCss.jrxml");
+			File fileEntreprise=ResourceUtils.getFile("classpath:subReportEntreprise.jrxml");
+			File fileEntrepriseCss=ResourceUtils.getFile("classpath:subReportEntrepriseCss.jrxml");
+			
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+			JasperReport subReport = JasperCompileManager.compileReport(file2.getAbsolutePath());
+			JasperReport subReportMonth = JasperCompileManager.compileReport(fileMonth.getAbsolutePath());
+			JasperReport subReportMonthCss = JasperCompileManager.compileReport(fileMonthCss.getAbsolutePath());
+			JasperReport subReportDir= JasperCompileManager.compileReport(fileDir.getAbsolutePath());
+			JasperReport subReportDirCss= JasperCompileManager.compileReport(fileDirCss.getAbsolutePath());
+			JasperReport subReportDiv= JasperCompileManager.compileReport(fileDiv.getAbsolutePath());
+			JasperReport subReportDivCss= JasperCompileManager.compileReport(fileDivCss.getAbsolutePath());
+			JasperReport subReportEntreprise= JasperCompileManager.compileReport(fileEntreprise.getAbsolutePath());
+			JasperReport subReportEntrepriseCss= JasperCompileManager.compileReport(fileEntrepriseCss.getAbsolutePath());
+			
+			//get data source for files
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(mainReportData);
 			JRBeanCollectionDataSource dataSource2 = new JRBeanCollectionDataSource(mainReportDataTotaux);
+			JRBeanCollectionDataSource dataSourceMonth = new JRBeanCollectionDataSource(subReportMonthData);
+			JRBeanCollectionDataSource dataSourceMonthCss = new JRBeanCollectionDataSource(subReportMonthCssData);
+			JRBeanCollectionDataSource dataSourceDir = new JRBeanCollectionDataSource(subReportDirData);
+			JRBeanCollectionDataSource dataSourceDirCss = new JRBeanCollectionDataSource(subReportDirCssData);
+			JRBeanCollectionDataSource dataSourceDiv = new JRBeanCollectionDataSource(transform);
+			JRBeanCollectionDataSource dataSourceDivCss = new JRBeanCollectionDataSource(transform2);
+			JRBeanCollectionDataSource dataSourceEntreprise = new JRBeanCollectionDataSource(entreprise);
+			//JRBeanCollectionDataSource dataSourceEntrepriseCss = new JRBeanCollectionDataSource(entrepriseCss);
+			JRBeanCollectionDataSource dataSourceEntrepriseCss = new JRBeanCollectionDataSource(subReportDivCssData);
+	
+			//parameters to send 
 			Map<String, Object> parameters = new HashMap<>();
-			JasperReport subReport = JasperCompileManager.compileReport(file2.getAbsolutePath());
 			parameters.put("subReport",subReport );
+			parameters.put("subReportMonth",subReportMonth );
 			parameters.put("totaux1",dataSource2 );
+			parameters.put("dataSourceMonth", dataSourceMonth);
+			parameters.put("subReportMonthCss",subReportMonthCss );
+			parameters.put("dataSourceMonthCss", dataSourceMonthCss);
+			parameters.put("subReportDir",subReportDir );
+			parameters.put("dataSourceDir", dataSourceDir);
+			parameters.put("subReportDirCss",subReportDirCss );
+			parameters.put("dataSourceDirCss", dataSourceDirCss);
+			parameters.put("subReportDivCss",subReportDivCss );
+			parameters.put("dataSourceDivCss", dataSourceDivCss);
+			parameters.put("subReportDiv",subReportDiv );
+			parameters.put("dataSourceDiv", dataSourceDiv);
+			parameters.put("subReportEntreprise",subReportEntreprise );
+			parameters.put("dataSourceEntreprise", dataSourceEntreprise);
+			parameters.put("subReportEntrepriseCss",subReportEntrepriseCss );
+			parameters.put("dataSourceEntrepriseCss", dataSourceEntrepriseCss);
 			
+			
+			//fill main report and sub reports by sending data with parameter and export the report
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters,  dataSource);
 			 JRTextExporter exporter = new  JRTextExporter();
 			exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 180);
@@ -801,6 +948,16 @@ public class Controller {
 		}
 		return null;
 	}
+	private String getGroupingByKey(EtatRecap p){
+		return p.getDiv()+p.getDbulcrub()+p.getDbulrappel();
+		}
+	private String getGroupingByKey2(EtatRecap p){
+		return p.getDbulcrub()+p.getDbulrappel();
+		}
+	private String getGroupingByKey3(EtatRecap p){
+		return p.getDbulcrub()+p.getCss();
+		}
+
 	@PostMapping({ "generateRet" })
 	public List<EtatRet> generateRet(@RequestBody List<EtatRet> ret,@RequestParam String structure) {
 		try {

@@ -1,15 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="etatRecap" pageWidth="2200" pageHeight="970" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="4c233b78-b328-4b8e-9812-f441c15bb481">
-	<parameter name="listOfStuff" class="java.util.List" isForPrompting="false">
-		<defaultValueExpression><![CDATA[Arrays.asList(new String[]{"100","147","516"})]]></defaultValueExpression>
-	</parameter>
 	<parameter name="subReport" class="net.sf.jasperreports.engine.JasperReport">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 		<defaultValueExpression><![CDATA[$P{subReport}]]></defaultValueExpression>
 	</parameter>
 	<parameter name="totaux1" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
-	<parameter name="JasperCustomSubReportLocation" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="dataSourceMonth" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="subReportMonth" class="net.sf.jasperreports.engine.JasperReport">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{subReportMonth}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataSourceMonthCss" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="subReportMonthCss" class="net.sf.jasperreports.engine.JasperReport">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{subReportMonthCss}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataSourceDir" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="subReportDir" class="net.sf.jasperreports.engine.JasperReport">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{subReportDir}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataSourceDirCss" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="subReportDirCss" class="net.sf.jasperreports.engine.JasperReport">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{subReportDirCss}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataSourceDiv" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="subReportDiv" class="net.sf.jasperreports.engine.JasperReport">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{subReportDiv}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataSourceDivCss" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="subReportDivCss" class="net.sf.jasperreports.engine.JasperReport">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{subReportDivCss}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subReportEntrepriseCss" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="dataSourceEntrepriseCss" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="subReportEntreprise" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="dataSourceEntreprise" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<field name="dbulcrub" class="java.lang.String"/>
 	<field name="dbuldesignrub" class="java.lang.String"/>
 	<field name="mtbase" class="java.math.BigDecimal"/>
@@ -49,90 +79,126 @@ $F{mtrub}:0):0]]></variableExpression>
 		<variableExpression><![CDATA[$F{dbulnature}.equals( "C" )?
 $F{mtrub}:0]]></variableExpression>
 	</variable>
-	<variable name="cotisation" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeCPTE" calculation="Sum">
-		<variableExpression><![CDATA[$F{css}.equals( "1" )?
-$F{dbulcrub}.equals( "300") ? $F{mtrub}:0:0]]></variableExpression>
-	</variable>
-	<variable name="GainNonCotis" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeCPTE" calculation="Sum">
-		<variableExpression><![CDATA[$F{dbulcrub}.equals( "134" ) || $F{dbulcrub}.equals( "143" ) || $F{dbulcrub}.equals( "147" )?
-$F{mtrub}:0]]></variableExpression>
-	</variable>
-	<variable name="GainImpMoisParRub" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeMois" calculation="Sum">
-		<variableExpression><![CDATA[$F{dbulnature}.equals( "G" )?
-($F{dbulimp}==1?
-($F{dbulcrub}.equals( "100" )?
-$F{mtrub}:0):0):0]]></variableExpression>
-	</variable>
-	<variable name="codeRub" class="java.lang.Integer" resetType="Group" resetGroup="grpeMois" calculation="DistinctCount">
-		<variableExpression><![CDATA[$F{dbulcrub}]]></variableExpression>
-	</variable>
-	<variable name="listCodeRub" class="java.lang.String" resetType="None" calculation="DistinctCount">
-		<variableExpression><![CDATA[($V{listCodeRub}==null?
- $F{dbulcrub}+"/":$V{listCodeRub}+ $F{dbulcrub}+"/")]]></variableExpression>
-	</variable>
-	<variable name="test" class="java.lang.String" resetType="Group" resetGroup="grpeCPTE">
-		<variableExpression><![CDATA[$F{report}.equals( "1" )?$F{div}+$F{dir}+$F{bulmoispaie}+$F{agtcptanal}:""]]></variableExpression>
-	</variable>
-	<variable name="grpeCpteAnalExist" class="java.lang.Integer" resetType="Group" resetGroup="grpeMois">
-		<variableExpression><![CDATA[$F{dbulcrub}]]></variableExpression>
-		<initialValueExpression><![CDATA[0]]></initialValueExpression>
-	</variable>
-	<variable name="cotisation2" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeCPTE" calculation="Sum">
-		<variableExpression><![CDATA[$F{css}.equals( "2" )?
-$F{dbulcrub}.equals( "300") ? $F{mtrub}:0:0]]></variableExpression>
-	</variable>
-	<variable name="cotisation3" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeCPTE" calculation="Sum">
-		<variableExpression><![CDATA[$F{css}.equals( "3" )?
-$F{dbulcrub}.equals( "300") ? $F{mtrub}:0:0]]></variableExpression>
-	</variable>
-	<variable name="test2" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeCPTE">
-		<variableExpression><![CDATA[$F{report}.equals( "1")?
-(new String($F{div}+$F{dir}+$F{bulmoispaie}+$F{agtcptanal}).equals( $V{test} )?
-	$F{mtrub}:0
-):0]]></variableExpression>
-	</variable>
 	<group name="grpeDiv" isStartNewColumn="true">
 		<groupExpression><![CDATA[$F{divdes}]]></groupExpression>
 		<groupFooter>
-			<band height="85">
-				<staticText>
-					<reportElement x="560" y="30" width="298" height="30" uuid="7768b2ae-5409-4be0-9fd0-0a77819f44e8"/>
-					<text><![CDATA[fin div]]></text>
-				</staticText>
-				<break>
-					<reportElement x="0" y="10" width="1579" height="1" uuid="04e5d736-6493-4068-bc7c-8b41f35cc607"/>
-				</break>
+			<band height="155">
+				<subreport>
+					<reportElement x="-12" y="24" width="1602" height="116" uuid="ff99a168-7aa8-4535-ae54-9829d6f5bdb1"/>
+					<subreportParameter name="div">
+						<subreportParameterExpression><![CDATA[$F{div}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="divdes">
+						<subreportParameterExpression><![CDATA[$F{divdes}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="dirdes">
+						<subreportParameterExpression><![CDATA[$F{dirdes}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="subReportDivCss">
+						<subreportParameterExpression><![CDATA[$P{subReportDivCss}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="dataSourceDivCss">
+						<subreportParameterExpression><![CDATA[$P{dataSourceDivCss}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="mois">
+						<subreportParameterExpression><![CDATA[$F{bulmoispaie}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="page">
+						<subreportParameterExpression><![CDATA[$V{PAGE_NUMBER}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{dataSourceDiv}.getData())]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{subReportDiv}]]></subreportExpression>
+				</subreport>
 			</band>
 		</groupFooter>
 	</group>
 	<group name="grpeDir" isStartNewColumn="true">
 		<groupExpression><![CDATA[$F{divdes}+$F{dirdes}]]></groupExpression>
 		<groupFooter>
-			<band height="101">
-				<staticText>
-					<reportElement x="556" y="50" width="298" height="30" uuid="cc3b193f-e09b-4508-9673-4c85c637e0fc"/>
-					<text><![CDATA[fin dir]]></text>
-				</staticText>
+			<band height="156">
 				<break>
-					<reportElement x="0" y="10" width="1579" height="1" uuid="31faf6cc-4240-4d1e-9813-eee336ba4d14"/>
+					<reportElement x="0" y="0" width="1578" height="1" uuid="31faf6cc-4240-4d1e-9813-eee336ba4d14"/>
 				</break>
+				<break>
+					<reportElement x="0" y="155" width="1578" height="1" uuid="04e5d736-6493-4068-bc7c-8b41f35cc607"/>
+				</break>
+				<subreport>
+					<reportElement x="-12" y="24" width="1602" height="116" uuid="7037fec5-7a96-4777-8fae-098659d20060"/>
+					<subreportParameter name="div">
+						<subreportParameterExpression><![CDATA[$F{div}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="dir">
+						<subreportParameterExpression><![CDATA[$F{dir}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="divdes">
+						<subreportParameterExpression><![CDATA[$F{divdes}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="dirdes">
+						<subreportParameterExpression><![CDATA[$F{dirdes}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="subReportDirCss">
+						<subreportParameterExpression><![CDATA[$P{subReportDirCss}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="dataSourceDirCss">
+						<subreportParameterExpression><![CDATA[$P{dataSourceDirCss}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="mois">
+						<subreportParameterExpression><![CDATA[$F{bulmoispaie}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="page">
+						<subreportParameterExpression><![CDATA[$V{PAGE_NUMBER}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{dataSourceDir}.getData())]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{subReportDir}]]></subreportExpression>
+				</subreport>
 			</band>
 		</groupFooter>
 	</group>
 	<group name="grpeMois" isStartNewColumn="true" isStartNewPage="true">
 		<groupExpression><![CDATA[$F{divdes}+$F{dirdes}+$F{bulmoispaie}]]></groupExpression>
 		<groupFooter>
-			<band height="303">
+			<band height="288">
 				<break>
-					<reportElement x="0" y="20" width="1580" height="1" uuid="7c136aa0-5c5b-41e9-b1a3-42ce371421c0"/>
+					<reportElement x="0" y="0" width="1578" height="1" uuid="7c136aa0-5c5b-41e9-b1a3-42ce371421c0"/>
 				</break>
+				<subreport>
+					<reportElement x="-12" y="10" width="1601" height="259" uuid="66cb58d4-1835-4916-b70a-1524a749ed88">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<subreportParameter name="div">
+						<subreportParameterExpression><![CDATA[$F{div}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="dir">
+						<subreportParameterExpression><![CDATA[$F{dir}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="divdes">
+						<subreportParameterExpression><![CDATA[$F{divdes}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="dirdes">
+						<subreportParameterExpression><![CDATA[$F{dirdes}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="mois">
+						<subreportParameterExpression><![CDATA[$F{bulmoispaie}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="subReportMonthCss">
+						<subreportParameterExpression><![CDATA[$P{subReportMonthCss}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="dataSourceMonthCss">
+						<subreportParameterExpression><![CDATA[$P{dataSourceMonthCss}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="page">
+						<subreportParameterExpression><![CDATA[$V{PAGE_NUMBER}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{dataSourceMonth}.getData())]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{subReportMonth}]]></subreportExpression>
+				</subreport>
 			</band>
 		</groupFooter>
 	</group>
 	<group name="grpeCPTE" isStartNewColumn="true">
 		<groupExpression><![CDATA[$F{divdes}+$F{dirdes}+$F{bulmoispaie}+$F{agtcptanal}]]></groupExpression>
 		<groupFooter>
-			<band height="193">
+			<band height="192">
 				<textField isBlankWhenNull="true">
 					<reportElement x="-11" y="30" width="391" height="20" isRemoveLineWhenBlank="true" uuid="29f1216e-a859-4c3f-b8f8-774aa0ece328"/>
 					<textFieldExpression><![CDATA[$F{report}.equals( "0" )?"TOTAUX DES CHAPITRES:":null]]></textFieldExpression>
@@ -198,6 +264,7 @@ $F{dbulcrub}.equals( "300") ? $F{mtrub}:0:0]]></variableExpression>
 	</group>
 	<pageHeader>
 		<band height="157" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{grpeCPTE_COUNT}==0?new Boolean(true):new Boolean(false)]]></printWhenExpression>
 			<textField isBlankWhenNull="true">
 				<reportElement x="0" y="0" width="410" height="18" isRemoveLineWhenBlank="true" uuid="68bbcbc4-03a1-4314-8c63-87d32a6f47f0">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
@@ -220,7 +287,7 @@ $F{dbulcrub}.equals( "300") ? $F{mtrub}:0:0]]></variableExpression>
 				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?"PAGE:":null]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="1480" y="0" width="45" height="15" isRemoveLineWhenBlank="true" uuid="b7069660-9384-4a35-b596-7a87af6d8f4a">
+				<reportElement x="1480" y="0" width="109" height="15" isRemoveLineWhenBlank="true" uuid="b7069660-9384-4a35-b596-7a87af6d8f4a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?$V{PAGE_NUMBER}:null]]></textFieldExpression>
@@ -302,13 +369,14 @@ $F{dbulcrub}.equals( "300") ? $F{mtrub}:0:0]]></variableExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="130" y="30" width="420" height="20" isRemoveLineWhenBlank="true" uuid="0faee8a2-1c20-485d-8fd8-58fb5f5994cc"/>
-				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?"TOTAUX PAR CPTE. ANALYTIQUE":null]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{grpeCPTE_COUNT}==0?"TOTAUX PAR CPTE. ANALYTIQUE":null]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="58" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$V{grpeCPTE_COUNT}==0?new Boolean(true):new Boolean(false)]]></printWhenExpression>
 			<staticText>
 				<reportElement x="-10" y="13" width="110" height="24" uuid="d065f8ed-0c05-47d0-a679-a392c9cfabe5">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>
@@ -434,7 +502,7 @@ $F{dbulcrub}.equals( "300") ? $F{mtrub}:0:0]]></variableExpression>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?$F{dbulnature}.equals( "G" )?
 ($F{dbulimp}==1?
-new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtrub}):""):"":null]]></textFieldExpression>
+new DecimalFormat("###,##0.000#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtrub}):""):"":null]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="790" y="0" width="190" height="20" isRemoveLineWhenBlank="true" uuid="72ac64bb-1484-4b8a-8bdb-6ddcf6c57c70">
@@ -476,7 +544,7 @@ new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Lo
 				</textElement>
 				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?$F{dbulnature}.equals( "R" )?
 ($F{dbulimp}==1?
-new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtrub}):""):"":null]]></textFieldExpression>
+new DecimalFormat("###,##0.000#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtrub}):""):"":null]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="429" y="0" width="151" height="20" isRemoveLineWhenBlank="true" uuid="52c3f95c-e640-4324-8f7c-41678ae6fdf8">
@@ -567,4 +635,25 @@ new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Lo
 			</textField>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="181" splitType="Prevent">
+			<subreport>
+				<reportElement x="-10" y="12" width="1599" height="151" uuid="6c971a86-6c5b-4605-aef8-413d785f45b1"/>
+				<subreportParameter name="subReportEntrepriseCss">
+					<subreportParameterExpression><![CDATA[$P{subReportEntrepriseCss}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="dataSourceEntrepriseCss">
+					<subreportParameterExpression><![CDATA[$P{dataSourceEntrepriseCss}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mois">
+					<subreportParameterExpression><![CDATA[$F{bulmoispaie}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="page">
+					<subreportParameterExpression><![CDATA[$V{PAGE_NUMBER}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{dataSourceEntreprise}.getData())]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{subReportEntreprise}]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
 </jasperReport>

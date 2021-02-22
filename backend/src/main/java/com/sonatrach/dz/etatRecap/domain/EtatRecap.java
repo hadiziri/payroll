@@ -67,6 +67,27 @@ public class EtatRecap implements Serializable {
 		
 	}
 
+	public EtatRecap(String div, String dir, Date bulmoispaie, String agtcptanal, String dbulcrub, Integer dbulrappel,
+			String dbuldesignrub, String dbulnature, Integer dbulimp, BigDecimal mtbase, BigDecimal mtrub,
+			String divdes, String dirdes, String css, String report) {
+		super();
+		this.div = div;
+		this.dir = dir;
+		this.bulmoispaie = bulmoispaie;
+		this.agtcptanal = agtcptanal;
+		this.dbulcrub = dbulcrub;
+		this.dbulrappel = dbulrappel;
+		this.dbuldesignrub = dbuldesignrub;
+		this.dbulnature = dbulnature;
+		this.dbulimp = dbulimp;
+		this.mtbase = mtbase;
+		this.mtrub = mtrub;
+		this.divdes = divdes;
+		this.dirdes = dirdes;
+		this.css = css;
+		this.report = report;
+	}
+
 	public String getDiv() {
 		return div;
 	}

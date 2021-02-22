@@ -5,7 +5,6 @@
 	<parameter name="div" class="java.lang.String"/>
 	<parameter name="dir" class="java.lang.String"/>
 	<parameter name="mois" class="java.util.Date"/>
-	<parameter name="cpteAnal" class="java.lang.String"/>
 	<field name="dbulcrub" class="java.lang.String"/>
 	<field name="dbuldesignrub" class="java.lang.String"/>
 	<field name="mtbase" class="java.math.BigDecimal"/>
@@ -28,7 +27,7 @@
 	(
 		$P{mois}.equals( $F{bulmoispaie} )?
 		(
-			$P{cpteAnal}.equals( $F{agtcptanal})?$F{css}.equals("1")?$F{mtrub}:new BigDecimal(0):new BigDecimal(0)
+			$F{css}.equals("1")?$F{mtrub}:new BigDecimal(0)
 		):new BigDecimal(0)
 	):new BigDecimal(0)
 ):new BigDecimal(0)]]></variableExpression>
@@ -40,9 +39,9 @@
 	(
 		$P{mois}.equals( $F{bulmoispaie} )?
 		(
-			$P{cpteAnal}.equals( $F{agtcptanal})?$F{css}.equals("2")?$F{mtrub}:new BigDecimal(0):new BigDecimal(0)
-		):new BigDecimal(0)
+			$F{css}.equals("2")?$F{mtrub}:new BigDecimal(0)
 	):new BigDecimal(0)
+):new BigDecimal(0)
 ):new BigDecimal(0)]]></variableExpression>
 	</variable>
 	<variable name="mtrub3" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeNew" calculation="Sum">
@@ -52,7 +51,7 @@
 	(
 		$P{mois}.equals( $F{bulmoispaie} )?
 		(
-			$P{cpteAnal}.equals( $F{agtcptanal})?$F{css}.equals("3")?$F{mtrub}:new BigDecimal(0):new BigDecimal(0)
+			$F{css}.equals("3")?$F{mtrub}:new BigDecimal(0)
 		):new BigDecimal(0)
 	):new BigDecimal(0)
 ):new BigDecimal(0)]]></variableExpression>
@@ -63,9 +62,9 @@
 	$P{dir}.equals( $F{dir})?
 	(
 		$P{mois}.equals( $F{bulmoispaie} )?
-		(
-			$P{cpteAnal}.equals( $F{agtcptanal})?$F{css}.equals("1")?$F{mtbase}:new BigDecimal(0):new BigDecimal(0)
-		):new BigDecimal(0)
+		
+			$F{css}.equals("1")?$F{mtbase}:new BigDecimal(0):new BigDecimal(0)
+		
 	):new BigDecimal(0)
 ):new BigDecimal(0)]]></variableExpression>
 	</variable>
@@ -76,7 +75,7 @@
 	(
 		$P{mois}.equals( $F{bulmoispaie} )?
 		(
-			$P{cpteAnal}.equals( $F{agtcptanal})?$F{css}.equals("2")?$F{mtbase}:new BigDecimal(0):new BigDecimal(0)
+			$F{css}.equals("2")?$F{mtbase}:new BigDecimal(0)
 		):new BigDecimal(0)
 	):new BigDecimal(0)
 ):new BigDecimal(0)]]></variableExpression>
@@ -88,13 +87,13 @@
 	(
 		$P{mois}.equals( $F{bulmoispaie} )?
 		(
-			$P{cpteAnal}.equals( $F{agtcptanal})?$F{css}.equals("3")?$F{mtbase}:new BigDecimal(0):new BigDecimal(0)
+			$F{css}.equals("3")?$F{mtbase}:new BigDecimal(0)
 		):new BigDecimal(0)
 	):new BigDecimal(0)
 ):new BigDecimal(0)]]></variableExpression>
 	</variable>
 	<group name="grpeNew">
-		<groupExpression><![CDATA[$P{div}+$P{dir}+$P{mois}+$P{cpteAnal}]]></groupExpression>
+		<groupExpression><![CDATA[$P{div}+$P{dir}+$P{mois}]]></groupExpression>
 		<groupFooter>
 			<band height="77">
 				<textField>
@@ -167,10 +166,7 @@
 (
 	$P{dir}.equals( $F{dir})?
 	(
-		$P{mois}.equals( $F{bulmoispaie} )?
-		(
-			$P{cpteAnal}.equals( $F{agtcptanal})?new Boolean (false):new Boolean(false)
-		):new Boolean(false)
+		$P{mois}.equals( $F{bulmoispaie} )?new Boolean (false):new Boolean(false)
 	):new Boolean(false)
 ):new Boolean(false)]]></printWhenExpression>
 			<textField>
