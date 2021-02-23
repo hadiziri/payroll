@@ -1,3 +1,4 @@
+import { Efile } from './../Models/Efile';
 import { Observable } from 'rxjs';
 import { MailResponse } from './../Models/MailResponse';
 import { MailRequest } from './../Models/MailRequest';
@@ -20,11 +21,21 @@ export class SendTableFilesService {
   public sendEmailFiles( mailReq:MailRequest):Observable<MailResponse>{
     return this.httpClient.post<MailResponse>(this.host+"sendEmailFiles",mailReq).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
     );
     
+  }
+
+  public saveEFiles(files:Array<Efile>):Observable<Array<Efile>>{
+    return this.httpClient.post<Array<Efile>>(this.host+"saveEFiles",files).pipe(
+      catchError((err) => {
+         //console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
   }
 }

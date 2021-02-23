@@ -72,12 +72,12 @@ export class NavigationHistoryComponent implements OnInit {
   ngOnInit(): void {
     //get currentUser
      this.currentUser.username = this.token.getUsername();
-     //console.log(this.currentUser)
+     // //console.log(this.currentUser)
      this.paramService.getUserByUserName(this.currentUser).subscribe(
        data => {
          if (data != null) {
  
-           // console.log(data);
+           //  //console.log(data);
            this.currentUser.iduser = data.iduser;
            this.getEmails();
          } else {
@@ -85,7 +85,7 @@ export class NavigationHistoryComponent implements OnInit {
          }
        },
        error => {
-         //console.log(error);
+         // //console.log(error);
           this.openDialogError(error);;
          throw error;
        }
@@ -98,7 +98,7 @@ export class NavigationHistoryComponent implements OnInit {
       (data) => {
         if (data != null) {
          
-           console.log(data)
+            //console.log(data)
          this.archiveStructure=data;
          this.dataSourceStructure= new MatTableDataSource(this.archiveStructure);
         } else {
@@ -108,7 +108,7 @@ export class NavigationHistoryComponent implements OnInit {
 
       },
       (error) => {
-        // console.log(error);
+        //  //console.log(error);
          this.openDialogError(error);;
         throw error;
       }
@@ -118,7 +118,7 @@ export class NavigationHistoryComponent implements OnInit {
       (data) => {
         if (data != null) {
          
-           console.log(data)
+            //console.log(data)
         this.archiveFolder=data;
          this.dataSourceFolder= new MatTableDataSource(this.archiveFolder);
         } else {
@@ -128,7 +128,7 @@ export class NavigationHistoryComponent implements OnInit {
 
       },
       (error) => {
-        // console.log(error);
+        //  //console.log(error);
          this.openDialogError(error);;
         throw error;
       }
@@ -140,7 +140,7 @@ export class NavigationHistoryComponent implements OnInit {
     this.historiqueService.getAllEmails(this.currentUser).subscribe(
       (data) => {
         if (data != null) {
-         // console.log(data);
+         //  //console.log(data);
           this.ELEMENT_DATA=data;
           this.dataSourceEmail = new MatTableDataSource(this.ELEMENT_DATA);
           for(let i=0;i<data.length;i++){
@@ -154,7 +154,7 @@ export class NavigationHistoryComponent implements OnInit {
 
       },
       (error) => {
-        // console.log(error);
+        //  //console.log(error);
          this.openDialogError(error);;
         throw error;
       }
@@ -169,7 +169,7 @@ export class NavigationHistoryComponent implements OnInit {
          
            this.allFiles.push({"filename":data,"idemail":email.idemail});
          
-         //console.log(this.allFiles)
+         // //console.log(this.allFiles)
         } else {
           this.openDialog();
         }
@@ -177,7 +177,7 @@ export class NavigationHistoryComponent implements OnInit {
 
       },
       (error) => {
-        // console.log(error);
+        //  //console.log(error);
          this.openDialogError(error);;
         throw error;
       }
@@ -203,7 +203,7 @@ export class NavigationHistoryComponent implements OnInit {
   }
 
   getStructure(event:any){
-    console.log(event)
+     //console.log(event)
     if(event.tab.textLabel=="Structures ajoutées"){
       this.operation="add";
     }else{
@@ -219,7 +219,7 @@ export class NavigationHistoryComponent implements OnInit {
       (data) => {
         if (data != null) {
          
-           console.log(data)
+            //console.log(data)
          this.archiveStructure=data;
          
        
@@ -232,7 +232,7 @@ export class NavigationHistoryComponent implements OnInit {
 
       },
       (error) => {
-        // console.log(error);
+        //  //console.log(error);
          this.openDialogError(error);;
         throw error;
       }
@@ -254,7 +254,7 @@ export class NavigationHistoryComponent implements OnInit {
       (data) => {
         if (data != null) {
          
-           console.log(data)
+            //console.log(data)
         this.archiveFolder=data;
         
          this.dataSourceFolder= new MatTableDataSource(this.archiveFolder);
@@ -265,7 +265,7 @@ export class NavigationHistoryComponent implements OnInit {
 
       },
       (error) => {
-        // console.log(error);
+        //  //console.log(error);
          this.openDialogError(error);;
         throw error;
       }

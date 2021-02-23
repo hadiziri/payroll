@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
     }
   }
   logout() {
-    //console.log("deconnexion")
+    // //console.log("deconnexion")
     this.connection=false;
     this.tokenStorage.signOut();
   
@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
     cancelText: 'Non'
   
 }).then( (result) => {
-  //console.log(result ? 'Agreed.' : 'Disagreed.');
+  // //console.log(result ? 'Agreed.' : 'Disagreed.');
   if(result){
    this.logout();
   }

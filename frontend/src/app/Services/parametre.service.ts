@@ -31,7 +31,7 @@ export class ParametreService {
    public getEtats():Observable<Array<clotureFiles>>{
      return this.httpClient.get<Array<clotureFiles>>(this.host+"allEtats").pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -44,7 +44,7 @@ export class ParametreService {
   public saveFileToPrint(file:Array<FileToPrint>):Observable<Array<FileToPrint>>{
     return this.httpClient.post<Array<FileToPrint>>(this.host+"saveFileToPrint",file).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -54,7 +54,7 @@ export class ParametreService {
   public deleteFileToPrint(file:Array<FileToPrint>):Observable<Array<FileToPrint>>{
     return this.httpClient.post<Array<FileToPrint>>(this.host+"deleteFileToPrint",file).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -64,7 +64,7 @@ export class ParametreService {
   public getAllFileToPrint():Observable<Array<FileToPrint>>{
     return this.httpClient.get<Array<FileToPrint>>(this.host+"allFileToPrint").pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -73,7 +73,7 @@ export class ParametreService {
   public  getSelectedEtat(file:FileToPrint):Observable<Array<FileToPrint>>{
     return this.httpClient.post<Array<FileToPrint>>(this.host+"selectedEtats",file).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -83,7 +83,7 @@ export class ParametreService {
   public getAllShActivities():Observable <Array<ShActivity>>{
     return this.httpClient.get <Array<ShActivity>>(this.host+"allShActivities").pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -93,7 +93,7 @@ export class ParametreService {
    public getStructureByActivity(activity :ShActivity):Observable <Array<Structure>>{
     return this.httpClient.post<Array<Structure>>(this.host+"getStructurByActivity",activity).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -104,7 +104,7 @@ export class ParametreService {
    public updateStructure(structure:Structure):Observable<Structure>{
      return this.httpClient.post<Structure>(this.host+"updateStructure",structure).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -114,7 +114,7 @@ export class ParametreService {
    public updateStructureArchive(archiveStructure:ArchiveStructure):Observable<ArchiveStructure>{
     return this.httpClient.post<ArchiveStructure>(this.host+"updateStructureArchive",archiveStructure).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -124,7 +124,7 @@ export class ParametreService {
    public getUserByUserName(u:User ):Observable<User>{
      return this.httpClient.post<User>(this.host+"getUserByUserName",u).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -134,7 +134,7 @@ export class ParametreService {
    public deleteStructure(structure:ArchiveStructure):Observable<Structure>{
      return this.httpClient.post<Structure>(this.host+"deleteStructure",structure).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -144,7 +144,7 @@ export class ParametreService {
    public addStructure(structure:Structure):Observable<Structure>{
     return this.httpClient.post<Structure>(this.host+"addStructure",structure).pipe(
      catchError((err) => {
-       console.log('error caught in service')
+        //console.log('error caught in service')
        console.error(err);
        return throwError(err);
      })
@@ -154,7 +154,7 @@ export class ParametreService {
 public addArchiveStructure(structure:ArchiveStructure):Observable<ArchiveStructure>{
   return this.httpClient.post<ArchiveStructure>(this.host+"addArchiveStructure",structure).pipe(
     catchError((err) => {
-      console.log('error caught in service')
+       //console.log('error caught in service')
       console.error(err);
       return throwError(err);
     })
@@ -164,7 +164,7 @@ public addArchiveStructure(structure:ArchiveStructure):Observable<ArchiveStructu
  public deleteFolderPath(folderArchive:FolderArchive):Observable<Folder>{
    return this.httpClient.post<Folder>(this.host+"deleteFolderPath",folderArchive).pipe(
     catchError((err) => {
-      console.log('error caught in service')
+       //console.log('error caught in service')
       console.error(err);
       return throwError(err);
     })
@@ -173,7 +173,7 @@ public addArchiveStructure(structure:ArchiveStructure):Observable<ArchiveStructu
  public updateFolderPath(folder:Folder):Observable<Folder>{
    return this.httpClient.post<Folder>(this.host+"updateFolderPath",folder).pipe(
     catchError((err) => {
-      console.log('error caught in service')
+       //console.log('error caught in service')
       console.error(err);
       return throwError(err);
     })
@@ -183,7 +183,7 @@ public addArchiveStructure(structure:ArchiveStructure):Observable<ArchiveStructu
  public updateFolderPathArchive(folderArchive:FolderArchive):Observable<FolderArchive>{
   return this.httpClient.post<FolderArchive>(this.host+"updateFolderPathArchive",folderArchive).pipe(
    catchError((err) => {
-     console.log('error caught in service')
+      //console.log('error caught in service')
      console.error(err);
      return throwError(err);
    })
@@ -193,7 +193,7 @@ public addArchiveStructure(structure:ArchiveStructure):Observable<ArchiveStructu
 public addNewFolder(folder:Folder):Observable<Folder>{
   return this.httpClient.post<Folder>(this.host+"addNewFolder",folder).pipe(
    catchError((err) => {
-     console.log('error caught in service')
+      //console.log('error caught in service')
      console.error(err);
      return throwError(err);
    })
@@ -203,7 +203,7 @@ public addNewFolder(folder:Folder):Observable<Folder>{
 public addNewFolderArchive(folderArchive:FolderArchive):Observable<FolderArchive>{
   return this.httpClient.post<FolderArchive>(this.host+"addNewFolderArchive",folderArchive).pipe(
    catchError((err) => {
-     console.log('error caught in service')
+      //console.log('error caught in service')
      console.error(err);
      return throwError(err);
    })
@@ -213,7 +213,7 @@ public addNewFolderArchive(folderArchive:FolderArchive):Observable<FolderArchive
 public addFilesToNewFolder(files:Array<FileTypeToFolder>):Observable<Array<FileTypeToFolder>>{
   return this.httpClient.post<Array<FileTypeToFolder>>(this.host+"addFilesToNewFolder",files).pipe(
     catchError((err) => {
-      console.log('error caught in service')
+       //console.log('error caught in service')
       console.error(err);
       return throwError(err);
     })
@@ -223,7 +223,7 @@ public addFilesToNewFolder(files:Array<FileTypeToFolder>):Observable<Array<FileT
 public getAllFileType():Observable<Array<FileType>>{
   return this.httpClient.get<Array<FileType>>(this.host+"getAllFileType").pipe(
     catchError((err) => {
-      console.log('error caught in service')
+       //console.log('error caught in service')
       console.error(err);
       return throwError(err);
     })

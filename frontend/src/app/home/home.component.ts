@@ -129,7 +129,7 @@ export class HomeComponent implements OnInit {
     this.paramService.getUserByUserName(this.currentUser).subscribe(
       (data) => {
       if(data!=null){
-        //console.log(data);
+        // //console.log(data);
         this.currentUser=data;
       }else{
         this.openDialog();
@@ -138,7 +138,7 @@ export class HomeComponent implements OnInit {
 
       },
       error => {
-        console.log(error);
+         //console.log(error);
         
         this.openDialogError(error);
         throw error;
@@ -152,7 +152,7 @@ export class HomeComponent implements OnInit {
       (data) => {
         if(data!=null){
           this.ELEMENT_DATA = data;
-          //console.log(data);
+          // //console.log(data);
           this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
           
         }else{
@@ -162,7 +162,7 @@ export class HomeComponent implements OnInit {
         
       },
       error => {
-        //console.log(error);
+        // //console.log(error);
         this.openDialogError(error);
         throw error;
 
@@ -173,7 +173,7 @@ export class HomeComponent implements OnInit {
       this.homeService.getEtatJournal().subscribe(
         (data) => {
           if(data!=null){
-            console.log(data);
+           console.log(data);
             this.allEtatJournal=data;
             
           }else{
@@ -183,7 +183,7 @@ export class HomeComponent implements OnInit {
           
         },
         error => {
-          //console.log(error);
+          // //console.log(error);
           this.openDialogError(error);
           throw error;
   
@@ -193,7 +193,7 @@ export class HomeComponent implements OnInit {
       this.homeService.getEtatMand().subscribe(
         (data) => {
           if(data!=null){
-            console.log(data);
+         console.log(data);
             this.allEtatMand=data;
             
           }else{
@@ -203,7 +203,7 @@ export class HomeComponent implements OnInit {
           
         },
         error => {
-          //console.log(error);
+          // //console.log(error);
           this.openDialogError(error);
           throw error;
   
@@ -213,7 +213,7 @@ export class HomeComponent implements OnInit {
       this.homeService.getEtatMip().subscribe(
         (data) => {
           if(data!=null){
-            console.log(data);
+         console.log(data);
             this.allEtatMip=data;
             
           }else{
@@ -223,7 +223,7 @@ export class HomeComponent implements OnInit {
           
         },
         error => {
-          //console.log(error);
+          // //console.log(error);
           this.openDialogError(error);
           throw error;
   
@@ -235,7 +235,7 @@ export class HomeComponent implements OnInit {
           if(data!=null){
            
             this.allEtatRecap=data;
-            console.log(this.allEtatRecap);
+          console.log(this.allEtatRecap);
             this.showSpinner=false;
           }else{
             this.openDialog();
@@ -244,7 +244,7 @@ export class HomeComponent implements OnInit {
           
         },
         error => {
-          //console.log(error);
+          // //console.log(error);
           this.openDialogError(error);
           throw error;
   
@@ -254,7 +254,7 @@ export class HomeComponent implements OnInit {
       this.homeService.getEtatRet().subscribe(
         (data) => {
           if(data!=null){
-            console.log(data);
+          console.log(data);
             this.allEtatRet=data;
            
           }else{
@@ -264,7 +264,7 @@ export class HomeComponent implements OnInit {
           
         },
         error => {
-          //console.log(error);
+          // //console.log(error);
           this.openDialogError(error);
           throw error;
   
@@ -306,7 +306,7 @@ export class HomeComponent implements OnInit {
       
        
         if(data.length!=0){
-          console.log(data);
+        //   //console.log(data);
           //send email
           this.eFiles=data;
           this.sendEmailToManagers(this.updatedStructure);
@@ -316,7 +316,7 @@ export class HomeComponent implements OnInit {
 
       },
       error => {
-        console.log(error);
+        // //console.log(error);
         this.openDialogError(error);
         
         throw error;
@@ -331,7 +331,7 @@ export class HomeComponent implements OnInit {
     this.homeService.sendEmailZip(this.mailRequest).subscribe(
       (data) => {
       
-        console.log(data);
+       //  //console.log(data);
         if(data!=null){
           if(data.status==true){
             this.saveEmailDB(struture);
@@ -346,7 +346,7 @@ export class HomeComponent implements OnInit {
 
       },
       error => {
-        console.log(error);
+       //  //console.log(error);
         this.openDialogError(error);
         throw error;
 
@@ -361,13 +361,13 @@ export class HomeComponent implements OnInit {
     this.homeService.SaveSentEmail(this.email).subscribe(
       (data) => {
       
-        console.log(data);
+        // //console.log(data);
         if(data!=null){
           this.emailSaved=true;
           for(let i=0;i<this.eFiles.length;i++){
             this.archiveSentFiles.push({"idemail":data.idemail,"idfile":this.eFiles[i].idfile});
           }
-          console.log(this.archiveSentFiles)
+          // //console.log(this.archiveSentFiles)
           this.saveArchiveSentFiles();
         }else{
           this.openDialog();
@@ -375,7 +375,7 @@ export class HomeComponent implements OnInit {
 
       },
       error => {
-        console.log(error);
+        // //console.log(error);
         this.openDialogError(error);
         throw error;
 
@@ -387,7 +387,7 @@ export class HomeComponent implements OnInit {
       (data) => {
       
         if(data!=null){
-          console.log(data);
+         //  //console.log(data);
         }else{
          this.openDialog();
         }
@@ -396,7 +396,7 @@ export class HomeComponent implements OnInit {
 
       },
       error => {
-        console.log(error);
+       //  //console.log(error);
         this.openDialogError(error);
         throw error;
 
@@ -409,7 +409,7 @@ export class HomeComponent implements OnInit {
     this.homeService.SaveArchiveSentFiles(this.archiveSentFiles).subscribe(
       (data) => {
       
-        console.log(data);
+       //  //console.log(data);
         if(data!=null){
           this.archiveSentFilesSaved=true;
           this.showAlert("Envoie Email","L'email a bien été envoyé aux gestionnaires");
@@ -419,7 +419,7 @@ export class HomeComponent implements OnInit {
 
       },
       error => {
-        console.log(error);
+      //   //console.log(error);
         this.openDialogError(error);
         throw error;
 
@@ -450,7 +450,7 @@ export class HomeComponent implements OnInit {
 
       (data) => {
       
-        console.log(data);
+       //  //console.log(data);
         if(data!=null){
           
           this.showAlert("Suspension Structure","La structure a bien été suspendue");
@@ -462,7 +462,7 @@ export class HomeComponent implements OnInit {
 
       },
       error => {
-        console.log(error);
+       //  //console.log(error);
         this.openDialogError(error);
         throw error;
 
@@ -482,7 +482,7 @@ export class HomeComponent implements OnInit {
 
       (data) => {
       
-        console.log(data);
+      //   //console.log(data);
         if(data!=null){
           
           this.showAlert("Activation Structure","La structure a bien été activée");
@@ -494,7 +494,7 @@ export class HomeComponent implements OnInit {
 
       },
       error => {
-        console.log(error);
+     //    //console.log(error);
         this.openDialogError(error);
         throw error;
 
@@ -514,7 +514,7 @@ export class HomeComponent implements OnInit {
      }else{
         this.codeStructure.push(structure.structurecodelike);
      }
-     console.log(this.codeStructure);
+     // //console.log(this.codeStructure);
      if(this.allEtatJournal.length==0||this.allEtatMand.length==0||this.allEtatMip.length==0||this.allEtatRecap.length==0||this.allEtatRet.length==0){
         this.showAlertInit("Initialisation des données","Veuillez patienter un petit moment s'il vous plait pour générer les fichiers");
      }else{
@@ -539,7 +539,7 @@ export class HomeComponent implements OnInit {
       this.filteredEtatRet=[];
       if(str.structurecodenotlike!="0"){
          this.codeNotLike=str.structurecodenotlike.split("/");
-       console.log(this.codeNotLike);
+       // //console.log(this.codeNotLike);
       }
       //filtrer journal
       for(let i=0;i<this.allEtatJournal.length;i++){
@@ -558,13 +558,13 @@ export class HomeComponent implements OnInit {
 
        
       }
-    //  console.log(this.filteredEtatJournal);
+    //   //console.log(this.filteredEtatJournal);
     if(str.structurecodenotlike!="0"){
       this.filteredEtatJournal=this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike)
       
-      //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
+      // //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
     }
-    console.log(this.filteredEtatJournal)
+    // //console.log(this.filteredEtatJournal)
      
       //filtrer mand
       for(let i=0;i<this.allEtatMand.length;i++){
@@ -581,11 +581,11 @@ export class HomeComponent implements OnInit {
         }
       }
       if(str.structurecodenotlike!="0"){
-     // console.log(this.filteredEtatMand);
+     //  //console.log(this.filteredEtatMand);
       this.filteredEtatMand=this.isExistCodeNotLike(this.filteredEtatMand,this.codeNotLike)
-      //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
+      // //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
       }
-      console.log(this.filteredEtatMand)
+     //  //console.log(this.filteredEtatMand)
 
       //filtrer mip
       for(let i=0;i<this.allEtatMip.length;i++){
@@ -602,11 +602,11 @@ export class HomeComponent implements OnInit {
         }
       }
       if(str.structurecodenotlike!="0"){
-     // console.log(this.filteredEtatMip);
+     //  //console.log(this.filteredEtatMip);
       this.filteredEtatMip=this.isExistCodeNotLike(this.filteredEtatMip,this.codeNotLike)
-      //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
+      // //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
       }
-      console.log(this.filteredEtatMip)
+     //  //console.log(this.filteredEtatMip)
 
       //filtrer recap
      
@@ -627,11 +627,11 @@ export class HomeComponent implements OnInit {
         }
       }
       if(str.structurecodenotlike!="0"){
-     // console.log(this.filteredEtatRecap);
+     //  //console.log(this.filteredEtatRecap);
       this.filteredEtatRecap=this.isExistCodeNotLike(this.filteredEtatRecap,this.codeNotLike)
-      //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
+      // //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
       }
-      console.log(this.filteredEtatRecap)
+     //  //console.log(this.filteredEtatRecap)
 
       //filter ret
       for(let i=0;i<this.allEtatRet.length;i++){
@@ -649,11 +649,11 @@ export class HomeComponent implements OnInit {
         }
       }
       if(str.structurecodenotlike!="0"){
-      //console.log(this.filteredEtatRet);
+      // //console.log(this.filteredEtatRet);
       this.filteredEtatRet=this.isExistCodeNotLike(this.filteredEtatRet,this.codeNotLike)
-      //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
+      // //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
       }
-      console.log(this.filteredEtatRet)
+    //   //console.log(this.filteredEtatRet)
       this.generateEtatFiles(str);
      
     }
@@ -680,17 +680,17 @@ export class HomeComponent implements OnInit {
           }
         }
       }
-      console.log(test)
+      // //console.log(test)
       etatArray=etatArray.filter( ( el:any ) => !test.includes( el ) );
       return etatArray;
     }
   generateEtatFiles(structure:Structure){
-    console.log("generation des fichiers")
+   //  //console.log("generation des fichiers")
     this.homeService.generateMand(this.filteredEtatMand,structure.structurename).subscribe(
       (data) => {
       
-        console.log("mand")
-        console.log(data);
+        // //console.log("mand")
+        // //console.log(data);
         if(data!=null){
           let efile:Efile={
             "idfile":0,
@@ -714,7 +714,7 @@ export class HomeComponent implements OnInit {
 
       },
       error => {
-        console.log(error);
+       //  //console.log(error);
         this.openDialogError(error);
         throw error;
 
@@ -722,8 +722,8 @@ export class HomeComponent implements OnInit {
     );
     this.homeService.generateJournal(this.filteredEtatJournal,structure.structurename).subscribe(
       (data) => {
-        console.log("jour")
-        console.log(data);
+        // //console.log("jour")
+        // //console.log(data);
         if(data!=null){
           let efile:Efile={
             "idfile":0,
@@ -747,7 +747,7 @@ export class HomeComponent implements OnInit {
 
       },
       error => {
-        console.log(error);
+       //  //console.log(error);
         this.openDialogError(error);
         throw error;
 
@@ -757,8 +757,8 @@ export class HomeComponent implements OnInit {
     this.homeService.generateMip(this.filteredEtatMip,structure.structurename).subscribe(
       (data) => {
       
-        console.log("mip")
-        console.log(data);
+       //  //console.log("mip")
+      //   //console.log(data);
         if(data!=null){
           let efile:Efile={
             "idfile":0,
@@ -782,7 +782,7 @@ export class HomeComponent implements OnInit {
 
       },
       error => {
-        console.log(error);
+      //   //console.log(error);
         this.openDialogError(error);
         throw error;
 
@@ -792,8 +792,8 @@ export class HomeComponent implements OnInit {
     this.homeService.generateRet(this.filteredEtatRet,structure.structurename).subscribe(
       (data) => {
       
-        console.log("ret")
-        console.log(data);
+        // //console.log("ret")
+      //   //console.log(data);
         if(data!=null){
           let efile:Efile={
             "idfile":0,
@@ -817,7 +817,7 @@ export class HomeComponent implements OnInit {
 
       },
       error => {
-        console.log(error);
+      //   //console.log(error);
         this.openDialogError(error);
         throw error;
 
@@ -827,8 +827,8 @@ export class HomeComponent implements OnInit {
     this.homeService.generateRecap(this.filteredEtatRecap,structure.structurename).subscribe(
       (data) => {
       
-        console.log("recap")
-        console.log(data);
+      //   //console.log("recap")
+      //  //console.log(data);
         if(data!=null){
           let efile:Efile={
             "idfile":0,
@@ -852,7 +852,7 @@ export class HomeComponent implements OnInit {
 
       },
       error => {
-        console.log(error);
+        // //console.log(error);
         this.openDialogError(error);
         throw error;
 
@@ -867,8 +867,8 @@ if(this.jour&&this.mip&&this.mand&&this.ret&&this.recap){
 this.homeService.saveGeneratedFiles(this.efiles).subscribe(
   (data) => {
       
-    console.log("save generated files in db")
-    console.log(data);
+    // //console.log("save generated files in db")
+   //  //console.log(data);
     if(data!=null){
       this.updateStatusStructure(structure);
       //this.showAlert("Activation Structure","La structure a bien été activée");
@@ -880,7 +880,7 @@ this.homeService.saveGeneratedFiles(this.efiles).subscribe(
 
   },
   error => {
-    console.log(error);
+   //  //console.log(error);
     this.openDialogError(error);
     throw error;
 
@@ -894,8 +894,8 @@ updateStatusStructure(structure:Structure){
   this.homeService.updateStructureFilesGenerated(structure).subscribe(
     (data) => {
       
-      console.log("updateStatusStructure")
-      console.log(data);
+     //  //console.log("updateStatusStructure")
+     //  //console.log(data);
       if(data!=null){
         
         this.showAlert("Génération etats paie","Les etats ont bien été généré.");
@@ -907,7 +907,7 @@ updateStatusStructure(structure:Structure){
   
     },
     error => {
-      console.log(error);
+      // //console.log(error);
       this.openDialogError(error);
       throw error;
   

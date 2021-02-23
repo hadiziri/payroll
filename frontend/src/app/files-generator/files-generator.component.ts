@@ -17,10 +17,10 @@ export class FilesGeneratorComponent implements OnInit {
   GenerateFile(name :number){
    
    /* this.comService.getFiles(this.structures[name]).subscribe(
-      data=>{ console.log(data)
+      data=>{  //console.log(data)
         }
       ,
-      err=>{ console.log(err);}
+      err=>{  //console.log(err);}
       
     );
   }*/

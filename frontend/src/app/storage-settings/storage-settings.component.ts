@@ -95,19 +95,19 @@ export class StorageSettingsComponent implements OnInit {
   ngOnInit() {
     //get currentUser
     this.currentUser.username = this.token.getUsername();
-    //console.log(this.currentUser)
+    // //console.log(this.currentUser)
     this.paramService.getUserByUserName(this.currentUser).subscribe(
       data => {
         if (data != null) {
 
-          //console.log(data);
+          // //console.log(data);
           this.currentUser.iduser = data.iduser;
         } else {
           this.openDialog();
         }
       },
       error => {
-        //console.log(error);
+        // //console.log(error);
          this.openDialogError(error);;
         throw error;
       }
@@ -118,7 +118,7 @@ export class StorageSettingsComponent implements OnInit {
     this.cloturePaieService.getallFolders().subscribe(
       (data) => {
         if (data != null) {
-          console.log(data);
+           //console.log(data);
           this.ELEMENT_DATA = data;
           this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
@@ -128,7 +128,7 @@ export class StorageSettingsComponent implements OnInit {
         }
       },
       (error) => {
-        // console.log(error);
+        //  //console.log(error);
          this.openDialogError(error);;
         throw error;
       }
@@ -173,13 +173,13 @@ export class StorageSettingsComponent implements OnInit {
       cancelText: 'Annuler'
 
     }).then((result) => {
-      //console.log(result ? 'Agreed.' : 'Disagreed.');
+      // //console.log(result ? 'Agreed.' : 'Disagreed.');
       if (result) {
         this.paramService.deleteFolderPath(this.folderArchive).subscribe(
           data => {
             if (data != null) {
 
-              //console.log(data);
+              // //console.log(data);
               this.showAlert("Suppression de dossier", "Le dossier et ses fichiers ont bien été supprimés.");
 
             } else {
@@ -187,7 +187,7 @@ export class StorageSettingsComponent implements OnInit {
             }
           },
           error => {
-            //console.log(error);
+            // //console.log(error);
              this.openDialogError(error);;
             throw error;
           }
@@ -220,28 +220,28 @@ export class StorageSettingsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      //console.log('The dialog was closed');
+      // //console.log('The dialog was closed');
       this.path = result;
       if (this.path != undefined) {
-        console.log(this.path)
+         //console.log(this.path)
         this.folder.displayedfolderpath = this.path;
-        console.log(this.folder)
+         //console.log(this.folder)
         this.paramService.updateFolderPath(this.folder).subscribe(
 
           data => {
             if (data != null) {
 
-              console.log(data);
+               //console.log(data);
               this.pathUpdated=true;
               this.showAlertUpdate();
 
             } else {
-              console.log("prob")
+               //console.log("prob")
               this.openDialog();
             }
           },
           error => {
-            console.log(error);
+             //console.log(error);
              this.openDialogError(error);;
             throw error;
           }
@@ -251,7 +251,7 @@ export class StorageSettingsComponent implements OnInit {
           data => {
             if (data != null) {
 
-              console.log(data);
+               //console.log(data);
               this.pathUpdatedArchive=true;
               this.showAlertUpdate();
 
@@ -260,7 +260,7 @@ export class StorageSettingsComponent implements OnInit {
             }
           },
           error => {
-            //console.log(error);
+            // //console.log(error);
              this.openDialogError(error);;
             throw error;
           }

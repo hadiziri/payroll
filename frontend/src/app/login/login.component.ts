@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    //console.log(this.form);
+    // //console.log(this.form);
 
     this.loginInfo = new AuthLoginInfo(
       this.form.username,
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
       
       },
       error => {
-       // console.log(error);
+       //  //console.log(error);
        this.showAlert('Alerte de connexion',"Nom d'utilisateur ou mot de passe incorrect");
         //this.errorMessage = error.error.message;
         this.state=0;

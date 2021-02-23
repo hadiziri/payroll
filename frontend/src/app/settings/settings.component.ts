@@ -53,7 +53,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
   //get currentUser
 this.username=this.token.getUsername();
-//console.log(this.username)
+// //console.log(this.username)
     //initialisation des forms pour le changement du psw
     this.firstFormGroup = this._formBuilder.group({
       username: ['', Validators.required]
@@ -81,9 +81,9 @@ this.username=this.token.getUsername();
     };
     
     let ancienPsw: string = this.firstFormGroup.controls['username'].value;
-    //console.log(ancienPsw)
+    // //console.log(ancienPsw)
     let psw:string=this.secondFormGroup.controls['psw'].value;
-    //console.log(psw)
+    // //console.log(psw)
     user.username = this.username;
     user.password = ancienPsw;
     this.userService.comparePsw(user).subscribe(
@@ -100,7 +100,7 @@ this.username=this.token.getUsername();
         }
       },
       error => {
-        //console.log(error);
+        // //console.log(error);
          this.openDialogError(error);;
         throw error;
 
@@ -120,7 +120,7 @@ this.username=this.token.getUsername();
     this.userService.updatePsw(user).subscribe(
       data => {
         if(data!=null){
-      //console.log(data);
+      // //console.log(data);
       this.showAlert("Votre mot de passe  a bien été modifié.");
       this.isDisabled = true;
         }else{
@@ -129,7 +129,7 @@ this.username=this.token.getUsername();
         
       },
       error => {
-        //console.log(error);
+        // //console.log(error);
          this.openDialogError(error);;
         throw error;
 

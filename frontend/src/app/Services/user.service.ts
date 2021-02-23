@@ -22,7 +22,7 @@ export class UserService {
   updatePsw(user:User): Observable<User> {
     return this.http.post<User>(this.userUrl+"updatePsw",user).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -33,7 +33,7 @@ export class UserService {
   comparePsw(user:User): Observable<User> {
     return this.http.post<User>(this.userUrl+"comparePsw",user).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })

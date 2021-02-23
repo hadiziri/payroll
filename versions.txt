@@ -1,3 +1,7 @@
+3.3
+---
+-Correction des bugs et amélioration fonctionnalités
+---------------------------------------------------------------------------------------------------
 3.2
 ---
 -Génération des 5 états paie

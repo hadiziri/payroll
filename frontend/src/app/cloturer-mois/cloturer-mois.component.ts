@@ -48,8 +48,13 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
     this.clotureService.getallFolders().subscribe(
       (data) => {
         if (data != null) {
-          //console.log(data);
-          this.folderCategories = data;
+          // //console.log(data);
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].foldername != "ETAT") {
+              this.folderCategories.push(data[i]);
+            }
+          }
+          
 
         this.dataSource = new MatTableDataSource(this.folderCategories);
         this.ngAfterViewInit();
@@ -59,7 +64,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
         }
       },
       (error) => {
-        //console.log(error);
+        // //console.log(error);
          this.openDialogError(error);;
         throw error;
       }
@@ -71,7 +76,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
 
       (data) => {
 
-        console.log(data);
+         //console.log(data);
         if(data!=null){
           for(let i=0;i<data.length;i++){
             this.getEtatFile(data[i]);
@@ -83,7 +88,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
 
       },
       error => {
-       // console.log(error);
+       //  //console.log(error);
          this.openDialogError(error);;
         throw error;
 
@@ -99,7 +104,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
   }
   ngAfterViewInit() {
    if(this.folderCategories.length!=0){
-    // console.log(this.folderCategories)
+    //  //console.log(this.folderCategories)
     this.dataSource.sort = this.sort;
    }
     
@@ -113,23 +118,23 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
     
       (data) => {
         
-        console.log(data);
+         //console.log(data);
         if(this.EtatArray.length>0){
           
           
           for(let i=0;i<this.EtatArray.length;i++){
            
             if(this.EtatArray[i].idFolder==file.idfolder){
-              //console.log(this.EtatArray[i].idFolder+"==>"+data)
+              // //console.log(this.EtatArray[i].idFolder+"==>"+data)
               this.EtatArray[i].etat.push(data)
-              //console.log(this.EtatArray[i].etat)
+              // //console.log(this.EtatArray[i].etat)
               exist=true;
             }
           }
         }
             if(!exist){
               this.state=[];
-             // console.log(this.state)
+             //  //console.log(this.state)
               this.state.push (data);
               this.EtatArray.push({ "idFolder":file.idfolder, "etat": this.state })
             }
@@ -138,12 +143,12 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
         
 
         
-        //console.log(this.EtatArray)
+        // //console.log(this.EtatArray)
         
 
       },
       (error) => {
-        //console.log(error);
+        // //console.log(error);
          this.openDialogError(error);;
         throw error;
       }
@@ -194,7 +199,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
       cancelText: 'Annuler'
     
   }).then( (result) => {
-    //console.log(result ? 'Agreed.' : 'Disagreed.');
+    // //console.log(result ? 'Agreed.' : 'Disagreed.');
     if(result){
      this.confirmClotureMois();
     }
@@ -203,8 +208,26 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
   }
 
   confirmClotureMois(){
-    //console.log("yes")
+    // //console.log("yes")
     this.clotureMoisService.updatePayMonth().subscribe(
+      data=>{
+        if(data!=null){
+          //this.showAlert("Le mois a bien été cloturé.");
+          this.updateStructureStatus();
+        }else{
+          this.openDialog();
+        }
+      },
+      (error) => {
+        // //console.log(error);
+         this.openDialogError(error);;
+        throw error;
+      }
+    )
+  }
+
+  updateStructureStatus(){
+    this.clotureMoisService.updateStructureClotureMois().subscribe(
       data=>{
         if(data!=null){
           this.showAlert("Le mois a bien été cloturé.");
@@ -213,13 +236,12 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
         }
       },
       (error) => {
-        //console.log(error);
+        // //console.log(error);
          this.openDialogError(error);;
         throw error;
       }
     )
   }
-
   showAlert(message: string) {
     mobiscroll.alert({
       title: 'Cloture Mois',

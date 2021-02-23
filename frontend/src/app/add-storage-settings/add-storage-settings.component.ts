@@ -1,3 +1,4 @@
+import { Efile } from './../Models/Efile';
 import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
 import { FileTypeToFolder } from './../Models/FileTypeToFolder';
 import { FolderArchive } from './../Models/FolderArchive';
@@ -54,6 +55,7 @@ export class AddStorageSettingsComponent implements OnInit {
   archiveAdded:Boolean=false;
   fileTypeToFolder:FileTypeToFolder[]=[];
   allFiles:FileType[]=[];
+
   tempTableFiles:clotureFiles[]=[];
 
   formSettings: MbscFormOptions= {
@@ -75,19 +77,19 @@ export class AddStorageSettingsComponent implements OnInit {
   ngOnInit(): void {
      //get currentUser
      this.currentUser.username = this.token.getUsername();
-     //console.log(this.currentUser)
+     // //console.log(this.currentUser)
      this.paramService.getUserByUserName(this.currentUser).subscribe(
        data => {
          if (data != null) {
  
-           // console.log(data);
+           //  //console.log(data);
            this.currentUser.iduser = data.iduser;
          } else {
           this.openDialog();
          }
        },
        error => {
-         //console.log(error);
+         // //console.log(error);
           this.openDialogError(error);;
          throw error;
        }
@@ -98,7 +100,7 @@ export class AddStorageSettingsComponent implements OnInit {
       this.paramService.getAllFileType().subscribe(
         (data) => {
 
-          //console.log(data);
+          // //console.log(data);
           if (data != null) {
             this.allFiles=data;
           } else {
@@ -109,7 +111,7 @@ export class AddStorageSettingsComponent implements OnInit {
   
         },
         error => {
-          // console.log(error);
+          //  //console.log(error);
            this.openDialogError(error);;
           throw error;
   
@@ -137,7 +139,7 @@ export class AddStorageSettingsComponent implements OnInit {
 }
    //update list of checked files
    updateCheckedFiles(file:clotureFiles){
-    console.log(file)
+     //console.log(file)
     if(this.tempTableFiles.length>0){
       let index=this.ischekedindex(file);
       if(index!=-1){
@@ -149,7 +151,7 @@ export class AddStorageSettingsComponent implements OnInit {
       this.tempTableFiles.push(file);
     }
     
-    console.log(this.tempTableFiles)
+     //console.log(this.tempTableFiles)
   }
 
   
@@ -157,7 +159,7 @@ export class AddStorageSettingsComponent implements OnInit {
     if(this.tempTableFiles.length==0){
       this.showAlert("Ajout d'un nouveau dossier","Vous devez sélectionner au moins un fichier à mettre dans ce dossier!")
      }else{
-       console.log(form)
+        //console.log(form)
        this.folder.foldername=form.foldername;
        this.folder.folderpath=form.folderpath;
       this.folder.displayedfolderpath=form.folderpath;
@@ -165,7 +167,7 @@ export class AddStorageSettingsComponent implements OnInit {
        this.paramService.addNewFolder(this.folder).subscribe(
         (data) => {
 
-          console.log(data);
+           //console.log(data);
           if (data != null) {
             this.folderArchive.archfoldername = data.foldername;
        this.folderArchive.archfolderpath = data.folderpath;
@@ -183,7 +185,7 @@ export class AddStorageSettingsComponent implements OnInit {
   
         },
         error => {
-          // console.log(error);
+          //  //console.log(error);
            this.openDialogError(error);;
           throw error;
   
@@ -207,12 +209,13 @@ export class AddStorageSettingsComponent implements OnInit {
  
 }
 saveFilesToFolder(files:Array<FileTypeToFolder>){
-  console.log(files)
+   //console.log(files)
   this.paramService.addFilesToNewFolder(files).subscribe(
     (data) => {
 
-      console.log(data);
+       //console.log(data);
       if (data != null) {
+        
         this.fileAdded=true;
         this.showAlertAddedNewFolder();
       } else {
@@ -223,7 +226,7 @@ saveFilesToFolder(files:Array<FileTypeToFolder>){
 
     },
     error => {
-      // console.log(error);
+      //  //console.log(error);
        this.openDialogError(error);;
       throw error;
 
@@ -235,11 +238,12 @@ saveAddedFolderArchive(archiveFolder:FolderArchive){
   this.paramService.addNewFolderArchive(archiveFolder).subscribe(
     (data) => {
 
-      console.log(data);
+       //console.log(data);
       if (data != null) {
         this.archiveAdded=true;
         for(let i=0;i<this.tempTableFiles.length;i++){
           this.fileTypeToFolder.push({"idfiletype":this.tempTableFiles[i].idfiletype,"idfolder":data.idfolder});
+          
         }
         this.saveFilesToFolder(this.fileTypeToFolder);
         this.showAlertAddedNewFolder();
@@ -251,7 +255,7 @@ saveAddedFolderArchive(archiveFolder:FolderArchive){
 
     },
     error => {
-      // console.log(error);
+      //  //console.log(error);
        this.openDialogError(error);;
       throw error;
 
@@ -266,7 +270,7 @@ saveAddedFolderArchive(archiveFolder:FolderArchive){
         title: "Ajout d'un nouveau dossier",
         message: "Le dossier et ses fichiers ont bien été ajoutés."
       }).then( (result) => {
-        //console.log(result ? 'Agreed.' : 'Disagreed.');
+        // //console.log(result ? 'Agreed.' : 'Disagreed.');
        
          this.router.navigateByUrl("storageSettings");
         

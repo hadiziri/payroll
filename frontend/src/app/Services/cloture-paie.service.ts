@@ -26,7 +26,7 @@ export class CloturePaieService {
   public getallFolders():Observable<Array<Folder>>{
     return this.httpClient.get<Array<Folder>>(this.host+"getAllFolders").pipe(
      catchError((err) => {
-       console.log('error caught in service')
+        //console.log('error caught in service')
        console.error(err);
        return throwError(err);
      })
@@ -36,7 +36,7 @@ export class CloturePaieService {
   public getFilesByFolder(folder:Folder):Observable<Array<clotureFiles>>{
    return this.httpClient.post<Array<clotureFiles>>(this.host+"getFilesByFolder",folder).pipe(
     catchError((err) => {
-      console.log('error caught in service')
+       //console.log('error caught in service')
       console.error(err);
       return throwError(err);
     })
@@ -47,7 +47,7 @@ export class CloturePaieService {
  public getEtatFile(file:clotureFiles):Observable<number>{
    return this.httpClient.post<number>(this.host+"getEtatFile",file).pipe(
      catchError((err) => {
-       console.log('error caught in service')
+        //console.log('error caught in service')
        console.error(err);
        return throwError(err);
      })
@@ -57,7 +57,7 @@ export class CloturePaieService {
  public generateTableFiles():Observable<Array<clotureFiles>>{
   return this.httpClient.get<Array<clotureFiles>>(this.host+"generateTableFiles").pipe(
     catchError((err) => {
-      console.log('error caught in service')
+       //console.log('error caught in service')
       console.error(err);
       return throwError(err);
     })
@@ -68,7 +68,7 @@ export class CloturePaieService {
  public generateSystemFiles():Observable<Array<clotureFiles>>{
   return this.httpClient.get<Array<clotureFiles>>(this.host+"generateSystemFiles").pipe(
     catchError((err) => {
-      console.log('error caught in service')
+       //console.log('error caught in service')
       console.error(err);
       return throwError(err);
     })
@@ -78,7 +78,7 @@ export class CloturePaieService {
  public generateFrubAlph():Observable<Array<clotureFiles>>{
   return this.httpClient.get<Array<clotureFiles>>(this.host+"generateFrubAlph").pipe(
     catchError((err) => {
-      console.log('error caught in service')
+       //console.log('error caught in service')
       console.error(err);
       return throwError(err);
     })
@@ -88,7 +88,7 @@ export class CloturePaieService {
  public generateFrubNum():Observable<Array<clotureFiles>>{
   return this.httpClient.get<Array<clotureFiles>>(this.host+"generateFrubNum").pipe(
     catchError((err) => {
-      console.log('error caught in service')
+       //console.log('error caught in service')
       console.error(err);
       return throwError(err);
     })
@@ -98,7 +98,7 @@ export class CloturePaieService {
  public generateNewPaieFiles():Observable<Array<clotureFiles>>{
   return this.httpClient.get<Array<clotureFiles>>(this.host+"generateNewPaieFiles").pipe(
     catchError((err) => {
-      console.log('error caught in service')
+       //console.log('error caught in service')
       console.error(err);
       return throwError(err);
     })
@@ -108,7 +108,7 @@ export class CloturePaieService {
  public generatePersFiles():Observable<Array<clotureFiles>>{
   return this.httpClient.get<Array<clotureFiles>>(this.host+"generatePersFiles").pipe(
     catchError((err) => {
-      console.log('error caught in service')
+       //console.log('error caught in service')
       console.error(err);
       return throwError(err);
     })
@@ -118,7 +118,7 @@ export class CloturePaieService {
  public getAllCloturePaie():Observable<Array<clotureFiles>>{
   return this.httpClient.get<Array<clotureFiles>>(this.host+"getAllCloturePaie").pipe(
     catchError((err) => {
-      console.log('error caught in service')
+       //console.log('error caught in service')
       console.error(err);
       return throwError(err);
     })

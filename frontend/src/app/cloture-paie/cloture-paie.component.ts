@@ -87,7 +87,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
 
       (data) => {
 
-        //console.log(data);
+        // //console.log(data);
         if (data != null) {
           for (let i = 0; i < data.length; i++) {
             this.getEtatFile(data[i]);
@@ -100,7 +100,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
 
       },
       error => {
-        // console.log(error);
+        //  //console.log(error);
          this.openDialogError(error);;
         throw error;
 
@@ -117,7 +117,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
     this.clotureService.getallFolders().subscribe(
       (data) => {
         if (data != null) {
-          //console.log(data);
+          // //console.log(data);
           for (let i = 0; i < data.length; i++) {
             if (data[i].foldername != "ETAT") {
               this.folderCategories.push(data[i]);
@@ -130,7 +130,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
         }
       },
       (error) => {
-        // console.log(error);
+        //  //console.log(error);
          this.openDialogError(error);;
         throw error;
       }
@@ -141,7 +141,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
   getStatusFile(idFile: number) {
     /* this.EtatArray.forEach(
        (element)=>{
-         console.log(element)
+          //console.log(element)
          if(element.idFile==idFile){
            return element.etat;
            
@@ -163,14 +163,14 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
 
     this.ELEMENT_DATA = [];
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-    //console.log(this.EtatArray)
+    // //console.log(this.EtatArray)
 
     let folder: Folder = { "idfolder": 0, "foldername": event.tab.textLabel, "folderpath": "", "statusfolder": 0 ,"displayedfolderpath":""};
 
     this.clotureService.getFilesByFolder(folder).subscribe(
       (data) => {
         if (data != null) {
-          //console.log(data);
+          // //console.log(data);
           this.ELEMENT_DATA = data;
           this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
           //this.globalStatusFolder(data,folder.foldername);
@@ -182,7 +182,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
 
       },
       (error) => {
-        // console.log(error);
+        //  //console.log(error);
          this.openDialogError(error);;
         throw error;
       }
@@ -209,7 +209,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
      this.globalFolderStatus=1;
     }
     
-    console.log(this.globalFolderStatus)
+     //console.log(this.globalFolderStatus)
    }
  */
 
@@ -219,11 +219,11 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
 
       (data) => {
         if (data != null) {
-          //console.log(data);
+          // //console.log(data);
           this.state = data;
           this.EtatArray.push({ "idFile": file.idfiletype, "etat": this.state })
 
-          //console.log(this.dataSource)
+          // //console.log(this.dataSource)
         } else {
           this.openDialog();
         }
@@ -232,7 +232,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
 
       },
       (error) => {
-        //console.log(error);
+        // //console.log(error);
          this.openDialogError(error);;
         throw error;
       }
@@ -243,14 +243,14 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
   }
 
   generateFiles(description: string) {
-    //console.log(description);
+    // //console.log(description);
     this.showSpinner = true;
     switch (description) {
       case "TABLES":
         this.clotureService.generateTableFiles().subscribe(
           (data) => {
             if (data != null) {
-              //console.log(data);
+              // //console.log(data);
               let msg = "Les fichiers tables ont bien été générés et la paie a bien été cloturée.";
               this.showSpinner = false;
               this.showAlert(msg);
@@ -262,7 +262,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
           },
 
           (error) => {
-            //console.log(error);
+            // //console.log(error);
              this.openDialogError(error);;
             throw error;
           }
@@ -276,7 +276,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
         this.clotureService.generateSystemFiles().subscribe(
           (data) => {
             if (data != null) {
-              //console.log(data);
+              // //console.log(data);
               let msg = "Les fichiers systèmes ont bien été générés et la paie a bien été cloturée.";
               this.showSpinner = false;
               this.showAlert(msg);
@@ -289,7 +289,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
           },
 
           (error) => {
-            //console.log(error);
+            // //console.log(error);
              this.openDialogError(error);;
             throw error;
           }
@@ -302,8 +302,8 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
         this.clotureService.generateFrubAlph().subscribe(
           (data) => {
             if (data != null) {
-              this.showSpinner = false;
-              //console.log(data);
+              //this.showSpinner = false;
+              // //console.log(data);
               this.FrubAlph = true;
               this.showAlertFRUB();
             } else {
@@ -315,7 +315,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
           },
 
           (error) => {
-            //console.log(error);
+            // //console.log(error);
              this.openDialogError(error);;
             throw error;
           }
@@ -323,8 +323,8 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
         this.clotureService.generateFrubNum().subscribe(
           (data) => {
             if (data != null) {
-              //console.log(data);
-              this.showSpinner = false;
+              // //console.log(data);
+              //this.showSpinner = false;
               this.FrubNum = true;
               this.showAlertFRUB();
             } else {
@@ -335,7 +335,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
 
           },
           (error) => {
-            //console.log(error);
+            // //console.log(error);
              this.openDialogError(error);;
             throw error;
           }
@@ -347,7 +347,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
 
           (data) => {
             if (data != null) {
-              //console.log(data);
+              // //console.log(data);
               let msg = "Les fichiers pers ont bien été générés et la paie a bien été cloturée.";
               this.showSpinner = false;
               this.showAlert(msg);
@@ -360,7 +360,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
           },
 
           (error) => {
-            //console.log(error);
+            // //console.log(error);
              this.openDialogError(error);;
             throw error;
           }
@@ -368,11 +368,11 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
         break;
 
       case "NEWPAIE":
-        console.log("generating NEWPAIE ");
+         //console.log("generating NEWPAIE ");
         this.clotureService.generateNewPaieFiles().subscribe(
           (data) => {
             if (data != null) {
-              //console.log(data);
+              // //console.log(data);
               let msg = "Les fichiers newpaie ont bien été générés et la paie a bien été cloturée.";
               this.showSpinner = false;
               this.showAlert(msg);
@@ -385,7 +385,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
           },
 
           (error) => {
-            //console.log(error);
+            // //console.log(error);
              this.openDialogError(error);;
             throw error;
           }

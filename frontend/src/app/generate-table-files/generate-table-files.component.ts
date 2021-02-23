@@ -1,3 +1,4 @@
+import { Efile } from './../Models/Efile';
 import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
 import { HomeService } from './../Services/home.service';
 import { ArchiveSentFiles } from './../Models/ArchiveSentFiles';
@@ -30,6 +31,8 @@ export class GenerateTableFilesComponent implements OnInit {
   email:EmailDB={"emailgenerationdate":new Date(),"emailobject":"","idemail":0,"iduser":0,"msg":"","receiver":"","sender":""};
   archiveSentFiles:ArchiveSentFiles[]=[];
   emailSaved:Boolean=false;
+  eFiles:Efile[]=[];
+  idEmail:number=0;
   archiveSentFilesSaved:Boolean=false;
   formSettings: MbscFormOptions = {
     theme: 'mobiscroll',
@@ -62,7 +65,7 @@ export class GenerateTableFilesComponent implements OnInit {
     this.clotureService.getFilesByFolder(folder).subscribe(
       (data) => {
         if (data != null) {
-          console.log(data);
+           //console.log(data);
           this.allTableFiles=data;
           //this.globalStatusFolder(data,folder.foldername);
         } else {
@@ -73,7 +76,7 @@ export class GenerateTableFilesComponent implements OnInit {
 
       },
       (error) => {
-        // console.log(error);
+        //  //console.log(error);
          this.openDialogError(error);;
         throw error;
       }
@@ -86,7 +89,7 @@ export class GenerateTableFilesComponent implements OnInit {
     this.paramService.getUserByUserName(this.currentUser).subscribe(
       (data) => {
       if(data!=null){
-        //console.log(data);
+        // //console.log(data);
         this.currentUser=data;
       }else{
         this.openDialog();
@@ -95,7 +98,7 @@ export class GenerateTableFilesComponent implements OnInit {
 
       },
       error => {
-        console.log(error);
+         //console.log(error);
          this.openDialogError(error);;
         throw error;
 
@@ -122,7 +125,7 @@ export class GenerateTableFilesComponent implements OnInit {
 
   //update list of checked files
   updateCheckedFiles(file:clotureFiles){
-    console.log(file)
+     //console.log(file)
     if(this.tempTableFiles.length>0){
       let index=this.ischekedindex(file);
       if(index!=-1){
@@ -134,7 +137,7 @@ export class GenerateTableFilesComponent implements OnInit {
       this.tempTableFiles.push(file);
     }
     
-    console.log(this.tempTableFiles)
+     //console.log(this.tempTableFiles)
   }
 
   //to print email error
@@ -162,7 +165,7 @@ export class GenerateTableFilesComponent implements OnInit {
     for(let i=0;i<this.tempTableFiles.length;i++){
       this.mailRequest.filesName.push(this.tempTableFiles[i].prefixfiletype)
     }
-    console.log(this.mailRequest)
+     //console.log(this.mailRequest)
      /**************initialisation of mail to save in DB************************************* */
      this.email.sender=this.mailRequest.from;
      this.email.emailobject=this.mailRequest.subject;
@@ -175,7 +178,7 @@ export class GenerateTableFilesComponent implements OnInit {
     this.SendTableFilesService.sendEmailFiles(this.mailRequest).subscribe(
       (data) => {
         if(data!=null){
-          //console.log(data);
+          // //console.log(data);
           if(data.status==true){
              /************** save email in DB************************************* */
             this.saveEmailDB();
@@ -187,7 +190,7 @@ export class GenerateTableFilesComponent implements OnInit {
   
         },
         error => {
-          console.log(error);
+           //console.log(error);
            this.openDialogError(error);;
           throw error;
   
@@ -202,21 +205,34 @@ saveEmailDB(){
   this.homeService.SaveSentEmail(this.email).subscribe(
     (data) => {
     
-      console.log(data);
+       //console.log(data);
       if(data!=null){
         this.emailSaved=true;
+        this.idEmail=data.idemail;
         for(let i=0;i<this.tempTableFiles.length;i++){
-          this.archiveSentFiles.push({"idemail":data.idemail,"idfile":this.tempTableFiles[i].idfiletype});
+         
+          let efile:Efile={
+            "idfile":0,
+            "idfiletype":this.tempTableFiles[i].idfiletype,
+            "filegenerationdate":new  Date(),          
+            "filename":this.tempTableFiles[i].descfiletype,
+            "idpaymonth":1,
+            "idstructure":1,
+            "iduser":this.currentUser.iduser,
+            "validatedflag":1
+          }
+          this.eFiles.push(efile);
         }
-        console.log(this.archiveSentFiles)
-        this.saveArchiveSentFiles();
+         //console.log(this.archiveSentFiles)
+         this.saveEfiles();
+       
       }else{
         this.openDialog();
       }
 
     },
     error => {
-      console.log(error);
+       //console.log(error);
        this.openDialogError(error);;
       throw error;
 
@@ -231,9 +247,10 @@ saveArchiveSentFiles(){
   this.homeService.SaveArchiveSentFiles(this.archiveSentFiles).subscribe(
     (data) => {
     
-      console.log(data);
+       //console.log(data);
       if(data!=null){
         this.archiveSentFilesSaved=true;
+       
         this.showAlert("Envoie Email","L'email a bien été envoyé aux gestionnaires");
       }else{
         this.openDialog();
@@ -241,13 +258,41 @@ saveArchiveSentFiles(){
 
     },
     error => {
-      console.log(error);
+       //console.log(error);
        this.openDialogError(error);;
       throw error;
 
     }
 
 
+  )
+}
+
+saveEfiles(){
+  this.SendTableFilesService.saveEFiles(this.eFiles).subscribe(
+    (data) => {
+    
+      //console.log(data);
+     if(data!=null){
+       for(let i=0;i<data.length;i++){
+        this.archiveSentFiles.push({"idemail":this.idEmail,"idfile":data[i].idfile});
+       }
+      
+      this.saveArchiveSentFiles();
+     }else{
+       this.openDialog();
+     }
+
+   },
+   error => {
+      //console.log(error);
+      this.openDialogError(error);;
+     throw error;
+
+   }
+
+
+ 
   )
 }
   newEmail(): FormControl {

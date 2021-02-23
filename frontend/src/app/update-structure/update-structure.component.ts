@@ -75,7 +75,7 @@ export class UpdateStructureComponent implements OnInit {
     });
 
     this.activatedRoute.queryParams.subscribe(params => {
-     //console.log(params["idstructure"])
+     // //console.log(params["idstructure"])
      this.structureArchive.archemailgroupemanagers=params["emailgroupmanagers"];
      this.structureArchive.archstatusstructure=params["statusstructure"];
      this.structureArchive.archstructurecodelike=params["structurecodelike"];
@@ -89,7 +89,7 @@ export class UpdateStructureComponent implements OnInit {
   }
   
   ngOnInit(): void {
-  // console.log(this.activatedRoute.snapshot.params.id)
+  //  //console.log(this.activatedRoute.snapshot.params.id)
    let object:any=this.formGroup.get("idactivity");
    if(object!=null){
     object.setValue(this.structureArchive.idactivity);
@@ -100,14 +100,14 @@ export class UpdateStructureComponent implements OnInit {
   (data) => {
     if(data!=null){
       this.allShActivities = data;
-     // console.log("allshavtivities");
-     // console.log(data);
+     //  //console.log("allshavtivities");
+     //  //console.log(data);
     }else{
       this.openDialog();
     } 
   },
   error => {
-   // console.log(error);
+   //  //console.log(error);
      this.openDialogError(error);;
     throw error;
   }
@@ -116,19 +116,19 @@ export class UpdateStructureComponent implements OnInit {
 
 //get currentUser
 this.currentUser.username=this.token.getUsername();
-//console.log(this.currentUser)
+// //console.log(this.currentUser)
 this.paramService.getUserByUserName(this.currentUser).subscribe(
   data=>{
     if(data!=null){
       
-     // console.log(data);
+     //  //console.log(data);
       this.currentUser.iduser=data.iduser;
     }else{
       this.openDialog();
     }
   },
   error=>{
-   // console.log(error);
+   //  //console.log(error);
      this.openDialogError(error);;
     throw error;
   }
@@ -173,19 +173,19 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
          this.StructureToUpdate.structurecodenotlike=this.post.structurecodenotlike;
        }
        this.StructureToUpdate.idstructure=this.activatedRoute.snapshot.params.id;
-      // console.log(this.StructureToUpdate)
+      //  //console.log(this.StructureToUpdate)
        this.paramService.updateStructure(this.StructureToUpdate).subscribe(
          data=>{
            if(data!=null){
              this.messageAdded=true;
-            // console.log(data)
+            //  //console.log(data)
              this.showAlert();
            }else{
             this.openDialog();
            }
          },
          error=>{
-          // console.log(error);
+          //  //console.log(error);
             this.openDialogError(error);;
            throw error;
          }
@@ -193,22 +193,22 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
        );
    
        this.structureArchive.idstructure=this.activatedRoute.snapshot.params.id;
-        // console.log(this.currentUser)
+        //  //console.log(this.currentUser)
          this.structureArchive.iduser=this.currentUser.iduser;
-         console.log(this.structureArchive)
+          //console.log(this.structureArchive)
        this.paramService.updateStructureArchive(this.structureArchive).subscribe(
    
          data=>{
            if(data!=null){
              this.messageArchive=true;
-             //console.log(data)
+             // //console.log(data)
              this.showAlert();
            }else{
             this.openDialog();
            }
          },
          error=>{
-           //console.log(error);
+           // //console.log(error);
             this.openDialogError(error);;
            throw error;
          }

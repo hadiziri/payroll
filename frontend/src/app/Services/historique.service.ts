@@ -26,7 +26,7 @@ export class HistoriqueService {
   public  getAllEmails(user:User):Observable<Array<EmailDB>>{
     return this.httpClient.post<Array<EmailDB>>(this.host+"getAllEmails",user).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -36,7 +36,7 @@ export class HistoriqueService {
   public getSentFiles(email:EmailDB):Observable<Array<String>>{
     return this.httpClient.post<Array<String>>(this.host+"getSentFiles",email).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -46,7 +46,7 @@ export class HistoriqueService {
   public getArchiveStructure(operation:String):Observable<Array<ArchiveStructure>>{
     return this.httpClient.post<Array<ArchiveStructure>>(this.host+"getArchiveStructure",operation).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -56,7 +56,7 @@ export class HistoriqueService {
   public getArchiveFolder(operation:String):Observable<Array<FolderArchive>>{
     return this.httpClient.post<Array<FolderArchive>>(this.host+"getArchiveFolder",operation).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })

@@ -27,7 +27,7 @@ export class HomeService {
   public getAllStructures():Observable <Array<Structure>>{
     return this.httpClient.get <Array<Structure>>(this.host+"getAllStructures").pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -39,7 +39,7 @@ export class HomeService {
   public sendEmailZip( mailReq:MailRequest):Observable<MailResponse>{
     return this.httpClient.post<MailResponse>(this.host+"sendEmailZip",mailReq).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -50,7 +50,7 @@ export class HomeService {
   public SaveSentEmail(email:EmailDB):Observable<EmailDB>{
     return this.httpClient.post<EmailDB>(this.host+"SaveSentEmail",email).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -61,7 +61,7 @@ export class HomeService {
   public SaveArchiveSentFiles(files:ArchiveSentFiles[]):Observable<Array<ArchiveSentFiles>>{
     return this.httpClient.post<Array<ArchiveSentFiles>>(this.host+"SaveArchiveSentFiles",files).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -71,7 +71,7 @@ export class HomeService {
   public getEfiles(structure:Structure):Observable<Array<Efile>>{
     return this.httpClient.post<Array<Efile>>(this.host+"getEfiles",structure).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -81,7 +81,7 @@ export class HomeService {
   public suspendreStructure(structure:Structure):Observable<Structure>{
     return this.httpClient.post<Structure>(this.host+"suspendreStructure",structure).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -91,7 +91,7 @@ export class HomeService {
   public activerStructure(structure:Structure):Observable<Structure>{
     return this.httpClient.post<Structure>(this.host+"activerStructure",structure).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -101,7 +101,7 @@ export class HomeService {
   public updateStructureStatus(structure:Structure):Observable<Structure>{
     return this.httpClient.post<Structure>(this.host+"updateStructureStatus",structure).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -112,7 +112,7 @@ export class HomeService {
   public getEtatJournal():Observable<Array<EtatJournal>>{
     return this.httpClient.get<Array<EtatJournal>>(this.host+"getEtatJournal").pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -122,7 +122,7 @@ export class HomeService {
   public getEtatMand():Observable<Array<EtatMand>>{
     return this.httpClient.get<Array<EtatMand>>(this.host+"getEtatMand").pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -132,7 +132,7 @@ export class HomeService {
   public getEtatMip():Observable<Array<EtatMip>>{
     return this.httpClient.get<Array<EtatMip>>(this.host+"getEtatMip").pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -142,7 +142,7 @@ export class HomeService {
   public getEtatRecap():Observable<Array<EtatRecap>>{
     return this.httpClient.get<Array<EtatRecap>>(this.host+"getEtatRecap").pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -152,7 +152,7 @@ export class HomeService {
   public getEtatRet():Observable<Array<EtatRet>>{
     return this.httpClient.get<Array<EtatRet>>(this.host+"getEtatRet").pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -162,7 +162,7 @@ export class HomeService {
   public generateJournal(journal:Array<EtatJournal>,nameStructure:String):Observable<Array<EtatJournal>>{
     return this.httpClient.post<Array<EtatJournal>>(this.host+"generateJournal",journal,{params:new HttpParams().set('structure', nameStructure.toString())}).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -172,7 +172,7 @@ export class HomeService {
   public generateMip(mip:Array<EtatMip>,nameStructure:String):Observable<Array<EtatMip>>{
     return this.httpClient.post<Array<EtatMip>>(this.host+"generateMip",mip,{params:new HttpParams().set('structure', nameStructure.toString())}).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -181,7 +181,7 @@ export class HomeService {
   public generateRet(ret:Array<EtatRet>,nameStructure:String):Observable<Array<EtatRet>>{
     return this.httpClient.post<Array<EtatRet>>(this.host+"generateRet",ret,{params:new HttpParams().set('structure', nameStructure.toString())}).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -191,7 +191,7 @@ export class HomeService {
   public generateMand(mand:Array<EtatMand>,nameStructure:String):Observable<Array<EtatMand>>{
     return this.httpClient.post<Array<EtatMand>>(this.host+"generateMand",mand,{params:new HttpParams().set('structure', nameStructure.toString())}).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -200,7 +200,7 @@ export class HomeService {
   public generateRecap(recap:Array<EtatRecap>,nameStructure:String):Observable<Array<EtatRecap>>{
     return this.httpClient.post<Array<EtatRecap>>(this.host+"generateRecap",recap,{params:new HttpParams().set('structure', nameStructure.toString())}).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -210,7 +210,7 @@ export class HomeService {
   public saveGeneratedFiles(files:Array<Efile>):Observable<Array<Efile>>{
     return this.httpClient.post<Array<Efile>>(this.host+"saveGeneratedFiles",files).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })
@@ -220,7 +220,7 @@ export class HomeService {
   public updateStructureFilesGenerated(structure:Structure):Observable<Structure>{
     return this.httpClient.post<Structure>(this.host+"updateStructureFilesGenerated",structure).pipe(
       catchError((err) => {
-        console.log('error caught in service')
+         //console.log('error caught in service')
         console.error(err);
         return throwError(err);
       })

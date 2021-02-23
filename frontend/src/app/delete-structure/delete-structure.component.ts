@@ -89,7 +89,7 @@ export class DeleteStructureComponent implements OnInit {
       (data) => {
         if(data!=null){
           this.ELEMENT_DATA = data;
-          //console.log(data);
+          // //console.log(data);
           this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
         }else{
           this.openDialog();
@@ -98,7 +98,7 @@ export class DeleteStructureComponent implements OnInit {
 
       },
       error => {
-        //console.log(error);
+        // //console.log(error);
          this.openDialogError(error);;
         throw error;
 
@@ -106,19 +106,19 @@ export class DeleteStructureComponent implements OnInit {
     );
     //get currentUser
 this.currentUser.username=this.token.getUsername();
-//console.log(this.currentUser)
+// //console.log(this.currentUser)
 this.paramService.getUserByUserName(this.currentUser).subscribe(
   data=>{
     if(data!=null){
       
-      //console.log(data);
+      // //console.log(data);
       this.currentUser.iduser=data.iduser;
     }else{
       this.openDialog();
     }
   },
   error=>{
-    //console.log(error);
+    // //console.log(error);
      this.openDialogError(error);;
     throw error;
   }
@@ -130,7 +130,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
  
 
   updateStructure(element:Structure){
-   // console.log(element)
+   //  //console.log(element)
     let navigationExtras: NavigationExtras = {
       queryParams: {
         "idstructure":element.idstructure,
@@ -157,7 +157,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
     this.structureArchive.archstructurename=element.structurename;
     this.structureArchive.idactivity=element.idactivity;
     this.structureArchive.structureoperation="delete";
-    //console.log(this.structureArchive)
+    // //console.log(this.structureArchive)
     this.showConfirm();
   
   }
@@ -171,13 +171,13 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
       cancelText: 'Annuler'
     
   }).then( (result) => {
-    //console.log(result ? 'Agreed.' : 'Disagreed.');
+    // //console.log(result ? 'Agreed.' : 'Disagreed.');
     if(result){
       this.paramService.deleteStructure(this.structureArchive).subscribe(
         data=>{
           if(data!=null){
             
-            //console.log(data);
+            // //console.log(data);
             this.showAlert();
            
           }else{
@@ -185,7 +185,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
           }
         },
         error=>{
-          //console.log(error);
+          // //console.log(error);
            this.openDialogError(error);;
           throw error;
         }

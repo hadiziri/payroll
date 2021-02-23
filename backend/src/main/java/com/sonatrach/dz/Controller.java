@@ -244,7 +244,9 @@ public class Controller {
 		return lesStructures;
 	}
 
-	/****************************************************************** Historique ****************************************************************************************************/
+	/******************************************************************
+	 * Historique
+	 ****************************************************************************************************/
 //get all emails sent by user
 	@PostMapping({ "getAllEmails" })
 	public List<EmailDB> getAllEmails(@RequestBody User user) {
@@ -315,7 +317,9 @@ public class Controller {
 		return null;
 	}
 
-	/******************************************************* Send Table files (email)************************************************************************************************/
+	/*******************************************************
+	 * Send Table files (email)
+	 ************************************************************************************************/
 	@PostMapping({ "sendEmailFiles" })
 	public MailResponse sendEmailFiles(@RequestBody MailRequest request) {
 		try {
@@ -350,8 +354,29 @@ public class Controller {
 		return null;
 	}
 
-	/****************************************************** Etat Paie ***************************************************************************************************************/
-	// ************************************************compresser le fichier zip*******************************************************************
+	@PostMapping({ "saveEFiles" })
+	public List<Efile> saveEFiles(@RequestBody List<Efile> files) {
+		try {
+			List<Efile> savedEfiles = new ArrayList();
+			// System.out.println("saveEfile");
+			for (int i = 0; i < files.size(); i++) {
+
+				Efile file = efileRepo.save(files.get(i));
+				// System.out.println(file.getIdfile()+" ");
+				savedEfiles.add(file);
+			}
+			return savedEfiles;
+		} catch (Exception e) {
+			System.out.println("Exception while saveEFiles()==>" + e.getMessage());
+		}
+		return null;
+	}
+
+	/******************************************************
+	 * Etat Paie
+	 ***************************************************************************************************************/
+	// ************************************************compresser le fichier
+	// zip*******************************************************************
 	public String compressDirectory(String zipName, String path) {
 		String sourceFile = path;
 		FileOutputStream fos = null;
@@ -409,7 +434,9 @@ public class Controller {
 
 	}
 
-	// **********************************************************Envoyer les etats des structures par mail (Etat paie)***************************************************
+	// **********************************************************Envoyer les etats
+	// des structures par mail (Etat
+	// paie)***************************************************
 	@PostMapping({ "sendEmailZip" })
 	public MailResponse sendEmailZip(@RequestBody MailRequest request) {
 		try {
@@ -444,7 +471,8 @@ public class Controller {
 		return null;
 	}
 
-	// *************************************************sauvgarder dans la BD l'email ***********************************************************
+	// *************************************************sauvgarder dans la BD
+	// l'email ***********************************************************
 	@PostMapping({ "SaveSentEmail" })
 	public EmailDB saveSentEmail(@RequestBody EmailDB email) {
 		try {
@@ -458,24 +486,28 @@ public class Controller {
 
 	}
 
-	// ***********************************************sauvgarder dans la BDarchiveSentFiles***********************************************************
+	// ***********************************************sauvgarder dans la
+	// BDarchiveSentFiles***********************************************************
 	@PostMapping({ "SaveArchiveSentFiles" })
 	public List<ArchiveSentFiles> SaveArchiveSentFiles(@RequestBody List<ArchiveSentFiles> files) {
+		try {
+			for (int i = 0; i < files.size(); i++) {
 
-		for (int i = 0; i < files.size(); i++) {
-			try {
+				// System.out.println(files.get(i).getIdemail()+" "+files.get(i).getIdfile());
 				archiveSentFilesRepo.save(files.get(i));
-			} catch (Exception e) {
-				System.out.println("Exception while saving ArchiveSentFiles==>" + e.getMessage());
-				return null;
 			}
+			return files;
+		} catch (Exception e) {
+			System.out.println("Exception while saving ArchiveSentFiles==>" + e.getMessage());
+
 		}
 
-		return files;
+		return null;
 
 	}
 
-	// ***************************************get Efiles for choosed struture (find search efiles by id structure)*******************************************
+	// ***************************************get Efiles for choosed struture (find
+	// search efiles by id structure)*******************************************
 	@PostMapping({ "getEfiles" })
 	public List<Efile> getEfiles(@RequestBody Structure structure) {
 		try {
@@ -489,7 +521,8 @@ public class Controller {
 		return null;
 	}
 
-	// ********************************************************** get All structures*********************************************************************
+	// ********************************************************** get All
+	// structures*********************************************************************
 	@GetMapping({ "/getAllStructures" })
 	public List<Structure> getAllStructures() {
 		List<Structure> lesStructures = new ArrayList();
@@ -504,7 +537,8 @@ public class Controller {
 		return lesStructures;
 	}
 
-	// **************************************************update structure status***************************************
+	// **************************************************update structure
+	// status***************************************
 	@PostMapping({ "updateStructureStatus" })
 	public Structure updateStructureStatus(@RequestBody Structure structure) {
 		try {
@@ -516,7 +550,8 @@ public class Controller {
 		return null;
 	}
 
-	// *********************************************Suspendre Structure**********************************************************************************
+	// *********************************************Suspendre
+	// Structure**********************************************************************************
 	@PostMapping({ "suspendreStructure" })
 	public Structure suspendreStructure(@RequestBody Structure structure) {
 		try {
@@ -528,7 +563,8 @@ public class Controller {
 		return null;
 	}
 
-	// ************************************Réactivation de la structure*********************************************************************************
+	// ************************************Réactivation de la
+	// structure*********************************************************************************
 	@PostMapping({ "activerStructure" })
 	public Structure activerStructure(@RequestBody Structure structure) {
 		try {
@@ -540,7 +576,8 @@ public class Controller {
 		return null;
 	}
 
-	// *********************************************Récuperer les etat paie(filtrage par mois et annee)**********************************************************
+	// *********************************************Récuperer les etat paie(filtrage
+	// par mois et annee)**********************************************************
 	@GetMapping({ "getEtatJournal" })
 	public List<EtatJournal> getEtatJournal() {
 		try {
@@ -548,7 +585,7 @@ public class Controller {
 			String currentYear = currentPaymonth.getPaymonth().substring(0, 4);
 			String currentMonth = currentPaymonth.getPaymonth().substring(4, 6);
 			// return etatJournalRepo.findByPayMonth(currentMonth, currentYear);
-			return etatJournalRepo.findByPayMonth("04", "2016");
+			return etatJournalRepo.findByPayMonth(currentMonth, currentYear);
 		} catch (Exception e) {
 			System.out.println("Exception getEtatJournal()==>" + e.getMessage());
 		}
@@ -561,8 +598,8 @@ public class Controller {
 			PayMonth currentPaymonth = paymonthRepo.findByState();
 			String currentYear = currentPaymonth.getPaymonth().substring(0, 4);
 			String currentMonth = currentPaymonth.getPaymonth().substring(4, 6);
-			// String date="01"+"/"+currentMonth+"/"+currentYear;
-			String date = "01/04/2016";
+			String date = "01" + "/" + currentMonth + "/" + currentYear;
+			// String date = "01/04/2016";
 			Date sysDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
 			// System.out.println(sysDate);
 			return etatMandRepo.findByPayMonth();
@@ -579,7 +616,7 @@ public class Controller {
 			String currentYear = currentPaymonth.getPaymonth().substring(0, 4);
 			String currentMonth = currentPaymonth.getPaymonth().substring(4, 6);
 			// return etatMipRepo.findByPayMonth(currentMonth, currentYear);
-			return etatMipRepo.findByPayMonth("04", "2016");
+			return etatMipRepo.findByPayMonth(currentMonth, currentYear);
 		} catch (Exception e) {
 			System.out.println("Exception getEtatJournal()==>" + e.getMessage());
 		}
@@ -592,8 +629,8 @@ public class Controller {
 			PayMonth currentPaymonth = paymonthRepo.findByState();
 			String currentYear = currentPaymonth.getPaymonth().substring(0, 4);
 			String currentMonth = currentPaymonth.getPaymonth().substring(4, 6);
-			// String date="01"+"/"+currentMonth+"/"+currentYear;
-			String date = "01/04/2016";
+			String date = "01" + "/" + currentMonth + "/" + currentYear;
+			// String date = "01/04/2016";
 			Date sysDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
 			// System.out.println(sysDate);
 			return etatRecapRepo.findByPayMonth();
@@ -609,16 +646,17 @@ public class Controller {
 			PayMonth currentPaymonth = paymonthRepo.findByState();
 			String currentYear = currentPaymonth.getPaymonth().substring(0, 4);
 			String currentMonth = currentPaymonth.getPaymonth().substring(4, 6);
-			return etatRetRepo.findByPayMonth("04", "2016");
+			return etatRetRepo.findByPayMonth(currentMonth, currentYear);
 		} catch (Exception e) {
 			System.out.println("Exception getEtatJournal()==>" + e.getMessage());
 		}
 		return null;
 	}
 
-	// *********************************************Générer les etat paie(filtrage par code structure)**********************************************************
+	// *********************************************Générer les etat paie(filtrage
+	// par code structure)**********************************************************
 	@PostMapping({ "generateJournal" })
-	public List<EtatJournal> generateJournal(@RequestBody List<EtatJournal> journal,@RequestParam String structure) {
+	public List<EtatJournal> generateJournal(@RequestBody List<EtatJournal> journal, @RequestParam String structure) {
 		try {
 			// **********************************************get current date from payMonth
 
@@ -627,13 +665,12 @@ public class Controller {
 			String currentMonth = currentDate.getPaymonth().substring(4, 6);
 			String dateFormat = currentYear + "-" + currentMonth;
 
-			//******************************************get Folder path 
-			Folder folder=folderRepo.findByFolderName("ETAT");
+			// ******************************************get Folder path
+			Folder folder = folderRepo.findByFolderName("ETAT");
 			// ********************************folder generation if not exist
-			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\"
-					+ currentYear;
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
 			String pathWithMounth = pathWithYear + "\\" + dateFormat;
-			
+
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
 				fileYear.mkdir();
@@ -642,34 +679,34 @@ public class Controller {
 			if (!fileMounth.exists()) {
 				fileMounth.mkdir();
 			}
-			String pathWithStructure=pathWithMounth+"\\"+structure+" "+dateFormat;
-			File fileStructure=new File(pathWithStructure);
-			if(!fileStructure.exists()) {
+			String pathWithStructure = pathWithMounth + "\\" + structure + " " + dateFormat;
+			File fileStructure = new File(pathWithStructure);
+			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
 			}
-			
+
 			// load file and compile it
 			File file = ResourceUtils.getFile("classpath:etatJour.jrxml");
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(journal);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-			
-			 JRTextExporter exporter = new  JRTextExporter();
+
+			JRTextExporter exporter = new JRTextExporter();
 			exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 180);
 			exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-			Object outputFileName = pathWithStructure + "\\" + "JOUR"+" "+structure
-					+ " " + dateFormat + ".SPL";
+			Object outputFileName = pathWithStructure + "\\" + "JOUR" + " " + structure + " " + dateFormat + ".SPL";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
-						exporter.exportReport();
+			exporter.exportReport();
 			return journal;
 		} catch (Exception e) {
 			System.out.println("Exception generateJournal()==>" + e.getMessage());
 		}
 		return null;
 	}
+
 	@PostMapping({ "generateMip" })
-	public List<EtatMip> generateMip(@RequestBody List<EtatMip> mip,@RequestParam String structure) {
+	public List<EtatMip> generateMip(@RequestBody List<EtatMip> mip, @RequestParam String structure) {
 		try {
 			// **********************************************get current date from payMonth
 
@@ -678,11 +715,10 @@ public class Controller {
 			String currentMonth = currentDate.getPaymonth().substring(4, 6);
 			String dateFormat = currentYear + "-" + currentMonth;
 
-			//******************************************get Folder path 
-			Folder folder=folderRepo.findByFolderName("ETAT");
+			// ******************************************get Folder path
+			Folder folder = folderRepo.findByFolderName("ETAT");
 			// ********************************folder generation if not exist
-			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\"
-					+ currentYear;
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
 			String pathWithMounth = pathWithYear + "\\" + dateFormat;
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
@@ -692,9 +728,9 @@ public class Controller {
 			if (!fileMounth.exists()) {
 				fileMounth.mkdir();
 			}
-			String pathWithStructure=pathWithMounth+"\\"+structure+" "+dateFormat;
-			File fileStructure=new File(pathWithStructure);
-			if(!fileStructure.exists()) {
+			String pathWithStructure = pathWithMounth + "\\" + structure + " " + dateFormat;
+			File fileStructure = new File(pathWithStructure);
+			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
 			}
 
@@ -703,14 +739,14 @@ public class Controller {
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(mip);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-			 JRTextExporter exporter = new  JRTextExporter();
+			JRTextExporter exporter = new JRTextExporter();
 			exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 180);
 			exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-			Object outputFileName = pathWithStructure + "\\" + "MIP"+" "+structure.toString()
-					+ " " + dateFormat + ".SPL";
+			Object outputFileName = pathWithStructure + "\\" + "MIP" + " " + structure.toString() + " " + dateFormat
+					+ ".SPL";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
-			
+
 			exporter.exportReport();
 			return mip;
 		} catch (Exception e) {
@@ -718,8 +754,9 @@ public class Controller {
 		}
 		return null;
 	}
+
 	@PostMapping({ "generateRecap" })
-	public List<EtatRecap> generateRecap(@RequestBody List<EtatRecap> recap,@RequestParam String structure) {
+	public List<EtatRecap> generateRecap(@RequestBody List<EtatRecap> recap, @RequestParam String structure) {
 		try {
 			// **********************************************get current date from payMonth
 
@@ -728,11 +765,10 @@ public class Controller {
 			String currentMonth = currentDate.getPaymonth().substring(4, 6);
 			String dateFormat = currentYear + "-" + currentMonth;
 
-			//******************************************get Folder path 
-			Folder folder=folderRepo.findByFolderName("ETAT");
+			// ******************************************get Folder path
+			Folder folder = folderRepo.findByFolderName("ETAT");
 			// ********************************folder generation if not exist
-			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\"
-					+ currentYear;
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
 			String pathWithMounth = pathWithYear + "\\" + dateFormat;
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
@@ -742,161 +778,159 @@ public class Controller {
 			if (!fileMounth.exists()) {
 				fileMounth.mkdir();
 			}
-			String pathWithStructure=pathWithMounth+"\\"+structure+" "+dateFormat;
-			File fileStructure=new File(pathWithStructure);
-			if(!fileStructure.exists()) {
+			String pathWithStructure = pathWithMounth + "\\" + structure + " " + dateFormat;
+			File fileStructure = new File(pathWithStructure);
+			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
 			}
-			List<EtatRecap> mainReportData=new ArrayList();
-			List<EtatRecap> mainReportDataTotaux=new ArrayList();//first subreport (calcul base cotisation totaux analytique)
-			List<EtatRecap> subReportMonthData=new ArrayList();
-			List<EtatRecap> subReportMonthCssData=new ArrayList();
-			List<EtatRecap> subReportDirData=new ArrayList();
-			List<EtatRecap> subReportDirCssData=new ArrayList();
-			List<EtatRecap> subReportDivData=new ArrayList ();
-			List<EtatRecap> subReportDivCssData=new ArrayList();
-			for(int i=0;i<recap.size();i++) {
-				if(recap.get(i).getReport().equals("0")) {
+			List<EtatRecap> mainReportData = new ArrayList();
+			List<EtatRecap> mainReportDataTotaux = new ArrayList();// first subreport (calcul base cotisation totaux
+																	// analytique)
+			List<EtatRecap> subReportMonthData = new ArrayList();
+			List<EtatRecap> subReportMonthCssData = new ArrayList();
+			List<EtatRecap> subReportDirData = new ArrayList();
+			List<EtatRecap> subReportDirCssData = new ArrayList();
+			List<EtatRecap> subReportDivData = new ArrayList();
+			List<EtatRecap> subReportDivCssData = new ArrayList();
+			for (int i = 0; i < recap.size(); i++) {
+				if (recap.get(i).getReport().equals("0")) {
 					mainReportData.add(recap.get(i));
 					subReportDivData.add(recap.get(i));
 				}
-				if(recap.get(i).getReport().equals("1")) {
-					/*EtatRecap1 recap1 = new EtatRecap1();
-					recap1.setAgtcptanal1(recap.get(i).getAgtcptanal());
-					recap1.setBulmoispaie1(recap.get(i).getBulmoispaie());
-					recap1.setCss1(recap.get(i).getCss());
-					recap1.setDbulcrub1(recap.get(i).getDbulcrub());
-					recap1.setDbuldesignrub1(recap.get(i).getDbuldesignrub());
-					recap1.setDbulimp1(recap.get(i).getDbulimp());
-					recap1.setDbulnature1(recap.get(i).getDbulnature());
-					recap1.setDir1(recap.get(i).getDir());
-					recap1.setDirdes1(recap.get(i).getDirdes());
-					recap1.setDiv1(recap.get(i).getDiv());
-					recap1.setDivdes1(recap.get(i).getDivdes());
-					recap1.setMtbase1(recap.get(i).getMtbase());
-					recap1.setMtrub1(recap.get(i).getMtrub());
-					recap1.setReport1(recap.get(i).getReport());
-					mainReportDataTotaux.add(recap1);*/
+				if (recap.get(i).getReport().equals("1")) {
+					/*
+					 * EtatRecap1 recap1 = new EtatRecap1();
+					 * recap1.setAgtcptanal1(recap.get(i).getAgtcptanal());
+					 * recap1.setBulmoispaie1(recap.get(i).getBulmoispaie());
+					 * recap1.setCss1(recap.get(i).getCss());
+					 * recap1.setDbulcrub1(recap.get(i).getDbulcrub());
+					 * recap1.setDbuldesignrub1(recap.get(i).getDbuldesignrub());
+					 * recap1.setDbulimp1(recap.get(i).getDbulimp());
+					 * recap1.setDbulnature1(recap.get(i).getDbulnature());
+					 * recap1.setDir1(recap.get(i).getDir());
+					 * recap1.setDirdes1(recap.get(i).getDirdes());
+					 * recap1.setDiv1(recap.get(i).getDiv());
+					 * recap1.setDivdes1(recap.get(i).getDivdes());
+					 * recap1.setMtbase1(recap.get(i).getMtbase());
+					 * recap1.setMtrub1(recap.get(i).getMtrub());
+					 * recap1.setReport1(recap.get(i).getReport());
+					 * mainReportDataTotaux.add(recap1);
+					 */
 					mainReportDataTotaux.add(recap.get(i));
 					subReportDivCssData.add(recap.get(i));
-					
+
 				}
-				if(recap.get(i).getReport().equals("2")) {
+				if (recap.get(i).getReport().equals("2")) {
 					subReportMonthData.add(recap.get(i));
 				}
-				if(recap.get(i).getReport().equals("3")) {
+				if (recap.get(i).getReport().equals("3")) {
 					subReportMonthCssData.add(recap.get(i));
-						
-				}
-				if(recap.get(i).getReport().equals("4")) {
-					subReportDirData.add(recap.get(i));
-		
-					
-				
-						
-				}
-				if(recap.get(i).getReport().equals("5")) {
-					subReportDirCssData.add(recap.get(i));
-					
-						
-				}
-				/*if(recap.get(i).getReport().equals("6")) {
-					subReportDivData.add(recap.get(i));
-						
-				}
-				if(recap.get(i).getReport().equals("7")) {
-					subReportDivCssData.add(recap.get(i));
-						
-				}*/
-				
-				
-				
-				
-			}
-			//transform div data without css and sort by div
-			 List<EtatRecap> transform = subReportDivData.stream().collect(
-					 Collectors.groupingBy(foo ->getGroupingByKey(foo))) 
-					 .entrySet().stream()
-			            .map(e -> e.getValue().stream()
-			                .reduce((f1,f2) -> new EtatRecap(f1.getDiv(),f1.getDir(),f1.getBulmoispaie(),f1.getAgtcptanal(),f1.getDbulcrub(),f1.getDbulrappel(),f1.getDbuldesignrub(),
-			                		f1.getDbulnature(),f1.getDbulimp(),f1.getMtbase().add(f2.getMtbase()),f1.getMtrub().add(f2.getMtrub()) ,f1.getDivdes(),f1.getDirdes(),f1.getCss(),f1.getReport()
-			                		)))
-			                .map(f -> f.get())
-			                .collect(Collectors.toList());
-			 
-			 
-			 java.util.Collections.sort(transform,new DivSorter() );   
-			//transform div data with css and sort by div
-			 List<EtatRecap> transform2 = subReportDivCssData.stream().collect(
-					 Collectors.groupingBy(foo ->getGroupingByKey(foo))) 
-					 .entrySet().stream()
-			            .map(e -> e.getValue().stream()
-			                .reduce((f1,f2) -> new EtatRecap(f1.getDiv(),f1.getDir(),f1.getBulmoispaie(),f1.getAgtcptanal(),f1.getDbulcrub(),f1.getDbulrappel(),f1.getDbuldesignrub(),
-			                		f1.getDbulnature(),f1.getDbulimp(),f1.getMtbase().add(f2.getMtbase()),f1.getMtrub().add(f2.getMtrub()) ,f1.getDivdes(),f1.getDirdes(),f1.getCss(),f1.getReport())))
-			                .map(f -> f.get())
-			                .collect(Collectors.toList());
-			 
-			 
-			 java.util.Collections.sort(transform2,new DivSorter() );  
-			//transform entreprise data without css and sort by crub
-			 List<EtatRecap> entreprise = subReportDivData.stream().collect(
-					 Collectors.groupingBy(foo ->getGroupingByKey2(foo))) 
-					 .entrySet().stream()
-			            .map(e -> e.getValue().stream()
-			                .reduce((f1,f2) -> new EtatRecap(f1.getDiv(),f1.getDir(),f1.getBulmoispaie(),f1.getAgtcptanal(),f1.getDbulcrub(),f1.getDbulrappel(),f1.getDbuldesignrub(),
-			                		f1.getDbulnature(),f1.getDbulimp(),f1.getMtbase().add(f2.getMtbase()),f1.getMtrub().add(f2.getMtrub()) ,f1.getDivdes(),f1.getDirdes(),f1.getCss(),f1.getReport()
-			                		)))
-			                .map(f -> f.get())
-			                .collect(Collectors.toList());
-			 
-			 java.util.Collections.sort(entreprise,new DbulcrubSorter() );  
-			 //j'ai pas besoin d'utiliser le group by jasper s'occupe de calculer les sommes
-			/* List<EtatRecap> entrepriseCss = subReportDivCssData.stream().collect(
-					 Collectors.groupingBy(foo ->getGroupingByKey3(foo))) 
-					 .entrySet().stream()
-			            .map(e -> e.getValue().stream()
-			                .reduce((f1,f2) -> new EtatRecap(f1.getDiv(),f1.getDir(),f1.getBulmoispaie(),f1.getAgtcptanal(),f1.getDbulcrub(),f1.getDbulrappel(),f1.getDbuldesignrub(),
-			                		f1.getDbulnature(),f1.getDbulimp(),f1.getMtbase().add(f2.getMtbase()),f1.getMtrub().add(f2.getMtrub()) ,f1.getDivdes(),f1.getDirdes(),f1.getCss(),f1.getReport()
-			                		)))
-			                .map(f -> f.get())
-			                .collect(Collectors.toList());
-			 
-			 java.util.Collections.sort(entrepriseCss,new DbulcrubSorter() );  
-			//transform  entreprise data with css and sort by div
-			 
-			System.out.println(entrepriseCss.size());
-			for(int i=0;i<entrepriseCss.size();i++) {
-				System.out.println(entrepriseCss.get(i).getDbulcrub()+"         "+entrepriseCss.get(i).getCss()+"      "+entrepriseCss.get(i).getMtbase()+"           "+entrepriseCss.get(i).getMtrub());
-			}
-			//System.out.println(subReportDivCssData.size());*/
-			 
 
-	
+				}
+				if (recap.get(i).getReport().equals("4")) {
+					subReportDirData.add(recap.get(i));
+
+				}
+				if (recap.get(i).getReport().equals("5")) {
+					subReportDirCssData.add(recap.get(i));
+
+				}
+				/*
+				 * if(recap.get(i).getReport().equals("6")) {
+				 * subReportDivData.add(recap.get(i));
+				 * 
+				 * } if(recap.get(i).getReport().equals("7")) {
+				 * subReportDivCssData.add(recap.get(i));
+				 * 
+				 * }
+				 */
+
+			}
+			// transform div data without css and sort by div
+			List<EtatRecap> transform = subReportDivData.stream()
+					.collect(Collectors.groupingBy(foo -> getGroupingByKey(foo))).entrySet().stream()
+					.map(e -> e.getValue().stream()
+							.reduce((f1, f2) -> new EtatRecap(f1.getDiv(), f1.getDir(), f1.getBulmoispaie(),
+									f1.getAgtcptanal(), f1.getDbulcrub(), f1.getDbulrappel(), f1.getDbuldesignrub(),
+									f1.getDbulnature(), f1.getDbulimp(), f1.getMtbase().add(f2.getMtbase()),
+									f1.getMtrub().add(f2.getMtrub()), f1.getDivdes(), f1.getDirdes(), f1.getCss(),
+									f1.getReport())))
+					.map(f -> f.get()).collect(Collectors.toList());
+
+			java.util.Collections.sort(transform, new DivSorter());
+			// transform div data with css and sort by div
+			List<EtatRecap> transform2 = subReportDivCssData.stream()
+					.collect(Collectors.groupingBy(foo -> getGroupingByKey(foo))).entrySet().stream()
+					.map(e -> e.getValue().stream()
+							.reduce((f1, f2) -> new EtatRecap(f1.getDiv(), f1.getDir(), f1.getBulmoispaie(),
+									f1.getAgtcptanal(), f1.getDbulcrub(), f1.getDbulrappel(), f1.getDbuldesignrub(),
+									f1.getDbulnature(), f1.getDbulimp(), f1.getMtbase().add(f2.getMtbase()),
+									f1.getMtrub().add(f2.getMtrub()), f1.getDivdes(), f1.getDirdes(), f1.getCss(),
+									f1.getReport())))
+					.map(f -> f.get()).collect(Collectors.toList());
+
+			java.util.Collections.sort(transform2, new DivSorter());
+			// transform entreprise data without css and sort by crub
+			List<EtatRecap> entreprise = subReportDivData.stream()
+					.collect(Collectors.groupingBy(foo -> getGroupingByKey2(foo))).entrySet().stream()
+					.map(e -> e.getValue().stream()
+							.reduce((f1, f2) -> new EtatRecap(f1.getDiv(), f1.getDir(), f1.getBulmoispaie(),
+									f1.getAgtcptanal(), f1.getDbulcrub(), f1.getDbulrappel(), f1.getDbuldesignrub(),
+									f1.getDbulnature(), f1.getDbulimp(), f1.getMtbase().add(f2.getMtbase()),
+									f1.getMtrub().add(f2.getMtrub()), f1.getDivdes(), f1.getDirdes(), f1.getCss(),
+									f1.getReport())))
+					.map(f -> f.get()).collect(Collectors.toList());
+
+			java.util.Collections.sort(entreprise, new DbulcrubSorter());
+			// j'ai pas besoin d'utiliser le group by jasper s'occupe de calculer les sommes
+			/*
+			 * List<EtatRecap> entrepriseCss = subReportDivCssData.stream().collect(
+			 * Collectors.groupingBy(foo ->getGroupingByKey3(foo))) .entrySet().stream()
+			 * .map(e -> e.getValue().stream() .reduce((f1,f2) -> new
+			 * EtatRecap(f1.getDiv(),f1.getDir(),f1.getBulmoispaie(),f1.getAgtcptanal(),f1.
+			 * getDbulcrub(),f1.getDbulrappel(),f1.getDbuldesignrub(),
+			 * f1.getDbulnature(),f1.getDbulimp(),f1.getMtbase().add(f2.getMtbase()),f1.
+			 * getMtrub().add(f2.getMtrub())
+			 * ,f1.getDivdes(),f1.getDirdes(),f1.getCss(),f1.getReport() ))) .map(f ->
+			 * f.get()) .collect(Collectors.toList());
+			 * 
+			 * java.util.Collections.sort(entrepriseCss,new DbulcrubSorter() ); //transform
+			 * entreprise data with css and sort by div
+			 * 
+			 * System.out.println(entrepriseCss.size()); for(int
+			 * i=0;i<entrepriseCss.size();i++) {
+			 * System.out.println(entrepriseCss.get(i).getDbulcrub()+"         "
+			 * +entrepriseCss.get(i).getCss()+"      "+entrepriseCss.get(i).getMtbase()
+			 * +"           "+entrepriseCss.get(i).getMtrub()); }
+			 * //System.out.println(subReportDivCssData.size());
+			 */
+
 			// load file and compile it
-			//get path files
+			// get path files
 			File file = ResourceUtils.getFile("classpath:etatRecap.jrxml");
 			File file2 = ResourceUtils.getFile("classpath:subReport.jrxml");
-			File fileMonth=ResourceUtils.getFile("classpath:subReportMonth.jrxml");
-			File fileMonthCss=ResourceUtils.getFile("classpath:subReportMonthCss.jrxml");
-			File fileDir=ResourceUtils.getFile("classpath:subReportDir.jrxml");
-			File fileDirCss=ResourceUtils.getFile("classpath:subReportDirCss.jrxml");
-			File fileDiv=ResourceUtils.getFile("classpath:subReportDiv.jrxml");
-			File fileDivCss=ResourceUtils.getFile("classpath:subReportDivCss.jrxml");
-			File fileEntreprise=ResourceUtils.getFile("classpath:subReportEntreprise.jrxml");
-			File fileEntrepriseCss=ResourceUtils.getFile("classpath:subReportEntrepriseCss.jrxml");
-			
+			File fileMonth = ResourceUtils.getFile("classpath:subReportMonth.jrxml");
+			File fileMonthCss = ResourceUtils.getFile("classpath:subReportMonthCss.jrxml");
+			File fileDir = ResourceUtils.getFile("classpath:subReportDir.jrxml");
+			File fileDirCss = ResourceUtils.getFile("classpath:subReportDirCss.jrxml");
+			File fileDiv = ResourceUtils.getFile("classpath:subReportDiv.jrxml");
+			File fileDivCss = ResourceUtils.getFile("classpath:subReportDivCss.jrxml");
+			File fileEntreprise = ResourceUtils.getFile("classpath:subReportEntreprise.jrxml");
+			File fileEntrepriseCss = ResourceUtils.getFile("classpath:subReportEntrepriseCss.jrxml");
+
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 			JasperReport subReport = JasperCompileManager.compileReport(file2.getAbsolutePath());
 			JasperReport subReportMonth = JasperCompileManager.compileReport(fileMonth.getAbsolutePath());
 			JasperReport subReportMonthCss = JasperCompileManager.compileReport(fileMonthCss.getAbsolutePath());
-			JasperReport subReportDir= JasperCompileManager.compileReport(fileDir.getAbsolutePath());
-			JasperReport subReportDirCss= JasperCompileManager.compileReport(fileDirCss.getAbsolutePath());
-			JasperReport subReportDiv= JasperCompileManager.compileReport(fileDiv.getAbsolutePath());
-			JasperReport subReportDivCss= JasperCompileManager.compileReport(fileDivCss.getAbsolutePath());
-			JasperReport subReportEntreprise= JasperCompileManager.compileReport(fileEntreprise.getAbsolutePath());
-			JasperReport subReportEntrepriseCss= JasperCompileManager.compileReport(fileEntrepriseCss.getAbsolutePath());
-			
-			//get data source for files
+			JasperReport subReportDir = JasperCompileManager.compileReport(fileDir.getAbsolutePath());
+			JasperReport subReportDirCss = JasperCompileManager.compileReport(fileDirCss.getAbsolutePath());
+			JasperReport subReportDiv = JasperCompileManager.compileReport(fileDiv.getAbsolutePath());
+			JasperReport subReportDivCss = JasperCompileManager.compileReport(fileDivCss.getAbsolutePath());
+			JasperReport subReportEntreprise = JasperCompileManager.compileReport(fileEntreprise.getAbsolutePath());
+			JasperReport subReportEntrepriseCss = JasperCompileManager
+					.compileReport(fileEntrepriseCss.getAbsolutePath());
+
+			// get data source for files
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(mainReportData);
 			JRBeanCollectionDataSource dataSource2 = new JRBeanCollectionDataSource(mainReportDataTotaux);
 			JRBeanCollectionDataSource dataSourceMonth = new JRBeanCollectionDataSource(subReportMonthData);
@@ -906,41 +940,42 @@ public class Controller {
 			JRBeanCollectionDataSource dataSourceDiv = new JRBeanCollectionDataSource(transform);
 			JRBeanCollectionDataSource dataSourceDivCss = new JRBeanCollectionDataSource(transform2);
 			JRBeanCollectionDataSource dataSourceEntreprise = new JRBeanCollectionDataSource(entreprise);
-			//JRBeanCollectionDataSource dataSourceEntrepriseCss = new JRBeanCollectionDataSource(entrepriseCss);
+			// JRBeanCollectionDataSource dataSourceEntrepriseCss = new
+			// JRBeanCollectionDataSource(entrepriseCss);
 			JRBeanCollectionDataSource dataSourceEntrepriseCss = new JRBeanCollectionDataSource(subReportDivCssData);
-	
-			//parameters to send 
+
+			// parameters to send
 			Map<String, Object> parameters = new HashMap<>();
-			parameters.put("subReport",subReport );
-			parameters.put("subReportMonth",subReportMonth );
-			parameters.put("totaux1",dataSource2 );
+			parameters.put("subReport", subReport);
+			parameters.put("subReportMonth", subReportMonth);
+			parameters.put("totaux1", dataSource2);
 			parameters.put("dataSourceMonth", dataSourceMonth);
-			parameters.put("subReportMonthCss",subReportMonthCss );
+			parameters.put("subReportMonthCss", subReportMonthCss);
 			parameters.put("dataSourceMonthCss", dataSourceMonthCss);
-			parameters.put("subReportDir",subReportDir );
+			parameters.put("subReportDir", subReportDir);
 			parameters.put("dataSourceDir", dataSourceDir);
-			parameters.put("subReportDirCss",subReportDirCss );
+			parameters.put("subReportDirCss", subReportDirCss);
 			parameters.put("dataSourceDirCss", dataSourceDirCss);
-			parameters.put("subReportDivCss",subReportDivCss );
+			parameters.put("subReportDivCss", subReportDivCss);
 			parameters.put("dataSourceDivCss", dataSourceDivCss);
-			parameters.put("subReportDiv",subReportDiv );
+			parameters.put("subReportDiv", subReportDiv);
 			parameters.put("dataSourceDiv", dataSourceDiv);
-			parameters.put("subReportEntreprise",subReportEntreprise );
+			parameters.put("subReportEntreprise", subReportEntreprise);
 			parameters.put("dataSourceEntreprise", dataSourceEntreprise);
-			parameters.put("subReportEntrepriseCss",subReportEntrepriseCss );
+			parameters.put("subReportEntrepriseCss", subReportEntrepriseCss);
 			parameters.put("dataSourceEntrepriseCss", dataSourceEntrepriseCss);
-			
-			
-			//fill main report and sub reports by sending data with parameter and export the report
-			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters,  dataSource);
-			 JRTextExporter exporter = new  JRTextExporter();
+
+			// fill main report and sub reports by sending data with parameter and export
+			// the report
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+			JRTextExporter exporter = new JRTextExporter();
 			exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 180);
 			exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-			Object outputFileName = pathWithStructure + "\\" + "RECAP"+" "+structure.toString()
-					+ " " + dateFormat + ".SPL";
+			Object outputFileName = pathWithStructure + "\\" + "RECAP" + " " + structure.toString() + " " + dateFormat
+					+ ".SPL";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
-			
+
 			exporter.exportReport();
 			return recap;
 		} catch (Exception e) {
@@ -948,18 +983,21 @@ public class Controller {
 		}
 		return null;
 	}
-	private String getGroupingByKey(EtatRecap p){
-		return p.getDiv()+p.getDbulcrub()+p.getDbulrappel();
-		}
-	private String getGroupingByKey2(EtatRecap p){
-		return p.getDbulcrub()+p.getDbulrappel();
-		}
-	private String getGroupingByKey3(EtatRecap p){
-		return p.getDbulcrub()+p.getCss();
-		}
+
+	private String getGroupingByKey(EtatRecap p) {
+		return p.getDiv() + p.getDbulcrub() + p.getDbulrappel();
+	}
+
+	private String getGroupingByKey2(EtatRecap p) {
+		return p.getDbulcrub() + p.getDbulrappel();
+	}
+
+	private String getGroupingByKey3(EtatRecap p) {
+		return p.getDbulcrub() + p.getCss();
+	}
 
 	@PostMapping({ "generateRet" })
-	public List<EtatRet> generateRet(@RequestBody List<EtatRet> ret,@RequestParam String structure) {
+	public List<EtatRet> generateRet(@RequestBody List<EtatRet> ret, @RequestParam String structure) {
 		try {
 			// **********************************************get current date from payMonth
 
@@ -968,11 +1006,10 @@ public class Controller {
 			String currentMonth = currentDate.getPaymonth().substring(4, 6);
 			String dateFormat = currentYear + "-" + currentMonth;
 
-			//******************************************get Folder path 
-			Folder folder=folderRepo.findByFolderName("ETAT");
+			// ******************************************get Folder path
+			Folder folder = folderRepo.findByFolderName("ETAT");
 			// ********************************folder generation if not exist
-			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\"
-					+ currentYear;
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
 			String pathWithMounth = pathWithYear + "\\" + dateFormat;
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
@@ -982,9 +1019,9 @@ public class Controller {
 			if (!fileMounth.exists()) {
 				fileMounth.mkdir();
 			}
-			String pathWithStructure=pathWithMounth+"\\"+structure+" "+dateFormat;
-			File fileStructure=new File(pathWithStructure);
-			if(!fileStructure.exists()) {
+			String pathWithStructure = pathWithMounth + "\\" + structure + " " + dateFormat;
+			File fileStructure = new File(pathWithStructure);
+			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
 			}
 
@@ -993,14 +1030,14 @@ public class Controller {
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(ret);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-			 JRTextExporter exporter = new  JRTextExporter();
+			JRTextExporter exporter = new JRTextExporter();
 			exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 180);
 			exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-			Object outputFileName = pathWithStructure + "\\" + "RET"+" "+structure.toString()
-					+ " " + dateFormat + ".SPL";
+			Object outputFileName = pathWithStructure + "\\" + "RET" + " " + structure.toString() + " " + dateFormat
+					+ ".SPL";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
-			
+
 			exporter.exportReport();
 			return ret;
 		} catch (Exception e) {
@@ -1009,24 +1046,22 @@ public class Controller {
 		return null;
 	}
 
-		
-	@PostMapping({ "generateMand"})
-	public List<EtatMand> generateMand(@RequestBody List<EtatMand> mand,@RequestParam String structure) {
+	@PostMapping({ "generateMand" })
+	public List<EtatMand> generateMand(@RequestBody List<EtatMand> mand, @RequestParam String structure) {
 		try {
 			// **********************************************get current date from payMonth
-		
+
 			PayMonth currentDate = paymonthRepo.findByState();
 			String currentYear = currentDate.getPaymonth().substring(0, 4);
 			String currentMonth = currentDate.getPaymonth().substring(4, 6);
 			String dateFormat = currentYear + "-" + currentMonth;
-			//String date="01"+"/"+currentMonth+"/"+currentYear;
-			String date = "01/04/2016";//for test
+			// String date="01"+"/"+currentMonth+"/"+currentYear;
+			String date = "01/04/2016";// for test
 			Date sysDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-			//******************************************get Folder path 
-			Folder folder=folderRepo.findByFolderName("ETAT");
+			// ******************************************get Folder path
+			Folder folder = folderRepo.findByFolderName("ETAT");
 			// ********************************folder generation if not exist
-			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\"
-					+ currentYear;
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
 			String pathWithMounth = pathWithYear + "\\" + dateFormat;
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
@@ -1036,34 +1071,35 @@ public class Controller {
 			if (!fileMounth.exists()) {
 				fileMounth.mkdir();
 			}
-			String pathWithStructure=pathWithMounth+"\\"+structure+" "+dateFormat;
-			File fileStructure=new File(pathWithStructure);
-			if(!fileStructure.exists()) {
+			String pathWithStructure = pathWithMounth + "\\" + structure + " " + dateFormat;
+			File fileStructure = new File(pathWithStructure);
+			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
 			}
-		
+
 			// load file and compile it
 			File file = ResourceUtils.getFile("classpath:etatMand.jrxml");
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-			
+
 			JRBeanCollectionDataSource data = new JRBeanCollectionDataSource(mand);
 			Map<String, Object> parameters = new HashMap<>();
-			parameters.put("currenntMonth",sysDate );
+			parameters.put("currenntMonth", sysDate);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, data);
-			
-			 JRTextExporter exporter = new  JRTextExporter();
-			
+
+			JRTextExporter exporter = new JRTextExporter();
+
 			exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 180);
-		
+
 			exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
-			
+
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-			
-			Object outputFileName = pathWithStructure + "\\" + "MAND"+" "+structure.toString()+ " "+ dateFormat + ".SPL";
+
+			Object outputFileName = pathWithStructure + "\\" + "MAND" + " " + structure.toString() + " " + dateFormat
+					+ ".SPL";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
-			
+
 			exporter.exportReport();
-			
+
 			return mand;
 		} catch (Exception e) {
 			System.out.println("Exception generateMand()==>" + e.getMessage());
@@ -1071,44 +1107,47 @@ public class Controller {
 		return null;
 	}
 
-	@PostMapping({"saveGeneratedFiles"})
-	public List<Efile>saveGeneratedFiles(@RequestBody List<Efile> files){
+	@PostMapping({ "saveGeneratedFiles" })
+	public List<Efile> saveGeneratedFiles(@RequestBody List<Efile> files) {
 		try {
-			Integer idFile=0;
+			Integer idFile = 0;
 			// **********************************************get current date from payMonth
 			PayMonth currentDate = paymonthRepo.findByState();
-			for(int i=0;i<files.size();i++) {
-				//System.out.println(files.get(i).getFilename());
-				idFile=fileTypeRepo.findByPrefixFile(files.get(i).getFilename());
-				//System.out.println(idFile);
-				
-				if(idFile!=null) {
+			for (int i = 0; i < files.size(); i++) {
+				// System.out.println(files.get(i).getFilename());
+				idFile = fileTypeRepo.findByPrefixFile(files.get(i).getFilename());
+				// System.out.println(idFile);
+
+				if (idFile != null) {
 					files.get(i).setIdfiletype(idFile);
 					files.get(i).setIdpaymonth(currentDate.getId());
 					efileRepo.save(files.get(i));
-				}else {
+				} else {
 					return null;
 				}
 			}
 			return files;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("Exception saveGeneratedFiles()==>" + e.getMessage());
 		}
 		return null;
 	}
-	
-	@PostMapping({"updateStructureFilesGenerated"})
+
+	@PostMapping({ "updateStructureFilesGenerated" })
 	public Structure updateStructureFilesGenerated(@RequestBody Structure structure) {
 		try {
 			structure.setSTATUSSTRUCTURE(1);
 			structureRepo.save(structure);
 			return structure;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("Exception updateStructureFilesGenerated()==>" + e.getMessage());
 		}
 		return null;
 	}
-	/**************************************************************** Cloture Mois*****************************************************************************************************/
+
+	/****************************************************************
+	 * Cloture Mois
+	 *****************************************************************************************************/
 	// confirmation cloture mois (update paymonth)
 	@GetMapping({ "/updatePayMonth" })
 	public PayMonth updatePayMonth() {
@@ -1137,7 +1176,25 @@ public class Controller {
 		return null;
 	}
 
-	/************************************************************** Cloture paie***************************************************************************************/
+	// update structure status ==3
+	@GetMapping({ "/updateStructureClotureMois" })
+	public List<Structure> updateStructureClotureMois() {
+		try {
+			List<Structure> structures = structureRepo.findAll();
+			for (int i = 0; i < structures.size(); i++) {
+				structures.get(i).setSTATUSSTRUCTURE(3);
+				structureRepo.save(structures.get(i));
+			}
+			return structures;
+		} catch (Exception e) {
+			System.out.println("Exception updateStructureClotureMois()====>" + e.getMessage());
+		}
+		return null;
+	}
+
+	/**************************************************************
+	 * Cloture paie
+	 ***************************************************************************************/
 
 	// get All folders pour la génération des fichiers
 	@GetMapping({ "/getAllFolders" })
@@ -1185,7 +1242,8 @@ public class Controller {
 		return null;
 	}
 
-	// get etat files pour la génération des fichiers (recuperer les etats des fichiers généré ou non)
+	// get etat files pour la génération des fichiers (recuperer les etats des
+	// fichiers généré ou non)
 	@PostMapping({ "getEtatFile" })
 	public int getEtatFile(@RequestBody CloturePaie file) {
 		File myfile = new File(file.getFOLDERPATH());
@@ -1622,6 +1680,7 @@ public class Controller {
 			if (!fileMounth.exists()) {
 				fileMounth.mkdir();
 			}
+			
 			File fileNewpaie = ResourceUtils.getFile("classpath:newPaie.jrxml");
 			JasperReport jasperReport10 = JasperCompileManager.compileReport(fileNewpaie.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource10 = new JRBeanCollectionDataSource(lesNewpaie);
@@ -1644,59 +1703,61 @@ public class Controller {
 	}
 
 	// génération des fichiers Pers
-	@GetMapping({ "generatePersFiles" })
-	public List<CloturePaie> generatePersFiles() throws FileNotFoundException, JRException {
-		List<CloturePaie> filesPers = new ArrayList();
-		try {
+		@GetMapping({ "generatePersFiles" })
+		public List<CloturePaie> generatePersFiles() throws FileNotFoundException, JRException {
+			List<CloturePaie> filesPers = new ArrayList();
+			try {
 
-			filesPers = clotureRepo.findByCategory("PERS");
+				filesPers = clotureRepo.findByCategory("PERS");
+				System.out.println( filesPers.get(0).getFOLDERPATH().trim());
 
-			List<Pers> lesPers = persRepo.findAll();
+				List<Pers> lesPers = persRepo.findAll();
 
-			// **********************************************get current date from payMonth
+				// **********************************************get current date from payMonth
 
-			PayMonth currentDate = paymonthRepo.findByState();
-			String currentYear = currentDate.getPaymonth().substring(0, 4);
-			String currentMonth = currentDate.getPaymonth().substring(4, 6);
-			String dateFormat = currentYear + "-" + currentMonth;
+				PayMonth currentDate = paymonthRepo.findByState();
+				String currentYear = currentDate.getPaymonth().substring(0, 4);
+				String currentMonth = currentDate.getPaymonth().substring(4, 6);
+				String dateFormat = currentYear + "-" + currentMonth;
 
-			// ********************************folder generation if not exist
-			String pathWithYear = filesPers.get(0).getFOLDERPATH() + filesPers.get(0).getFOLDERNAME() + "\\"
-					+ currentYear;
-			String pathWithMounth = pathWithYear + "\\" + dateFormat;
-			File fileYear = new File(pathWithYear);
-			if (!fileYear.exists()) {
-				fileYear.mkdir();
+				// ********************************folder generation if not exist
+				String pathWithYear = filesPers.get(0).getFOLDERPATH().trim() + filesPers.get(0).getFOLDERNAME().trim() + "\\"
+						+ currentYear;
+				String pathWithMounth = pathWithYear + "\\" + dateFormat;
+				File fileYear = new File(pathWithYear);
+				if (!fileYear.exists()) {
+					fileYear.mkdir();
+				}
+				File fileMounth = new File(pathWithMounth);
+				if (!fileMounth.exists()) {
+					fileMounth.mkdir();
+				}
+				System.out.println(pathWithMounth);
+				// load file and compile it
+				File filePers = ResourceUtils.getFile("classpath:pers.jrxml");
+				JasperReport jasperReport11 = JasperCompileManager.compileReport(filePers.getAbsolutePath());
+				JRBeanCollectionDataSource dataSource11 = new JRBeanCollectionDataSource(lesPers);
+				JasperPrint jasperPrint11 = JasperFillManager.fillReport(jasperReport11, null, dataSource11);
+				JRXlsxExporter exporter11 = new JRXlsxExporter();
+				exporter11.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+				exporter11.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+				exporter11.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint11);
+				Object outputFileName11 = pathWithMounth + "\\"
+						+ clotureRepo.findByDesc("pers").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".DBF";
+				exporter11.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName11);
+				exporter11.exportReport();
+
+				return filesPers;
+			} catch (Exception e) {
+				System.out.println(e.getMessage() + "==>generatePersFiles()");
+				filesPers = null;
 			}
-			File fileMounth = new File(pathWithMounth);
-			if (!fileMounth.exists()) {
-				fileMounth.mkdir();
-			}
-
-			// load file and compile it
-			File filePers = ResourceUtils.getFile("classpath:pers.jrxml");
-			JasperReport jasperReport11 = JasperCompileManager.compileReport(filePers.getAbsolutePath());
-			JRBeanCollectionDataSource dataSource11 = new JRBeanCollectionDataSource(lesPers);
-			JasperPrint jasperPrint11 = JasperFillManager.fillReport(jasperReport11, null, dataSource11);
-			JRXlsxExporter exporter11 = new JRXlsxExporter();
-			exporter11.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
-			exporter11.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
-			exporter11.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint11);
-			Object outputFileName11 = pathWithMounth + "\\" + clotureRepo.findByDesc("pers").get(0).getPREFIXFILETYPE()
-					+ " " + dateFormat + ".DBF";
-			exporter11.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName11);
-			exporter11.exportReport();
-
 			return filesPers;
-		} catch (Exception e) {
-			System.out.println(e.getMessage() + "==>generatePersFiles()");
-			filesPers = null;
+
 		}
-		return filesPers;
-
-	}
-
-	/************************************************ Login/subscribe *********************************************************************************************************/
+	/************************************************
+	 * Login/subscribe
+	 *********************************************************************************************************/
 
 	// Connexion
 	@RequestMapping(value = "/api/auth/signin", method = RequestMethod.POST)
@@ -1744,7 +1805,9 @@ public class Controller {
 		return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
 	}
 
-	/***************************************** gestion users (plus tard)************************************************************************************************/
+	/*****************************************
+	 * gestion users (plus tard)
+	 ************************************************************************************************/
 	@GetMapping({ "getAllUsers" })
 	public List<User> getAllUsers() {
 		List<User> allUsers = new ArrayList();
@@ -1766,7 +1829,9 @@ public class Controller {
 		return currentUser;
 	}
 
-	/**************************************************** Parametres*****************************************************************************************************/
+	/****************************************************
+	 * Parametres
+	 *****************************************************************************************************/
 	// get User by username
 	@PostMapping({ "getUserByUserName" })
 	public User getUserByUserName(@RequestBody User u) {

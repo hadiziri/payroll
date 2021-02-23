@@ -79,33 +79,33 @@ export class AddStructureComponent implements OnInit {
         if (data != null) {
           this.allShActivities = data;
 
-          //console.log("allshavtivities");
-          //console.log(data);
+          // //console.log("allshavtivities");
+          // //console.log(data);
         } else {
           this.openDialog();
         }
       },
       error => {
-        //console.log(error);
+        // //console.log(error);
          this.openDialogError(error);;
         throw error;
       }
     );
     //get currentUser
     this.currentUser.username = this.token.getUsername();
-    //console.log(this.currentUser)
+    // //console.log(this.currentUser)
     this.paramService.getUserByUserName(this.currentUser).subscribe(
       data => {
         if (data != null) {
 
-          // console.log(data);
+          //  //console.log(data);
           this.currentUser.iduser = data.iduser;
         } else {
           this.openDialog();
         }
       },
       error => {
-        //console.log(error);
+        // //console.log(error);
          this.openDialogError(error);;
         throw error;
       }
@@ -125,7 +125,7 @@ export class AddStructureComponent implements OnInit {
   }
 
   onSubmit(post: any) {
-    //console.log(post)
+    // //console.log(post)
     //structure to add
     this.StructureToAdd.structurename = post.structurename;
     this.StructureToAdd.structurecodelike = post.structurecodelike;
@@ -145,14 +145,14 @@ export class AddStructureComponent implements OnInit {
       data => {
         if (data != null) {
           this.messageAdded = true;
-          // console.log(data)
+          //  //console.log(data)
           this.archivateAddedStructure();
         } else {
           alert("Une erreur s'est produite.Veuillez réessayer plus tard");
         }
       },
       error => {
-        //console.log(error);
+        // //console.log(error);
          this.openDialogError(error);;
         throw error;
       }
@@ -171,14 +171,14 @@ export class AddStructureComponent implements OnInit {
       data => {
         if (data != null) {
           this.messageArchive = true;
-          // console.log(data)
+          //  //console.log(data)
           this.showAlert();
         } else {
           alert("Une erreur s'est produite.Veuillez réessayer plus tard");
         }
       },
       error => {
-        //console.log(error);
+        // //console.log(error);
          this.openDialogError(error);;
         throw error;
       }

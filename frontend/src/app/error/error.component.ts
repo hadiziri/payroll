@@ -29,7 +29,7 @@ export class ErrorComponent implements OnInit {
   
 
   onSubmit() {
-    //console.log(this.form);
+    // //console.log(this.form);
 
     this.loginInfo = new AuthLoginInfo(
       this.form.username,
@@ -54,7 +54,7 @@ export class ErrorComponent implements OnInit {
       
       },
       error => {
-        //console.log(error);
+        // //console.log(error);
         this.errorMessage = error;
      
         this.isLoginFailed = true;
