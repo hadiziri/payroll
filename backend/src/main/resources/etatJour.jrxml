@@ -680,7 +680,7 @@
 				<textElement textAlignment="Left">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{bulnom}==null?" ":"!"+$F{bulnom}.substring( 0, 25 )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{bulnom}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
 				<reportElement x="330" y="0" width="150" height="20" uuid="72ac64bb-1484-4b8a-8bdb-6ddcf6c57c70">

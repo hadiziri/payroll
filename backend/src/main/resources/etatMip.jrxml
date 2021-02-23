@@ -241,7 +241,7 @@
 				<textElement textAlignment="Left">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{bulmatricule}==null?" ":"    "+$F{bulmatricule}.substring( 0,6 )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{bulmatricule}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="340" y="0" width="440" height="20" uuid="b9c4d404-6ffe-47b5-aeaf-ee9ffb804c6a">
@@ -253,7 +253,7 @@
 				<textElement textAlignment="Left">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{agtnom}==null?" ":"!"+$F{agtnom}.substring( 0, 27 )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{agtnom}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="790" y="0" width="150" height="20" uuid="72ac64bb-1484-4b8a-8bdb-6ddcf6c57c70">

@@ -275,7 +275,7 @@ export class HomeComponent implements OnInit {
 
 //---------------------------------------------------------------------SEND EMAIL----------------------------------------------------------------------------------------------
   sendEmail(structure:Structure){
-    
+    this.showSpinner=true;
     /**************initialisation of mail request************************************* */
     //this.mailRequest.to=structure.emailgroupmanagers;
     this.mailRequest.to.push("Feriel.Aid@Sonatrach.dz")
@@ -309,7 +309,7 @@ export class HomeComponent implements OnInit {
         //   //console.log(data);
           //send email
           this.eFiles=data;
-          this.sendEmailToManagers(this.updatedStructure);
+          this.sendEmailToManagers(this.updatedStructure,structure);
         }else{
           this.openDialog();
         }
@@ -327,14 +327,14 @@ export class HomeComponent implements OnInit {
   }
 
 
-  sendEmailToManagers(struture:Structure){
+  sendEmailToManagers(struture:Structure,currentStructure:Structure){
     this.homeService.sendEmailZip(this.mailRequest).subscribe(
       (data) => {
       
        //  //console.log(data);
         if(data!=null){
           if(data.status==true){
-            this.saveEmailDB(struture);
+            this.saveEmailDB(struture,currentStructure);
            
           
           }else{
@@ -356,7 +356,7 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  saveEmailDB(struture:Structure){
+  saveEmailDB(struture:Structure,currentStructure:Structure){
     this.archiveSentFiles=[];
     this.homeService.SaveSentEmail(this.email).subscribe(
       (data) => {
@@ -368,7 +368,7 @@ export class HomeComponent implements OnInit {
             this.archiveSentFiles.push({"idemail":data.idemail,"idfile":this.eFiles[i].idfile});
           }
           // //console.log(this.archiveSentFiles)
-          this.saveArchiveSentFiles();
+          this.saveArchiveSentFiles(currentStructure);
         }else{
           this.openDialog();
         }
@@ -405,13 +405,15 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  saveArchiveSentFiles(){
+  saveArchiveSentFiles(currentStructure:Structure){
     this.homeService.SaveArchiveSentFiles(this.archiveSentFiles).subscribe(
       (data) => {
       
        //  //console.log(data);
         if(data!=null){
           this.archiveSentFilesSaved=true;
+          currentStructure.statusstructure=0;
+          this.showSpinner=false;
           this.showAlert("Envoie Email","L'email a bien été envoyé aux gestionnaires");
         }else{
           this.openDialog();
@@ -433,9 +435,9 @@ export class HomeComponent implements OnInit {
       mobiscroll.alert({
         title: title,
         message: msg
-         ,callback: function () {
+        /* ,callback: function () {
           window.location.reload();
-         }
+         }*/
       });
     
    
@@ -507,6 +509,7 @@ export class HomeComponent implements OnInit {
   
     //----------------------------------------------------------------générer fichiers-----------------------------------------------------------------------
     genererFichier(structure:Structure){
+      this.showSpinner=true;
       this.codeStructure=[];
      if(structure.structurecodelike.includes("/")){
        this.codeStructure=structure.structurecodelike.split("/");
@@ -516,7 +519,8 @@ export class HomeComponent implements OnInit {
      }
      // //console.log(this.codeStructure);
      if(this.allEtatJournal.length==0||this.allEtatMand.length==0||this.allEtatMip.length==0||this.allEtatRecap.length==0||this.allEtatRet.length==0){
-        this.showAlertInit("Initialisation des données","Veuillez patienter un petit moment s'il vous plait pour générer les fichiers");
+        //this.showAlertInit("Initialisation des données","Veuillez patienter un petit moment s'il vous plait pour générer les fichiers");
+        this.filtrerEtats(this.codeStructure,structure);
      }else{
         this.filtrerEtats(this.codeStructure,structure);
      }
@@ -897,7 +901,8 @@ updateStatusStructure(structure:Structure){
      //  //console.log("updateStatusStructure")
      //  //console.log(data);
       if(data!=null){
-        
+        structure.statusstructure=1;
+        this.showSpinner=false;
         this.showAlert("Génération etats paie","Les etats ont bien été généré.");
       }else{
         
