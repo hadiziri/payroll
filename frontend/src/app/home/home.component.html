@@ -1,136 +1,47 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="Description" CONTENT="Free angular bootstrap admin dashboard template. World first blur panel dashboard.">
+<meta name="keywords" content="admin,dashboard,template,angular,bootstrap,blur,panel,html,css,javascript">
+<title>Blur Admin</title>
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+<link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96x96.png">
 
-<div class="container">
- 
-  <div class="row">
-    <h1> Générer des etats de paie et les envoyer aux gestionnaires par émail  </h1>
-    <mat-form-field appearance="fill" style="width: 100%; ">
-      <mat-label style="font-size: large;"><span class="glyphicon glyphicon-search" aria-hidden="true" style="margin-right: 8px;"></span>Chercher</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="nom structure" #input>
-      
-    </mat-form-field>
-    <div class="table-container">
-     
-   
-      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-
-        <!-- Position Column -->
-        <ng-container matColumnDef="idstructure">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header class="header_table"> No. </th>
-          <td mat-cell *matCellDef="let element"> {{element.idstructure}}</td>
-        </ng-container>
-
-        <!-- Position Column -->
-        <ng-container matColumnDef="structurename">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header class="header_table"> Nom structure </th>
-          <td mat-cell *matCellDef="let element"> {{element.structurename}} </td>
-
-        </ng-container>
-
-        <!-- Name Column -->
-        <ng-container matColumnDef="STRUCTURECODELIKE">
-          <th mat-header-cell *matHeaderCellDef class="header_table"> Code Structure </th>
-          <td mat-cell *matCellDef="let element"> {{element.structurecodelike}} </td>
-        </ng-container>
-
-        <!-- Weight Column -->
-        <ng-container matColumnDef="EMAILGROUPMANAGERS">
-          <th mat-header-cell *matHeaderCellDef r class="header_table"> Email groupe gestionnaire</th>
-          <td mat-cell *matCellDef="let element"> {{element.emailgroupmanagers}} </td>
-        </ng-container>
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="STATUSSTRUCTURE">
-          <th mat-header-cell *matHeaderCellDef class="header_table"> Etat Structure </th>
-          <td mat-cell *matCellDef="let element">
-
-            <div [ngSwitch]="element.statusstructure">
-              <svg width="25" height="25" viewBox="0 0 100 100" *ngSwitchCase="0">
-                <circle cx="60" cy="60" r="40" style="fill:#3DBC14" />
-              </svg>
-              <svg width="25" height="25" viewBox="0 0 100 100" *ngSwitchCase="1">
-                <circle cx="60" cy="60" r="40" style="fill:orange" />
-              </svg>
-              <svg width="25" height="25" viewBox="0 0 100 100" *ngSwitchCase="2">
-                <circle cx="60" cy="60" r="40" style="fill:red" />
-              </svg>
-              <svg width="25" height="25" viewBox="0 0 100 100" *ngSwitchCase="3">
-                <circle cx="60" cy="60" r="40" style="fill:#FBED64" />
-              </svg>
-
-            </div>
-
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="action" >
-          <th mat-header-cell *matHeaderCellDef class="header_table" style="padding-left: 20px;"> Action </th>
-          <td mat-cell *matCellDef="let element">
-            <mat-grid-list cols="3">
-              <button class="btn btn-info" id="first_btn" (click)="genererFichier(element)" [disabled]="element.statusstructure==2||element.statusstructure==0||element.statusstructure==1" >Générer</button>
-              <button class="btn btn-success" id="first_btn" (click)="sendEmail(element)" [disabled]="element.statusstructure==2||element.statusstructure==0||element.statusstructure==3">Envoyer</button>
-              <button class="btn btn-danger" id="first_btn" (click)="suspendreStructure(element)" [disabled]="element.statusstructure==2||element.statusstructure==0||element.statusstructure==3">Suspendre</button>
-              <button class="btn btn-secondary" id="second_btn" (click)="activerStructure(element)" [disabled]="element.statusstructure!=2">Activer</button>
-            </mat-grid-list>
-
-          </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-
-
-    </div>
-    <mat-paginator [pageSizeOptions]="[10, 15,20]"></mat-paginator>
-  </div>
-  <div class="dropdown">
-    <button class="btn" type="button" data-toggle="dropdown">Signification état structure
-      <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-      <li>
-        <svg width="25" height="25" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="40" fill="#3DBC14" />
-        </svg>
-        <strong> fichiers générées et envoyées</strong>
-      </li>
-      <li>
-        <svg width="25" height="25" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="40" fill="orange" />
-        </svg>
-        <strong> fichiers générées et non envoyées</strong>
-      </li>
-      <li>
-        <svg width="25" height="25" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="40" fill="#FBED64" />
-        </svg>
-        <strong> fichiers non générées et non envoyées</strong>
-      </li>
-      <li>
-        <svg width="25" height="25" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="40" fill="red" />
-        </svg>
-        <strong> structure suspendue</strong>
-      </li>
-    </ul>
-  </div>
-
-  <!--  
-<div class="row">
-    <div class="center2">
-
-      <button id="new-board-btn" class="btn btn-primary btn-lg button" (click)="cloturerPaie()">Clôturer Paie</button>
-      <button class="btn btn-secondary btn-lg button" (click)="logout()">Se déconnecter</button>
-    </div>
-  </div>
-<!-->
-
-
-
-
-  
-<div class="disable-background" *ngIf="showSpinner"></div>
-  <div class="center" *ngIf="showSpinner">
-    <mat-progress-spinner diameter=65 mode="indeterminate">
-    </mat-progress-spinner>
-  </div>
-
- 
+</head>
+<body>
+<div class="page-not-found-modal">
+<h1>404 Error</h1>
+<p>Sorry, that page doesn't exist. <a href="/">Go to Home Page.</a></p>
 </div>
+</body>
+</html>
+!-->
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Fragment 1</mat-card-title>
+        <mat-card-subtitle>Etat Paie</mat-card-subtitle>
+      </mat-card-header>
+     
+      <mat-card-content>
+        <p>
+      Ce fragment vous permet de générer les cinq (5) état de paie pour chaque structure ,et d'envoyer ces derniers aux gestionnaires.
+          En cas de probléme lors de la génération vous pouvez suspendre la structure, ce qui va empecher les autres utilisateurs d'envoyer ces états jusqu'a la réactivation de la structure. 
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>2</mat-grid-tile>
+  <mat-grid-tile>3</mat-grid-tile>
+  <mat-grid-tile>4</mat-grid-tile>
+</mat-grid-list>

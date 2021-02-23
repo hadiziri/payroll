@@ -18,7 +18,7 @@ import { FilesGeneratorComponent } from './files-generator/files-generator.compo
 import { GenerateTableFilesComponent } from './generate-table-files/generate-table-files.component';
 
 const APP_ROUTING : Routes =[
-    {path:'home', component:HomeComponent },
+    {path:'etatPaie', component:FilesGeneratorComponent },
     {path :'historique',component:NavigationHistoryComponent},
     {path :'addStructure',component:AddStructureComponent},
     {path :"structures", component :DeleteStructureComponent},
