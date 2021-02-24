@@ -7,25 +7,19 @@ import javax.persistence.Id;
 
 public class EtatJournalId implements Serializable{
 	String bulmatricule;
-	String moisexp;
-	String anneeexp;
+	String moispaie;
 	public String getBulmatricule() {
 		return bulmatricule;
 	}
 	public void setBulmatricule(String bulmatricule) {
 		this.bulmatricule = bulmatricule;
 	}
-	public String getMoisexp() {
-		return moisexp;
+	public String getMoispaie() {
+		return moispaie;
 	}
-	public void setMoisexp(String moisexp) {
-		this.moisexp = moisexp;
+	public void setMoispaie(String moispaie) {
+		this.moispaie = moispaie;
 	}
-	public String getAnneeexp() {
-		return anneeexp;
-	}
-	public void setAnneeexp(String anneeexp) {
-		this.anneeexp = anneeexp;
-	}
+
 	
 }

@@ -15,7 +15,7 @@ import com.sonatrach.dz.fileToPrint.domain.FileToPrintId;
 @Entity
 @Table(name ="PAYROLLSTRUCTUREARCHIVE")
 @IdClass(ArchiveStructureId.class)
-@NamedQuery(name = "ArchiveStructure.findByOperation", query = "SELECT p FROM ArchiveStructure  p WHERE structureoperation=?1")
+@NamedQuery(name = "ArchiveStructure.findByOperation", query = "SELECT p FROM ArchiveStructure  p WHERE structureoperation=?1 and iduser=?2")
 public class ArchiveStructure implements Serializable{
 	@Id
 	 Integer  idstructure ;

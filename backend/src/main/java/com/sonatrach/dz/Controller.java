@@ -253,9 +253,9 @@ public class Controller {
 		ArrayList emails = new ArrayList();
 		try {
 			emails = emailDbRepo.findByIdUser(user.getIduser());
-			if (emails.size() > 0) {
+			
 				return emails;
-			}
+			
 		} catch (Exception e) {
 			System.out.println("Exception getAllEmails()==>" + e.getMessage());
 		}
@@ -287,14 +287,15 @@ public class Controller {
 
 //get structure archive with operation
 	@PostMapping({ "getArchiveStructure" })
-	public List<ArchiveStructure> getArchiveStructure(@RequestBody String operation) {
+	public List<ArchiveStructure> getArchiveStructure(@RequestBody User user) {
 		try {
-			ArrayList<ArchiveStructure> archiveStructure = archiveStructureRepo.findByOperation(operation);
+			ArrayList<ArchiveStructure> archiveStructure = new ArrayList();
+			archiveStructure = 	archiveStructureRepo.findByOperation(user.getName(),user.getIduser());
 
-			if (archiveStructure != null) {
+			
 
 				return archiveStructure;
-			}
+			
 		} catch (Exception e) {
 			System.out.println("Exception  getArchiveStructure()==>" + e.getMessage());
 		}
@@ -303,14 +304,14 @@ public class Controller {
 
 //get folder archive with operation
 	@PostMapping({ "getArchiveFolder" })
-	public List<FolderArchive> getArchiveFolder(@RequestBody String operation) {
+	public List<FolderArchive> getArchiveFolder(@RequestBody User user) {
 		try {
-			ArrayList<FolderArchive> archiveFolder = folderArchiveRepo.findByOperation(operation);
+			ArrayList<FolderArchive> archiveFolder  = new ArrayList();
+			 archiveFolder = folderArchiveRepo.findByOperation(user.getName(),user.getIduser());
 
-			if (archiveFolder != null) {
-
+			
 				return archiveFolder;
-			}
+			
 		} catch (Exception e) {
 			System.out.println("Exception  getArchiveStructure()==>" + e.getMessage());
 		}
@@ -616,7 +617,7 @@ public class Controller {
 			String currentYear = currentPaymonth.getPaymonth().substring(0, 4);
 			String currentMonth = currentPaymonth.getPaymonth().substring(4, 6);
 			// return etatMipRepo.findByPayMonth(currentMonth, currentYear);
-			return etatMipRepo.findByPayMonth(currentMonth, currentYear);
+			return etatMipRepo.findByPayMonth();
 		} catch (Exception e) {
 			System.out.println("Exception getEtatJournal()==>" + e.getMessage());
 		}
@@ -1076,11 +1077,11 @@ public class Controller {
 			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
 			}
-			for(int i=0;i<mand.size();i++) {
+		/*	for(int i=0;i<mand.size();i++) {
                 if(mand.get(i).getBulnet()==new BigDecimal(0)) {
                        mand.get(i).setBulnet(new BigDecimal(0));
                 }
-         }
+         }*/
 
 			// load file and compile it
 			File file = ResourceUtils.getFile("classpath:etatMand.jrxml");

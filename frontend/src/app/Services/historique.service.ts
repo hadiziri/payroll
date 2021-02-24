@@ -43,7 +43,7 @@ export class HistoriqueService {
     );
   }
 
-  public getArchiveStructure(operation:String):Observable<Array<ArchiveStructure>>{
+  public getArchiveStructure(operation:User):Observable<Array<ArchiveStructure>>{
     return this.httpClient.post<Array<ArchiveStructure>>(this.host+"getArchiveStructure",operation).pipe(
       catchError((err) => {
          //console.log('error caught in service')
@@ -53,7 +53,7 @@ export class HistoriqueService {
     );
   }
 
-  public getArchiveFolder(operation:String):Observable<Array<FolderArchive>>{
+  public getArchiveFolder(operation:User):Observable<Array<FolderArchive>>{
     return this.httpClient.post<Array<FolderArchive>>(this.host+"getArchiveFolder",operation).pipe(
       catchError((err) => {
          //console.log('error caught in service')

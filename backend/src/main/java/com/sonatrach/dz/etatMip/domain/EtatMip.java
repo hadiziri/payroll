@@ -15,22 +15,23 @@ import com.sonatrach.dz.etatJournal.domain.EtatJournalId;
 
 @Entity
 @Table(name ="PAIE_ETAT_MIP")
-@IdClass(EtatJournalId.class)
+@IdClass(EtatMipId.class)
 @NamedQuery(name = "EtatMip.findByPayMonth", query = "SELECT p FROM EtatMip  p  order by dirdes")
 public class EtatMip implements Serializable{
 	@Id
 	@Column(name="BUL_MATRICULE")
 	String bulmatricule;
-	@Id
+	
 	@Column(name="MOIS_EXP")
 	String moisexp;
-	@Id
+	
 	@Column(name="ANNEE_EXP")
 	String anneeexp;
 	@Column(name="DIR")
 	String dir;
 	@Column(name="DIV_OP")
 	String divop;
+	@Id
 	@Column(name="BUL_MOIS_PAIE")
 	Date bulmoispaie;
 	@Column(name="AGT_NOM")

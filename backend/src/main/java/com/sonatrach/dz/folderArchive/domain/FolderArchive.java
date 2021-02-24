@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name ="FOLDERARCHIVE")
 @IdClass(FolderArchiveId.class)
-@NamedQuery(name = "FolderArchive.findByOperation", query = "SELECT p FROM FolderArchive  p WHERE folderoperation=?1")
+@NamedQuery(name = "FolderArchive.findByOperation", query = "SELECT p FROM FolderArchive  p WHERE folderoperation=?1 and iduser=?2")
 public class FolderArchive {
 	@Id
 	 Integer iduser ;

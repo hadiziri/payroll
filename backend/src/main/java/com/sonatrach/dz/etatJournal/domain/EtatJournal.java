@@ -16,13 +16,13 @@ import com.sonatrach.dz.etatRecap.domain.EtatRecapId;
 
 @Entity
 @Table(name ="PAIE_ETAT_JOURNAL")
-@NamedQuery(name = "EtatJournal.findByPayMonth", query = "SELECT p FROM EtatJournal  p  order by divdes,dirdes,strdes")
+@NamedQuery(name = "EtatJournal.findByPayMonth", query = "SELECT p FROM EtatJournal  p  order by div,dir,cstr,mat")
 @IdClass(EtatJournalId.class)
 public class EtatJournal implements Serializable{
-	@Id
+	
 	@Column(name="MOIS_EXP")
 	String moisexp;
-	@Id
+	
 	@Column(name="ANNEE_EXP")
 	String anneeexp;
 	@Column(name="MAT")
@@ -41,6 +41,7 @@ public class EtatJournal implements Serializable{
 	Integer bultotalenfant;
 	@Column(name="BUL_ENFANTMOIN10")
 	Integer bulenfantmoin10;
+	@Id
 	@Column(name="MOIS_PAIE")
 	String moispaie;	
 	@Column(name="BUL_GAINSIMP")

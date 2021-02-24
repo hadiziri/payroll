@@ -12,7 +12,7 @@
 	<field name="dir" class="java.lang.String"/>
 	<field name="dirdes" class="java.lang.String"/>
 	<field name="divdes" class="java.lang.String"/>
-	<variable name="bulmatricule1" class="java.lang.Integer" resetType="Group" resetGroup="grpdep" calculation="DistinctCount">
+	<variable name="bulmatricule1" class="java.lang.Integer" resetType="Group" resetGroup="grpdep" calculation="Count">
 		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
 	</variable>
 	<variable name="montant4601" class="java.math.BigDecimal" resetType="Group" resetGroup="grpdep" calculation="Sum">
@@ -21,7 +21,7 @@
 	<variable name="rapp4601" class="java.math.BigDecimal" resetType="Group" resetGroup="grpdep" calculation="Sum">
 		<variableExpression><![CDATA[$F{rapp460}]]></variableExpression>
 	</variable>
-	<variable name="bulmatricule2" class="java.lang.Integer" calculation="DistinctCount">
+	<variable name="bulmatricule2" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
 	</variable>
 	<variable name="montant4602" class="java.math.BigDecimal" calculation="Sum">
@@ -145,7 +145,7 @@
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="200" y="70" width="440" height="20" uuid="9396dd58-5bb2-41f2-9668-99dfacf1c81d"/>
+				<reportElement x="260" y="70" width="430" height="40" uuid="9396dd58-5bb2-41f2-9668-99dfacf1c81d"/>
 				<textFieldExpression><![CDATA[$F{divdes}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -155,8 +155,16 @@
 				<text><![CDATA[DIRECTION:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="860" y="70" width="360" height="15" uuid="72aa1609-c759-4686-8616-d25c841be5d7"/>
+				<reportElement x="920" y="70" width="460" height="40" uuid="72aa1609-c759-4686-8616-d25c841be5d7"/>
 				<textFieldExpression><![CDATA[$F{dirdes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="70" width="61" height="21" uuid="b04fc845-2098-4227-8f21-88760c0aee0e"/>
+				<textFieldExpression><![CDATA[$F{divop}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="860" y="70" width="61" height="21" uuid="3d52dba3-6526-4cb6-a547-42939e118c3b"/>
+				<textFieldExpression><![CDATA[$F{dir}.substring(2, 3 )]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

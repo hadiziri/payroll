@@ -55,7 +55,7 @@ import { UpdateStorageSettingsComponent } from './update-storage-settings/update
 import { AddStorageSettingsComponent } from './add-storage-settings/add-storage-settings.component';
 import { NavigationHistoryComponent } from './navigation-history/navigation-history.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -98,8 +98,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatDialogModule,
     MatAutocompleteModule,
     MatToolbarModule,
-    MatButtonModule,
-    NgbModule
+    MatButtonModule
+  
  
   ],
   providers: [

@@ -20,13 +20,13 @@
 		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
 	</variable>
 	<variable name="bulnet2" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeTotal" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulnet}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulnet}]]></variableExpression>
 	</variable>
 	<variable name="bulmatricule1" class="java.lang.Integer" resetType="Group" resetGroup="grpdep" calculation="DistinctCount">
 		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
 	</variable>
 	<variable name="bulnet1" class="java.lang.Float" resetType="Group" resetGroup="grpdep" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulnet}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulnet}]]></variableExpression>
 	</variable>
 	<variable name="bulmatricule3" class="java.lang.Integer" resetType="Group" resetGroup="grpeDir" calculation="DistinctCount">
 		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
@@ -38,23 +38,28 @@
 		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
 	</variable>
 	<variable name="bulnet3" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})!=0?$F{bulnet}:0]]></variableExpression>
-		<initialValueExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?$F{bulnet}:0]]></initialValueExpression>
+		<variableExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})!=0?$F{bulnet}:new BigDecimal(0)]]></variableExpression>
 	</variable>
 	<variable name="bulnet4" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?$F{bulnet}:0]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?$F{bulnet}:new BigDecimal(0)]]></variableExpression>
 	</variable>
 	<variable name="bulnet5" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDiv" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})!=0?$F{bulnet}:0]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})!=0?$F{bulnet}:new BigDecimal(0)]]></variableExpression>
 	</variable>
 	<variable name="bulnet6" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDiv" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?$F{bulnet}:0]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?$F{bulnet}:new BigDecimal(0)]]></variableExpression>
 	</variable>
 	<variable name="bulnet7" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})!=0?$F{bulnet}:0]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})!=0?$F{bulnet}:new BigDecimal(0)]]></variableExpression>
 	</variable>
 	<variable name="bulnet8" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?$F{bulnet}:0]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?$F{bulnet}:new BigDecimal(0)]]></variableExpression>
+	</variable>
+	<variable name="bulmatricule6" class="java.lang.Integer" resetType="Group" resetGroup="grpeMois" calculation="Count">
+		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
+	</variable>
+	<variable name="bulnet9" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeMois" calculation="Sum">
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulnet}]]></variableExpression>
 	</variable>
 	<group name="grpeDiv">
 		<groupExpression><![CDATA[$F{div}]]></groupExpression>
@@ -89,15 +94,18 @@
 					<textFieldExpression><![CDATA[$F{divdes}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="460" y="80" width="450" height="20" uuid="72f0337f-8344-4bd0-98ad-827688e69a40"/>
+					<reportElement x="460" y="80" width="420" height="20" uuid="72f0337f-8344-4bd0-98ad-827688e69a40"/>
+					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulnet5})]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="580" y="100" width="440" height="20" uuid="7b3180e8-62a8-4cc5-8c92-569197f31698"/>
+					<reportElement x="580" y="100" width="300" height="20" uuid="7b3180e8-62a8-4cc5-8c92-569197f31698"/>
+					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulnet6})]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="480" y="130" width="530" height="20" uuid="e3cfb6c9-f9c1-4558-a153-57a36c91c8e6"/>
+					<reportElement x="480" y="130" width="400" height="20" uuid="e3cfb6c9-f9c1-4558-a153-57a36c91c8e6"/>
+					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulnet5}.add( $V{bulnet6} ))]]></textFieldExpression>
 				</textField>
 			</band>
@@ -132,20 +140,52 @@
 					<textFieldExpression><![CDATA[$F{dirdes}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="460" y="100" width="300" height="20" uuid="22a38c29-2f66-48b2-9662-f334475d75fa"/>
+					<reportElement x="460" y="100" width="420" height="20" uuid="22a38c29-2f66-48b2-9662-f334475d75fa"/>
+					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulnet3})]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="580" y="120" width="320" height="20" uuid="8e29b0e7-4c9a-4c1e-8a3e-7415a2ba19c6"/>
+					<reportElement x="580" y="120" width="300" height="20" uuid="8e29b0e7-4c9a-4c1e-8a3e-7415a2ba19c6"/>
+					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulnet4})]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
 	</group>
+	<group name="grpeMois">
+		<groupExpression><![CDATA[$F{div}+$F{dir}+$F{bulmoisexp}]]></groupExpression>
+		<groupFooter>
+			<band height="114">
+				<printWhenExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})!=0?new Boolean(true):new Boolean(false)]]></printWhenExpression>
+				<staticText>
+					<reportElement x="170" y="20" width="430" height="21" uuid="afb78534-f976-4ca4-ab09-6c955dcf9527"/>
+					<text><![CDATA[TOTAUX DES PAIES RETROACTIVES]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="170" y="50" width="200" height="20" uuid="4fe51efe-02a7-478f-bc1d-1a227feed32c"/>
+					<text><![CDATA[TOTAL AGENTS:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="170" y="70" width="260" height="20" uuid="a91c009d-ff3b-4d84-ab4f-3e69aa0fc48b"/>
+					<text><![CDATA[TOTAL NET A PAYER:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="370" y="50" width="350" height="20" uuid="335de96b-2599-4c8a-b1bc-5c641303a98b"/>
+					<textFieldExpression><![CDATA[$V{bulmatricule6}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="430" y="70" width="450" height="20" uuid="d291d192-6b39-4b8d-ace9-34390354c8c9"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulnet9})]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
 	<group name="grpeTotal" isStartNewColumn="true">
-		<groupExpression><![CDATA[$F{div}+$F{dir}+$F{bulcbanque}]]></groupExpression>
+		<groupExpression><![CDATA[$F{div}+$F{dir}+$F{bulmoisexp}+$F{bulcbanque}]]></groupExpression>
 		<groupFooter>
 			<band height="129" splitType="Prevent">
+				<printWhenExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?new Boolean(true):new Boolean(false)]]></printWhenExpression>
 				<staticText>
 					<reportElement x="0" y="10" width="230" height="15" uuid="5b3a5a02-8b09-4f1b-ba71-41e29ab455ec">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -167,7 +207,8 @@
 					<text><![CDATA[TOTAL AGENTS:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="370" y="70" width="180" height="20" uuid="5ab7b3b1-9e88-4a66-861b-2dd4ac10f083"/>
+					<reportElement x="370" y="70" width="510" height="20" uuid="5ab7b3b1-9e88-4a66-861b-2dd4ac10f083"/>
+					<textElement textAlignment="Left"/>
 					<textFieldExpression><![CDATA[$V{bulmatricule2}]]></textFieldExpression>
 				</textField>
 				<staticText>
@@ -175,7 +216,8 @@
 					<text><![CDATA[TOTAL NET A PAYER:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="430" y="90" width="290" height="20" uuid="eb500cc1-f0ec-4786-9bf7-b4b1b0fdcc7a"/>
+					<reportElement x="430" y="90" width="450" height="20" uuid="eb500cc1-f0ec-4786-9bf7-b4b1b0fdcc7a"/>
+					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulnet2})]]></textFieldExpression>
 				</textField>
 				<textField>
@@ -194,9 +236,10 @@
 		</groupFooter>
 	</group>
 	<group name="grpdep" isStartNewColumn="true">
-		<groupExpression><![CDATA[$F{div}+$F{dir}+$F{bulcbanque}+$F{bulcagence}]]></groupExpression>
+		<groupExpression><![CDATA[$F{div}+$F{dir}+$F{bulmoisexp}+$F{bulcbanque}+$F{bulcagence}]]></groupExpression>
 		<groupFooter>
 			<band height="196" splitType="Stretch">
+				<printWhenExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?new Boolean(true):new Boolean(false)]]></printWhenExpression>
 				<staticText>
 					<reportElement x="0" y="60" width="240" height="15" uuid="551c2447-05cb-4884-a8f2-fffea193915f">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -222,11 +265,13 @@
 					<text><![CDATA[TOTAL NET A PAYER:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="370" y="140" width="220" height="20" uuid="a7a45e66-9564-4763-8d2b-37c6f52e9f92"/>
+					<reportElement x="370" y="140" width="510" height="20" uuid="a7a45e66-9564-4763-8d2b-37c6f52e9f92"/>
+					<textElement textAlignment="Left"/>
 					<textFieldExpression><![CDATA[$V{bulmatricule1}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="430" y="160" width="320" height="20" uuid="f8c01d06-1118-4ce0-b430-391950c4d701"/>
+					<reportElement x="430" y="160" width="450" height="20" uuid="f8c01d06-1118-4ce0-b430-391950c4d701"/>
+					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulnet1})]]></textFieldExpression>
 				</textField>
 				<textField>
@@ -311,26 +356,26 @@
 				</reportElement>
 				<text><![CDATA[D I V I S I O N :]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="-10" y="140" width="50" height="20" uuid="f18cf6ba-2bef-4094-8c04-9ce9fb5e5234"/>
-				<textFieldExpression><![CDATA[$F{bulcbanque}]]></textFieldExpression>
+			<textField isBlankWhenNull="true">
+				<reportElement x="-10" y="140" width="50" height="20" isRemoveLineWhenBlank="true" uuid="f18cf6ba-2bef-4094-8c04-9ce9fb5e5234"/>
+				<textFieldExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?$F{bulcbanque}:""]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="40" y="140" width="440" height="20" uuid="94dbdb1b-7df2-4636-9e52-da06cc0f139d"/>
-				<textFieldExpression><![CDATA[$F{bandes}]]></textFieldExpression>
+			<textField isBlankWhenNull="true">
+				<reportElement x="40" y="140" width="440" height="20" isRemoveLineWhenBlank="true" uuid="94dbdb1b-7df2-4636-9e52-da06cc0f139d"/>
+				<textFieldExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?$F{bandes}:""]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="720" y="140" width="70" height="20" uuid="ba00c7b3-3b30-428b-9ebe-711e1b251408"/>
-				<textFieldExpression><![CDATA[$F{bulcagence}]]></textFieldExpression>
+			<textField isBlankWhenNull="true">
+				<reportElement x="720" y="140" width="70" height="20" isRemoveLineWhenBlank="true" uuid="ba00c7b3-3b30-428b-9ebe-711e1b251408"/>
+				<textFieldExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?$F{bulcagence}:""]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="790" y="140" width="490" height="20" uuid="f171d546-4e3c-42cf-93c7-f01db059a517"/>
-				<textFieldExpression><![CDATA[$F{agedes}]]></textFieldExpression>
+			<textField isBlankWhenNull="true">
+				<reportElement x="790" y="140" width="490" height="20" isRemoveLineWhenBlank="true" uuid="f171d546-4e3c-42cf-93c7-f01db059a517"/>
+				<textFieldExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?$F{agedes}:""]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="630" y="140" width="90" height="20" uuid="4834acd0-c9ea-49c1-b900-f6d375af5962"/>
-				<text><![CDATA[AGENCE:]]></text>
-			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="630" y="140" width="90" height="20" isRemoveLineWhenBlank="true" uuid="4834acd0-c9ea-49c1-b900-f6d375af5962"/>
+				<textFieldExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?"AGENCE:":""]]></textFieldExpression>
+			</textField>
 			<textField>
 				<reportElement x="200" y="70" width="580" height="20" uuid="e5965fad-0076-4ce9-86e3-034d3f62aa71"/>
 				<textFieldExpression><![CDATA[$F{divdes}]]></textFieldExpression>
@@ -338,6 +383,10 @@
 			<textField>
 				<reportElement x="280" y="90" width="500" height="20" uuid="a5ad4d8f-690f-43d9-8764-e549c4b6b857"/>
 				<textFieldExpression><![CDATA[$F{dirdes}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="701" y="120" width="790" height="21" isRemoveLineWhenBlank="true" uuid="ba677927-6b5a-47e7-b5f2-397d12fcf85b"/>
+				<textFieldExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})!=0?"PAIES RETROACTIVES CAISSE PRINCIPAL":""]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -542,15 +591,18 @@
 				<textFieldExpression><![CDATA[$V{bulmatricule5}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="460" y="80" width="580" height="20" uuid="56de0140-b23f-46d1-8c33-3c90251a7946"/>
+				<reportElement x="460" y="80" width="420" height="20" uuid="56de0140-b23f-46d1-8c33-3c90251a7946"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulnet7})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="580" y="100" width="600" height="20" uuid="a8cb8e3e-3160-42f0-8770-46fa2d51bbcb"/>
+				<reportElement x="580" y="100" width="300" height="20" uuid="a8cb8e3e-3160-42f0-8770-46fa2d51bbcb"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulnet8})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="480" y="130" width="590" height="20" uuid="a34ffb97-3368-497a-8bf4-ce90cc2245c1"/>
+				<reportElement x="480" y="130" width="400" height="20" uuid="a34ffb97-3368-497a-8bf4-ce90cc2245c1"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulnet7}.add( $V{bulnet8}))]]></textFieldExpression>
 			</textField>
 		</band>

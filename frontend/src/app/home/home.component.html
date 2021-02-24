@@ -1,40 +1,17 @@
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="Description" CONTENT="Free angular bootstrap admin dashboard template. World first blur panel dashboard.">
-<meta name="keywords" content="admin,dashboard,template,angular,bootstrap,blur,panel,html,css,javascript">
-<title>Blur Admin</title>
-<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
-<link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96x96.png">
-
-</head>
-<body>
-<div class="page-not-found-modal">
-<h1>404 Error</h1>
-<p>Sorry, that page doesn't exist. <a href="/">Go to Home Page.</a></p>
-</div>
-</body>
-</html>
-
-<div class="disable-background"></div>!-->
+<h1> BIENVENUE DANS L'APPLICATION EXPLOITATION PAIE, NOUS VOUS PROPOSONS LES SERVICES SUIVANTS:  </h1>
 <mat-grid-list cols="2" rowHeight="2:1">
   <mat-grid-tile>
     <mat-card class="example-card">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>Fragment 1</mat-card-title>
-        <mat-card-subtitle>Etat Paie</mat-card-subtitle>
+        <mat-card-title style="color:#1b867b;">Etat Paie</mat-card-title>
+        <mat-card-subtitle style="color:#B3B0B0;"> Fragment 1</mat-card-subtitle>
       </mat-card-header>
      
       <mat-card-content>
-        <p>
-      Ce fragment vous permet de générer les cinq (5) état de paie pour chaque structure ,et d'envoyer ces derniers aux gestionnaires.
-          En cas de probléme lors de la génération vous pouvez suspendre la structure, ce qui va empecher les autres utilisateurs d'envoyer ces états jusqu'a la réactivation de la structure. 
+        <p style="color: white;padding-bottom: 10px;"> 
+      Ce fragment vous permet de générer les cinqs (5) état de paie pour chaque structure ,et d'envoyer ces derniers aux gestionnaires.<br>
+          En cas de probléme lors de la génération vous pouvez suspendre la structure, ce qui va empecher les autres utilisateurs d'envoyer ces états jusqu'a la réactivation de la structure. <br>
         </p>
       </mat-card-content>
       <mat-card-actions>
@@ -42,9 +19,110 @@
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>
-  <mat-grid-tile>2</mat-grid-tile>
-  <mat-grid-tile>3</mat-grid-tile>
-  <mat-grid-tile>4</mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title style="color: #1b867b;">Clôture Paie</mat-card-title>
+        <mat-card-subtitle style="color:#B3B0B0;"> Fragment 2</mat-card-subtitle>
+      </mat-card-header>
+     
+      <mat-card-content>
+        <p style="color: white;"> 
+      Ce fragment vous permet de générer les  fichiers de paie des différents dossiers.<br>
+      Vous pouvez distinguer les fichiers générés à travers l'état qui s'affiche en vert lorsque ces derniers sont générés et en rouge sinon.
+        </p>
+      <br><br>
+      </mat-card-content>
+      <mat-card-actions>
+        
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title style="color: #1b867b;">Clôture Mois</mat-card-title>
+        <mat-card-subtitle style="color:#B3B0B0;"> Fragment 3</mat-card-subtitle>
+      </mat-card-header>
+     
+      <mat-card-content>
+        <p style="color: white;"> 
+      Ce fragment vous permet de clôturer le mois et passer au mois suivant.<br>
+      Vous pouvez distinguer les fichiers générés pour ce mois à travers l'état qui s'affiche en vert lorsque ces derniers sont générés et en rouge sinon.
+        </p>
+        <br><br>
+      </mat-card-content>
+      <mat-card-actions>
+        
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title style="color: #1b867b;">Envoie Fichiers Système</mat-card-title>
+        <mat-card-subtitle style="color:#B3B0B0;"> Fragment 4</mat-card-subtitle>
+      </mat-card-header>
+     
+      <mat-card-content>
+        <p style="color: white;"> 
+      Ce fragment vous permet de séléctionner des fichiers système et d'envoyer ces derniers aux gestionnaires.<br>
+          Vous pouvez consulter les différents émails envoyés dans le fragment historique.
+        </p>
+        <br><br><br>
+      </mat-card-content>
+      <mat-card-actions>
+        
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title style="color: #1b867b;">Historique</mat-card-title>
+        <mat-card-subtitle style="color:#B3B0B0;"> Fragment 5</mat-card-subtitle>
+      </mat-card-header>
+     
+      <mat-card-content>
+        <p style="color: white;"> 
+      Ce fragment vous permet de voir les différents émails que vous avez envoyé,ainsi toutes les structures que vous avez ajoutées,modifiées ou bien supprimées.Et enfin tout les dossiers ajoutés,modifiés ou bien supprimés. <br>
+        
+        </p>
+        <br><br><br>
+      </mat-card-content>
+      <mat-card-actions>
+        
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title style="color: #1b867b;">Paramétres</mat-card-title>
+        <mat-card-subtitle style="color:#B3B0B0;"> Fragment 6</mat-card-subtitle>
+      </mat-card-header>
+     
+      <mat-card-content>
+        <p style="color: white;"> 
+      Ce fragment vous permet de :
+    </p>
+      <ul style="color: white;">
+        <li>Changer votre mot de passe.</li>
+        <li>Choisir des fichiers à imprimer.</li>
+        <li>Ajouter un nouveau chemin de stockage des fichiers,le modifier ou bien le supprimer.</li>
+        <li>Ajouter une nouvelle structure, la modifier ou bien la supprimer.</li>
+      </ul>
+      </mat-card-content>
+      <mat-card-actions>
+        
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
 </mat-grid-list>
 <div class="content" role="main" >
 

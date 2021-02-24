@@ -72,6 +72,7 @@ export class NavigationHistoryComponent implements OnInit {
   ngOnInit(): void {
     //get currentUser
      this.currentUser.username = this.token.getUsername();
+     this.currentUser.name=this.operation;
      // //console.log(this.currentUser)
      this.paramService.getUserByUserName(this.currentUser).subscribe(
        data => {
@@ -93,8 +94,8 @@ export class NavigationHistoryComponent implements OnInit {
  
      );
 
-     //all added structure (by default)
-     this.historiqueService.getArchiveStructure(this.operation).subscribe(
+     //all added structure (by default)(added)
+     this.historiqueService.getArchiveStructure(this.currentUser).subscribe(
       (data) => {
         if (data != null) {
          
@@ -102,7 +103,7 @@ export class NavigationHistoryComponent implements OnInit {
          this.archiveStructure=data;
          this.dataSourceStructure= new MatTableDataSource(this.archiveStructure);
         } else {
-          this.openDialog();
+         this.openDialog();
         }
 
 
@@ -113,8 +114,8 @@ export class NavigationHistoryComponent implements OnInit {
         throw error;
       }
     );
-  //all added folder (by default)
-    this.historiqueService.getArchiveFolder(this.operation).subscribe(
+  //all added folder (by default)(added)
+    this.historiqueService.getArchiveFolder(this.currentUser).subscribe(
       (data) => {
         if (data != null) {
          
@@ -206,6 +207,7 @@ export class NavigationHistoryComponent implements OnInit {
      //console.log(event)
     if(event.tab.textLabel=="Structures ajoutées"){
       this.operation="add";
+      
     }else{
       if(event.tab.textLabel=="Structures supprimées"){
         this.operation="delete";
@@ -214,8 +216,9 @@ export class NavigationHistoryComponent implements OnInit {
       }
 
     }
+    this.currentUser.name=this.operation;
 
-    this.historiqueService.getArchiveStructure(this.operation).subscribe(
+    this.historiqueService.getArchiveStructure(this.currentUser).subscribe(
       (data) => {
         if (data != null) {
          
@@ -250,7 +253,8 @@ export class NavigationHistoryComponent implements OnInit {
       }
 
     }
-    this.historiqueService.getArchiveFolder(this.operation).subscribe(
+    this.currentUser.name=this.operation;
+    this.historiqueService.getArchiveFolder(this.currentUser).subscribe(
       (data) => {
         if (data != null) {
          
