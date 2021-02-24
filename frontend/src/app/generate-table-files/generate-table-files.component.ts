@@ -33,6 +33,7 @@ export class GenerateTableFilesComponent implements OnInit {
   emailSaved:Boolean=false;
   eFiles:Efile[]=[];
   idEmail:number=0;
+  
   archiveSentFilesSaved:Boolean=false;
   formSettings: MbscFormOptions = {
     theme: 'mobiscroll',

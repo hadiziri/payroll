@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -585,7 +585,7 @@ public class Controller {
 			String currentYear = currentPaymonth.getPaymonth().substring(0, 4);
 			String currentMonth = currentPaymonth.getPaymonth().substring(4, 6);
 			// return etatJournalRepo.findByPayMonth(currentMonth, currentYear);
-			return etatJournalRepo.findByPayMonth(currentMonth, currentYear);
+			return etatJournalRepo.findByPayMonth();
 		} catch (Exception e) {
 			System.out.println("Exception getEtatJournal()==>" + e.getMessage());
 		}
@@ -1055,8 +1055,8 @@ public class Controller {
 			String currentYear = currentDate.getPaymonth().substring(0, 4);
 			String currentMonth = currentDate.getPaymonth().substring(4, 6);
 			String dateFormat = currentYear + "-" + currentMonth;
-			// String date="01"+"/"+currentMonth+"/"+currentYear;
-			String date = "01/04/2016";// for test
+			 String date="01"+"/"+currentMonth+"/"+currentYear;
+			//String date = "01/04/2016";// for test
 			Date sysDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
 			// ******************************************get Folder path
 			Folder folder = folderRepo.findByFolderName("ETAT");
@@ -1076,6 +1076,11 @@ public class Controller {
 			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
 			}
+			for(int i=0;i<mand.size();i++) {
+                if(mand.get(i).getBulnet()==new BigDecimal(0)) {
+                       mand.get(i).setBulnet(new BigDecimal(0));
+                }
+         }
 
 			// load file and compile it
 			File file = ResourceUtils.getFile("classpath:etatMand.jrxml");

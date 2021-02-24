@@ -16,7 +16,7 @@ import com.sonatrach.dz.etatRet.domain.EtatRetId;
 @Entity
 @Table(name ="PAIE_ETAT_MANDATEMENT")
 @IdClass(EtatMandId.class)
-@NamedQuery(name = "EtatMand.findByPayMonth", query = "SELECT p FROM EtatMand  p ")
+@NamedQuery(name = "EtatMand.findByPayMonth", query = "SELECT p FROM EtatMand  p  ")
 public class EtatMand implements Serializable{
 	
 	@Column(name="BUL_CBANQUE")

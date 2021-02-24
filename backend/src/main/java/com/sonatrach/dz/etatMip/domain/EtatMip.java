@@ -1,23 +1,30 @@
 package com.sonatrach.dz.etatMip.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.sonatrach.dz.etatJournal.domain.EtatJournalId;
+
 @Entity
 @Table(name ="PAIE_ETAT_MIP")
-@NamedQuery(name = "EtatMip.findByPayMonth", query = "SELECT p FROM EtatMip  p WHERE moisexp=?1 AND anneeexp=?2 order by dirdes")
-public class EtatMip {
+@IdClass(EtatJournalId.class)
+@NamedQuery(name = "EtatMip.findByPayMonth", query = "SELECT p FROM EtatMip  p  order by dirdes")
+public class EtatMip implements Serializable{
 	@Id
 	@Column(name="BUL_MATRICULE")
 	String bulmatricule;
+	@Id
 	@Column(name="MOIS_EXP")
 	String moisexp;
+	@Id
 	@Column(name="ANNEE_EXP")
 	String anneeexp;
 	@Column(name="DIR")

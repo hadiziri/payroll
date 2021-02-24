@@ -86,7 +86,7 @@ export class FilesGeneratorComponent implements OnInit {
   ret:Boolean=false;
   recap:Boolean=false;
   mip:Boolean=false;
-  
+  count:number=0;
   updatedStructure:Structure={
     "idstructure":0,
     "idactivity":0,
@@ -518,8 +518,8 @@ export class FilesGeneratorComponent implements OnInit {
      }
      // //console.log(this.codeStructure);
      if(this.allEtatJournal.length==0||this.allEtatMand.length==0||this.allEtatMip.length==0||this.allEtatRecap.length==0||this.allEtatRet.length==0){
-        //this.showAlertInit("Initialisation des données","Veuillez patienter un petit moment s'il vous plait pour générer les fichiers");
-        this.filtrerEtats(this.codeStructure,structure);
+        this.showAlertInit("Initialisation des données","Veuillez patienter un petit moment s'il vous plait pour générer les fichiers");
+        //this.filtrerEtats(this.codeStructure,structure);
      }else{
         this.filtrerEtats(this.codeStructure,structure);
      }
@@ -873,7 +873,9 @@ this.homeService.saveGeneratedFiles(this.efiles).subscribe(
     // //console.log("save generated files in db")
    //  //console.log(data);
     if(data!=null){
+      
       this.updateStatusStructure(structure);
+      
       //this.showAlert("Activation Structure","La structure a bien été activée");
     }else{
       
@@ -902,7 +904,7 @@ updateStatusStructure(structure:Structure){
       if(data!=null){
         structure.statusstructure=1;
         this.showSpinner=false;
-        this.showAlert("Génération etats paie","Les etats ont bien été généré.");
+        this.showAlertGeneration("Génération etats paie","Les etats ont bien été généré.");
       }else{
         
         
@@ -942,7 +944,21 @@ updateStatusStructure(structure:Structure){
       window.location.reload();
     });
   }
+  showAlertGeneration(title:String,msg:String) {
+    if(this.jour&&this.mip&&this.mand&&this.ret&&this.recap){
+      mobiscroll.alert({
+        title: title,
+        message: msg
+        /* ,callback: function () {
+          window.location.reload();
+         }*/
+      });
+    }
+  
+  
+  
+  }
+  
 }
 
-   
 

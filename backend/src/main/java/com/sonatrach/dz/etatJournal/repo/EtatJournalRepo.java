@@ -11,5 +11,5 @@ import com.sonatrach.dz.etatJournal.domain.EtatJournal;
 
 @Repository
 public interface EtatJournalRepo extends JpaRepository<EtatJournal, String>{
-ArrayList<EtatJournal>findByPayMonth(String mois,String annee);
+ArrayList<EtatJournal>findByPayMonth();
 }

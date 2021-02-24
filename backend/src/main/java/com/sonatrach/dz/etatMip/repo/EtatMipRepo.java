@@ -12,5 +12,5 @@ import com.sonatrach.dz.etatMip.domain.EtatMip;
 
 @Repository
 public interface EtatMipRepo  extends JpaRepository<EtatMip, String>{
-	ArrayList<EtatMip>findByPayMonth(String mois,String annee);
+	ArrayList<EtatMip>findByPayMonth();
 }
