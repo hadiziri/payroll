@@ -707,7 +707,7 @@ export class FilesGeneratorComponent implements OnInit {
           }
           this.efiles.push(efile);
           this.mand=true;
-        // this.saveGeneratedFilesInDB(structure);
+        this.saveGeneratedFilesInDB(structure);
           //this.showAlert("Activation Structure","La structure a bien été activée");
         }else{
           

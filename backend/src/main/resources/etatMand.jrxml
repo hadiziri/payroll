@@ -331,18 +331,18 @@
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[(  new SimpleDateFormat("MM").format($F{bulmoisexp}).equals("01") ? "Janvier" : 
-         new SimpleDateFormat("MM").format($F{bulmoisexp}).equals("02") ? "Février" :
-         new SimpleDateFormat("MM").format($F{bulmoisexp}).equals("03") ? "Mars" :
-        new SimpleDateFormat("MM").format($F{bulmoisexp}).equals("04") ? "Avril" :
-        new SimpleDateFormat("MM").format($F{bulmoisexp}).equals("05") ? "Mai" :
-         new SimpleDateFormat("MM").format($F{bulmoisexp}).equals("06") ? "Juin" :
-         new SimpleDateFormat("MM").format($F{bulmoisexp}).equals("07") ? "Juillet" :
-        new SimpleDateFormat("MM").format($F{bulmoisexp}).equals("08") ? "Aout" :
-         new SimpleDateFormat("MM").format($F{bulmoisexp}).equals("09") ? "Septembre" :
-        new SimpleDateFormat("MM").format($F{bulmoisexp}).equals("10") ? "Octobre" : 
-         new SimpleDateFormat("MM").format($F{bulmoisexp}).equals("11") ? "Novembre" : "Decembre"
-    )+" "+new SimpleDateFormat("yyyy").format($F{bulmoisexp})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[(  new SimpleDateFormat("MM").format($P{currenntMonth}).equals("01") ? "Janvier" : 
+         new SimpleDateFormat("MM").format($P{currenntMonth}).equals("02") ? "Février" :
+         new SimpleDateFormat("MM").format($P{currenntMonth}).equals("03") ? "Mars" :
+        new SimpleDateFormat("MM").format($P{currenntMonth}).equals("04") ? "Avril" :
+        new SimpleDateFormat("MM").format($P{currenntMonth}).equals("05") ? "Mai" :
+         new SimpleDateFormat("MM").format($P{currenntMonth}).equals("06") ? "Juin" :
+         new SimpleDateFormat("MM").format($P{currenntMonth}).equals("07") ? "Juillet" :
+        new SimpleDateFormat("MM").format($P{currenntMonth}).equals("08") ? "Aout" :
+         new SimpleDateFormat("MM").format($P{currenntMonth}).equals("09") ? "Septembre" :
+        new SimpleDateFormat("MM").format($P{currenntMonth}).equals("10") ? "Octobre" : 
+         new SimpleDateFormat("MM").format($P{currenntMonth}).equals("11") ? "Novembre" : "Decembre"
+    )+" "+new SimpleDateFormat("yyyy").format($P{currenntMonth})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="-10" y="90" width="290" height="20" uuid="d8d6365f-872b-49ad-8d45-ee0838e25817">
