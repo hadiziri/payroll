@@ -3,4 +3,7 @@
     background-color:#343A3D ;
    
     }
-  
+    @keyframes example {
+        from {background-color: #E77F03;}
+        to {background-color: #FDAF52;}
+      }
