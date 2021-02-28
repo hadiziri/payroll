@@ -536,8 +536,8 @@ export class FilesGeneratorComponent implements OnInit {
      }
      // //console.log(this.codeStructure);
      if(this.allEtatJournal.length==0||this.allEtatMand.length==0||this.allEtatMip.length==0||this.allEtatRecap.length==0||this.allEtatRet.length==0){
-        this.showAlertInit("Initialisation des données","Veuillez patienter un petit moment s'il vous plait pour générer les fichiers");
-        //this.filtrerEtats(this.codeStructure,structure);
+        //this.showAlertInit("Initialisation des données","Veuillez patienter un petit moment s'il vous plait pour générer les fichiers");
+        this.filtrerEtats(this.codeStructure,structure);
      }else{
         this.filtrerEtats(this.codeStructure,structure);
      }
