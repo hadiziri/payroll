@@ -1,3 +1,4 @@
+import { PayMonth } from './../Models/PayMonth';
 import { CommunService } from './commun.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -39,6 +40,16 @@ export class UserService {
       })
     );
     
+  }
+
+  getCurrentMonth():Observable<PayMonth>{
+    return this.http.get<PayMonth>(this.userUrl+"getCurrentMonth").pipe(
+      catchError((err) => {
+         //console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
   }
   }
 

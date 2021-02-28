@@ -86,6 +86,11 @@ export class FilesGeneratorComponent implements OnInit {
   ret:Boolean=false;
   recap:Boolean=false;
   mip:Boolean=false;
+  allmand:Boolean=false;
+  alljour:Boolean=false;
+  allret:Boolean=false;
+  allrecap:Boolean=false;
+  allmip:Boolean=false;
   count:number=0;
   updatedStructure:Structure={
     "idstructure":0,
@@ -174,6 +179,8 @@ export class FilesGeneratorComponent implements OnInit {
           if(data!=null){
            console.log(data);
             this.allEtatJournal=data;
+            this.alljour=true;
+            this.disableSpinner();
             
           }else{
             this.openDialog();
@@ -194,7 +201,8 @@ export class FilesGeneratorComponent implements OnInit {
           if(data!=null){
          console.log(data);
             this.allEtatMand=data;
-            
+            this.allmand=true;
+            this.disableSpinner();
           }else{
             this.openDialog();
           }
@@ -214,7 +222,8 @@ export class FilesGeneratorComponent implements OnInit {
           if(data!=null){
          console.log(data);
             this.allEtatMip=data;
-            
+            this.allmip=true;
+            this.disableSpinner();
           }else{
             this.openDialog();
           }
@@ -235,7 +244,9 @@ export class FilesGeneratorComponent implements OnInit {
            
             this.allEtatRecap=data;
           console.log(this.allEtatRecap);
-            this.showSpinner=false;
+          this.allrecap=true;
+          this.disableSpinner();
+          
           }else{
             this.openDialog();
           }
@@ -255,6 +266,8 @@ export class FilesGeneratorComponent implements OnInit {
           if(data!=null){
           console.log(data);
             this.allEtatRet=data;
+            this.allret=true;
+            this.disableSpinner();
            
           }else{
             this.openDialog();
@@ -272,6 +285,11 @@ export class FilesGeneratorComponent implements OnInit {
      
   }
 
+  disableSpinner(){
+    if(this.alljour&&this.allmip&&this.allmand&&this.allret&&this.allrecap){
+      this.showSpinner=false;
+    }
+  }
 //---------------------------------------------------------------------SEND EMAIL----------------------------------------------------------------------------------------------
   sendEmail(structure:Structure){
     this.showSpinner=true;
@@ -946,6 +964,11 @@ updateStatusStructure(structure:Structure){
   }
   showAlertGeneration(title:String,msg:String) {
     if(this.jour&&this.mip&&this.mand&&this.ret&&this.recap){
+      this.jour=false;
+      this.mip=false;
+      this.mand=false;
+      this.ret=false;
+      this.recap=false;
       mobiscroll.alert({
         title: title,
         message: msg

@@ -244,6 +244,20 @@ public class Controller {
 		return lesStructures;
 	}
 
+	@GetMapping({"/getCurrentMonth"})
+	public PayMonth getCurrentMonth() {
+		try {
+			PayMonth currentDate = paymonthRepo.findByState();
+			/*String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;*/
+			return currentDate;
+		}catch(Exception e ) {
+			System.out.println("Exception getCurrentMonth()==>" + e.getMessage());
+		}
+	return null;
+		
+	}
 	/******************************************************************
 	 * Historique
 	 ****************************************************************************************************/

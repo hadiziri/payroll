@@ -493,7 +493,7 @@
 				<textElement textAlignment="Left">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{bulnom}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["!"+$F{bulnom}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="780" y="0" width="200" height="20" uuid="72ac64bb-1484-4b8a-8bdb-6ddcf6c57c70">
@@ -517,7 +517,8 @@
 				<textElement textAlignment="Left">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["!    "]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})!=0?"!"+(  new SimpleDateFormat("MM").format($F{bulmoisexp})
+    )+"/"+new SimpleDateFormat("yyyy").format($F{bulmoisexp}):"!"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="990" y="0" width="160" height="20" uuid="c7d9f004-ba41-4c99-9a6c-cfbf3173864a">
@@ -526,7 +527,7 @@
 				<box>
 					<pen lineWidth="0.0" lineStyle="Dashed"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{bulnet})]]></textFieldExpression>

@@ -217,6 +217,10 @@
 					<reportElement x="260" y="119" width="140" height="16" uuid="695d86e5-d7c5-4dfd-8bab-9d9822a1452b"/>
 					<textFieldExpression><![CDATA[$V{bulmatricule6}]]></textFieldExpression>
 				</textField>
+				<textField>
+					<reportElement x="260" y="99" width="151" height="17" uuid="39e97e05-a961-4c98-9ffa-53262db77131"/>
+					<textFieldExpression><![CDATA[$F{div}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupFooter>
 	</group>
@@ -304,6 +308,10 @@
 				<textField>
 					<reportElement x="250" y="120" width="170" height="16" uuid="10146640-0d98-4c17-89fc-86a90aa2a5e0"/>
 					<textFieldExpression><![CDATA[$V{bulmatricule7}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="250" y="99" width="151" height="17" uuid="fddcfc19-9384-40c1-b43e-b4796dfbb567"/>
+					<textFieldExpression><![CDATA[$F{dir}.substring(1, 2 )]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -680,7 +688,7 @@
 				<textElement textAlignment="Left">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{bulnom}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["!"+$F{bulnom}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
 				<reportElement x="330" y="0" width="150" height="20" uuid="72ac64bb-1484-4b8a-8bdb-6ddcf6c57c70">

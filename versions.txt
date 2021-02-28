@@ -1,3 +1,10 @@
+3.5
+---
+-Correction des etats (mip ,mand , journal)
+-Ajout du mois courant dans le header
+-Design Home page
+-File generator component correction des erreurs
+---------------------------------------------------------------------------------------------------
 3.4
 ---
 -Correction des bugs et amélioration fonctionnalités(Historique+home page)

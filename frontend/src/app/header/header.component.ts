@@ -1,3 +1,7 @@
+import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
+import { UserService } from './../Services/user.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from './../auth/token-storage.service';
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +21,8 @@ export class HeaderComponent implements OnInit {
     theme: 'mobiscroll',
     themeVariant: 'light'
   };
-  constructor(private tokenStorage: TokenStorageService,private router: Router) { }
+  currentMonth:String="dd";
+  constructor(private tokenStorage: TokenStorageService,private router: Router,private userService:UserService,public dialog: MatDialog) { }
 
 
   ngOnInit(): void {
@@ -25,6 +30,29 @@ export class HeaderComponent implements OnInit {
       this.connection=true;
    
     }
+
+    this.userService.getCurrentMonth().subscribe(
+      (data) => {
+        if(data!=null){
+        //console.log(data);
+        let currentYear = data.paymonth.substring(0, 4);
+			let currentMonth = data.paymonth.substring(4, 6);
+			let dateFormat =currentMonth+"/"+ currentYear  ;
+          this.currentMonth=dateFormat;
+         
+        }else{
+          this.openDialog();
+        }
+        
+        
+      },
+      error => {
+        // //console.log(error);
+        this.openDialogError(error);
+        throw error;
+
+      }
+    )
   }
   logout() {
     // //console.log("deconnexion")
@@ -50,7 +78,23 @@ export class HeaderComponent implements OnInit {
 }); 
 
 }
+openDialog() {
+  const dialogRef = this.dialog.open(AlertDialogComponent);
 
+  dialogRef.afterClosed().subscribe(result => {
+    window.location.reload();
+  });
+}
+openDialogError(error:String): void {
+  const dialogRef = this.dialog.open(ErrorDialogComponent, {
+    width: '650px',
+    data: {message: error}
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    window.location.reload();
+  });
+}
 
 
 }

@@ -18,9 +18,10 @@ import com.sonatrach.dz.etatRet.domain.EtatRetId;
 @IdClass(EtatMandId.class)
 @NamedQuery(name = "EtatMand.findByPayMonth", query = "SELECT p FROM EtatMand  p  ")
 public class EtatMand implements Serializable{
-	
+	@Id
 	@Column(name="BUL_CBANQUE")
 	String bulcbanque;
+	@Id
 	@Column(name="BUL_CAGENCE")
 	String bulcagence;
 	@Column(name="DEPT")

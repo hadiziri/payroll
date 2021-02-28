@@ -49,7 +49,7 @@ export interface EtatElement {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  structures=['9ZK','5X1','ASL','AST','COM','CPE','CRD','DG','DP','EXP','FOR','IAP','LTH','PEC','PED','16','17','18','19'];
+  
  
 
 
@@ -58,7 +58,4 @@ export class HomeComponent implements OnInit {
   }
 
 
- GenerateFile(index:number){
-
- }
 }

@@ -63,12 +63,12 @@
 				<textField>
 					<reportElement x="780" y="50" width="160" height="18" uuid="98581f0f-90ea-4c5e-b28d-e025aa11c8ec"/>
 					<textElement textAlignment="Right"/>
-					<textFieldExpression><![CDATA[$V{montant4601}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{montant4601})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{montant4601}==null?"0,00":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{montant4601})]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="950" y="50" width="200" height="18" uuid="c55c15d2-1b3d-46a5-9dc1-6e4c3735dfb9"/>
 					<textElement textAlignment="Right"/>
-					<textFieldExpression><![CDATA[$V{rapp4601}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{rapp4601})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{rapp4601}==null?"0,00":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{rapp4601})]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="940" y="50" width="9" height="18" uuid="58dab7aa-7ef7-4684-a69e-38c621e41d4f">
@@ -126,7 +126,7 @@
     )+" "+$F{anneeexp}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="-10" y="70" width="210" height="15" uuid="125acc07-6073-414e-b66e-c05330058689">
+				<reportElement x="-10" y="60" width="210" height="15" uuid="125acc07-6073-414e-b66e-c05330058689">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<text><![CDATA[D I V I S I O N  :]]></text>
@@ -145,34 +145,34 @@
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="260" y="70" width="430" height="40" uuid="9396dd58-5bb2-41f2-9668-99dfacf1c81d"/>
+				<reportElement x="260" y="60" width="430" height="40" uuid="9396dd58-5bb2-41f2-9668-99dfacf1c81d"/>
 				<textFieldExpression><![CDATA[$F{divdes}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="710" y="70" width="150" height="15" uuid="f1d14d38-4440-4383-ac61-a6c569230c47">
+				<reportElement x="710" y="60" width="150" height="15" uuid="f1d14d38-4440-4383-ac61-a6c569230c47">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<text><![CDATA[DIRECTION:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="920" y="70" width="460" height="40" uuid="72aa1609-c759-4686-8616-d25c841be5d7"/>
+				<reportElement x="920" y="60" width="460" height="40" uuid="72aa1609-c759-4686-8616-d25c841be5d7"/>
 				<textFieldExpression><![CDATA[$F{dirdes}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="200" y="70" width="61" height="21" uuid="b04fc845-2098-4227-8f21-88760c0aee0e"/>
+				<reportElement x="200" y="60" width="61" height="21" uuid="b04fc845-2098-4227-8f21-88760c0aee0e"/>
 				<textFieldExpression><![CDATA[$F{divop}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="860" y="70" width="61" height="21" uuid="3d52dba3-6526-4cb6-a547-42939e118c3b"/>
-				<textFieldExpression><![CDATA[$F{dir}.substring(2, 3 )]]></textFieldExpression>
+				<reportElement x="860" y="60" width="61" height="21" uuid="3d52dba3-6526-4cb6-a547-42939e118c3b"/>
+				<textFieldExpression><![CDATA[$F{dir}.substring(1, 2 )]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="73" splitType="Prevent">
+		<band height="53" splitType="Prevent">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement x="-10" y="19" width="350" height="31" uuid="d065f8ed-0c05-47d0-a679-a392c9cfabe5">
+				<reportElement x="-10" y="19" width="250" height="20" uuid="d065f8ed-0c05-47d0-a679-a392c9cfabe5">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -180,10 +180,10 @@
 					<pen lineWidth="0.0" lineStyle="Dashed"/>
 				</box>
 				<textElement textAlignment="Left"/>
-				<text><![CDATA[!   MATRICULE                                                     !]]></text>
+				<text><![CDATA[!   MATRICULE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="340" y="19" width="440" height="31" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+				<reportElement x="240" y="19" width="500" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -191,20 +191,20 @@
 					<pen lineWidth="0.0" lineStyle="Dashed"/>
 				</box>
 				<textElement textAlignment="Left"/>
-				<text><![CDATA[!   NOM ET PRENOM                                              !]]></text>
+				<text><![CDATA[!   NOM ET PRENOM]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="780" y="19" width="160" height="31" uuid="4b1f5b5c-4c61-4159-9357-041fd8e3e775">
+				<reportElement x="740" y="19" width="200" height="20" uuid="4b1f5b5c-4c61-4159-9357-041fd8e3e775">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.0" lineStyle="Dashed"/>
 				</box>
 				<textElement textAlignment="Left"/>
-				<text><![CDATA[! Montant RUB ! 460]]></text>
+				<text><![CDATA[!Montant RUB 460]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="940" y="19" width="210" height="31" uuid="4b1f5b5c-4c61-4159-9357-041fd8e3e775">
+				<reportElement x="940" y="19" width="210" height="20" uuid="4b1f5b5c-4c61-4159-9357-041fd8e3e775">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -213,34 +213,34 @@
 				<textElement textAlignment="Left">
 					<font isItalic="false"/>
 				</textElement>
-				<text><![CDATA[!  RAPPEL RUB      !   460          ]]></text>
+				<text><![CDATA[!RAPPEL RUB 460          ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1150" y="19" width="350" height="31" uuid="4b1f5b5c-4c61-4159-9357-041fd8e3e775">
+				<reportElement x="1150" y="19" width="350" height="20" uuid="4b1f5b5c-4c61-4159-9357-041fd8e3e775">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.0" lineStyle="Dashed"/>
 				</box>
 				<textElement textAlignment="Left"/>
-				<text><![CDATA[!  Date  Effet              ! !                           !                                        ]]></text>
+				<text><![CDATA[!  Date  Effet ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="-10" y="6" width="1510" height="13" uuid="bf985571-26a3-41fc-9a7e-e395c29a60fe"/>
-				<text><![CDATA[+---------------------------+-----------------------------------+-------------+----------------+---------------------------+]]></text>
+				<text><![CDATA[+-------------------+----------------------------------------+----------------+----------------+---------------------------+]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-10" y="50" width="1510" height="13" uuid="8afe1fc3-c7c2-44bc-af43-80d93af68b27">
+				<reportElement x="-10" y="40" width="1510" height="13" uuid="8afe1fc3-c7c2-44bc-af43-80d93af68b27">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<text><![CDATA[+---------------------------+-----------------------------------+-------------+----------------+---------------------------+]]></text>
+				<text><![CDATA[+-------------------+----------------------------------------+----------------+----------------+---------------------------+]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField>
-				<reportElement x="-10" y="0" width="350" height="20" uuid="1324277f-1cf1-4cc2-a5f3-88ededc0ff6e">
+				<reportElement x="-10" y="0" width="250" height="20" uuid="1324277f-1cf1-4cc2-a5f3-88ededc0ff6e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>
 				</reportElement>
 				<box>
@@ -252,7 +252,7 @@
 				<textFieldExpression><![CDATA[$F{bulmatricule}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="340" y="0" width="440" height="20" uuid="b9c4d404-6ffe-47b5-aeaf-ee9ffb804c6a">
+				<reportElement x="240" y="0" width="500" height="20" uuid="b9c4d404-6ffe-47b5-aeaf-ee9ffb804c6a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="372fc4a5-58e8-4f68-9b0b-b8c92b4521d4"/>
 				</reportElement>
 				<box>
@@ -261,10 +261,10 @@
 				<textElement textAlignment="Left">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{agtnom}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["!"+$F{agtnom}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="790" y="0" width="150" height="20" uuid="72ac64bb-1484-4b8a-8bdb-6ddcf6c57c70">
+				<reportElement x="749" y="0" width="191" height="20" uuid="72ac64bb-1484-4b8a-8bdb-6ddcf6c57c70">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aafde1ac-9f21-4267-b383-ffd18072315c"/>
 				</reportElement>
 				<box>
@@ -273,7 +273,7 @@
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{montant460}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{montant460})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{montant460}==null?"0,00":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{montant460})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="1150" y="0" width="350" height="20" uuid="c7d9f004-ba41-4c99-9a6c-cfbf3173864a">
@@ -297,10 +297,10 @@
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{rapp460}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{rapp460})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{rapp460}==null?"0,00":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{rapp460})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="780" y="0" width="9" height="20" uuid="f70a4d0b-88be-4717-b81a-5b48cfe93c68">
+				<reportElement x="740" y="0" width="9" height="20" uuid="f70a4d0b-88be-4717-b81a-5b48cfe93c68">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<text><![CDATA[!]]></text>
@@ -361,12 +361,12 @@
 			<textField>
 				<reportElement x="780" y="50" width="160" height="18" uuid="7b32e6ca-49a0-490c-8db8-d356459cddc1"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$V{montant4602}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{montant4602})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{montant4602}==null?"0,00":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{montant4602})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="950" y="50" width="200" height="18" uuid="9de5a3d8-e3bc-4a3b-9cf2-f13b4b029cbc"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$V{rapp4602}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{rapp4602})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{rapp4602}==null?"0,00":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{rapp4602})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

@@ -45,12 +45,20 @@
           déconnecter
           <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
         </a></li>
+      </ul>
+        <ul class="nav navbar-nav navbar-right">
+        <li style="margin-right: 5px;"><a class="nav-link disabled navbar-right"  style="cursor: pointer; color:#BF0F0F;font-size: 18px; "  ><strong>
+          <span class="glyphicon glyphicon glyphicon-calendar" aria-hidden="true"></span>Mois Courant:    <span>   {{currentMonth}}</span>
+         
+        </strong>
+        </a></li>
+      </ul>
       <!-- 
         <li *ngIf="!connection" class="nav-item">
           <a class="nav-link" [routerLink]="['/auth/login']">Connexion</a>
         </li>
         -->
 
-    </ul>
+   
   </div>
 </nav>
