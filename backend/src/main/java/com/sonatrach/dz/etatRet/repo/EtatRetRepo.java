@@ -14,5 +14,5 @@ import com.sonatrach.dz.etatRet.domain.EtatRetId;
 @Repository
 public interface EtatRetRepo  extends JpaRepository<EtatRet, EtatRetId>
 {
-	ArrayList<EtatRet>findByPayMonth(String mois,String annee);
+	ArrayList<EtatRet>findByPayMonth();
 }

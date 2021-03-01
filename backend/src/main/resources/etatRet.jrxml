@@ -5,7 +5,7 @@
 	<field name="agtmatricule" class="java.lang.String"/>
 	<field name="agtnom" class="java.lang.String"/>
 	<field name="dbulmontant" class="java.math.BigDecimal"/>
-	<field name="dbulrappel" class="java.math.BigDecimal"/>
+	<field name="dbulrappel" class="java.lang.Integer"/>
 	<field name="rubimp" class="java.lang.String"/>
 	<field name="rubdesignation" class="java.lang.String"/>
 	<field name="anneeexp" class="java.lang.String"/>
@@ -13,22 +13,28 @@
 	<field name="dirdes" class="java.lang.String"/>
 	<field name="divdes" class="java.lang.String"/>
 	<variable name="dbulmontant1" class="java.math.BigDecimal" resetType="Group" resetGroup="grpdep" calculation="Sum">
-		<variableExpression><![CDATA[$F{dbulmontant}]]></variableExpression>
-	</variable>
-	<variable name="dbulrappel1" class="java.math.BigDecimal" resetType="Group" resetGroup="grpdep" calculation="Sum">
-		<variableExpression><![CDATA[$F{dbulrappel}]]></variableExpression>
+		<variableExpression><![CDATA[$F{dbulrappel}==1?
+$F{dbulmontant}:new BigDecimal(0)]]></variableExpression>
 	</variable>
 	<variable name="dbulmontant2" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
-		<variableExpression><![CDATA[$F{dbulmontant}]]></variableExpression>
-	</variable>
-	<variable name="dbulrappel2" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
-		<variableExpression><![CDATA[$F{dbulrappel}]]></variableExpression>
+		<variableExpression><![CDATA[$F{dbulrappel}==1?
+$F{dbulmontant}:new BigDecimal(0)]]></variableExpression>
 	</variable>
 	<variable name="dbulmontant3" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDiv" calculation="Sum">
-		<variableExpression><![CDATA[$F{dbulmontant}]]></variableExpression>
+		<variableExpression><![CDATA[$F{dbulrappel}==1?
+$F{dbulmontant}:new BigDecimal(0)]]></variableExpression>
 	</variable>
-	<variable name="dbulrappel3" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDiv" calculation="Sum">
-		<variableExpression><![CDATA[$F{dbulrappel}]]></variableExpression>
+	<variable name="dbulmontant4" class="java.math.BigDecimal" resetType="Group" resetGroup="grpdep" calculation="Sum">
+		<variableExpression><![CDATA[$F{dbulrappel}==2?
+$F{dbulmontant}:new BigDecimal(0)]]></variableExpression>
+	</variable>
+	<variable name="dbulmontant5" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
+		<variableExpression><![CDATA[$F{dbulrappel}==2?
+$F{dbulmontant}:new BigDecimal(0)]]></variableExpression>
+	</variable>
+	<variable name="dbulmontant6" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDiv" calculation="Sum">
+		<variableExpression><![CDATA[$F{dbulrappel}==2?
+$F{dbulmontant}:new BigDecimal(0)]]></variableExpression>
 	</variable>
 	<group name="grpeDiv">
 		<groupExpression><![CDATA[$F{divdes}]]></groupExpression>
@@ -42,14 +48,14 @@
 					<text><![CDATA[TOTAL DIVISION   :]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="1170" y="20" width="220" height="19" uuid="102de2b9-c4c7-48f3-980a-427c8ee4ea47"/>
+					<reportElement x="1130" y="20" width="250" height="19" uuid="102de2b9-c4c7-48f3-980a-427c8ee4ea47"/>
 					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$V{dbulmontant3}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{dbulmontant3})]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="1390" y="20" width="200" height="19" uuid="b04f7e24-0485-4700-b761-d04457c8cef3"/>
+					<reportElement x="1390" y="20" width="200" height="19" uuid="cec8ec4f-bcd3-4c5a-a1d4-17a5f7e9873c"/>
 					<textElement textAlignment="Right"/>
-					<textFieldExpression><![CDATA[$V{dbulrappel3}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{dbulrappel3})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{dbulmontant6}.compareTo(new BigDecimal(0))==0?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{dbulmontant6})]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -57,7 +63,7 @@
 	<group name="grpeDir">
 		<groupExpression><![CDATA[$F{divdes}+$F{dirdes}]]></groupExpression>
 		<groupFooter>
-			<band height="56">
+			<band height="52">
 				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				<staticText>
 					<reportElement x="880" y="20" width="230" height="19" uuid="158b37ce-93f0-47b0-926c-7a3878b507b6">
@@ -66,14 +72,14 @@
 					<text><![CDATA[TOTAL DIRECTION  :]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="1170" y="20" width="219" height="19" uuid="b7f6038e-16f7-48bf-be67-2946ccdd6223"/>
+					<reportElement x="1130" y="20" width="250" height="19" uuid="b7f6038e-16f7-48bf-be67-2946ccdd6223"/>
 					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$V{dbulmontant2}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{dbulmontant2})]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="1390" y="20" width="200" height="19" uuid="e5ccebdb-b3a2-4781-b8e8-44546defba40"/>
+					<reportElement x="1390" y="20" width="200" height="19" uuid="79dcab19-16d9-4921-a06b-882759c695ea"/>
 					<textElement textAlignment="Right"/>
-					<textFieldExpression><![CDATA[$V{dbulrappel2}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{dbulrappel2})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{dbulmontant5}.compareTo(new BigDecimal(0))==0?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{dbulmontant5})]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -81,7 +87,7 @@
 	<group name="grpdep" isStartNewColumn="true">
 		<groupExpression><![CDATA[$F{divdes}+$F{dirdes}+$F{rubdesignation}]]></groupExpression>
 		<groupFooter>
-			<band height="39">
+			<band height="42">
 				<staticText>
 					<reportElement x="880" y="20" width="230" height="19" uuid="cf557cc4-a595-408b-8330-8b0e1df46cd0">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -89,14 +95,14 @@
 					<text><![CDATA[MONTANT RUBRIQUE :]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="1170" y="20" width="219" height="19" uuid="2e6964ec-711c-4c5c-9f49-eb9d3552475b"/>
+					<reportElement x="1130" y="20" width="250" height="19" uuid="2e6964ec-711c-4c5c-9f49-eb9d3552475b"/>
 					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$V{dbulmontant1}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{dbulmontant1})]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="1390" y="20" width="200" height="19" uuid="dc4f4d68-5fab-4e55-bf3e-95028ed28632"/>
+					<reportElement x="1390" y="20" width="200" height="19" uuid="4ee7f612-6d66-47ca-b37c-d6cf8ee3899b"/>
 					<textElement textAlignment="Right"/>
-					<textFieldExpression><![CDATA[$V{dbulrappel1}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{dbulrappel1})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{dbulmontant4}.compareTo(new BigDecimal(0))==0?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{dbulmontant4})]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -153,10 +159,10 @@
 				<reportElement x="-10" y="70" width="210" height="15" uuid="125acc07-6073-414e-b66e-c05330058689">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<text><![CDATA[D I V I S I O N :]]></text>
+				<text><![CDATA[DIVISION:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="200" y="70" width="460" height="20" uuid="1c8679f3-eb6a-4ec4-9144-d28c426550e3"/>
+				<reportElement x="200" y="70" width="480" height="30" uuid="1c8679f3-eb6a-4ec4-9144-d28c426550e3"/>
 				<textFieldExpression><![CDATA[$F{divdes}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -166,7 +172,7 @@
 				<text><![CDATA[DIRECTION:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="860" y="70" width="360" height="15" uuid="a4d3c465-1790-413a-9e60-c97b87483524"/>
+				<reportElement x="860" y="70" width="640" height="30" uuid="a4d3c465-1790-413a-9e60-c97b87483524"/>
 				<textFieldExpression><![CDATA[$F{dirdes}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -275,7 +281,7 @@
 				<textElement textAlignment="Left">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{agtnom}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["!"+$F{agtnom}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="780" y="0" width="160" height="20" uuid="72ac64bb-1484-4b8a-8bdb-6ddcf6c57c70">
@@ -299,7 +305,8 @@
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{dbulmontant}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{dbulmontant})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{dbulrappel}==1?
+$F{dbulmontant}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{dbulmontant}):""]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="940" y="0" width="260" height="20" uuid="c7d9f004-ba41-4c99-9a6c-cfbf3173864a">
@@ -323,7 +330,8 @@
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{dbulrappel}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{dbulrappel})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{dbulrappel}==2?
+$F{dbulmontant}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{dbulmontant}):""]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="1200" y="1" width="9" height="19" uuid="7b8176ce-7080-42b1-87cf-d3bfb29f1425">

@@ -56,6 +56,8 @@ import { AddStorageSettingsComponent } from './add-storage-settings/add-storage-
 import { NavigationHistoryComponent } from './navigation-history/navigation-history.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 
 
@@ -98,7 +100,9 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     MatDialogModule,
     MatAutocompleteModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressBarModule,
+ 
   
  
   ],

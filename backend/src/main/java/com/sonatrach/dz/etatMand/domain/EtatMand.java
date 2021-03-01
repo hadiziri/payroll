@@ -21,7 +21,7 @@ public class EtatMand implements Serializable{
 	@Id
 	@Column(name="BUL_CBANQUE")
 	String bulcbanque;
-	@Id
+	
 	@Column(name="BUL_CAGENCE")
 	String bulcagence;
 	@Column(name="DEPT")

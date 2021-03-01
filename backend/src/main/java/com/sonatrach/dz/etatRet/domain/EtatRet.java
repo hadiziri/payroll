@@ -15,10 +15,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name ="PAIE_ETAT_RETIMPOSABLES")
 @IdClass(EtatRetId.class)
-@NamedQuery(name = "EtatRet.findByPayMonth", query = "SELECT p FROM EtatRet  p WHERE moisexp=?1 AND anneeexp=?2 order by divdes,dirdes,rubdesignation")
+@NamedQuery(name = "EtatRet.findByPayMonth", query = "SELECT p FROM EtatRet  p  order by divdes,dirdes,rubdesignation")
 public class EtatRet implements Serializable{
+	@Id
 	@Column(name="MOIS_EXP")
 	String moisexp;
+	@Id
 	@Column(name="ANNEE_EXP")
 	String anneeexp;
 	@Id
@@ -35,8 +37,9 @@ public class EtatRet implements Serializable{
 	String rubimp;
 	@Column(name="RUB_DESIGNATION")
 	String rubdesignation;
+	@Id
 	@Column(name="DBUL_RAPPEL")
-	BigDecimal dbulrappel;
+	Integer dbulrappel;
 	@Column(name="DBUL_MONTANT")
 	BigDecimal dbulmontant;
 	@Column(name="DIV_DESIGNATION")
@@ -112,11 +115,13 @@ public class EtatRet implements Serializable{
 		this.rubdesignation = rubdesignation;
 	}
 
-	public BigDecimal getDbulrappel() {
+	
+
+	public Integer getDbulrappel() {
 		return dbulrappel;
 	}
 
-	public void setDbulrappel(BigDecimal dbulrappel) {
+	public void setDbulrappel(Integer dbulrappel) {
 		this.dbulrappel = dbulrappel;
 	}
 

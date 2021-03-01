@@ -661,7 +661,7 @@ public class Controller {
 			PayMonth currentPaymonth = paymonthRepo.findByState();
 			String currentYear = currentPaymonth.getPaymonth().substring(0, 4);
 			String currentMonth = currentPaymonth.getPaymonth().substring(4, 6);
-			return etatRetRepo.findByPayMonth(currentMonth, currentYear);
+			return etatRetRepo.findByPayMonth();
 		} catch (Exception e) {
 			System.out.println("Exception getEtatJournal()==>" + e.getMessage());
 		}

@@ -7,7 +7,7 @@ public class EtatMandId implements Serializable {
 	String bulmatricule;
 	Date bulmoisexp;
 	String bulcbanque;
-	String bulcagence;
+
 	public String getBulmatricule() {
 		return bulmatricule;
 	}
@@ -26,12 +26,6 @@ public class EtatMandId implements Serializable {
 	public void setBulcbanque(String bulcbanque) {
 		this.bulcbanque = bulcbanque;
 	}
-	public String getBulcagence() {
-		return bulcagence;
-	}
-	public void setBulcagence(String bulcagence) {
-		this.bulcagence = bulcagence;
-	}
-	
+
 	
 }

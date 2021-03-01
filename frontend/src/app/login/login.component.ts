@@ -1,3 +1,5 @@
+import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
+import { UserService } from './../Services/user.service';
 import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router, Routes } from '@angular/router';
@@ -27,7 +29,7 @@ export class LoginComponent implements OnInit {
     themeVariant: 'light'
 };
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService,private router:Router,public dialog: MatDialog) { }
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService,private router:Router,public dialog: MatDialog,private userService:UserService) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
@@ -59,6 +61,8 @@ export class LoginComponent implements OnInit {
           this.state=2;
           this.isLoggedIn = true;
           this.reloadPage();
+         
+         
         }
         
       
@@ -75,7 +79,30 @@ export class LoginComponent implements OnInit {
   }
 
   reloadPage() {
-    window.location.reload();
+    this.userService.getCurrentMonth().subscribe(
+      (response) => {
+        if(response!=null){
+        //console.log(data);
+        let currentYear = response.paymonth.substring(0, 4);
+      let currentMonth = response.paymonth.substring(4, 6);
+      let dateFormat =currentMonth+"/"+ currentYear  ;
+      this.tokenStorage.saveCurrentMonth(dateFormat);
+      window.location.reload();
+         
+        }else{
+          this.openDialog();
+        }
+        
+        
+      },
+      error1 => {
+        // //console.log(error);
+        this.openDialogError(error1);
+        throw error1;
+
+      }
+    )
+    
   }
 
   register(){
@@ -95,5 +122,15 @@ export class LoginComponent implements OnInit {
 }
 openDialog() {
   this.dialog.open(AlertDialogComponent);
+}
+openDialogError(error:String): void {
+  const dialogRef = this.dialog.open(ErrorDialogComponent, {
+    width: '650px',
+    data: {message: error}
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    window.location.reload();
+  });
 }
 }

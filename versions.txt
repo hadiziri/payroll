@@ -1,3 +1,9 @@
+3.6
+---
+-Correction des etats (mip ,mand , ret)
+-Correction bug mois courant
+-Design etat paie (progress bar)
+---------------------------------------------------------------------------------------------------
 3.5
 ---
 -Correction des etats (mip ,mand , journal)

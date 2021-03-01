@@ -31,11 +31,11 @@ import { newArray, stringify } from '@angular/compiler/src/util';
 import { mobiscroll, MbscFormOptions } from '@mobiscroll/angular-lite';
 
 
-export interface EtatElement {
+export interface FileDetails {
   
-  idStructure: number;
+  name: String;
 
-  etatStructure: number;
+  progress: number;
   
 }
 
@@ -61,6 +61,8 @@ export class FilesGeneratorComponent implements OnInit {
   };
 
   showSpinner: Boolean = true;
+  color: String = "primary";
+  showProgress: Boolean = false;
   mailRequest:MailRequest={"from":"","msg":"","sturcturename":"","subject":"","to":[],"filesName":[]};
   currentUser:User={"email":"","iduser":0,"name":"","password":"","state":0,"username":""};
   email:EmailDB={"emailgenerationdate":new Date(),"emailobject":"","idemail":0,"iduser":0,"msg":"","receiver":"","sender":""};
@@ -102,6 +104,8 @@ export class FilesGeneratorComponent implements OnInit {
     "structurename":""
   };
 
+  uploadedFiles:FileDetails[]=[{"name":"Journal","progress":0},{"name":"Mand","progress":0},{"name":"Mip","progress":0},{"name":"Ret","progress":0},{"name":"Recap","progress":0}];
+  
   
 
   @ViewChild(MatSort) set matSort(sort: MatSort) {
@@ -126,6 +130,8 @@ export class FilesGeneratorComponent implements OnInit {
       sanitizer.bypassSecurityTrustResourceUrl('assets/img/' + this.icon_etat));
 
   }
+
+ 
 
   ngOnInit() {
     //get current user
@@ -526,7 +532,8 @@ export class FilesGeneratorComponent implements OnInit {
   
     //----------------------------------------------------------------générer fichiers-----------------------------------------------------------------------
     genererFichier(structure:Structure){
-      this.showSpinner=true;
+      this.showProgress=true;
+      //console.log(this.showProgress)
       this.codeStructure=[];
      if(structure.structurecodelike.includes("/")){
        this.codeStructure=structure.structurecodelike.split("/");
@@ -536,8 +543,8 @@ export class FilesGeneratorComponent implements OnInit {
      }
      // //console.log(this.codeStructure);
      if(this.allEtatJournal.length==0||this.allEtatMand.length==0||this.allEtatMip.length==0||this.allEtatRecap.length==0||this.allEtatRet.length==0){
-        //this.showAlertInit("Initialisation des données","Veuillez patienter un petit moment s'il vous plait pour générer les fichiers");
-        this.filtrerEtats(this.codeStructure,structure);
+        this.showAlertInit("Initialisation des données","Veuillez patienter un petit moment s'il vous plait pour générer les fichiers");
+      
      }else{
         this.filtrerEtats(this.codeStructure,structure);
      }
@@ -580,13 +587,14 @@ export class FilesGeneratorComponent implements OnInit {
        
       }
     //   //console.log(this.filteredEtatJournal);
+    this.uploadedFiles[0].progress=25;
     if(str.structurecodenotlike!="0"){
       this.filteredEtatJournal=this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike)
       
       // //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
     }
     // //console.log(this.filteredEtatJournal)
-     
+    this.uploadedFiles[0].progress=50;
       //filtrer mand
       for(let i=0;i<this.allEtatMand.length;i++){
         if(codeLike.length==1){
@@ -601,13 +609,14 @@ export class FilesGeneratorComponent implements OnInit {
           }
         }
       }
+      this.uploadedFiles[1].progress=25;
       if(str.structurecodenotlike!="0"){
      //  //console.log(this.filteredEtatMand);
       this.filteredEtatMand=this.isExistCodeNotLike(this.filteredEtatMand,this.codeNotLike)
       // //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
       }
      //  //console.log(this.filteredEtatMand)
-
+     this.uploadedFiles[1].progress=50;
       //filtrer mip
       for(let i=0;i<this.allEtatMip.length;i++){
         if(codeLike.length==1){
@@ -622,13 +631,14 @@ export class FilesGeneratorComponent implements OnInit {
           }
         }
       }
+      this.uploadedFiles[2].progress=25;
       if(str.structurecodenotlike!="0"){
      //  //console.log(this.filteredEtatMip);
       this.filteredEtatMip=this.isExistCodeNotLike(this.filteredEtatMip,this.codeNotLike)
       // //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
       }
      //  //console.log(this.filteredEtatMip)
-
+     this.uploadedFiles[2].progress=50;
       //filtrer recap
      
       for(let i=0;i<this.allEtatRecap.length;i++){
@@ -647,13 +657,14 @@ export class FilesGeneratorComponent implements OnInit {
           }
         }
       }
+      this.uploadedFiles[4].progress=25;
       if(str.structurecodenotlike!="0"){
      //  //console.log(this.filteredEtatRecap);
       this.filteredEtatRecap=this.isExistCodeNotLike(this.filteredEtatRecap,this.codeNotLike)
       // //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
       }
      //  //console.log(this.filteredEtatRecap)
-
+     this.uploadedFiles[4].progress=50;
       //filter ret
       for(let i=0;i<this.allEtatRet.length;i++){
         if(codeLike.length==1){
@@ -669,12 +680,14 @@ export class FilesGeneratorComponent implements OnInit {
           }
         }
       }
+      this.uploadedFiles[3].progress=25;
       if(str.structurecodenotlike!="0"){
       // //console.log(this.filteredEtatRet);
       this.filteredEtatRet=this.isExistCodeNotLike(this.filteredEtatRet,this.codeNotLike)
       // //console.log(this.isExistCodeNotLike(this.filteredEtatJournal,this.codeNotLike));
       }
     //   //console.log(this.filteredEtatRet)
+    this.uploadedFiles[3].progress=50;
       this.generateEtatFiles(str);
      
     }
@@ -707,6 +720,7 @@ export class FilesGeneratorComponent implements OnInit {
     }
   generateEtatFiles(structure:Structure){
    //  //console.log("generation des fichiers")
+   this.uploadedFiles[1].progress=75;
     this.homeService.generateMand(this.filteredEtatMand,structure.structurename).subscribe(
       (data) => {
       
@@ -725,6 +739,7 @@ export class FilesGeneratorComponent implements OnInit {
           }
           this.efiles.push(efile);
           this.mand=true;
+      this.uploadedFiles[1].progress=100;
         this.saveGeneratedFilesInDB(structure);
           //this.showAlert("Activation Structure","La structure a bien été activée");
         }else{
@@ -741,6 +756,7 @@ export class FilesGeneratorComponent implements OnInit {
 
       }
     );
+    this.uploadedFiles[0].progress=75;
    this.homeService.generateJournal(this.filteredEtatJournal,structure.structurename).subscribe(
       (data) => {
         // //console.log("jour")
@@ -758,6 +774,7 @@ export class FilesGeneratorComponent implements OnInit {
           }
           this.efiles.push(efile);
           this.jour=true;
+          this.uploadedFiles[0].progress=100;
           this.saveGeneratedFilesInDB(structure);
           //this.showAlert("Activation Structure","La structure a bien été activée");
         }else{
@@ -774,7 +791,7 @@ export class FilesGeneratorComponent implements OnInit {
 
       }
     );
-
+    this.uploadedFiles[2].progress=75;
     this.homeService.generateMip(this.filteredEtatMip,structure.structurename).subscribe(
       (data) => {
       
@@ -793,6 +810,7 @@ export class FilesGeneratorComponent implements OnInit {
           }
           this.efiles.push(efile);
           this.mip=true;
+          this.uploadedFiles[2].progress=100;
           this.saveGeneratedFilesInDB(structure);
           //this.showAlert("Activation Structure","La structure a bien été activée");
         }else{
@@ -809,7 +827,7 @@ export class FilesGeneratorComponent implements OnInit {
 
       }
     );
-
+    this.uploadedFiles[3].progress=75;
     this.homeService.generateRet(this.filteredEtatRet,structure.structurename).subscribe(
       (data) => {
       
@@ -828,6 +846,7 @@ export class FilesGeneratorComponent implements OnInit {
           }
           this.efiles.push(efile);
           this.ret=true;
+          this.uploadedFiles[3].progress=100;
           this.saveGeneratedFilesInDB(structure);
           //this.showAlert("Activation Structure","La structure a bien été activée");
         }else{
@@ -844,7 +863,7 @@ export class FilesGeneratorComponent implements OnInit {
 
       }
     );
-
+    this.uploadedFiles[4].progress=75;
     this.homeService.generateRecap(this.filteredEtatRecap,structure.structurename).subscribe(
       (data) => {
       
@@ -863,6 +882,7 @@ export class FilesGeneratorComponent implements OnInit {
           }
           this.efiles.push(efile);
           this.recap=true;
+          this.uploadedFiles[4].progress=100;
           this.saveGeneratedFilesInDB(structure);
           //this.showAlert("Activation Structure","La structure a bien été activée");
         }else{
@@ -921,7 +941,7 @@ updateStatusStructure(structure:Structure){
      //  //console.log(data);
       if(data!=null){
         structure.statusstructure=1;
-        this.showSpinner=false;
+        this.showProgress=false;
         this.showAlertGeneration("Génération etats paie","Les etats ont bien été généré.");
       }else{
         

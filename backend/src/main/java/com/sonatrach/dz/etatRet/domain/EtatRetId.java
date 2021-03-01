@@ -5,6 +5,9 @@ import java.io.Serializable;
 public class EtatRetId implements Serializable{
 private String agtmatricule;
 private String rubimp;
+String anneeexp;
+String moisexp;
+Integer dbulrappel;
 public String getAgtmatricule() {
 	return agtmatricule;
 }

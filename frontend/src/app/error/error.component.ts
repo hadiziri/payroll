@@ -39,7 +39,7 @@ export class ErrorComponent implements OnInit {
       data => {
         
         if(data.accessToken=="xx.yy.zz"){
-          this.showAlert();
+          this.showAlert('Alerte de connexion',"Votre compte n'est pas activé.Veuillez contacter votre administrateur");
         }else{
           this.tokenStorage.saveToken(data.accessToken);
           this.tokenStorage.saveUsername(data.username);
@@ -48,13 +48,14 @@ export class ErrorComponent implements OnInit {
           this.isLoginFailed = false;
          
           this.isLoggedIn = true;
-         this.router.navigateByUrl("home");
+         this.router.navigateByUrl("");
         }
         
       
       },
       error => {
         // //console.log(error);
+        this.showAlert('Alerte de connexion',"Nom d'utilisateur ou mot de passe incorrect");
         this.errorMessage = error;
      
         this.isLoginFailed = true;
@@ -63,12 +64,10 @@ export class ErrorComponent implements OnInit {
   }
 
 
-  
-
-  showAlert() {
+  showAlert(title:String,msg:String) {
     mobiscroll.alert({
-        title: 'Alerte de connexion',
-        message: "Votre compte n'est pas activé.Veuillez contacter votre administrateur"
+        title: title,
+        message: msg
        /* ,callback: function () {
             mobiscroll.toast({
                 message: 'Alert closed'
@@ -76,5 +75,7 @@ export class ErrorComponent implements OnInit {
         }*/
     });
 }
+
+
 
 }
