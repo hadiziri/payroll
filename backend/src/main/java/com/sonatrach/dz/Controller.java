@@ -8,6 +8,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.DirectoryNotEmptyException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -501,6 +505,37 @@ public class Controller {
 
 	}
 
+	//*******************************suppression du zip aprés envoie émail********************************************************
+	@PostMapping({ "deleteZip" })
+	public String deleteZip(@RequestBody Structure structure) {
+		try {
+			Folder folder = folderRepo.findByFolderName("ETAT");
+			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
+			String zipPathWithName = folder.getFOLDERPATH() + "ETAT" + "\\" + currentYear + "\\" + dateFormat + "\\"
+					+ structure.getSTRUCTURENAME() + " " + dateFormat + ".zip";
+			Files.deleteIfExists(Paths.get(zipPathWithName));
+			return "success";
+		}catch(NoSuchFileException e) 
+	        { 
+	            System.out.println("No such file/directory exists deleteZip()==>" + e.getMessage()); 
+	        } 
+	        catch(DirectoryNotEmptyException e) 
+	        { 
+	            System.out.println("Directory is not empty.deleteZip()==>" + e.getMessage()); 
+	        } 
+	        catch(IOException e) 
+	        { 
+	            System.out.println("Invalid permissions. deleteZip()==>" + e.getMessage()); 
+	        
+		} catch (Exception e) {
+			System.out.println("Exception deleteZip()==>" + e.getMessage());
+		}
+		return null;
+
+	}
 	// ***********************************************sauvgarder dans la
 	// BDarchiveSentFiles***********************************************************
 	@PostMapping({ "SaveArchiveSentFiles" })
@@ -593,7 +628,7 @@ public class Controller {
 
 	// *********************************************Récuperer les etat paie(filtrage
 	// par mois et annee)**********************************************************
-	@GetMapping({ "getEtatJournal" })
+	@GetMapping({ "getEtatJournal"})
 	public List<EtatJournal> getEtatJournal() {
 		try {
 			PayMonth currentPaymonth = paymonthRepo.findByState();
@@ -619,7 +654,7 @@ public class Controller {
 			// System.out.println(sysDate);
 			return etatMandRepo.findByPayMonth();
 		} catch (Exception e) {
-			System.out.println("Exception getEtatJournal()==>" + e.getMessage());
+			System.out.println("Exception getEtatMand()==>" + e.getMessage());
 		}
 		return null;
 	}
@@ -633,7 +668,7 @@ public class Controller {
 			// return etatMipRepo.findByPayMonth(currentMonth, currentYear);
 			return etatMipRepo.findByPayMonth();
 		} catch (Exception e) {
-			System.out.println("Exception getEtatJournal()==>" + e.getMessage());
+			System.out.println("Exception getEtatMip()==>" + e.getMessage());
 		}
 		return null;
 	}
@@ -650,7 +685,7 @@ public class Controller {
 			// System.out.println(sysDate);
 			return etatRecapRepo.findByPayMonth();
 		} catch (Exception e) {
-			System.out.println("Exception getEtatJournal()==>" + e.getMessage());
+			System.out.println("Exception getEtatRecap()==>" + e.getMessage());
 		}
 		return null;
 	}
@@ -663,7 +698,7 @@ public class Controller {
 			String currentMonth = currentPaymonth.getPaymonth().substring(4, 6);
 			return etatRetRepo.findByPayMonth();
 		} catch (Exception e) {
-			System.out.println("Exception getEtatJournal()==>" + e.getMessage());
+			System.out.println("Exception getEtatRet()==>" + e.getMessage());
 		}
 		return null;
 	}
@@ -979,6 +1014,10 @@ public class Controller {
 			parameters.put("dataSourceEntreprise", dataSourceEntreprise);
 			parameters.put("subReportEntrepriseCss", subReportEntrepriseCss);
 			parameters.put("dataSourceEntrepriseCss", dataSourceEntrepriseCss);
+			//send current month as parameter
+			 String date="01"+"/"+currentMonth+"/"+currentYear;
+			Date sysDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+			parameters.put("currenntMonth", sysDate);
 
 			// fill main report and sub reports by sending data with parameter and export
 			// the report

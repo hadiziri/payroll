@@ -227,4 +227,14 @@ export class HomeService {
     );
   }
 
+  public deleteZip(structure:Structure):Observable<String>{
+    return this.httpClient.post<String>(this.host+"deleteZip",structure).pipe(
+      catchError((err) => {
+         //console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
+
 }

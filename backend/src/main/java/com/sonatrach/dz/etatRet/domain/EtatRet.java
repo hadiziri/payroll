@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name ="PAIE_ETAT_RETIMPOSABLES")
 @IdClass(EtatRetId.class)
-@NamedQuery(name = "EtatRet.findByPayMonth", query = "SELECT p FROM EtatRet  p  order by divdes,dirdes,rubdesignation")
+@NamedQuery(name = "EtatRet.findByPayMonth", query = "SELECT p FROM EtatRet  p  order by divop,dir,rubimp")
 public class EtatRet implements Serializable{
 	@Id
 	@Column(name="MOIS_EXP")

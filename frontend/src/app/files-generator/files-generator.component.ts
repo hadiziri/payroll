@@ -60,8 +60,9 @@ export class FilesGeneratorComponent implements OnInit {
     themeVariant: 'light'
   };
 
-  showSpinner: Boolean = true;
-  color: String = "primary";
+  showSpinner: Boolean = false;
+  showProgressInit: Boolean = true;
+  color: String = "warn";
   showProgress: Boolean = false;
   mailRequest:MailRequest={"from":"","msg":"","sturcturename":"","subject":"","to":[],"filesName":[]};
   currentUser:User={"email":"","iduser":0,"name":"","password":"","state":0,"username":""};
@@ -105,7 +106,7 @@ export class FilesGeneratorComponent implements OnInit {
   };
 
   uploadedFiles:FileDetails[]=[{"name":"Journal","progress":0},{"name":"Mand","progress":0},{"name":"Mip","progress":0},{"name":"Ret","progress":0},{"name":"Recap","progress":0}];
-  
+  initProgress:number=0;
   
 
   @ViewChild(MatSort) set matSort(sort: MatSort) {
@@ -134,6 +135,7 @@ export class FilesGeneratorComponent implements OnInit {
  
 
   ngOnInit() {
+ this.initProgress=10;
     //get current user
     this.currentUser.username=this.token.getUsername();
     this.paramService.getUserByUserName(this.currentUser).subscribe(
@@ -180,10 +182,11 @@ export class FilesGeneratorComponent implements OnInit {
     );
 
     //get all etat paie filtered by paymonth
-      this.homeService.getEtatJournal().subscribe(
+     this.homeService.getEtatJournal().subscribe(
         (data) => {
           if(data!=null){
            console.log(data);
+           this.initProgress=this.initProgress+15;
             this.allEtatJournal=data;
             this.alljour=true;
             this.disableSpinner();
@@ -201,11 +204,12 @@ export class FilesGeneratorComponent implements OnInit {
   
         }
       );
-
+    
       this.homeService.getEtatMand().subscribe(
         (data) => {
           if(data!=null){
          console.log(data);
+         this.initProgress=this.initProgress+15;
             this.allEtatMand=data;
             this.allmand=true;
             this.disableSpinner();
@@ -222,11 +226,12 @@ export class FilesGeneratorComponent implements OnInit {
   
         }
       );
-
+      
       this.homeService.getEtatMip().subscribe(
         (data) => {
           if(data!=null){
          console.log(data);
+         this.initProgress=this.initProgress+15;
             this.allEtatMip=data;
             this.allmip=true;
             this.disableSpinner();
@@ -243,11 +248,11 @@ export class FilesGeneratorComponent implements OnInit {
   
         }
       );
-
+      
       this.homeService.getEtatRecap().subscribe(
         (data) => {
           if(data!=null){
-           
+            this.initProgress=this.initProgress+15;
             this.allEtatRecap=data;
           console.log(this.allEtatRecap);
           this.allrecap=true;
@@ -266,11 +271,12 @@ export class FilesGeneratorComponent implements OnInit {
   
         }
       );
-
+     
       this.homeService.getEtatRet().subscribe(
         (data) => {
           if(data!=null){
           console.log(data);
+         this.initProgress=this.initProgress+15;
             this.allEtatRet=data;
             this.allret=true;
             this.disableSpinner();
@@ -288,12 +294,12 @@ export class FilesGeneratorComponent implements OnInit {
   
         }
       );
-     
+    this.initProgress=25;
   }
 
   disableSpinner(){
     if(this.alljour&&this.allmip&&this.allmand&&this.allret&&this.allrecap){
-      this.showSpinner=false;
+      this.showProgressInit=false;
     }
   }
 //---------------------------------------------------------------------SEND EMAIL----------------------------------------------------------------------------------------------
@@ -301,11 +307,11 @@ export class FilesGeneratorComponent implements OnInit {
     this.showSpinner=true;
     /**************initialisation of mail request************************************* */
     //this.mailRequest.to=structure.emailgroupmanagers;
-    this.mailRequest.to.push("Feriel.Aid@Sonatrach.dz")
+    this.mailRequest.to.push("DG-ISI-DBA@Sonatrach.dz")
     this.mailRequest.to.push(this.currentUser.email); //pour le moment juste pour tester
     this.mailRequest.sturcturename=structure.structurename;
-    this.mailRequest.subject="test from angular";
-    this.mailRequest.msg="Je vous envoie ci-joint les etats de paie de ce mois.";
+    this.mailRequest.subject="états paie";
+    this.mailRequest.msg="Veuillez trouver ci-attaché les état paie du mois.";
     this.mailRequest.from=this.currentUser.email;
      /**************initialisation of mail to save in DB************************************* */
     this.email.emailobject=this.mailRequest.subject;
@@ -438,6 +444,7 @@ export class FilesGeneratorComponent implements OnInit {
           currentStructure.statusstructure=0;
           this.showSpinner=false;
           this.showAlert("Envoie Email","L'email a bien été envoyé aux gestionnaires");
+         this.deleteZip(currentStructure);
         }else{
           this.openDialog();
         }
@@ -451,6 +458,28 @@ export class FilesGeneratorComponent implements OnInit {
       }
 
 
+    )
+  }
+
+  deleteZip(currentStructure:Structure){
+    this.homeService.deleteZip(currentStructure).subscribe(
+      (data) => {
+      
+        if(data!=null){
+        console.log(data);
+        }else{
+         //this.openDialog();
+        }
+       
+       
+
+      },
+      error => {
+       console.log(error);
+        //this.openDialogError(error);
+        throw error;
+
+      }
     )
   }
 

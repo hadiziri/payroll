@@ -242,3 +242,15 @@ h1 {
   padding: 8px;
   text-shadow: 2px 2px 5px #888586;
 }
+
+::ng-deep .mat-progress-bar-fill::after {
+  background-color: #08ED77;
+}
+
+::ng-deep .mat-progress-bar-buffer {
+  background: #E4E8EB;
+}
+
+::ng-deep .mat-progress-bar {
+  border-radius: 2px;
+}

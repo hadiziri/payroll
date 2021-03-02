@@ -1,3 +1,9 @@
+3.8
+---
+-Correction de l'etat Recap,mand,mip,ret
+-Ajout suppression zip aprés envoi émail
+-Design état paie
+---------------------------------------------------------------------------------------------------
 3.7
 ---
 -Correction de l'etat Recap

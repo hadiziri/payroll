@@ -40,6 +40,7 @@
 	<parameter name="dataSourceEntrepriseCss" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<parameter name="subReportEntreprise" class="net.sf.jasperreports.engine.JasperReport"/>
 	<parameter name="dataSourceEntreprise" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="currenntMonth" class="java.util.Date"/>
 	<field name="dbulcrub" class="java.lang.String"/>
 	<field name="dbuldesignrub" class="java.lang.String"/>
 	<field name="mtbase" class="java.math.BigDecimal"/>
@@ -73,6 +74,7 @@ $F{mtrub}:0):0]]></variableExpression>
 	<variable name="retNimp" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeCPTE" calculation="Sum">
 		<variableExpression><![CDATA[$F{dbulnature}.equals( "R" )?
 ($F{dbulimp}==0?
+	$F{dbulcrub}.equals("319")?0:
 $F{mtrub}:0):0]]></variableExpression>
 	</variable>
 	<variable name="chargeEmp" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeCPTE" calculation="Sum">
@@ -188,6 +190,9 @@ $F{mtrub}:0]]></variableExpression>
 					</subreportParameter>
 					<subreportParameter name="page">
 						<subreportParameterExpression><![CDATA[$V{PAGE_NUMBER}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="currenntMonth">
+						<subreportParameterExpression><![CDATA[$P{currenntMonth}]]></subreportParameterExpression>
 					</subreportParameter>
 					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{dataSourceMonth}.getData())]]></dataSourceExpression>
 					<subreportExpression><![CDATA[$P{subReportMonth}]]></subreportExpression>
@@ -332,21 +337,33 @@ $F{mtrub}:0]]></variableExpression>
 				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?$F{dir}.substring( 2, $F{dir}.length() ):null]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="810" y="30" width="150" height="20" isRemoveLineWhenBlank="true" uuid="cdea23ec-bbf8-4169-96d6-bceca5be7bc2">
+				<reportElement x="810" y="30" width="370" height="20" isRemoveLineWhenBlank="true" uuid="cdea23ec-bbf8-4169-96d6-bceca5be7bc2">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?(  new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("01") ? "Janvier" : 
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("02") ? "Février" :
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("03") ? "Mars" :
-        new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("04") ? "Avril" :
-        new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("05") ? "Mai" :
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("06") ? "Juin" :
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("07") ? "Juillet" :
-        new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("08") ? "Aout" :
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("09") ? "Septembre" :
-        new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("10") ? "Octobre" : 
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("11") ? "Novembre" : "Decembre"
+				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?(  new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("01") ?
+	$F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Janvier" :"RETRO   Janvier" :
+         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("02") ?
+         $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Février" :"RETRO   Février":
+         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("03") ?
+          $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Mars" :"RETRO   Mars":
+        new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("04") ?
+         $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Avril" :"RETRO   Avril":
+        new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("05") ?
+         $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Mai" :"RETRO   Mai":
+         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("06") ?
+          $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Juin" :"RETRO   Juin":
+         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("07") ?
+          $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Juillet" :"RETRO   Juillet":
+        new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("08") ? 
+         $F{bulmoispaie}.compareTo($P{currenntMonth})==0?"Aout" :"RETRO   Aout":
+         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("09") ?
+          $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Septembre" :"RETRO   Septembre":
+        new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("10") ?
+         $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Octobre" : "RETRO   Octobre":
+         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("11") ? 
+          $F{bulmoispaie}.compareTo($P{currenntMonth})==0?"Novembre" :"RETRO   Novembre":
+             $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Decembre":"RETRO   Decembre"
     )+" "+new SimpleDateFormat("yyyy").format($F{bulmoispaie}):null]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
@@ -628,9 +645,9 @@ new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Lo
 		</band>
 	</columnFooter>
 	<pageFooter>
-		<band height="41" splitType="Stretch">
+		<band height="27" splitType="Stretch">
 			<textField>
-				<reportElement x="-20" y="5" width="70" height="20" uuid="1bf1c8a5-03cc-4597-82a7-38a93c7e6e2d"/>
+				<reportElement x="-20" y="0" width="70" height="20" uuid="1bf1c8a5-03cc-4597-82a7-38a93c7e6e2d"/>
 				<textFieldExpression><![CDATA["\f"]]></textFieldExpression>
 			</textField>
 		</band>

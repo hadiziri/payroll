@@ -149,13 +149,13 @@
 				<textFieldExpression><![CDATA[$F{divdes}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="710" y="60" width="150" height="15" uuid="f1d14d38-4440-4383-ac61-a6c569230c47">
+				<reportElement x="710" y="60" width="239" height="15" uuid="f1d14d38-4440-4383-ac61-a6c569230c47">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<text><![CDATA[DIRECTION:]]></text>
+				<text><![CDATA[D I R E C T I O N :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="920" y="60" width="560" height="40" uuid="72aa1609-c759-4686-8616-d25c841be5d7"/>
+				<reportElement x="1050" y="60" width="560" height="40" uuid="72aa1609-c759-4686-8616-d25c841be5d7"/>
 				<textFieldExpression><![CDATA[$F{dirdes}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -163,8 +163,8 @@
 				<textFieldExpression><![CDATA[$F{divop}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="860" y="60" width="61" height="21" uuid="3d52dba3-6526-4cb6-a547-42939e118c3b"/>
-				<textFieldExpression><![CDATA[$F{dir}.substring(1, 2 )]]></textFieldExpression>
+				<reportElement x="949" y="60" width="101" height="21" uuid="3d52dba3-6526-4cb6-a547-42939e118c3b"/>
+				<textFieldExpression><![CDATA[$F{dir}.substring(1, $F{dir}.length() )]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

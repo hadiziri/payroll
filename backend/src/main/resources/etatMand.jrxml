@@ -298,7 +298,7 @@
 		</groupFooter>
 	</group>
 	<pageHeader>
-		<band height="182" splitType="Prevent">
+		<band height="153" splitType="Prevent">
 			<staticText>
 				<reportElement x="0" y="0" width="410" height="18" uuid="68bbcbc4-03a1-4314-8c63-87d32a6f47f0">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
@@ -345,47 +345,47 @@
     )+" "+new SimpleDateFormat("yyyy").format($P{currenntMonth})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="-10" y="90" width="290" height="20" uuid="d8d6365f-872b-49ad-8d45-ee0838e25817">
+				<reportElement x="0" y="60" width="290" height="20" uuid="d8d6365f-872b-49ad-8d45-ee0838e25817">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<text><![CDATA[DIRECTION:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-10" y="70" width="210" height="20" uuid="125acc07-6073-414e-b66e-c05330058689">
+				<reportElement x="0" y="40" width="210" height="20" uuid="125acc07-6073-414e-b66e-c05330058689">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<text><![CDATA[DIVISION:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="-10" y="140" width="50" height="20" isRemoveLineWhenBlank="true" uuid="f18cf6ba-2bef-4094-8c04-9ce9fb5e5234"/>
+				<reportElement x="0" y="110" width="50" height="20" isRemoveLineWhenBlank="true" uuid="f18cf6ba-2bef-4094-8c04-9ce9fb5e5234"/>
 				<textFieldExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?$F{bulcbanque}:""]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="40" y="140" width="440" height="20" isRemoveLineWhenBlank="true" uuid="94dbdb1b-7df2-4636-9e52-da06cc0f139d"/>
+				<reportElement x="50" y="110" width="440" height="20" isRemoveLineWhenBlank="true" uuid="94dbdb1b-7df2-4636-9e52-da06cc0f139d"/>
 				<textFieldExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?$F{bandes}:""]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="720" y="140" width="70" height="20" isRemoveLineWhenBlank="true" uuid="ba00c7b3-3b30-428b-9ebe-711e1b251408"/>
+				<reportElement x="730" y="110" width="70" height="20" isRemoveLineWhenBlank="true" uuid="ba00c7b3-3b30-428b-9ebe-711e1b251408"/>
 				<textFieldExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?$F{bulcagence}:""]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="790" y="140" width="490" height="20" isRemoveLineWhenBlank="true" uuid="f171d546-4e3c-42cf-93c7-f01db059a517"/>
+				<reportElement x="800" y="110" width="490" height="20" isRemoveLineWhenBlank="true" uuid="f171d546-4e3c-42cf-93c7-f01db059a517"/>
 				<textFieldExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?$F{agedes}:""]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="630" y="140" width="90" height="20" isRemoveLineWhenBlank="true" uuid="4834acd0-c9ea-49c1-b900-f6d375af5962"/>
+				<reportElement x="640" y="110" width="90" height="20" isRemoveLineWhenBlank="true" uuid="4834acd0-c9ea-49c1-b900-f6d375af5962"/>
 				<textFieldExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?"AGENCE:":""]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="200" y="70" width="780" height="20" uuid="e5965fad-0076-4ce9-86e3-034d3f62aa71"/>
+				<reportElement x="210" y="40" width="780" height="20" uuid="e5965fad-0076-4ce9-86e3-034d3f62aa71"/>
 				<textFieldExpression><![CDATA[$F{divdes}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="280" y="90" width="700" height="20" uuid="a5ad4d8f-690f-43d9-8764-e549c4b6b857"/>
+				<reportElement x="290" y="60" width="700" height="20" uuid="a5ad4d8f-690f-43d9-8764-e549c4b6b857"/>
 				<textFieldExpression><![CDATA[$F{dirdes}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="701" y="120" width="790" height="21" isRemoveLineWhenBlank="true" uuid="ba677927-6b5a-47e7-b5f2-397d12fcf85b"/>
+				<reportElement x="711" y="90" width="790" height="21" isRemoveLineWhenBlank="true" uuid="ba677927-6b5a-47e7-b5f2-397d12fcf85b"/>
 				<textFieldExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})!=0?"PAIES RETROACTIVES CAISSE PRINCIPAL":""]]></textFieldExpression>
 			</textField>
 		</band>

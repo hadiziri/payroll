@@ -133,18 +133,30 @@
   
     
   <div  class="overlay"  *ngIf="showProgress">
-    <mat-card class="center" style="width: 30%; background-color: #031C27; border-color: white;" >
+    <mat-card class="center" style="width: 25%; background-color: #015F47; border-color: white;" >
       <mat-card-header>
-        <mat-card-title style="color: white;">Génération des fichiers en cours... </mat-card-title>
+        <mat-card-title style="color: white;text-align: center;">Génération des fichiers en cours... </mat-card-title>
         <mat-card-subtitle style="font-size: 15px; font-weight: bold; color: white;" *ngFor="let uploadedFile of uploadedFiles">
           <mat-icon>insert_drive_file</mat-icon>
           {{uploadedFile.name}} - {{uploadedFile.progress}}%
-          <mat-progress-bar mode="determinate" value="{{uploadedFile.progress}}" [color]="color"></mat-progress-bar>
+          <mat-progress-bar mode="determinate" value="{{uploadedFile.progress}}" ></mat-progress-bar>
         </mat-card-subtitle>
       </mat-card-header>
     </mat-card>
   </div>
   
+  <div  class="overlay"  *ngIf="showProgressInit">
+    <mat-card class="center" style="width: 20%; background-color: #015F47; border-color: white;" >
+      <mat-card-header>
+        <mat-card-title style="color: white; font-size: 19px;text-align: center;">Initialisation des données en cours... </mat-card-title>
+        <mat-card-subtitle style="font-size: 15px; font-weight: bold; color: white; text-align: center;" >
+        
+          Chargement - {{initProgress}}%
+          <mat-progress-bar mode="indeterminate"  ></mat-progress-bar>
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
   
 <div class="disable-background" *ngIf="showSpinner"></div>
   <div class="center" *ngIf="showSpinner">
