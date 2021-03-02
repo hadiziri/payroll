@@ -198,49 +198,49 @@ $F{mtrub}:0]]></variableExpression>
 	<group name="grpeCPTE" isStartNewColumn="true">
 		<groupExpression><![CDATA[$F{divdes}+$F{dirdes}+$F{bulmoispaie}+$F{agtcptanal}]]></groupExpression>
 		<groupFooter>
-			<band height="192">
+			<band height="174">
 				<textField isBlankWhenNull="true">
-					<reportElement x="-11" y="30" width="391" height="20" isRemoveLineWhenBlank="true" uuid="29f1216e-a859-4c3f-b8f8-774aa0ece328"/>
+					<reportElement x="-12" y="10" width="391" height="20" isRemoveLineWhenBlank="true" uuid="29f1216e-a859-4c3f-b8f8-774aa0ece328"/>
 					<textFieldExpression><![CDATA[$F{report}.equals( "0" )?"TOTAUX DES CHAPITRES:":null]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="562" y="30" width="218" height="20" isRemoveLineWhenBlank="true" uuid="984270ea-5dad-4c59-a03d-db7d2313c2d2">
+					<reportElement x="561" y="10" width="218" height="20" isRemoveLineWhenBlank="true" uuid="984270ea-5dad-4c59-a03d-db7d2313c2d2">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{report}.equals( "0" )?new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{gainImp}):null]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="780" y="30" width="200" height="20" isRemoveLineWhenBlank="true" uuid="552e7bee-bd14-4d18-9406-61a293404774"/>
+					<reportElement x="779" y="10" width="200" height="20" isRemoveLineWhenBlank="true" uuid="552e7bee-bd14-4d18-9406-61a293404774"/>
 					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{report}.equals( "0" )?new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{gainNimp}):null]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="980" y="30" width="201" height="20" isRemoveLineWhenBlank="true" uuid="f98f61af-a245-468b-89d3-57543d0c1cfc"/>
+					<reportElement x="979" y="10" width="201" height="20" isRemoveLineWhenBlank="true" uuid="f98f61af-a245-468b-89d3-57543d0c1cfc"/>
 					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{report}.equals( "0" )?new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{retImp}):null]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="1181" y="30" width="209" height="20" isRemoveLineWhenBlank="true" uuid="8b2582d2-75e1-4a5e-8833-c45b7c9a0cbf"/>
+					<reportElement x="1180" y="10" width="209" height="20" isRemoveLineWhenBlank="true" uuid="8b2582d2-75e1-4a5e-8833-c45b7c9a0cbf"/>
 					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{report}.equals( "0" )?new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{retNimp}):null]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="1390" y="30" width="200" height="20" isRemoveLineWhenBlank="true" uuid="e3034b98-8779-4545-abfc-64722b00b994"/>
+					<reportElement x="1389" y="10" width="200" height="20" isRemoveLineWhenBlank="true" uuid="e3034b98-8779-4545-abfc-64722b00b994"/>
 					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{report}.equals( "0" )?new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{chargeEmp}):null]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="-11" y="50" width="571" height="20" isRemoveLineWhenBlank="true" uuid="328bc3f3-e063-41f9-a3c8-8a83e5bbd615"/>
+					<reportElement x="-12" y="30" width="571" height="20" isRemoveLineWhenBlank="true" uuid="328bc3f3-e063-41f9-a3c8-8a83e5bbd615"/>
 					<textFieldExpression><![CDATA[$F{report}.equals( "0" )?"DINARS ***********************************":null]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="562" y="50" width="218" height="20" isRemoveLineWhenBlank="true" uuid="6b692610-ab4d-4c54-9dd8-2fe283b7d05c"/>
+					<reportElement x="561" y="30" width="218" height="20" isRemoveLineWhenBlank="true" uuid="6b692610-ab4d-4c54-9dd8-2fe283b7d05c"/>
 					<textElement textAlignment="Right"/>
 					<textFieldExpression><![CDATA[$F{report}.equals( "0" )?new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{gainImp}.add( $V{gainNimp} ).subtract($V{retImp}.add($V{retNimp}) )):null]]></textFieldExpression>
 				</textField>
 				<subreport overflowType="Stretch">
-					<reportElement isPrintRepeatedValues="false" x="-11" y="70" width="1600" height="110" uuid="c66932be-495b-4979-b7ea-41d7cd7c7dfb">
+					<reportElement isPrintRepeatedValues="false" x="-12" y="50" width="1600" height="110" uuid="c66932be-495b-4979-b7ea-41d7cd7c7dfb">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						<printWhenExpression><![CDATA[$F{report}.equals( "0" )?new Boolean(true):new Boolean (false)]]></printWhenExpression>
 					</reportElement>
@@ -263,7 +263,7 @@ $F{mtrub}:0]]></variableExpression>
 		</groupFooter>
 	</group>
 	<pageHeader>
-		<band height="157" splitType="Stretch">
+		<band height="128" splitType="Stretch">
 			<printWhenExpression><![CDATA[$V{grpeCPTE_COUNT}==0?new Boolean(true):new Boolean(false)]]></printWhenExpression>
 			<textField isBlankWhenNull="true">
 				<reportElement x="0" y="0" width="410" height="18" isRemoveLineWhenBlank="true" uuid="68bbcbc4-03a1-4314-8c63-87d32a6f47f0">
@@ -301,7 +301,7 @@ $F{mtrub}:0]]></variableExpression>
     )+" "+new SimpleDateFormat("yyyy").format($F{bulmoispaie}):null]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="-10" y="70" width="210" height="15" isRemoveLineWhenBlank="true" uuid="125acc07-6073-414e-b66e-c05330058689">
+				<reportElement x="-10" y="55" width="210" height="15" isRemoveLineWhenBlank="true" uuid="125acc07-6073-414e-b66e-c05330058689">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?"DIV. OPER.":null]]></textFieldExpression>
@@ -320,16 +320,16 @@ $F{mtrub}:0]]></variableExpression>
 				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date()):null]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="1295" y="70" width="100" height="20" isRemoveLineWhenBlank="true" uuid="02e99c2b-6da6-47bb-83fe-c04f40d7b11c">
+				<reportElement x="1295" y="55" width="100" height="15" isRemoveLineWhenBlank="true" uuid="02e99c2b-6da6-47bb-83fe-c04f40d7b11c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?"DEPT:":null]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="1395" y="70" width="100" height="20" isRemoveLineWhenBlank="true" uuid="98e49771-90e4-4030-953b-f64de4b1a062">
+				<reportElement x="1295" y="80" width="185" height="20" isRemoveLineWhenBlank="true" uuid="98e49771-90e4-4030-953b-f64de4b1a062">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?$F{div}:null]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?$F{dir}.substring( 2, $F{dir}.length() ):null]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="810" y="30" width="150" height="20" isRemoveLineWhenBlank="true" uuid="cdea23ec-bbf8-4169-96d6-bceca5be7bc2">
@@ -350,17 +350,17 @@ $F{mtrub}:0]]></variableExpression>
     )+" "+new SimpleDateFormat("yyyy").format($F{bulmoispaie}):null]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="600" y="70" width="210" height="15" isRemoveLineWhenBlank="true" uuid="fb15e38e-a1d9-486d-a7d5-da912ebf1ecc">
+				<reportElement x="595" y="55" width="215" height="15" isRemoveLineWhenBlank="true" uuid="fb15e38e-a1d9-486d-a7d5-da912ebf1ecc">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?"DIRECTION":null]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="-11" y="110" width="440" height="20" isRemoveLineWhenBlank="true" uuid="30bbe63e-1329-41ef-8c39-cad391299f87"/>
+				<reportElement x="-10" y="80" width="580" height="20" isRemoveLineWhenBlank="true" uuid="30bbe63e-1329-41ef-8c39-cad391299f87"/>
 				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?$F{divdes}:null]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="600" y="110" width="380" height="20" isRemoveLineWhenBlank="true" uuid="ee0290de-4590-4964-a246-3a8212453224"/>
+				<reportElement x="595" y="80" width="625" height="20" isRemoveLineWhenBlank="true" uuid="ee0290de-4590-4964-a246-3a8212453224"/>
 				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?$F{dirdes}:null]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
@@ -556,7 +556,7 @@ new DecimalFormat("###,##0.000#", new java.text.DecimalFormatSymbols(java.util.L
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?$F{mtbase}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtbase}):null]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?$F{mtbase}.compareTo(new BigDecimal(0))==0?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtbase}):null]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="100" y="0" width="320" height="20" isRemoveLineWhenBlank="true" uuid="6b06199e-874c-4add-8981-544792134a3d">
