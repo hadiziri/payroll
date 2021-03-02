@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name ="PAIE_ETAT_RECAP")
 @IdClass(EtatRecapId.class)
-@NamedQueries({@NamedQuery(name = "EtatRecap.findByPayMonth", query = "SELECT  p FROM EtatRecap  p order by divdes,dirdes,bulmoispaie,agtcptanal,dbulcrub,report "),
+@NamedQueries({@NamedQuery(name = "EtatRecap.findByPayMonth", query = "SELECT  p FROM EtatRecap  p order by div,dir,bulmoispaie,agtcptanal,dbulcrub,report "),
 	@NamedQuery(name = "EtatRecap.findByReport", query = "SELECT  p FROM EtatRecap  p where report=?1 order by div,dir,bulmoispaie,agtcptanal,dbulcrub,report ")
 })
 
