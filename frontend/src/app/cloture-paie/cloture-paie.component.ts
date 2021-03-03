@@ -47,6 +47,10 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
   folderCategories: Folder[] = [];
   state: number = -1;
   FrubAlph: Boolean = false;
+  FrubAlph1: Boolean = false;
+  FrubAlph2: Boolean = false;
+  FrubAlph3: Boolean = false;
+  FrubAlph4: Boolean = false;
   FrubNum: Boolean = false;
   EtatArray = Array<EtatElement>();
   showSpinner: Boolean = false;
@@ -299,12 +303,97 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
         break;
 
       case "FRUB":
-        this.clotureService.generateFrubAlph().subscribe(
+        this.clotureService.generateFrubAK_O_UZ().subscribe(
           (data) => {
             if (data != null) {
               //this.showSpinner = false;
               // //console.log(data);
               this.FrubAlph = true;
+              this.showAlertFRUB();
+            } else {
+              this.showSpinner = false;
+              this.openDialog();
+              // alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
+            }
+
+          },
+
+          (error) => {
+            // //console.log(error);
+             this.openDialogError(error);;
+            throw error;
+          }
+        );
+
+        this.clotureService.generateFrubQ().subscribe(
+          (data) => {
+            if (data != null) {
+              //this.showSpinner = false;
+              // //console.log(data);
+              this.FrubAlph1 = true;
+              this.showAlertFRUB();
+            } else {
+              this.showSpinner = false;
+              this.openDialog();
+              // alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
+            }
+
+          },
+
+          (error) => {
+            // //console.log(error);
+             this.openDialogError(error);;
+            throw error;
+          }
+        );
+        this.clotureService.generateFrubL_NP().subscribe(
+          (data) => {
+            if (data != null) {
+              //this.showSpinner = false;
+              // //console.log(data);
+              this.FrubAlph2 = true;
+              this.showAlertFRUB();
+            } else {
+              this.showSpinner = false;
+              this.openDialog();
+              // alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
+            }
+
+          },
+
+          (error) => {
+            // //console.log(error);
+             this.openDialogError(error);;
+            throw error;
+          }
+        );
+        this.clotureService.generateFrubM_R_S_X().subscribe(
+          (data) => {
+            if (data != null) {
+              //this.showSpinner = false;
+              // //console.log(data);
+              this.FrubAlph3 = true;
+              this.showAlertFRUB();
+            } else {
+              this.showSpinner = false;
+              this.openDialog();
+              // alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
+            }
+
+          },
+
+          (error) => {
+            // //console.log(error);
+             this.openDialogError(error);;
+            throw error;
+          }
+        );
+        this.clotureService.generateFrubT().subscribe(
+          (data) => {
+            if (data != null) {
+              //this.showSpinner = false;
+              // //console.log(data);
+              this.FrubAlph4 = true;
               this.showAlertFRUB();
             } else {
               this.showSpinner = false;
@@ -408,7 +497,7 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
 
   }
   showAlertFRUB() {
-    if (this.FrubAlph && this.FrubNum) {
+    if (this.FrubAlph && this.FrubNum &&this.FrubAlph1 &&this.FrubAlph2 &&this.FrubAlph3 && this.FrubAlph4) {
       this.showSpinner = false;
       mobiscroll.alert({
         title: 'Cloture Paie',

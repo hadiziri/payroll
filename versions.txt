@@ -1,3 +1,8 @@
+3.9
+---
+-Correction des fichiers newpaie,pers,fonction,FrubAlph(5fichiers)
+-Correction bug état paie
+---------------------------------------------------------------------------------------------------
 3.8
 ---
 -Correction de l'etat Recap,mand,mip,ret

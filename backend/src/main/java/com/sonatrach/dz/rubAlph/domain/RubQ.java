@@ -6,9 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name ="PAIE_FRUB_AK_O_UZ")
-//PAIE_FRUB_A_TABLE 
-public class RubAKOUZ {
+@Table(name ="PAIE_FRUB_Q")
+public class RubQ {
 	@Id
 	@Column(name="DATE_EXPL")
 	private String DATEEXPL;
@@ -67,7 +66,7 @@ public class RubAKOUZ {
 	@Column(name="ADRESSE")
 	private String ADRESSE;
 	
-	public RubAKOUZ() {
+	public RubQ() {
 		
 	}
 	public String getDATEEXPL() {
@@ -239,5 +238,4 @@ public class RubAKOUZ {
 	public void setADRESSE(String aDRESSE) {
 		ADRESSE = aDRESSE;
 	}
-	
 }
