@@ -305,9 +305,11 @@ export class FilesGeneratorComponent implements OnInit {
 //---------------------------------------------------------------------SEND EMAIL----------------------------------------------------------------------------------------------
   sendEmail(structure:Structure){
     this.showSpinner=true;
+    this.eFiles=[];
     /**************initialisation of mail request************************************* */
     //this.mailRequest.to=structure.emailgroupmanagers;
-    this.mailRequest.to.push("DG-ISI-DBA@Sonatrach.dz")
+    //this.mailRequest.to.push("DSI-Exploitation_paie@Sonatrach.dz")
+    this.mailRequest.to.push("Feriel.Aid@Sonatrach.dz");
     this.mailRequest.to.push(this.currentUser.email); //pour le moment juste pour tester
     this.mailRequest.sturcturename=structure.structurename;
     this.mailRequest.subject="états paie";
@@ -594,6 +596,7 @@ export class FilesGeneratorComponent implements OnInit {
       this.filteredEtatMip=[];
       this.filteredEtatRecap=[];
       this.filteredEtatRet=[];
+      this.codeNotLike=[];
       if(str.structurecodenotlike!="0"){
          this.codeNotLike=str.structurecodenotlike.split("/");
        // //console.log(this.codeNotLike);
