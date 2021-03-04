@@ -1,3 +1,6 @@
+import { ParametreService } from './../Services/parametre.service';
+import { User } from './../Models/User';
+import { Gfile } from './../Models/Gfile';
 import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
 import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -53,10 +56,11 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
   FrubAlph4: Boolean = false;
   FrubNum: Boolean = false;
   EtatArray = Array<EtatElement>();
+  gfiles:Gfile[]=[];
   showSpinner: Boolean = false;
   //globalFolderStatus:number=-1;
 
-
+  currentUser:User={"email":"","iduser":0,"name":"","password":"","state":0,"username":""};
   dataSource: MatTableDataSource<clotureFiles> = new MatTableDataSource(this.ELEMENT_DATA);
   formSettings: MbscFormOptions = {
     theme: 'mobiscroll',
@@ -72,7 +76,8 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,
     private clotureService: CloturePaieService,
     private homeService: HomeService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private token: TokenStorageService,private paramService :ParametreService
   ) {
 
 
@@ -86,7 +91,28 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+//get current user
+this.currentUser.username=this.token.getUsername();
+this.paramService.getUserByUserName(this.currentUser).subscribe(
+  (data) => {
+  if(data!=null){
+    // //console.log(data);
+    this.currentUser=data;
+  }else{
+    this.openDialog();
+  }
+   
 
+  },
+  error => {
+     //console.log(error);
+    
+    this.openDialogError(error);
+    throw error;
+
+  }
+
+)
     this.clotureService.getAllCloturePaie().subscribe(
 
       (data) => {
@@ -255,9 +281,19 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
           (data) => {
             if (data != null) {
               // //console.log(data);
-              let msg = "Les fichiers tables ont bien été générés et la paie a bien été cloturée.";
-              this.showSpinner = false;
-              this.showAlert(msg);
+              for(let i=0;i<data.length;i++){
+                let file:Gfile={
+                "idgfile":0,
+                "iduser":this.currentUser.iduser,
+                "gfilegenerationdate":new Date(),
+                "gfilename":data[i].prefixfiletype,
+                "idfiletype":data[i].idfiletype,
+                "idpaymonth":0
+                }
+                this.gfiles.push(file);
+              }
+              this.saveGeneratedGfiles();
+           
             } else {
               this.showSpinner = false;
               this.openDialog();
@@ -281,9 +317,18 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
           (data) => {
             if (data != null) {
               // //console.log(data);
-              let msg = "Les fichiers systèmes ont bien été générés et la paie a bien été cloturée.";
-              this.showSpinner = false;
-              this.showAlert(msg);
+              for(let i=0;i<data.length;i++){
+                let file:Gfile={
+                "idgfile":0,
+                "iduser":this.currentUser.iduser,
+                "gfilegenerationdate":new Date(),
+                "gfilename":data[i].prefixfiletype,
+                "idfiletype":data[i].idfiletype,
+                "idpaymonth":0
+                }
+                this.gfiles.push(file);
+              }
+              this.saveGeneratedGfiles();
             } else {
               this.showSpinner = false;
               this.openDialog();
@@ -372,6 +417,18 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
             if (data != null) {
               //this.showSpinner = false;
               // //console.log(data);
+              for(let i=0;i<data.length;i++){
+                let file:Gfile={
+                "idgfile":0,
+                "iduser":this.currentUser.iduser,
+                "gfilegenerationdate":new Date(),
+                "gfilename":data[i].prefixfiletype,
+                "idfiletype":data[i].idfiletype,
+                "idpaymonth":0
+                }
+                this.gfiles.push(file);
+              }
+              
               this.FrubAlph3 = true;
               this.showAlertFRUB();
             } else {
@@ -437,9 +494,18 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
           (data) => {
             if (data != null) {
               // //console.log(data);
-              let msg = "Les fichiers pers ont bien été générés et la paie a bien été cloturée.";
-              this.showSpinner = false;
-              this.showAlert(msg);
+              for(let i=0;i<data.length;i++){
+                let file:Gfile={
+                "idgfile":0,
+                "iduser":this.currentUser.iduser,
+                "gfilegenerationdate":new Date(),
+                "gfilename":data[i].prefixfiletype,
+                "idfiletype":data[i].idfiletype,
+                "idpaymonth":0
+                }
+                this.gfiles.push(file);
+              }
+              this.saveGeneratedGfiles();
             } else {
               this.showSpinner = false;
               this.openDialog();
@@ -462,9 +528,18 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
           (data) => {
             if (data != null) {
               // //console.log(data);
-              let msg = "Les fichiers newpaie ont bien été générés et la paie a bien été cloturée.";
-              this.showSpinner = false;
-              this.showAlert(msg);
+              for(let i=0;i<data.length;i++){
+                let file:Gfile={
+                "idgfile":0,
+                "iduser":this.currentUser.iduser,
+                "gfilegenerationdate":new Date(),
+                "gfilename":data[i].prefixfiletype,
+                "idfiletype":data[i].idfiletype,
+                "idpaymonth":0
+                }
+                this.gfiles.push(file);
+              }
+              this.saveGeneratedGfiles();
             } else {
               this.showSpinner = false;
               this.openDialog();
@@ -484,6 +559,29 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
     }
   }
 
+  saveGeneratedGfiles(){
+    this.clotureService.saveGeneratedGfiles(this.gfiles).subscribe(
+      (data) => {
+        if (data != null) {
+          // //console.log(data);
+          let msg = "Les fichiers ont bien été générés et la paie a bien été cloturée.";
+          this.showSpinner = false;
+          this.showAlert(msg);
+        } else {
+          this.showSpinner = false;
+          this.openDialog();
+          //alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
+        }
+
+      },
+
+      (error) => {
+        // //console.log(error);
+         this.openDialogError(error);;
+        throw error;
+      }
+    )
+  }
 
   showAlert(message: string) {
     mobiscroll.alert({
@@ -498,6 +596,10 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
   }
   showAlertFRUB() {
     if (this.FrubAlph && this.FrubNum &&this.FrubAlph1 &&this.FrubAlph2 &&this.FrubAlph3 && this.FrubAlph4) {
+      this.clotureService.saveGeneratedGfiles(this.gfiles).subscribe(
+        (data) => {
+          if (data != null) {
+            // //console.log(data);
       this.showSpinner = false;
       mobiscroll.alert({
         title: 'Cloture Paie',
@@ -507,6 +609,34 @@ export class CloturePaieComponent implements OnInit, AfterViewInit {
           window.location.reload();
         }
       });
+          } else {
+            this.showSpinner = false;
+            this.openDialog();
+            //alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
+          }
+  
+        },
+  
+        (error) => {
+          // //console.log(error);
+           this.openDialogError(error);;
+          throw error;
+        }
+      )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 

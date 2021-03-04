@@ -11,6 +11,7 @@ import { catchError  } from 'rxjs/operators';
 
 import { Folder } from '../Models/Folder';
 import { clotureFiles } from './../Models/cloturesFiles';
+import { Gfile } from '../Models/Gfile';
 
 @Injectable({
   providedIn: 'root'
@@ -161,4 +162,13 @@ export class CloturePaieService {
   );
  }
 
+ public saveGeneratedGfiles(files:Array<Gfile>):Observable<Array<Gfile>>{
+  return this.httpClient.post<Array<Gfile>>(this.host+"saveGeneratedGfiles",files).pipe(
+    catchError((err) => {
+       //console.log('error caught in service')
+      console.error(err);
+      return throwError(err);
+    })
+  );
+}
 }

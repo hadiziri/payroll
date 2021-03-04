@@ -1,3 +1,8 @@
+4.0
+---
+-Correction de la sauvgarde lors de la génération des états de paie (Efile)
+-Ajout d'une table Gfile pour la sauvgarde de tout les fichiers générés qui n'ont pas de structure(cloture paie)
+---------------------------------------------------------------------------------------------------
 3.9
 ---
 -Correction des fichiers newpaie,pers,fonction,FrubAlph(5fichiers)

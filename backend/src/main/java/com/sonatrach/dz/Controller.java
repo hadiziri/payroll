@@ -97,6 +97,8 @@ import com.sonatrach.dz.folderArchive.domain.FolderArchive;
 import com.sonatrach.dz.folderArchive.repo.FolderArchiveRepo;
 import com.sonatrach.dz.fonction.domain.Fonction;
 import com.sonatrach.dz.fonction.repo.FonctionRepo;
+import com.sonatrach.dz.gfile.domain.Gfile;
+import com.sonatrach.dz.gfile.repo.GfileRepo;
 import com.sonatrach.dz.localite.domain.Localite;
 import com.sonatrach.dz.localite.repo.LocaliteRepo;
 import com.sonatrach.dz.message.request.LoginForm;
@@ -241,6 +243,8 @@ public class Controller {
 	EtatRetRepo etatRetRepo;
 	@Autowired
 	EtatRecapRepo etatRecapRepo;
+	@Autowired
+	GfileRepo gfileRepo;
 
 	// ****************************************API*****************************************************************************
 	// Api Test
@@ -1196,9 +1200,19 @@ public class Controller {
 				if (idFile != null) {
 					files.get(i).setIdfiletype(idFile);
 					files.get(i).setIdpaymonth(currentDate.getId());
-					efileRepo.save(files.get(i));
-				} else {
-					return null;
+					//efileRepo.save(files.get(i));
+				}
+			}
+			
+			for(int j=0;j<files.size();j++) {
+				Efile file=efileRepo.findByIdStrIdFile(files.get(j).getIdstructure(),files.get(j).getIdfiletype() );
+				if(file!=null) {
+					file.setFilegenerationdate(files.get(j).getFilegenerationdate());
+					file.setIduser(files.get(j).getIduser());
+					file.setIdpaymonth(files.get(j).getIdpaymonth());
+					efileRepo.save(file);
+				}else {
+					efileRepo.save(files.get(j));
 				}
 			}
 			return files;
@@ -1327,6 +1341,37 @@ public class Controller {
 		} else {
 			return 0;
 		}
+	}
+	
+	@PostMapping({ "saveGeneratedGfiles" })
+	public List<Gfile> saveGeneratedGfiles(@RequestBody List<Gfile> files){
+		try {
+			List<Gfile> savedFiles=new ArrayList();
+			PayMonth currentDate = paymonthRepo.findByState();
+			
+				for(int i=0;i<files.size();i++) {
+					files.get(i).setIdpaymonth(currentDate.getId());
+					
+				
+			}
+			
+			for(int i=0;i<files.size();i++) {
+				Gfile myFile=gfileRepo.findByIdFilePaymonth(files.get(i).getIdfiletype(), files.get(i).getIdpaymonth());
+				if(myFile!=null) {
+					myFile.setIduser(files.get(i).getIduser());
+					myFile.setGfilegenerationdate(files.get(i).getGfilegenerationdate());
+					savedFiles.add(gfileRepo.save(myFile));
+				}else {
+					savedFiles.add(gfileRepo.save(files.get(i)));
+				}
+			}
+			return savedFiles;
+			
+			
+		} catch (Exception e) {
+			System.out.println("Exception saveGeneratedGfiles()==>" + e.getMessage());
+		}
+		return null;
 	}
 
 	// pour avoir tt les fichiers pour verifier l'etat de chacun (Cloture Paie Menu)

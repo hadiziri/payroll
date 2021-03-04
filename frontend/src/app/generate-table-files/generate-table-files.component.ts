@@ -225,7 +225,7 @@ saveEmailDB(){
           this.eFiles.push(efile);
         }
          //console.log(this.archiveSentFiles)
-         this.saveEfiles();
+         //this.saveEfiles();
        
       }else{
         this.openDialog();
