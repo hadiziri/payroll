@@ -1525,8 +1525,9 @@ public class Controller {
 
 	}
 
-	public void generatedToDBF(String batPath,String filePath,String outPutPath) {
-		 ProcessBuilder processBuilder = new ProcessBuilder("C:\\DIN_DRH\\DCDSI_EXPLOITATION\\SYSTEME\\2021\\2021-02\\convert.bat",filePath
+	public void generatedToDBF(String batPath,String filePath,String outPutPath) throws FileNotFoundException {
+		File file = ResourceUtils.getFile("classpath:convert.bat");
+		 ProcessBuilder processBuilder = new ProcessBuilder(file.getAbsolutePath(),filePath
 					,outPutPath);
 					       
 					       
@@ -1546,8 +1547,8 @@ public class Controller {
 
 					            int exitVal = process.waitFor();
 					            if (exitVal == 0) {
-					                System.out.println(output);
-					                System.exit(0);
+					                //System.out.println(output);
+					                //System.exit(0);
 					            } else {
 					                //abnormal...
 					            }
@@ -1644,7 +1645,7 @@ public class Controller {
 					+ clotureRepo.findByDesc("fonction").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter3.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName3);
 			exporter3.exportReport();
-
+			//generatedToDBF("",outputFileName3.toString(),pathWithMounth);
 			// load file and compile it
 			File fileLocalite = ResourceUtils.getFile("classpath:lesLocalites.jrxml");
 			JasperReport jasperReport4 = JasperCompileManager.compileReport(fileLocalite.getAbsolutePath());
@@ -1658,7 +1659,7 @@ public class Controller {
 					+ clotureRepo.findByDesc("localite").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter4.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName4);
 			exporter4.exportReport();
-
+			//generatedToDBF("",outputFileName4.toString(),pathWithMounth);
 			// load file and compile it
 			File filePays = ResourceUtils.getFile("classpath:lesPays.jrxml");
 			JasperReport jasperReport5 = JasperCompileManager.compileReport(filePays.getAbsolutePath());
@@ -1672,7 +1673,7 @@ public class Controller {
 					+ " " + dateFormat + ".xlsx";
 			exporter5.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName5);
 			exporter5.exportReport();
-
+			//generatedToDBF("",outputFileName5.toString(),pathWithMounth);
 			// load file and compile it
 			File fileRubrique = ResourceUtils.getFile("classpath:lesRubriques.jrxml");
 			JasperReport jasperReport6 = JasperCompileManager.compileReport(fileRubrique.getAbsolutePath());
@@ -1686,7 +1687,7 @@ public class Controller {
 					+ clotureRepo.findByDesc("rubrique").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter6.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName6);
 			exporter6.exportReport();
-
+			//generatedToDBF("",outputFileName6.toString(),pathWithMounth);
 			// load file and compile it
 			File fileTabStructure = ResourceUtils.getFile("classpath:lesTabStructures.jrxml");
 			JasperReport jasperReport7 = JasperCompileManager.compileReport(fileTabStructure.getAbsolutePath());
@@ -1700,7 +1701,7 @@ public class Controller {
 					+ clotureRepo.findByDesc("structure").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter7.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName7);
 			exporter7.exportReport();
-
+			//generatedToDBF("",outputFileName7.toString(),pathWithMounth);
 			return fileTables;
 
 		} catch (Exception e) {
@@ -1752,7 +1753,7 @@ public class Controller {
 					+ " " + dateFormat + ".xlsx";
 			exporter8.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName8);
 			exporter8.exportReport();
-
+			//generatedToDBF("",outputFileName8.toString(),pathWithMounth);
 			// load file and compile it
 			File fileDep = ResourceUtils.getFile("classpath:dep.jrxml");
 			JasperReport jasperReport9 = JasperCompileManager.compileReport(fileDep.getAbsolutePath());
@@ -1766,6 +1767,7 @@ public class Controller {
 					+ " " + dateFormat + ".xlsx";
 			exporter9.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName9);
 			exporter9.exportReport();
+			//generatedToDBF("",outputFileName9.toString(),pathWithMounth);
 			return fileSys;
 
 		} catch (Exception e) {
@@ -1820,7 +1822,7 @@ public class Controller {
 					+ " " + dateFormat + ".xlsx";
 			exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
 			exporter12.exportReport();
-
+			generatedToDBF("",outputFileName12.toString(),pathWithMounth);
 			// load file and compile it
 			/*
 			 * File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml"); JasperReport
@@ -1892,7 +1894,7 @@ public class Controller {
 					+ " " + dateFormat + ".xlsx";
 			exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
 			exporter12.exportReport();
-
+			generatedToDBF("",outputFileName12.toString(),pathWithMounth);
 			// load file and compile it
 			/*
 			 * File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml"); JasperReport
@@ -1964,7 +1966,7 @@ public class Controller {
 					+ " " + dateFormat + ".xlsx";
 			exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
 			exporter12.exportReport();
-
+			generatedToDBF("",outputFileName12.toString(),pathWithMounth);
 			// load file and compile it
 			/*
 			 * File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml"); JasperReport
@@ -2036,7 +2038,7 @@ public class Controller {
 					+ " " + dateFormat + ".xlsx";
 			exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
 			exporter12.exportReport();
-
+			generatedToDBF("",outputFileName12.toString(),pathWithMounth);
 			// load file and compile it
 			/*
 			 * File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml"); JasperReport
@@ -2108,7 +2110,7 @@ public class Controller {
 					+ " " + dateFormat + ".xlsx";
 			exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
 			exporter12.exportReport();
-
+			generatedToDBF("",outputFileName12.toString(),pathWithMounth);
 			// load file and compile it
 			/*
 			 * File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml"); JasperReport
@@ -2199,6 +2201,7 @@ public class Controller {
 					+ " " + dateFormat + ".xlsx";
 			exporter13.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName13);
 			exporter13.exportReport();
+			generatedToDBF("",outputFileName13.toString(),pathWithMounth);
 			return fileFrub;
 
 		} catch (Exception e) {
@@ -2251,6 +2254,7 @@ public class Controller {
 					+ clotureRepo.findByDesc("newpaie").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter10.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName10);
 			exporter10.exportReport();
+			generatedToDBF("",outputFileName10.toString(),pathWithMounth);
 			return fileNewPaie;
 		} catch (Exception e) {
 			System.out.println(e.getMessage() + "==>generateNewPaieFiles()");
@@ -2303,6 +2307,7 @@ public class Controller {
 				Object outputFileName11 = pathWithMounth + "\\"
 						+ clotureRepo.findByDesc("pers").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 				exporter11.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName11);
+				generatedToDBF("",outputFileName11.toString(),pathWithMounth);
 				exporter11.exportReport();
 
 				return filesPers;

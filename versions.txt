@@ -1,4 +1,7 @@
-
+4.3
+---
+-Génération fichiers DBF(newpaie,pers,FRUB)
+---------------------------------------------------------------------------------------------------
 4.2
 ---
 -Correction bug (getFilesByFolder)
