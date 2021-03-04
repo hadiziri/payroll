@@ -1,3 +1,5 @@
+import { ArchiveSentGfiles } from './../Models/ArchiveSentGfiles';
+import { Gfile } from './../Models/Gfile';
 import { Efile } from './../Models/Efile';
 import { Observable } from 'rxjs';
 import { MailResponse } from './../Models/MailResponse';
@@ -29,8 +31,18 @@ export class SendTableFilesService {
     
   }
 
-  public saveEFiles(files:Array<Efile>):Observable<Array<Efile>>{
-    return this.httpClient.post<Array<Efile>>(this.host+"saveEFiles",files).pipe(
+  public getGfilesTable():Observable<Array<Gfile>>{
+    return this.httpClient.get<Array<Gfile>>(this.host+"getGfilesTable").pipe(
+      catchError((err) => {
+         //console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
+
+  public saveArchiveSentGfiles(files:Array<ArchiveSentGfiles>):Observable<Array<ArchiveSentGfiles>>{
+    return this.httpClient.post<Array<ArchiveSentGfiles>>(this.host+"saveArchiveSentGfiles",files).pipe(
       catchError((err) => {
          //console.log('error caught in service')
         console.error(err);

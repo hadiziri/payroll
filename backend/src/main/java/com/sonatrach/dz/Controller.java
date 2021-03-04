@@ -53,6 +53,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sonatrach.dz.archiveSentFiles.domain.ArchiveSentFiles;
 import com.sonatrach.dz.archiveSentFiles.repo.ArchiveSentFilesRepo;
+import com.sonatrach.dz.archiveSentGfiles.domain.ArchiveSentGfiles;
+import com.sonatrach.dz.archiveSentGfiles.repo.ArchiveSentGfilesRepo;
 import com.sonatrach.dz.archiveStructure.domain.ArchiveStructure;
 import com.sonatrach.dz.archiveStructure.repo.ArchiveStructureRepo;
 import com.sonatrach.dz.banque.domain.Banque;
@@ -245,7 +247,9 @@ public class Controller {
 	EtatRecapRepo etatRecapRepo;
 	@Autowired
 	GfileRepo gfileRepo;
-
+	@Autowired
+	ArchiveSentGfilesRepo archiveSentGfilesRepo ;
+	
 	// ****************************************API*****************************************************************************
 	// Api Test
 	@GetMapping({ "/test" })
@@ -304,18 +308,45 @@ public class Controller {
 	@PostMapping({ "getSentFiles" })
 	public String[] getSentFiles(@RequestBody EmailDB email) {
 		try {
+			String[] fileNames = null;
+			String[] gfileNames = null;
 			ArrayList<ArchiveSentFiles> fileIds = archiveSentFilesRepo.findByIdEmail(email.getIdemail());
-
-			if (fileIds != null) {
-				String[] fileNames = new String[fileIds.size()];
+			ArrayList<ArchiveSentGfiles> gfilesIds=archiveSentGfilesRepo.findGfilesByIdEmail(email.getIdemail());
+			
+			if (fileIds!=null ) {
+				
+				 fileNames = new String[fileIds.size()];
 				for (int i = 0; i < fileIds.size(); i++) {
 					Optional<Efile> sentFile = efileRepo.findById(fileIds.get(i).getIdfile());
 					if (sentFile.get() != null) {
 						fileNames[i] = sentFile.get().getFilename();
 					}
 				}
-				return fileNames;
+			
 			}
+			System.out.println(gfilesIds.size());
+			if(gfilesIds!=null) {
+				 gfileNames = new String[gfilesIds.size()];
+				
+				for (int i = 0; i < gfilesIds.size(); i++) {
+					Optional<Gfile> sentgFile = gfileRepo.findById(gfilesIds.get(i).getIdgfile());
+					System.out.println(sentgFile.get().getGfilename());
+					if (sentgFile.get() != null) {
+						gfileNames[i] = sentgFile.get().getGfilename();
+					
+					}
+				}
+			
+				
+			
+			}
+			
+			if(fileNames.length!=0) {
+				return fileNames;
+			}else {
+				return gfileNames;
+			}
+			
 		} catch (Exception e) {
 			System.out.println("Exception  getSentFiles()==>" + e.getMessage());
 		}
@@ -392,21 +423,34 @@ public class Controller {
 		}
 		return null;
 	}
-
-	@PostMapping({ "saveEFiles" })
-	public List<Efile> saveEFiles(@RequestBody List<Efile> files) {
+	@GetMapping({"getGfilesTable"})
+	public List<Gfile> getGfilesTable(){
 		try {
-			List<Efile> savedEfiles = new ArrayList();
+			List<Gfile> gfiles=new ArrayList();
+			gfiles=gfileRepo.findByFolderName("TABLES");
+			return gfiles;
+		} catch (Exception e) {
+			System.out.println("Exception  getGfilesTable()==>" + e.getMessage());
+		
+		}
+		return null;
+	}
+	
+	
+	@PostMapping({ "saveArchiveSentGfiles" })
+	public List<ArchiveSentGfiles> saveArchiveSentGfiles(@RequestBody List<ArchiveSentGfiles> files) {
+		try {
+			List<ArchiveSentGfiles> savedGfiles = new ArrayList();
 			// System.out.println("saveEfile");
 			for (int i = 0; i < files.size(); i++) {
 
-				Efile file = efileRepo.save(files.get(i));
+				ArchiveSentGfiles file = archiveSentGfilesRepo.save(files.get(i));
 				// System.out.println(file.getIdfile()+" ");
-				savedEfiles.add(file);
+				savedGfiles.add(file);
 			}
-			return savedEfiles;
+			return savedGfiles;
 		} catch (Exception e) {
-			System.out.println("Exception while saveEFiles()==>" + e.getMessage());
+			System.out.println("Exception while saveArchiveSentGfiles()==>" + e.getMessage());
 		}
 		return null;
 	}
@@ -1309,22 +1353,24 @@ public class Controller {
 			String dateFormat = currentYear + "-" + currentMonth;
 			String path;
 			List<CloturePaie> files = clotureRepo.findByCategory(f.getFOLDERNAME());
+			List<CloturePaie> existFiles = new ArrayList();
 			for (int i = 0; i < files.size(); i++) {
-				if (files.get(i).getDESCFILETYPE().equals("pers") || files.get(i).getDESCFILETYPE().equals("newpaie")
-						|| files.get(i).getDESCFILETYPE().equals("frubA")
-						|| files.get(i).getDESCFILETYPE().equals("frubN")) {
+				
 					path = files.get(i).getFOLDERPATH() + files.get(i).getFOLDERNAME() + "\\" + currentYear + "\\"
 							+ dateFormat + "\\" + files.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
-				} else {
-					path = files.get(i).getFOLDERPATH() + files.get(i).getFOLDERNAME() + "\\" + currentYear + "\\"
-							+ dateFormat + "\\" + files.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
-				}
+				
 
 				files.get(i).setFOLDERPATH(path);
 
 			}
 
-			return files;
+			for(int j=0;j<files.size();j++) {
+				File tblFile = new File(files.get(j).getFOLDERPATH());
+				if (tblFile.exists()) {
+					existFiles.add(files.get(j));
+			}
+			}
+			return existFiles;
 		} catch (Exception e) {
 			System.out.println("Exception getFilesByFolder()==>" + e.getMessage());
 		}
@@ -1343,6 +1389,7 @@ public class Controller {
 		}
 	}
 	
+
 	@PostMapping({ "saveGeneratedGfiles" })
 	public List<Gfile> saveGeneratedGfiles(@RequestBody List<Gfile> files){
 		try {

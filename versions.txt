@@ -1,3 +1,9 @@
+
+4.1
+---
+-Historique avec les fichiers en attaché
+-envoie fichiers systeme que si ils sont générés
+---------------------------------------------------------------------------------------------------
 4.0
 ---
 -Correction de la sauvgarde lors de la génération des états de paie (Efile)

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -13,7 +14,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name ="GFILE")
 @SequenceGenerator(name="GFILE_ID_SEQ",initialValue=1, allocationSize=1)
-@NamedQuery(name = "Gfile.findByIdFilePaymonth", query = "SELECT p FROM Gfile  p WHERE idfiletype=?1 and idpaymonth=?2")
+@NamedQueries({@NamedQuery(name = "Gfile.findByIdFilePaymonth", query = "SELECT p FROM Gfile  p WHERE idfiletype=?1 and idpaymonth=?2"),
+	@NamedQuery(name = "Gfile.findByFolderName", query = "SELECT p FROM Gfile  p WHERE gfoldername=?1 ")
+})
+
 public class Gfile {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="GFILE_ID_SEQ")
@@ -23,6 +27,7 @@ public class Gfile {
 	Integer  iduser ;
 	String gfilename  ;
 	Date gfilegenerationdate;
+	String gfoldername;
 	
 	public Gfile() {
 		
@@ -69,6 +74,14 @@ public class Gfile {
 
 	public void setGfilegenerationdate(Date gfilegenerationdate) {
 		this.gfilegenerationdate = gfilegenerationdate;
+	}
+
+	public String getGfoldername() {
+		return gfoldername;
+	}
+
+	public void setGfoldername(String gfoldername) {
+		this.gfoldername = gfoldername;
 	}
 
 	

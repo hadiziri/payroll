@@ -288,7 +288,8 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
                 "gfilegenerationdate":new Date(),
                 "gfilename":data[i].prefixfiletype,
                 "idfiletype":data[i].idfiletype,
-                "idpaymonth":0
+                "idpaymonth":0,
+                "gfoldername":"TABLES"
                 }
                 this.gfiles.push(file);
               }
@@ -324,7 +325,8 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
                 "gfilegenerationdate":new Date(),
                 "gfilename":data[i].prefixfiletype,
                 "idfiletype":data[i].idfiletype,
-                "idpaymonth":0
+                "idpaymonth":0,
+                "gfoldername":"SYSTEME"
                 }
                 this.gfiles.push(file);
               }
@@ -424,7 +426,8 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
                 "gfilegenerationdate":new Date(),
                 "gfilename":data[i].prefixfiletype,
                 "idfiletype":data[i].idfiletype,
-                "idpaymonth":0
+                "idpaymonth":0,
+                "gfoldername":"FRUB"
                 }
                 this.gfiles.push(file);
               }
@@ -501,7 +504,8 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
                 "gfilegenerationdate":new Date(),
                 "gfilename":data[i].prefixfiletype,
                 "idfiletype":data[i].idfiletype,
-                "idpaymonth":0
+                "idpaymonth":0,
+                "gfoldername":"PERS"
                 }
                 this.gfiles.push(file);
               }
@@ -535,7 +539,8 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
                 "gfilegenerationdate":new Date(),
                 "gfilename":data[i].prefixfiletype,
                 "idfiletype":data[i].idfiletype,
-                "idpaymonth":0
+                "idpaymonth":0,
+                "gfoldername":"NEWPAIE"
                 }
                 this.gfiles.push(file);
               }

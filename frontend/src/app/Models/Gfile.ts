@@ -5,6 +5,6 @@ export interface Gfile{
     idpaymonth :number;
      iduser :number;
     gfilename :String ;
-
+    gfoldername:String;
     gfilegenerationdate:Date;
 }

@@ -1,3 +1,4 @@
+import { ArchiveSentGfiles } from './../Models/ArchiveSentGfiles';
 import { Efile } from './../Models/Efile';
 import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
 import { HomeService } from './../Services/home.service';
@@ -29,7 +30,7 @@ export class GenerateTableFilesComponent implements OnInit {
   mailRequest:MailRequest={"from":"","msg":"","sturcturename":"","subject":"","to":[],"filesName":[]};
   currentUser:User={"email":"","iduser":0,"name":"","password":"","state":0,"username":""};
   email:EmailDB={"emailgenerationdate":new Date(),"emailobject":"","idemail":0,"iduser":0,"msg":"","receiver":"","sender":""};
-  archiveSentFiles:ArchiveSentFiles[]=[];
+  archiveSentGfiles:ArchiveSentGfiles[]=[];
   emailSaved:Boolean=false;
   eFiles:Efile[]=[];
   idEmail:number=0;
@@ -66,7 +67,7 @@ export class GenerateTableFilesComponent implements OnInit {
     this.clotureService.getFilesByFolder(folder).subscribe(
       (data) => {
         if (data != null) {
-           //console.log(data);
+          // console.log(data);
           this.allTableFiles=data;
           //this.globalStatusFolder(data,folder.foldername);
         } else {
@@ -202,7 +203,8 @@ export class GenerateTableFilesComponent implements OnInit {
   
 }
 saveEmailDB(){
-  this.archiveSentFiles=[];
+  this.archiveSentGfiles=[];
+  this.idEmail=0;
   this.homeService.SaveSentEmail(this.email).subscribe(
     (data) => {
     
@@ -210,22 +212,8 @@ saveEmailDB(){
       if(data!=null){
         this.emailSaved=true;
         this.idEmail=data.idemail;
-        for(let i=0;i<this.tempTableFiles.length;i++){
-         
-          let efile:Efile={
-            "idfile":0,
-            "idfiletype":this.tempTableFiles[i].idfiletype,
-            "filegenerationdate":new  Date(),          
-            "filename":this.tempTableFiles[i].descfiletype,
-            "idpaymonth":1,
-            "idstructure":1,
-            "iduser":this.currentUser.iduser,
-            "validatedflag":1
-          }
-          this.eFiles.push(efile);
-        }
-         //console.log(this.archiveSentFiles)
-         //this.saveEfiles();
+    
+         this.getGfilesTable();
        
       }else{
         this.openDialog();
@@ -245,7 +233,7 @@ saveEmailDB(){
 }
 
 saveArchiveSentFiles(){
-  this.homeService.SaveArchiveSentFiles(this.archiveSentFiles).subscribe(
+  this.SendTableFilesService.saveArchiveSentGfiles(this.archiveSentGfiles).subscribe(
     (data) => {
     
        //console.log(data);
@@ -269,14 +257,21 @@ saveArchiveSentFiles(){
   )
 }
 
-saveEfiles(){
-  this.SendTableFilesService.saveEFiles(this.eFiles).subscribe(
+getGfilesTable(){
+   this.archiveSentGfiles=[];
+  this.SendTableFilesService.getGfilesTable().subscribe(
     (data) => {
     
       //console.log(data);
      if(data!=null){
-       for(let i=0;i<data.length;i++){
-        this.archiveSentFiles.push({"idemail":this.idEmail,"idfile":data[i].idfile});
+       for(let i=0;i<this.tempTableFiles.length;i++){
+         for(let j=0;j<data.length;j++){
+          if(this.tempTableFiles[i].prefixfiletype==data[j].gfilename){
+            this.archiveSentGfiles.push({"idemail":this.idEmail,"idgfile":data[j].idgfile});
+          }
+         
+         }
+       
        }
       
       this.saveArchiveSentFiles();
