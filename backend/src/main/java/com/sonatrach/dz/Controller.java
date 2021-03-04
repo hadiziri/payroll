@@ -1,5 +1,6 @@
 package com.sonatrach.dz;
 
+import java.io.BufferedReader;
 import java.io.File
 
 ;
@@ -7,6 +8,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.Files;
@@ -165,6 +168,7 @@ import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 @CrossOrigin("*")
 public class Controller {
 	// **********************************************repositories************************************************************
+
 	@Autowired
 	BanqueRepo banqueRepo;
 	@Autowired
@@ -253,7 +257,41 @@ public class Controller {
 	// ****************************************API*****************************************************************************
 	// Api Test
 	@GetMapping({ "/test" })
-	public List<CloturePaie> getAllBanques() {
+	public List<CloturePaie> getAllBanques() throws IOException {
+		 ProcessBuilder processBuilder = new ProcessBuilder("C:\\DIN_DRH\\DCDSI_EXPLOITATION\\SYSTEME\\2021\\2021-02\\convert.bat","C:\\DIN_DRH\\DCDSI_EXPLOITATION\\SYSTEME\\2021\\2021-02\\DEP 2021-02.xlsx"
+	,"C:\\DIN_DRH\\DCDSI_EXPLOITATION\\SYSTEME\\2021\\2021-02");
+	       
+	        //Process process = Runtime.getRuntime().exec(
+	        //            "cmd /c hello.bat", null, new File("C:\\Users\\mkyong\\"));
+	                    
+	        try {
+
+	            Process process = processBuilder.start();
+
+	            StringBuilder output = new StringBuilder();
+
+	            BufferedReader reader = new BufferedReader(
+	                    new InputStreamReader(process.getInputStream()));
+
+	            String line;
+	            while ((line = reader.readLine()) != null) {
+	                output.append(line + "\n");
+	            }
+
+	            int exitVal = process.waitFor();
+	            if (exitVal == 0) {
+	                System.out.println(output);
+	                System.exit(0);
+	            } else {
+	                //abnormal...
+	            }
+
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+	        }
+ 
 		return clotureRepo.findAll();
 	}
 
@@ -324,13 +362,13 @@ public class Controller {
 				}
 			
 			}
-			System.out.println(gfilesIds.size());
+			
 			if(gfilesIds!=null) {
 				 gfileNames = new String[gfilesIds.size()];
 				
 				for (int i = 0; i < gfilesIds.size(); i++) {
 					Optional<Gfile> sentgFile = gfileRepo.findById(gfilesIds.get(i).getIdgfile());
-					System.out.println(sentgFile.get().getGfilename());
+					
 					if (sentgFile.get() != null) {
 						gfileNames[i] = sentgFile.get().getGfilename();
 					
@@ -1353,6 +1391,35 @@ public class Controller {
 			String dateFormat = currentYear + "-" + currentMonth;
 			String path;
 			List<CloturePaie> files = clotureRepo.findByCategory(f.getFOLDERNAME());
+			
+			for (int i = 0; i < files.size(); i++) {
+				
+					path = files.get(i).getFOLDERPATH() + files.get(i).getFOLDERNAME() + "\\" + currentYear + "\\"
+							+ dateFormat + "\\" + files.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
+				
+
+				files.get(i).setFOLDERPATH(path);
+
+			}
+
+			
+			
+			return files;
+		} catch (Exception e) {
+			System.out.println("Exception getFilesByFolder()==>" + e.getMessage());
+		}
+		return null;
+	}
+
+	@PostMapping({ "/getFilesByFolder2" })
+	public List<CloturePaie> getFilesByFolder2(@RequestBody Folder f) {
+		try {
+			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
+			String path;
+			List<CloturePaie> files = clotureRepo.findByCategory(f.getFOLDERNAME());
 			List<CloturePaie> existFiles = new ArrayList();
 			for (int i = 0; i < files.size(); i++) {
 				
@@ -1376,7 +1443,6 @@ public class Controller {
 		}
 		return null;
 	}
-
 	// get etat files pour la génération des fichiers (recuperer les etats des
 	// fichiers généré ou non)
 	@PostMapping({ "getEtatFile" })
@@ -1459,6 +1525,39 @@ public class Controller {
 
 	}
 
+	public void generatedToDBF(String batPath,String filePath,String outPutPath) {
+		 ProcessBuilder processBuilder = new ProcessBuilder("C:\\DIN_DRH\\DCDSI_EXPLOITATION\\SYSTEME\\2021\\2021-02\\convert.bat",filePath
+					,outPutPath);
+					       
+					       
+					        try {
+
+					            Process process = processBuilder.start();
+
+					            StringBuilder output = new StringBuilder();
+
+					            BufferedReader reader = new BufferedReader(
+					                    new InputStreamReader(process.getInputStream()));
+
+					            String line;
+					            while ((line = reader.readLine()) != null) {
+					                output.append(line + "\n");
+					            }
+
+					            int exitVal = process.waitFor();
+					            if (exitVal == 0) {
+					                System.out.println(output);
+					                System.exit(0);
+					            } else {
+					                //abnormal...
+					            }
+
+					        } catch (IOException e) {
+					           System.out.println(e.getMessage()+"generatedToDBF"); 
+					        } catch (InterruptedException e) {
+					        	System.out.println(e.getMessage()+"generatedToDBF"); 
+					        }
+	}
 	// génération des fichiers Tables
 	@GetMapping({ "generateTableFiles" })
 	public List<CloturePaie> generateTableFiles() throws FileNotFoundException, JRException {
@@ -1514,7 +1613,9 @@ public class Controller {
 					+ " " + dateFormat + ".xlsx";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
 			exporter.exportReport();
-
+			
+			
+			//generatedToDBF("",outputFileName.toString(),pathWithMounth);
 			// load file and compile it
 			File fileDiplome = ResourceUtils.getFile("classpath:lesDiplomes.jrxml");
 			JasperReport jasperReport2 = JasperCompileManager.compileReport(fileDiplome.getAbsolutePath());
@@ -1528,7 +1629,8 @@ public class Controller {
 					+ clotureRepo.findByDesc("diplome").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter2.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName2);
 			exporter2.exportReport();
-
+			
+			//generatedToDBF("",outputFileName2.toString(),pathWithMounth);
 			// load file and compile it
 			File fileFonctions = ResourceUtils.getFile("classpath:lesFonctions.jrxml");
 			JasperReport jasperReport3 = JasperCompileManager.compileReport(fileFonctions.getAbsolutePath());

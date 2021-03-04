@@ -64,7 +64,7 @@ export class GenerateTableFilesComponent implements OnInit {
     let folder: Folder = { "idfolder": 0, "foldername": "TABLES", "folderpath": "", "statusfolder": 0 ,"displayedfolderpath":""};
 
     //get all table files
-    this.clotureService.getFilesByFolder(folder).subscribe(
+    this.clotureService.getFilesByFolder2(folder).subscribe(
       (data) => {
         if (data != null) {
           // console.log(data);

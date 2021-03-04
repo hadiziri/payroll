@@ -44,6 +44,15 @@ export class CloturePaieService {
   );
  }
 
+ public getFilesByFolder2(folder:Folder):Observable<Array<clotureFiles>>{
+  return this.httpClient.post<Array<clotureFiles>>(this.host+"getFilesByFolder2",folder).pipe(
+   catchError((err) => {
+      //console.log('error caught in service')
+     console.error(err);
+     return throwError(err);
+   })
+ );
+}
 
  public getEtatFile(file:clotureFiles):Observable<number>{
    return this.httpClient.post<number>(this.host+"getEtatFile",file).pipe(

@@ -1,4 +1,8 @@
 
+4.2
+---
+-Correction bug (getFilesByFolder)
+---------------------------------------------------------------------------------------------------
 4.1
 ---
 -Historique avec les fichiers en attaché
