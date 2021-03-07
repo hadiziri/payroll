@@ -2,6 +2,7 @@
 <!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="text_output" pageWidth="2500" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="9a0b1db2-1ed0-44e1-960b-4626cea0097d">
 	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
 	<field name="DATEEXPL" class="java.lang.String"/>
 	<field name="MAT" class="java.lang.String"/>
 	<field name="NOMPRENOM" class="java.lang.String"/>
@@ -23,10 +24,10 @@
 	<field name="CODENATUR" class="java.lang.Integer"/>
 	<field name="DTDEB" class="java.lang.String"/>
 	<field name="DEFIN" class="java.lang.String"/>
-	<field name="MTMOIS" class="java.lang.String"/>
-	<field name="MTRAPPEL" class="java.lang.String"/>
-	<field name="TAUX" class="java.lang.String"/>
-	<field name="ELEMSTAT" class="java.lang.String"/>
+	<field name="MTMOIS" class="java.math.BigDecimal"/>
+	<field name="MTRAPPEL" class="java.math.BigDecimal"/>
+	<field name="TAUX" class="java.math.BigDecimal"/>
+	<field name="ELEMSTAT" class="java.math.BigDecimal"/>
 	<field name="GROUPE" class="java.lang.String"/>
 	<field name="NBENFTOT" class="java.lang.String"/>
 	<field name="ADRESSE" class="java.lang.String"/>

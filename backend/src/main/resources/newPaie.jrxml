@@ -2,6 +2,7 @@
 <!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="text_output" pageWidth="2500" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="9a0b1db2-1ed0-44e1-960b-4626cea0097d">
 	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
 	<field name="ref" class="java.lang.String"/>
 	<field name="mat" class="java.lang.String"/>
 	<field name="str" class="java.lang.String"/>
@@ -11,27 +12,27 @@
 	<field name="echelon" class="java.lang.String"/>
 	<field name="mtsb" class="java.lang.String"/>
 	<field name="mtechelon" class="java.lang.String"/>
-	<field name="mtpers" class="java.lang.String"/>
-	<field name="mtai07" class="java.lang.String"/>
-	<field name="mtai08" class="java.lang.String"/>
-	<field name="mtai09" class="java.lang.String"/>
-	<field name="mtai10" class="java.lang.String"/>
-	<field name="mtai11" class="java.lang.String"/>
-	<field name="mtai12" class="java.lang.String"/>
-	<field name="mtai13" class="java.lang.String"/>
-	<field name="mtai14" class="java.lang.String"/>
-	<field name="mtai15" class="java.lang.String"/>
-	<field name="mtai16" class="java.lang.String"/>
-	<field name="mtai17" class="java.lang.String"/>
-	<field name="mtai18" class="java.lang.String"/>
-	<field name="txreval" class="java.lang.String"/>
-	<field name="mtreval" class="java.lang.String"/>
-	<field name="txpri" class="java.lang.String"/>
-	<field name="txprc" class="java.lang.String"/>
-	<field name="mtpri" class="java.lang.String"/>
-	<field name="mtprc" class="java.lang.String"/>
-	<field name="mtiag" class="java.lang.String"/>
-	<field name="nouvsal" class="java.lang.String"/>
+	<field name="mtpers" class="java.math.BigDecimal"/>
+	<field name="mtai07" class="java.math.BigDecimal"/>
+	<field name="mtai08" class="java.math.BigDecimal"/>
+	<field name="mtai09" class="java.math.BigDecimal"/>
+	<field name="mtai10" class="java.math.BigDecimal"/>
+	<field name="mtai11" class="java.math.BigDecimal"/>
+	<field name="mtai12" class="java.math.BigDecimal"/>
+	<field name="mtai13" class="java.math.BigDecimal"/>
+	<field name="mtai14" class="java.math.BigDecimal"/>
+	<field name="mtai15" class="java.math.BigDecimal"/>
+	<field name="mtai16" class="java.math.BigDecimal"/>
+	<field name="mtai17" class="java.math.BigDecimal"/>
+	<field name="mtai18" class="java.math.BigDecimal"/>
+	<field name="txreval" class="java.math.BigDecimal"/>
+	<field name="mtreval" class="java.math.BigDecimal"/>
+	<field name="txpri" class="java.math.BigDecimal"/>
+	<field name="txprc" class="java.math.BigDecimal"/>
+	<field name="mtpri" class="java.math.BigDecimal"/>
+	<field name="mtprc" class="java.math.BigDecimal"/>
+	<field name="mtiag" class="java.math.BigDecimal"/>
+	<field name="nouvsal" class="java.math.BigDecimal"/>
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>

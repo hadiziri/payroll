@@ -1,3 +1,9 @@
+4.4
+---
+-Regler prob number (xlsx)(pers,newpaie,Frub)
+-Structure suspendu apres génération
+-affichage date 
+---------------------------------------------------------------------------------------------------
 4.3
 ---
 -Génération fichiers DBF(newpaie,pers,FRUB)

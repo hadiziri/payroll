@@ -1,5 +1,7 @@
 package com.sonatrach.dz.rubAlph.domain;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -52,13 +54,13 @@ public class RubLNP {
 	@Column(name="DT_FIN")
 	private String DEFIN;
 	@Column(name="MT_MOIS")
-	private String MTMOIS;
+	private BigDecimal MTMOIS;
 	@Column(name="MT_RAPP")
-	private String MTRAPPEL;
+	private BigDecimal MTRAPPEL;
 	@Column(name="TAUX")
-	private String TAUX;
+	private BigDecimal TAUX;
 	@Column(name="ELEM_STAT")
-	private String ELEMSTAT;
+	private BigDecimal ELEMSTAT;
 	@Column(name="GROUPE")
 	private String GROUPE;
 	@Column(name="NB_ENF_TOT")
@@ -196,28 +198,30 @@ public class RubLNP {
 	public void setDEFIN(String dEFIN) {
 		DEFIN = dEFIN;
 	}
-	public String getMTMOIS() {
+
+
+	public BigDecimal getMTMOIS() {
 		return MTMOIS;
 	}
-	public void setMTMOIS(String mTMOIS) {
+	public void setMTMOIS(BigDecimal mTMOIS) {
 		MTMOIS = mTMOIS;
 	}
-	public String getMTRAPPEL() {
+	public BigDecimal getMTRAPPEL() {
 		return MTRAPPEL;
 	}
-	public void setMTRAPPEL(String mTRAPPEL) {
+	public void setMTRAPPEL(BigDecimal mTRAPPEL) {
 		MTRAPPEL = mTRAPPEL;
 	}
-	public String getTAUX() {
+	public BigDecimal getTAUX() {
 		return TAUX;
 	}
-	public void setTAUX(String tAUX) {
+	public void setTAUX(BigDecimal tAUX) {
 		TAUX = tAUX;
 	}
-	public String getELEMSTAT() {
+	public BigDecimal getELEMSTAT() {
 		return ELEMSTAT;
 	}
-	public void setELEMSTAT(String eLEMSTAT) {
+	public void setELEMSTAT(BigDecimal eLEMSTAT) {
 		ELEMSTAT = eLEMSTAT;
 	}
 	public String getGROUPE() {

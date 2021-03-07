@@ -1,5 +1,7 @@
 package com.sonatrach.dz.newpaie.domain;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -29,47 +31,47 @@ public class NewPaie {
 	@Column(name="MT_ECHLON")
 	private String mtechelon;
 	@Column(name="MT_PRS")
-	private String mtpers;
+	private BigDecimal mtpers;
 	@Column(name="MT_AI07")
-	private String mtai07;
+	private BigDecimal mtai07;
 	@Column(name="MT_AI08")
-	private String mtai08;
+	private BigDecimal mtai08;
 	@Column(name="MT_AI09")
-	private String mtai09;
+	private BigDecimal mtai09;
 	@Column(name="MT_AI10")
-	private String mtai10;
+	private BigDecimal mtai10;
 	@Column(name="MT_AI11")
-	private String mtai11;
+	private BigDecimal mtai11;
 	@Column(name="MT_AI12")
-	private String mtai12;
+	private BigDecimal mtai12;
 	@Column(name="MT_AI13")
-	private String mtai13;
+	private BigDecimal mtai13;
 	@Column(name="MT_AI14")
-	private String mtai14;
+	private BigDecimal mtai14;
 	@Column(name="MT_AI15")
-	private String mtai15;
+	private BigDecimal mtai15;
 	@Column(name="MT_AI16")
-	private String mtai16;
+	private BigDecimal mtai16;
 	@Column(name="MT_AI17")
-	private String mtai17;
+	private BigDecimal mtai17;
 	@Column(name="MT_AI18")
-	private String mtai18;
+	private BigDecimal mtai18;
 	@Column(name="TX_REVAL")
-	private String txreval;
+	private BigDecimal txreval;
 	@Column(name="MT_REVAL")
-	private String mtreval;
+	private BigDecimal mtreval;
 	@Column(name="TX_PRI")
-	private String txpri;
+	private BigDecimal txpri;
 	@Column(name="TX_PRC")
-	private String txprc;
+	private BigDecimal txprc;
 	@Column(name="MT_PRI")
-	private String mtpri;
+	private BigDecimal mtpri;
 	@Column(name="MT_PRC")
-	private String mtprc;
+	private BigDecimal mtprc;
 	@Column(name="MT_IAG")
-	private String mtiag;
+	private BigDecimal mtiag;
 	@Column(name="NOUV_SAL")
-	private String nouvsal;
+	private BigDecimal nouvsal;
 	
 	public NewPaie() {
 		
@@ -147,174 +149,175 @@ public class NewPaie {
 		this.mtechelon = mtechelon;
 	}
 
-	
-	public String getMtai07() {
-		return mtai07;
-	}
-
-	public void setMtai07(String mtai07) {
-		this.mtai07 = mtai07;
-	}
-
-	public String getMtai08() {
-		return mtai08;
-	}
-
-	public void setMtai08(String mtai08) {
-		this.mtai08 = mtai08;
-	}
-
-	public String getMtai09() {
-		return mtai09;
-	}
-
-	public void setMtai09(String mtai09) {
-		this.mtai09 = mtai09;
-	}
-
-	public String getMtai10() {
-		return mtai10;
-	}
-
-	public void setMtai10(String mtai10) {
-		this.mtai10 = mtai10;
-	}
-
-	public String getMtai11() {
-		return mtai11;
-	}
-
-	public void setMtai11(String mtai11) {
-		this.mtai11 = mtai11;
-	}
-
-	public String getMtai12() {
-		return mtai12;
-	}
-
-	public void setMtai12(String mtai12) {
-		this.mtai12 = mtai12;
-	}
-
-	public String getMtai13() {
-		return mtai13;
-	}
-
-	public void setMtai13(String mtai13) {
-		this.mtai13 = mtai13;
-	}
-
-	public String getMtai14() {
-		return mtai14;
-	}
-
-	public void setMtai14(String mtai14) {
-		this.mtai14 = mtai14;
-	}
-
-	public String getMtai15() {
-		return mtai15;
-	}
-
-	public void setMtai15(String mtai15) {
-		this.mtai15 = mtai15;
-	}
-
-	public String getMtai16() {
-		return mtai16;
-	}
-
-	public void setMtai16(String mtai16) {
-		this.mtai16 = mtai16;
-	}
-
-	public String getMtai17() {
-		return mtai17;
-	}
-
-	public void setMtai17(String mtai17) {
-		this.mtai17 = mtai17;
-	}
-
-	public String getMtai18() {
-		return mtai18;
-	}
-
-	public void setMtai18(String mtai18) {
-		this.mtai18 = mtai18;
-	}
-
-	public String getTxreval() {
-		return txreval;
-	}
-
-	public void setTxreval(String txreval) {
-		this.txreval = txreval;
-	}
-
-	public String getMtreval() {
-		return mtreval;
-	}
-
-	public void setMtreval(String mtreval) {
-		this.mtreval = mtreval;
-	}
-
-	public String getTxpri() {
-		return txpri;
-	}
-
-	public void setTxpri(String txpri) {
-		this.txpri = txpri;
-	}
-
-	public String getTxprc() {
-		return txprc;
-	}
-
-	public void setTxprc(String txprc) {
-		this.txprc = txprc;
-	}
-
-	public String getMtpri() {
-		return mtpri;
-	}
-
-	public void setMtpri(String mtpri) {
-		this.mtpri = mtpri;
-	}
-
-	public String getMtprc() {
-		return mtprc;
-	}
-
-	public void setMtprc(String mtprc) {
-		this.mtprc = mtprc;
-	}
-
-	public String getMtiag() {
-		return mtiag;
-	}
-
-	public void setMtiag(String mtiag) {
-		this.mtiag = mtiag;
-	}
-
-	public String getNouvsal() {
-		return nouvsal;
-	}
-
-	public void setNouvsal(String nouvsal) {
-		this.nouvsal = nouvsal;
-	}
-
-	public String getMtpers() {
+	public BigDecimal getMtpers() {
 		return mtpers;
 	}
 
-	public void setMtpers(String mtpers) {
+	public void setMtpers(BigDecimal mtpers) {
 		this.mtpers = mtpers;
 	}
+
+	public BigDecimal getMtai07() {
+		return mtai07;
+	}
+
+	public void setMtai07(BigDecimal mtai07) {
+		this.mtai07 = mtai07;
+	}
+
+	public BigDecimal getMtai08() {
+		return mtai08;
+	}
+
+	public void setMtai08(BigDecimal mtai08) {
+		this.mtai08 = mtai08;
+	}
+
+	public BigDecimal getMtai09() {
+		return mtai09;
+	}
+
+	public void setMtai09(BigDecimal mtai09) {
+		this.mtai09 = mtai09;
+	}
+
+	public BigDecimal getMtai10() {
+		return mtai10;
+	}
+
+	public void setMtai10(BigDecimal mtai10) {
+		this.mtai10 = mtai10;
+	}
+
+	public BigDecimal getMtai11() {
+		return mtai11;
+	}
+
+	public void setMtai11(BigDecimal mtai11) {
+		this.mtai11 = mtai11;
+	}
+
+	public BigDecimal getMtai12() {
+		return mtai12;
+	}
+
+	public void setMtai12(BigDecimal mtai12) {
+		this.mtai12 = mtai12;
+	}
+
+	public BigDecimal getMtai13() {
+		return mtai13;
+	}
+
+	public void setMtai13(BigDecimal mtai13) {
+		this.mtai13 = mtai13;
+	}
+
+	public BigDecimal getMtai14() {
+		return mtai14;
+	}
+
+	public void setMtai14(BigDecimal mtai14) {
+		this.mtai14 = mtai14;
+	}
+
+	public BigDecimal getMtai15() {
+		return mtai15;
+	}
+
+	public void setMtai15(BigDecimal mtai15) {
+		this.mtai15 = mtai15;
+	}
+
+	public BigDecimal getMtai16() {
+		return mtai16;
+	}
+
+	public void setMtai16(BigDecimal mtai16) {
+		this.mtai16 = mtai16;
+	}
+
+	public BigDecimal getMtai17() {
+		return mtai17;
+	}
+
+	public void setMtai17(BigDecimal mtai17) {
+		this.mtai17 = mtai17;
+	}
+
+	public BigDecimal getMtai18() {
+		return mtai18;
+	}
+
+	public void setMtai18(BigDecimal mtai18) {
+		this.mtai18 = mtai18;
+	}
+
+	public BigDecimal getTxreval() {
+		return txreval;
+	}
+
+	public void setTxreval(BigDecimal txreval) {
+		this.txreval = txreval;
+	}
+
+	public BigDecimal getMtreval() {
+		return mtreval;
+	}
+
+	public void setMtreval(BigDecimal mtreval) {
+		this.mtreval = mtreval;
+	}
+
+	public BigDecimal getTxpri() {
+		return txpri;
+	}
+
+	public void setTxpri(BigDecimal txpri) {
+		this.txpri = txpri;
+	}
+
+	public BigDecimal getTxprc() {
+		return txprc;
+	}
+
+	public void setTxprc(BigDecimal txprc) {
+		this.txprc = txprc;
+	}
+
+	public BigDecimal getMtpri() {
+		return mtpri;
+	}
+
+	public void setMtpri(BigDecimal mtpri) {
+		this.mtpri = mtpri;
+	}
+
+	public BigDecimal getMtprc() {
+		return mtprc;
+	}
+
+	public void setMtprc(BigDecimal mtprc) {
+		this.mtprc = mtprc;
+	}
+
+	public BigDecimal getMtiag() {
+		return mtiag;
+	}
+
+	public void setMtiag(BigDecimal mtiag) {
+		this.mtiag = mtiag;
+	}
+
+	public BigDecimal getNouvsal() {
+		return nouvsal;
+	}
+
+	public void setNouvsal(BigDecimal nouvsal) {
+		this.nouvsal = nouvsal;
+	}
+
+	
 	
 	
 

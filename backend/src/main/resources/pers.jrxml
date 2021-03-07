@@ -2,6 +2,7 @@
 <!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="text_output" pageWidth="8000" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="9a0b1db2-1ed0-44e1-960b-4626cea0097d">
 	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
 	<field name="MAT" class="java.lang.String"/>
 	<field name="CSOC" class="java.lang.String"/>
 	<field name="DIV" class="java.lang.String"/>
@@ -42,7 +43,7 @@
 	<field name="PROM" class="java.lang.String"/>
 	<field name="SANCT" class="java.lang.String"/>
 	<field name="CSAL" class="java.lang.String"/>
-	<field name="SALBASE" class="java.lang.String"/>
+	<field name="SALBASE" class="java.math.BigDecimal"/>
 	<field name="SCLASS" class="java.lang.String"/>
 	<field name="CFONCT" class="java.lang.String"/>
 	<field name="LIBFONC" class="java.lang.String"/>

@@ -972,7 +972,7 @@ updateStatusStructure(structure:Structure){
      //  //console.log("updateStatusStructure")
      //  //console.log(data);
       if(data!=null){
-        structure.statusstructure=1;
+        structure.statusstructure=2;
         this.showProgress=false;
         this.showAlertGeneration("Génération etats paie","Les etats ont bien été généré.");
       }else{

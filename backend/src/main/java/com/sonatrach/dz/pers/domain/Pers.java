@@ -1,5 +1,7 @@
 package com.sonatrach.dz.pers.domain;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -93,7 +95,7 @@ public class Pers {
 	@Column(name="CSAL")
 	private String CSAL;
 	@Column(name="SALBASE")
-	private String SALBASE;
+	private BigDecimal SALBASE;
 	@Column(name="SCLASS")
 	private String SCLASS;
 	@Column(name="CFONCT")
@@ -661,12 +663,15 @@ public class Pers {
 	}
 
 
-	public String getSALBASE() {
+
+
+
+	public BigDecimal getSALBASE() {
 		return SALBASE;
 	}
 
 
-	public void setSALBASE(String sALBASE) {
+	public void setSALBASE(BigDecimal sALBASE) {
 		SALBASE = sALBASE;
 	}
 

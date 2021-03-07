@@ -479,9 +479,11 @@ public class Controller {
 	public List<ArchiveSentGfiles> saveArchiveSentGfiles(@RequestBody List<ArchiveSentGfiles> files) {
 		try {
 			List<ArchiveSentGfiles> savedGfiles = new ArrayList();
+			PayMonth currentDate = paymonthRepo.findByState();
+	
 			// System.out.println("saveEfile");
 			for (int i = 0; i < files.size(); i++) {
-
+				
 				ArchiveSentGfiles file = archiveSentGfilesRepo.save(files.get(i));
 				// System.out.println(file.getIdfile()+" ");
 				savedGfiles.add(file);
@@ -1274,14 +1276,21 @@ public class Controller {
 			Integer idFile = 0;
 			// **********************************************get current date from payMonth
 			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
+			
 			for (int i = 0; i < files.size(); i++) {
 				// System.out.println(files.get(i).getFilename());
 				idFile = fileTypeRepo.findByPrefixFile(files.get(i).getFilename());
+				Optional<Structure> structure=structureRepo.findById(files.get(i).getIdstructure());
 				// System.out.println(idFile);
 
-				if (idFile != null) {
+				if (idFile != null &&structure.get() !=null) {
 					files.get(i).setIdfiletype(idFile);
 					files.get(i).setIdpaymonth(currentDate.getId());
+					files.get(i).setFilename(files.get(i).getFilename()+" "+structure.get().getSTRUCTURENAME()+" "+
+							dateFormat);
 					//efileRepo.save(files.get(i));
 				}
 			}
@@ -1460,11 +1469,14 @@ public class Controller {
 	public List<Gfile> saveGeneratedGfiles(@RequestBody List<Gfile> files){
 		try {
 			List<Gfile> savedFiles=new ArrayList();
+		
 			PayMonth currentDate = paymonthRepo.findByState();
-			
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
 				for(int i=0;i<files.size();i++) {
 					files.get(i).setIdpaymonth(currentDate.getId());
-					
+					files.get(i).setGfilename(files.get(i).getGfilename()+" "+dateFormat);
 				
 			}
 			
@@ -2307,9 +2319,9 @@ public class Controller {
 				Object outputFileName11 = pathWithMounth + "\\"
 						+ clotureRepo.findByDesc("pers").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 				exporter11.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName11);
-				generatedToDBF("",outputFileName11.toString(),pathWithMounth);
+				
 				exporter11.exportReport();
-
+				generatedToDBF("",outputFileName11.toString(),pathWithMounth);
 				return filesPers;
 			} catch (Exception e) {
 				System.out.println(e.getMessage() + "==>generatePersFiles()");
