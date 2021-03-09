@@ -1,6 +1,7 @@
 package com.sonatrach.dz;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File
 
 ;
@@ -14,6 +15,7 @@ import java.math.BigDecimal;
 import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -121,11 +123,13 @@ import com.sonatrach.dz.pers.domain.Pers;
 import com.sonatrach.dz.pers.repo.PersRepo;
 import com.sonatrach.dz.repository.UserRepository;
 import com.sonatrach.dz.rubAlph.domain.RubAKOUZ;
+import com.sonatrach.dz.rubAlph.domain.RubAlph;
 import com.sonatrach.dz.rubAlph.domain.RubLNP;
 import com.sonatrach.dz.rubAlph.domain.RubMRSX;
 import com.sonatrach.dz.rubAlph.domain.RubQ;
 import com.sonatrach.dz.rubAlph.domain.RubT;
 import com.sonatrach.dz.rubAlph.repo.RubAKOUZRepo;
+import com.sonatrach.dz.rubAlph.repo.RubAlphRepo;
 import com.sonatrach.dz.rubAlph.repo.RubLNPRepo;
 import com.sonatrach.dz.rubAlph.repo.RubMRSXRepo;
 import com.sonatrach.dz.rubAlph.repo.RubQRepo;
@@ -252,47 +256,41 @@ public class Controller {
 	@Autowired
 	GfileRepo gfileRepo;
 	@Autowired
-	ArchiveSentGfilesRepo archiveSentGfilesRepo ;
-	
+	ArchiveSentGfilesRepo archiveSentGfilesRepo;
+	@Autowired
+	RubAlphRepo rubAlphRepo;
+
 	// ****************************************API*****************************************************************************
 	// Api Test
 	@GetMapping({ "/test" })
-	public List<CloturePaie> getAllBanques() throws IOException {
-		 ProcessBuilder processBuilder = new ProcessBuilder("C:\\DIN_DRH\\DCDSI_EXPLOITATION\\SYSTEME\\2021\\2021-02\\convert.bat","C:\\DIN_DRH\\DCDSI_EXPLOITATION\\SYSTEME\\2021\\2021-02\\DEP 2021-02.xlsx"
-	,"C:\\DIN_DRH\\DCDSI_EXPLOITATION\\SYSTEME\\2021\\2021-02");
-	       
-	        //Process process = Runtime.getRuntime().exec(
-	        //            "cmd /c hello.bat", null, new File("C:\\Users\\mkyong\\"));
-	                    
-	        try {
-
-	            Process process = processBuilder.start();
-
-	            StringBuilder output = new StringBuilder();
-
-	            BufferedReader reader = new BufferedReader(
-	                    new InputStreamReader(process.getInputStream()));
-
-	            String line;
-	            while ((line = reader.readLine()) != null) {
-	                output.append(line + "\n");
-	            }
-
-	            int exitVal = process.waitFor();
-	            if (exitVal == 0) {
-	                System.out.println(output);
-	                System.exit(0);
-	            } else {
-	                //abnormal...
-	            }
-
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        } catch (InterruptedException e) {
-	            e.printStackTrace();
-	        }
- 
-		return clotureRepo.findAll();
+	public List<RubT> getAllBanques() throws IOException {
+		/*
+		 * ProcessBuilder processBuilder = new ProcessBuilder(
+		 * "C:\\DIN_DRH\\DCDSI_EXPLOITATION\\SYSTEME\\2021\\2021-02\\convert.bat","C:\\DIN_DRH\\DCDSI_EXPLOITATION\\SYSTEME\\2021\\2021-02\\DEP 2021-02.xlsx"
+		 * ,"C:\\DIN_DRH\\DCDSI_EXPLOITATION\\SYSTEME\\2021\\2021-02");
+		 * 
+		 * //Process process = Runtime.getRuntime().exec( // "cmd /c hello.bat", null,
+		 * new File("C:\\Users\\mkyong\\"));
+		 * 
+		 * try {
+		 * 
+		 * Process process = processBuilder.start();
+		 * 
+		 * StringBuilder output = new StringBuilder();
+		 * 
+		 * BufferedReader reader = new BufferedReader( new
+		 * InputStreamReader(process.getInputStream()));
+		 * 
+		 * String line; while ((line = reader.readLine()) != null) { output.append(line
+		 * + "\n"); }
+		 * 
+		 * int exitVal = process.waitFor(); if (exitVal == 0) {
+		 * System.out.println(output); System.exit(0); } else { //abnormal... }
+		 * 
+		 * } catch (IOException e) { e.printStackTrace(); } catch (InterruptedException
+		 * e) { e.printStackTrace(); }
+		 */
+		return rubTRepo.findAll();
 	}
 
 	// get structure by activity
@@ -310,20 +308,23 @@ public class Controller {
 		return lesStructures;
 	}
 
-	@GetMapping({"/getCurrentMonth"})
+	@GetMapping({ "/getCurrentMonth" })
 	public PayMonth getCurrentMonth() {
 		try {
 			PayMonth currentDate = paymonthRepo.findByState();
-			/*String currentYear = currentDate.getPaymonth().substring(0, 4);
-			String currentMonth = currentDate.getPaymonth().substring(4, 6);
-			String dateFormat = currentYear + "-" + currentMonth;*/
+			/*
+			 * String currentYear = currentDate.getPaymonth().substring(0, 4); String
+			 * currentMonth = currentDate.getPaymonth().substring(4, 6); String dateFormat =
+			 * currentYear + "-" + currentMonth;
+			 */
 			return currentDate;
-		}catch(Exception e ) {
+		} catch (Exception e) {
 			System.out.println("Exception getCurrentMonth()==>" + e.getMessage());
 		}
-	return null;
-		
+		return null;
+
 	}
+
 	/******************************************************************
 	 * Historique
 	 ****************************************************************************************************/
@@ -333,9 +334,9 @@ public class Controller {
 		ArrayList emails = new ArrayList();
 		try {
 			emails = emailDbRepo.findByIdUser(user.getIduser());
-			
-				return emails;
-			
+
+			return emails;
+
 		} catch (Exception e) {
 			System.out.println("Exception getAllEmails()==>" + e.getMessage());
 		}
@@ -349,42 +350,40 @@ public class Controller {
 			String[] fileNames = null;
 			String[] gfileNames = null;
 			ArrayList<ArchiveSentFiles> fileIds = archiveSentFilesRepo.findByIdEmail(email.getIdemail());
-			ArrayList<ArchiveSentGfiles> gfilesIds=archiveSentGfilesRepo.findGfilesByIdEmail(email.getIdemail());
-			
-			if (fileIds!=null ) {
-				
-				 fileNames = new String[fileIds.size()];
+			ArrayList<ArchiveSentGfiles> gfilesIds = archiveSentGfilesRepo.findGfilesByIdEmail(email.getIdemail());
+
+			if (fileIds != null) {
+
+				fileNames = new String[fileIds.size()];
 				for (int i = 0; i < fileIds.size(); i++) {
 					Optional<Efile> sentFile = efileRepo.findById(fileIds.get(i).getIdfile());
 					if (sentFile.get() != null) {
 						fileNames[i] = sentFile.get().getFilename();
 					}
 				}
-			
+
 			}
-			
-			if(gfilesIds!=null) {
-				 gfileNames = new String[gfilesIds.size()];
-				
+
+			if (gfilesIds != null) {
+				gfileNames = new String[gfilesIds.size()];
+
 				for (int i = 0; i < gfilesIds.size(); i++) {
 					Optional<Gfile> sentgFile = gfileRepo.findById(gfilesIds.get(i).getIdgfile());
-					
+
 					if (sentgFile.get() != null) {
 						gfileNames[i] = sentgFile.get().getGfilename();
-					
+
 					}
 				}
-			
-				
-			
+
 			}
-			
-			if(fileNames.length!=0) {
+
+			if (fileNames.length != 0) {
 				return fileNames;
-			}else {
+			} else {
 				return gfileNames;
 			}
-			
+
 		} catch (Exception e) {
 			System.out.println("Exception  getSentFiles()==>" + e.getMessage());
 		}
@@ -397,12 +396,10 @@ public class Controller {
 	public List<ArchiveStructure> getArchiveStructure(@RequestBody User user) {
 		try {
 			ArrayList<ArchiveStructure> archiveStructure = new ArrayList();
-			archiveStructure = 	archiveStructureRepo.findByOperation(user.getName(),user.getIduser());
+			archiveStructure = archiveStructureRepo.findByOperation(user.getName(), user.getIduser());
 
-			
+			return archiveStructure;
 
-				return archiveStructure;
-			
 		} catch (Exception e) {
 			System.out.println("Exception  getArchiveStructure()==>" + e.getMessage());
 		}
@@ -413,12 +410,11 @@ public class Controller {
 	@PostMapping({ "getArchiveFolder" })
 	public List<FolderArchive> getArchiveFolder(@RequestBody User user) {
 		try {
-			ArrayList<FolderArchive> archiveFolder  = new ArrayList();
-			 archiveFolder = folderArchiveRepo.findByOperation(user.getName(),user.getIduser());
+			ArrayList<FolderArchive> archiveFolder = new ArrayList();
+			archiveFolder = folderArchiveRepo.findByOperation(user.getName(), user.getIduser());
 
-			
-				return archiveFolder;
-			
+			return archiveFolder;
+
 		} catch (Exception e) {
 			System.out.println("Exception  getArchiveStructure()==>" + e.getMessage());
 		}
@@ -461,29 +457,29 @@ public class Controller {
 		}
 		return null;
 	}
-	@GetMapping({"getGfilesTable"})
-	public List<Gfile> getGfilesTable(){
+
+	@GetMapping({ "getGfilesTable" })
+	public List<Gfile> getGfilesTable() {
 		try {
-			List<Gfile> gfiles=new ArrayList();
-			gfiles=gfileRepo.findByFolderName("TABLES");
+			List<Gfile> gfiles = new ArrayList();
+			gfiles = gfileRepo.findByFolderName("TABLES");
 			return gfiles;
 		} catch (Exception e) {
 			System.out.println("Exception  getGfilesTable()==>" + e.getMessage());
-		
+
 		}
 		return null;
 	}
-	
-	
+
 	@PostMapping({ "saveArchiveSentGfiles" })
 	public List<ArchiveSentGfiles> saveArchiveSentGfiles(@RequestBody List<ArchiveSentGfiles> files) {
 		try {
 			List<ArchiveSentGfiles> savedGfiles = new ArrayList();
 			PayMonth currentDate = paymonthRepo.findByState();
-	
+
 			// System.out.println("saveEfile");
 			for (int i = 0; i < files.size(); i++) {
-				
+
 				ArchiveSentGfiles file = archiveSentGfilesRepo.save(files.get(i));
 				// System.out.println(file.getIdfile()+" ");
 				savedGfiles.add(file);
@@ -609,7 +605,8 @@ public class Controller {
 
 	}
 
-	//*******************************suppression du zip aprés envoie émail********************************************************
+	// *******************************suppression du zip aprés envoie
+	// émail********************************************************
 	@PostMapping({ "deleteZip" })
 	public String deleteZip(@RequestBody Structure structure) {
 		try {
@@ -622,24 +619,20 @@ public class Controller {
 					+ structure.getSTRUCTURENAME() + " " + dateFormat + ".zip";
 			Files.deleteIfExists(Paths.get(zipPathWithName));
 			return "success";
-		}catch(NoSuchFileException e) 
-	        { 
-	            System.out.println("No such file/directory exists deleteZip()==>" + e.getMessage()); 
-	        } 
-	        catch(DirectoryNotEmptyException e) 
-	        { 
-	            System.out.println("Directory is not empty.deleteZip()==>" + e.getMessage()); 
-	        } 
-	        catch(IOException e) 
-	        { 
-	            System.out.println("Invalid permissions. deleteZip()==>" + e.getMessage()); 
-	        
+		} catch (NoSuchFileException e) {
+			System.out.println("No such file/directory exists deleteZip()==>" + e.getMessage());
+		} catch (DirectoryNotEmptyException e) {
+			System.out.println("Directory is not empty.deleteZip()==>" + e.getMessage());
+		} catch (IOException e) {
+			System.out.println("Invalid permissions. deleteZip()==>" + e.getMessage());
+
 		} catch (Exception e) {
 			System.out.println("Exception deleteZip()==>" + e.getMessage());
 		}
 		return null;
 
 	}
+
 	// ***********************************************sauvgarder dans la
 	// BDarchiveSentFiles***********************************************************
 	@PostMapping({ "SaveArchiveSentFiles" })
@@ -730,9 +723,411 @@ public class Controller {
 		return null;
 	}
 
+	// *****************************filter by codeLike and codeNotLike
+	// structure****************************************
+
+	public List<RubNum> filtrerFrubN(List<RubNum> data, Structure structure) {
+
+		String[] codeLike = structure.getSTRUCTURECODELIKE().split("/");
+		String[] codeNotLike = structure.getSTRUCTURECODENOTLIKE().split("/");
+		List<RubNum> filtredData = new ArrayList();
+
+		for (int i = 0; i < data.size(); i++) {
+			for (int j = 0; j < codeLike.length; j++) {
+
+				if (data.get(i).getDIREC().startsWith(codeLike[j])) {
+
+					for (int k = 0; k < codeNotLike.length; k++) {
+
+						if (!data.get(i).getDIREC().startsWith(codeNotLike[k])) {
+
+							filtredData.add(data.get(i));
+						}
+					}
+
+				}
+			}
+
+		}
+		return filtredData;
+
+	}
+
+	public List<RubAlph> filtrerFrubA(List<RubAlph> data, Structure structure) {
+
+		String[] codeLike = structure.getSTRUCTURECODELIKE().split("/");
+		String[] codeNotLike = structure.getSTRUCTURECODENOTLIKE().split("/");
+		List<RubAlph> filtredData = new ArrayList();
+
+		for (int i = 0; i < data.size(); i++) {
+			for (int j = 0; j < codeLike.length; j++) {
+				if (data.get(i).getDIREC().startsWith(codeLike[j])) {
+					for (int k = 0; k < codeNotLike.length; k++) {
+						if (!data.get(i).getDIREC().startsWith(codeNotLike[k])) {
+							filtredData.add(data.get(i));
+						}
+					}
+
+				}
+			}
+
+		}
+		return filtredData;
+
+	}
+
+	public List<Pers> filtrerPers(List<Pers> data, Structure structure) {
+
+		String[] codeLike = structure.getSTRUCTURECODELIKE().split("/");
+		String[] codeNotLike = structure.getSTRUCTURECODENOTLIKE().split("/");
+		List<Pers> filtredData = new ArrayList();
+
+		for (int i = 0; i < data.size(); i++) {
+			for (int j = 0; j < codeLike.length; j++) {
+				if (data.get(i).getDIV().startsWith(codeLike[j])) {
+					for (int k = 0; k < codeNotLike.length; k++) {
+						if (!data.get(i).getDIV().startsWith(codeNotLike[k])) {
+							filtredData.add(data.get(i));
+						}
+					}
+
+				}
+			}
+
+		}
+		return filtredData;
+
+	}
+
+	public List<NewPaie> filtrerNewPaie(List<NewPaie> data, Structure structure) {
+
+		String[] codeLike = structure.getSTRUCTURECODELIKE().split("/");
+		String[] codeNotLike = structure.getSTRUCTURECODENOTLIKE().split("/");
+		List<NewPaie> filtredData = new ArrayList();
+
+		for (int i = 0; i < data.size(); i++) {
+			for (int j = 0; j < codeLike.length; j++) {
+				if (data.get(i).getStr().startsWith(codeLike[j])) {
+					for (int k = 0; k < codeNotLike.length; k++) {
+						if (!data.get(i).getStr().startsWith(codeNotLike[k])) {
+							filtredData.add(data.get(i));
+						}
+					}
+
+				}
+			}
+
+		}
+		return filtredData;
+
+	}
+
+	// ************************************generer les fichiers par
+	// structure*********************************************************//
+	// génération des fichiers FRUBN
+	@PostMapping({ "generateFrubNStr" })
+	public Structure generateFrubNStr(@RequestBody Structure structure) throws FileNotFoundException, JRException {
+
+		try {
+			List<RubNum> lesFrubNum = rubNumRepo.findAll();
+			// System.out.println(lesFrubNum.size());
+			List<RubNum> filtredFrubNum = filtrerFrubN(lesFrubNum, structure);
+			// System.out.println(filtredFrubNum.size());
+
+			// **********************************************get current date from payMonth
+
+			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
+
+			// ******************************************get Folder path
+			Folder folder = folderRepo.findByFolderName("ETAT");
+			Folder folder2 = folderRepo.findByFolderName("FRUB");
+			// ********************************folder generation if not exist
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
+			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+
+			String pathWithYear2 = folder2.getFOLDERPATH() + folder2.getFOLDERNAME() + "\\" + currentYear;
+			String pathWithMounth2 = pathWithYear2 + "\\" + dateFormat;
+			File fileYear = new File(pathWithYear);
+			if (!fileYear.exists()) {
+				fileYear.mkdir();
+			}
+			File fileMounth = new File(pathWithMounth);
+			if (!fileMounth.exists()) {
+				fileMounth.mkdir();
+			}
+
+			File fileYear2 = new File(pathWithYear2);
+			if (!fileYear2.exists()) {
+				fileYear2.mkdir();
+			}
+			File fileMounth2 = new File(pathWithMounth2);
+			if (!fileMounth2.exists()) {
+				fileMounth2.mkdir();
+			}
+			String pathWithStructure = pathWithMounth + "\\" + structure.getSTRUCTURENAME() + " " + dateFormat;
+			File fileStructure = new File(pathWithStructure);
+			if (!fileStructure.exists()) {
+				fileStructure.mkdir();
+			}
+
+			// load file and compile it
+			File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml");
+			JasperReport jasperReport13 = JasperCompileManager.compileReport(filerubN.getAbsolutePath());
+
+			JRBeanCollectionDataSource dataSource13 = new JRBeanCollectionDataSource(filtredFrubNum);
+			JasperPrint jasperPrint13 = JasperFillManager.fillReport(jasperReport13, null, dataSource13);
+
+			JRXlsxExporter exporter13 = new JRXlsxExporter();
+			exporter13.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter13.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter13.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint13);
+			Object outputFileName13 = pathWithStructure + "\\" + "Frub" + " " + structure.getSTRUCTURENAME() + " "
+					+ dateFormat + ".xlsx";
+			exporter13.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName13);
+			exporter13.exportReport();
+			generatedToDBF("", outputFileName13.toString(), pathWithStructure);
+			String pathfile = pathWithMounth2 + "\\" + "Frub" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+					+ ".xlsx";
+			String pathfile2 = pathWithMounth2 + "\\" + "Frub" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+					+ ".dbf";
+			String pathDbf = pathWithStructure + "\\" + "Frub" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+					+ ".dbf";
+			copyFile(outputFileName13.toString(), pathWithMounth2, pathfile);
+			copyFile(pathDbf, pathWithMounth2, pathfile2);
+
+			return structure;
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage() + "==>generateFrubNStr() ");
+
+		}
+		return null;
+
+	}
+
+	public void copyFile(String source, String to, String filePath) {
+		try {
+			Path source1 = Paths.get(source);
+			Path newdir = Paths.get(to);
+			File target = new File(filePath);
+
+			if (target.exists()) {
+				if (target.delete()) {
+
+					Files.copy(source1, newdir.resolve(source1.getFileName()));
+				}
+			} else {
+				Files.copy(source1, newdir.resolve(source1.getFileName()));
+			}
+		} catch (IOException e) {
+			System.out.println("exception copyFile==>" + e.getMessage());
+		}
+
+	}
+
+	@PostMapping({ "generateFrubAStr" })
+	public Structure generateFrubAStr(@RequestBody Structure structure) throws FileNotFoundException, JRException {
+
+		try {
+
+			List<RubAlph> lesFrubAlph = rubAlphRepo.findAll();
+			// System.out.println(lesFrubAlph.size());
+			List<RubAlph> filtredFrubT = filtrerFrubA(lesFrubAlph, structure);
+			// **********************************************get current date from payMonth
+
+			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
+
+			// ******************************************get Folder path
+			Folder folder = folderRepo.findByFolderName("ETAT");
+			Folder folder2 = folderRepo.findByFolderName("FRUB");
+			// ********************************folder generation if not exist
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
+			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+
+			String pathWithYear2 = folder2.getFOLDERPATH() + folder2.getFOLDERNAME() + "\\" + currentYear;
+			String pathWithMounth2 = pathWithYear2 + "\\" + dateFormat;
+
+			File fileYear = new File(pathWithYear);
+			if (!fileYear.exists()) {
+				fileYear.mkdir();
+			}
+			File fileMounth = new File(pathWithMounth);
+			if (!fileMounth.exists()) {
+				fileMounth.mkdir();
+			}
+			File fileYear2 = new File(pathWithYear2);
+			if (!fileYear2.exists()) {
+				fileYear2.mkdir();
+			}
+			File fileMounth2 = new File(pathWithMounth2);
+			if (!fileMounth2.exists()) {
+				fileMounth2.mkdir();
+			}
+			String pathWithStructure = pathWithMounth + "\\" + structure.getSTRUCTURENAME() + " " + dateFormat;
+			File fileStructure = new File(pathWithStructure);
+			if (!fileStructure.exists()) {
+				fileStructure.mkdir();
+			}
+
+			// load file and compile it
+
+			File filerubA = ResourceUtils.getFile("classpath:rubAlph.jrxml");
+			JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(filtredFrubT);
+			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, null, dataSource12);
+			JRXlsxExporter exporter12 = new JRXlsxExporter();
+			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter12.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint12);
+			Object outputFileName12 = pathWithStructure + "\\" + "Frub" + " " + structure.getSTRUCTURENAME() + " "
+					+ dateFormat + ".xlsx";
+			exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
+			exporter12.exportReport();
+			generatedToDBF("", outputFileName12.toString(), pathWithStructure);
+			String pathfile = pathWithMounth2 + "\\" + "Frub" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+					+ ".xlsx";
+			String pathfile2 = pathWithMounth2 + "\\" + "Frub" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+					+ ".dbf";
+			String pathDbf = pathWithStructure + "\\" + "Frub" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+					+ ".dbf";
+			copyFile(outputFileName12.toString(), pathWithMounth2, pathfile);
+			copyFile(pathDbf, pathWithMounth2, pathfile2);
+			return structure;
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage() + "==>generateFrubAStr() ");
+
+		}
+		return null;
+
+	}
+
+	// génération des fichiers NewPaie
+	@PostMapping({ "generateNewPaieStr" })
+	public Structure generateNewPaieStr(@RequestBody Structure structure) throws FileNotFoundException, JRException {
+
+		try {
+
+			List<NewPaie> lesNewpaie = newPaieRepo.findAll();
+			List<NewPaie> filtredNewPaie = filtrerNewPaie(lesNewpaie, structure);
+			// **********************************************get current date from payMonth
+
+			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
+
+			// ******************************************get Folder path
+			Folder folder = folderRepo.findByFolderName("ETAT");
+			// ********************************folder generation if not exist
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
+			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+
+			File fileYear = new File(pathWithYear);
+			if (!fileYear.exists()) {
+				fileYear.mkdir();
+			}
+			File fileMounth = new File(pathWithMounth);
+			if (!fileMounth.exists()) {
+				fileMounth.mkdir();
+			}
+			String pathWithStructure = pathWithMounth + "\\" + structure.getSTRUCTURENAME() + " " + dateFormat;
+			File fileStructure = new File(pathWithStructure);
+			if (!fileStructure.exists()) {
+				fileStructure.mkdir();
+			}
+			File fileNewpaie = ResourceUtils.getFile("classpath:newPaie.jrxml");
+			JasperReport jasperReport10 = JasperCompileManager.compileReport(fileNewpaie.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource10 = new JRBeanCollectionDataSource(filtredNewPaie);
+			JasperPrint jasperPrint10 = JasperFillManager.fillReport(jasperReport10, null, dataSource10);
+			JRXlsxExporter exporter10 = new JRXlsxExporter();
+			exporter10.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter10.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter10.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint10);
+			Object outputFileName10 = pathWithStructure + "\\" + "NEWPAIE" + " " + structure.getSTRUCTURENAME() + " "
+					+ dateFormat + ".xlsx";
+			exporter10.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName10);
+			exporter10.exportReport();
+			generatedToDBF("", outputFileName10.toString(), pathWithStructure);
+
+			return structure;
+		} catch (Exception e) {
+			System.out.println(e.getMessage() + "==>generateNewPaieStr()");
+
+		}
+		return null;
+
+	}
+
+	// génération des fichiers Pers
+	@PostMapping({ "generatePersStr" })
+	public Structure generatePersStr(@RequestBody Structure structure) throws FileNotFoundException, JRException {
+
+		try {
+
+			List<Pers> lesPers = persRepo.findAll();
+			List<Pers> filtredPers = filtrerPers(lesPers, structure);
+			// **********************************************get current date from payMonth
+
+			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
+
+			// ******************************************get Folder path
+			Folder folder = folderRepo.findByFolderName("ETAT");
+			// ********************************folder generation if not exist
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
+			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+
+			File fileYear = new File(pathWithYear);
+			if (!fileYear.exists()) {
+				fileYear.mkdir();
+			}
+			File fileMounth = new File(pathWithMounth);
+			if (!fileMounth.exists()) {
+				fileMounth.mkdir();
+			}
+			String pathWithStructure = pathWithMounth + "\\" + structure.getSTRUCTURENAME() + " " + dateFormat;
+			File fileStructure = new File(pathWithStructure);
+			if (!fileStructure.exists()) {
+				fileStructure.mkdir();
+			}
+			// System.out.println(pathWithMounth);
+			// load file and compile it
+			File filePers = ResourceUtils.getFile("classpath:pers.jrxml");
+			JasperReport jasperReport11 = JasperCompileManager.compileReport(filePers.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource11 = new JRBeanCollectionDataSource(filtredPers);
+			JasperPrint jasperPrint11 = JasperFillManager.fillReport(jasperReport11, null, dataSource11);
+			JRXlsxExporter exporter11 = new JRXlsxExporter();
+			exporter11.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter11.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter11.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint11);
+			Object outputFileName11 = pathWithStructure + "\\" + "Pers" + " " + structure.getSTRUCTURENAME() + " "
+					+ dateFormat + ".xlsx";
+			exporter11.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName11);
+
+			exporter11.exportReport();
+			generatedToDBF("", outputFileName11.toString(), pathWithStructure);
+
+			return structure;
+		} catch (Exception e) {
+			System.out.println(e.getMessage() + "==>generatePersStr()");
+
+		}
+		return null;
+
+	}
+
 	// *********************************************Récuperer les etat paie(filtrage
 	// par mois et annee)**********************************************************
-	@GetMapping({ "getEtatJournal"})
+	@GetMapping({ "getEtatJournal" })
 	public List<EtatJournal> getEtatJournal() {
 		try {
 			PayMonth currentPaymonth = paymonthRepo.findByState();
@@ -1118,8 +1513,8 @@ public class Controller {
 			parameters.put("dataSourceEntreprise", dataSourceEntreprise);
 			parameters.put("subReportEntrepriseCss", subReportEntrepriseCss);
 			parameters.put("dataSourceEntrepriseCss", dataSourceEntrepriseCss);
-			//send current month as parameter
-			 String date="01"+"/"+currentMonth+"/"+currentYear;
+			// send current month as parameter
+			String date = "01" + "/" + currentMonth + "/" + currentYear;
 			Date sysDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
 			parameters.put("currenntMonth", sysDate);
 
@@ -1213,8 +1608,8 @@ public class Controller {
 			String currentYear = currentDate.getPaymonth().substring(0, 4);
 			String currentMonth = currentDate.getPaymonth().substring(4, 6);
 			String dateFormat = currentYear + "-" + currentMonth;
-			 String date="01"+"/"+currentMonth+"/"+currentYear;
-			//String date = "01/04/2016";// for test
+			String date = "01" + "/" + currentMonth + "/" + currentYear;
+			// String date = "01/04/2016";// for test
 			Date sysDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
 			// ******************************************get Folder path
 			Folder folder = folderRepo.findByFolderName("ETAT");
@@ -1234,11 +1629,10 @@ public class Controller {
 			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
 			}
-		/*	for(int i=0;i<mand.size();i++) {
-                if(mand.get(i).getBulnet()==new BigDecimal(0)) {
-                       mand.get(i).setBulnet(new BigDecimal(0));
-                }
-         }*/
+			/*
+			 * for(int i=0;i<mand.size();i++) { if(mand.get(i).getBulnet()==new
+			 * BigDecimal(0)) { mand.get(i).setBulnet(new BigDecimal(0)); } }
+			 */
 
 			// load file and compile it
 			File file = ResourceUtils.getFile("classpath:etatMand.jrxml");
@@ -1279,30 +1673,30 @@ public class Controller {
 			String currentYear = currentDate.getPaymonth().substring(0, 4);
 			String currentMonth = currentDate.getPaymonth().substring(4, 6);
 			String dateFormat = currentYear + "-" + currentMonth;
-			
+
 			for (int i = 0; i < files.size(); i++) {
 				// System.out.println(files.get(i).getFilename());
 				idFile = fileTypeRepo.findByPrefixFile(files.get(i).getFilename());
-				Optional<Structure> structure=structureRepo.findById(files.get(i).getIdstructure());
+				Optional<Structure> structure = structureRepo.findById(files.get(i).getIdstructure());
 				// System.out.println(idFile);
 
-				if (idFile != null &&structure.get() !=null) {
+				if (idFile != null && structure.get() != null) {
 					files.get(i).setIdfiletype(idFile);
 					files.get(i).setIdpaymonth(currentDate.getId());
-					files.get(i).setFilename(files.get(i).getFilename()+" "+structure.get().getSTRUCTURENAME()+" "+
-							dateFormat);
-					//efileRepo.save(files.get(i));
+					files.get(i).setFilename(
+							files.get(i).getFilename() + " " + structure.get().getSTRUCTURENAME() + " " + dateFormat);
+					// efileRepo.save(files.get(i));
 				}
 			}
-			
-			for(int j=0;j<files.size();j++) {
-				Efile file=efileRepo.findByIdStrIdFile(files.get(j).getIdstructure(),files.get(j).getIdfiletype() );
-				if(file!=null) {
+
+			for (int j = 0; j < files.size(); j++) {
+				Efile file = efileRepo.findByIdStrIdFile(files.get(j).getIdstructure(), files.get(j).getIdfiletype());
+				if (file != null) {
 					file.setFilegenerationdate(files.get(j).getFilegenerationdate());
 					file.setIduser(files.get(j).getIduser());
 					file.setIdpaymonth(files.get(j).getIdpaymonth());
 					efileRepo.save(file);
-				}else {
+				} else {
 					efileRepo.save(files.get(j));
 				}
 			}
@@ -1316,7 +1710,7 @@ public class Controller {
 	@PostMapping({ "updateStructureFilesGenerated" })
 	public Structure updateStructureFilesGenerated(@RequestBody Structure structure) {
 		try {
-			structure.setSTATUSSTRUCTURE(1);
+
 			structureRepo.save(structure);
 			return structure;
 		} catch (Exception e) {
@@ -1400,19 +1794,16 @@ public class Controller {
 			String dateFormat = currentYear + "-" + currentMonth;
 			String path;
 			List<CloturePaie> files = clotureRepo.findByCategory(f.getFOLDERNAME());
-			
+
 			for (int i = 0; i < files.size(); i++) {
-				
-					path = files.get(i).getFOLDERPATH() + files.get(i).getFOLDERNAME() + "\\" + currentYear + "\\"
-							+ dateFormat + "\\" + files.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
-				
+
+				path = files.get(i).getFOLDERPATH() + files.get(i).getFOLDERNAME() + "\\" + currentYear + "\\"
+						+ dateFormat + "\\" + files.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 
 				files.get(i).setFOLDERPATH(path);
 
 			}
 
-			
-			
 			return files;
 		} catch (Exception e) {
 			System.out.println("Exception getFilesByFolder()==>" + e.getMessage());
@@ -1431,20 +1822,19 @@ public class Controller {
 			List<CloturePaie> files = clotureRepo.findByCategory(f.getFOLDERNAME());
 			List<CloturePaie> existFiles = new ArrayList();
 			for (int i = 0; i < files.size(); i++) {
-				
-					path = files.get(i).getFOLDERPATH() + files.get(i).getFOLDERNAME() + "\\" + currentYear + "\\"
-							+ dateFormat + "\\" + files.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
-				
+
+				path = files.get(i).getFOLDERPATH() + files.get(i).getFOLDERNAME() + "\\" + currentYear + "\\"
+						+ dateFormat + "\\" + files.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 
 				files.get(i).setFOLDERPATH(path);
 
 			}
 
-			for(int j=0;j<files.size();j++) {
+			for (int j = 0; j < files.size(); j++) {
 				File tblFile = new File(files.get(j).getFOLDERPATH());
 				if (tblFile.exists()) {
 					existFiles.add(files.get(j));
-			}
+				}
 			}
 			return existFiles;
 		} catch (Exception e) {
@@ -1452,6 +1842,7 @@ public class Controller {
 		}
 		return null;
 	}
+
 	// get etat files pour la génération des fichiers (recuperer les etats des
 	// fichiers généré ou non)
 	@PostMapping({ "getEtatFile" })
@@ -1463,36 +1854,35 @@ public class Controller {
 			return 0;
 		}
 	}
-	
 
 	@PostMapping({ "saveGeneratedGfiles" })
-	public List<Gfile> saveGeneratedGfiles(@RequestBody List<Gfile> files){
+	public List<Gfile> saveGeneratedGfiles(@RequestBody List<Gfile> files) {
 		try {
-			List<Gfile> savedFiles=new ArrayList();
-		
+			List<Gfile> savedFiles = new ArrayList();
+
 			PayMonth currentDate = paymonthRepo.findByState();
 			String currentYear = currentDate.getPaymonth().substring(0, 4);
 			String currentMonth = currentDate.getPaymonth().substring(4, 6);
 			String dateFormat = currentYear + "-" + currentMonth;
-				for(int i=0;i<files.size();i++) {
-					files.get(i).setIdpaymonth(currentDate.getId());
-					files.get(i).setGfilename(files.get(i).getGfilename()+" "+dateFormat);
-				
+			for (int i = 0; i < files.size(); i++) {
+				files.get(i).setIdpaymonth(currentDate.getId());
+				files.get(i).setGfilename(files.get(i).getGfilename() + " " + dateFormat);
+
 			}
-			
-			for(int i=0;i<files.size();i++) {
-				Gfile myFile=gfileRepo.findByIdFilePaymonth(files.get(i).getIdfiletype(), files.get(i).getIdpaymonth());
-				if(myFile!=null) {
+
+			for (int i = 0; i < files.size(); i++) {
+				Gfile myFile = gfileRepo.findByIdFilePaymonth(files.get(i).getIdfiletype(),
+						files.get(i).getIdpaymonth());
+				if (myFile != null) {
 					myFile.setIduser(files.get(i).getIduser());
 					myFile.setGfilegenerationdate(files.get(i).getGfilegenerationdate());
 					savedFiles.add(gfileRepo.save(myFile));
-				}else {
+				} else {
 					savedFiles.add(gfileRepo.save(files.get(i)));
 				}
 			}
 			return savedFiles;
-			
-			
+
 		} catch (Exception e) {
 			System.out.println("Exception saveGeneratedGfiles()==>" + e.getMessage());
 		}
@@ -1537,40 +1927,38 @@ public class Controller {
 
 	}
 
-	public void generatedToDBF(String batPath,String filePath,String outPutPath) throws FileNotFoundException {
+	public void generatedToDBF(String batPath, String filePath, String outPutPath) throws FileNotFoundException {
 		File file = ResourceUtils.getFile("classpath:convert.bat");
-		 ProcessBuilder processBuilder = new ProcessBuilder(file.getAbsolutePath(),filePath
-					,outPutPath);
-					       
-					       
-					        try {
+		ProcessBuilder processBuilder = new ProcessBuilder(file.getAbsolutePath(), filePath, outPutPath);
 
-					            Process process = processBuilder.start();
+		try {
 
-					            StringBuilder output = new StringBuilder();
+			Process process = processBuilder.start();
 
-					            BufferedReader reader = new BufferedReader(
-					                    new InputStreamReader(process.getInputStream()));
+			StringBuilder output = new StringBuilder();
 
-					            String line;
-					            while ((line = reader.readLine()) != null) {
-					                output.append(line + "\n");
-					            }
+			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-					            int exitVal = process.waitFor();
-					            if (exitVal == 0) {
-					                //System.out.println(output);
-					                //System.exit(0);
-					            } else {
-					                //abnormal...
-					            }
+			String line;
+			while ((line = reader.readLine()) != null) {
+				output.append(line + "\n");
+			}
 
-					        } catch (IOException e) {
-					           System.out.println(e.getMessage()+"generatedToDBF"); 
-					        } catch (InterruptedException e) {
-					        	System.out.println(e.getMessage()+"generatedToDBF"); 
-					        }
+			int exitVal = process.waitFor();
+			if (exitVal == 0) {
+				// System.out.println(output);
+				// System.exit(0);
+			} else {
+				// abnormal...
+			}
+
+		} catch (IOException e) {
+			System.out.println(e.getMessage() + "generatedToDBF");
+		} catch (InterruptedException e) {
+			System.out.println(e.getMessage() + "generatedToDBF");
+		}
 	}
+
 	// génération des fichiers Tables
 	@GetMapping({ "generateTableFiles" })
 	public List<CloturePaie> generateTableFiles() throws FileNotFoundException, JRException {
@@ -1626,9 +2014,8 @@ public class Controller {
 					+ " " + dateFormat + ".xlsx";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
 			exporter.exportReport();
-			
-			
-			//generatedToDBF("",outputFileName.toString(),pathWithMounth);
+
+			// generatedToDBF("",outputFileName.toString(),pathWithMounth);
 			// load file and compile it
 			File fileDiplome = ResourceUtils.getFile("classpath:lesDiplomes.jrxml");
 			JasperReport jasperReport2 = JasperCompileManager.compileReport(fileDiplome.getAbsolutePath());
@@ -1642,8 +2029,8 @@ public class Controller {
 					+ clotureRepo.findByDesc("diplome").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter2.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName2);
 			exporter2.exportReport();
-			
-			//generatedToDBF("",outputFileName2.toString(),pathWithMounth);
+
+			// generatedToDBF("",outputFileName2.toString(),pathWithMounth);
 			// load file and compile it
 			File fileFonctions = ResourceUtils.getFile("classpath:lesFonctions.jrxml");
 			JasperReport jasperReport3 = JasperCompileManager.compileReport(fileFonctions.getAbsolutePath());
@@ -1657,7 +2044,7 @@ public class Controller {
 					+ clotureRepo.findByDesc("fonction").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter3.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName3);
 			exporter3.exportReport();
-			//generatedToDBF("",outputFileName3.toString(),pathWithMounth);
+			// generatedToDBF("",outputFileName3.toString(),pathWithMounth);
 			// load file and compile it
 			File fileLocalite = ResourceUtils.getFile("classpath:lesLocalites.jrxml");
 			JasperReport jasperReport4 = JasperCompileManager.compileReport(fileLocalite.getAbsolutePath());
@@ -1671,7 +2058,7 @@ public class Controller {
 					+ clotureRepo.findByDesc("localite").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter4.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName4);
 			exporter4.exportReport();
-			//generatedToDBF("",outputFileName4.toString(),pathWithMounth);
+			// generatedToDBF("",outputFileName4.toString(),pathWithMounth);
 			// load file and compile it
 			File filePays = ResourceUtils.getFile("classpath:lesPays.jrxml");
 			JasperReport jasperReport5 = JasperCompileManager.compileReport(filePays.getAbsolutePath());
@@ -1685,7 +2072,7 @@ public class Controller {
 					+ " " + dateFormat + ".xlsx";
 			exporter5.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName5);
 			exporter5.exportReport();
-			//generatedToDBF("",outputFileName5.toString(),pathWithMounth);
+			// generatedToDBF("",outputFileName5.toString(),pathWithMounth);
 			// load file and compile it
 			File fileRubrique = ResourceUtils.getFile("classpath:lesRubriques.jrxml");
 			JasperReport jasperReport6 = JasperCompileManager.compileReport(fileRubrique.getAbsolutePath());
@@ -1699,7 +2086,7 @@ public class Controller {
 					+ clotureRepo.findByDesc("rubrique").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter6.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName6);
 			exporter6.exportReport();
-			//generatedToDBF("",outputFileName6.toString(),pathWithMounth);
+			// generatedToDBF("",outputFileName6.toString(),pathWithMounth);
 			// load file and compile it
 			File fileTabStructure = ResourceUtils.getFile("classpath:lesTabStructures.jrxml");
 			JasperReport jasperReport7 = JasperCompileManager.compileReport(fileTabStructure.getAbsolutePath());
@@ -1713,7 +2100,7 @@ public class Controller {
 					+ clotureRepo.findByDesc("structure").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter7.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName7);
 			exporter7.exportReport();
-			//generatedToDBF("",outputFileName7.toString(),pathWithMounth);
+			// generatedToDBF("",outputFileName7.toString(),pathWithMounth);
 			return fileTables;
 
 		} catch (Exception e) {
@@ -1765,7 +2152,7 @@ public class Controller {
 					+ " " + dateFormat + ".xlsx";
 			exporter8.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName8);
 			exporter8.exportReport();
-			//generatedToDBF("",outputFileName8.toString(),pathWithMounth);
+			// generatedToDBF("",outputFileName8.toString(),pathWithMounth);
 			// load file and compile it
 			File fileDep = ResourceUtils.getFile("classpath:dep.jrxml");
 			JasperReport jasperReport9 = JasperCompileManager.compileReport(fileDep.getAbsolutePath());
@@ -1779,7 +2166,7 @@ public class Controller {
 					+ " " + dateFormat + ".xlsx";
 			exporter9.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName9);
 			exporter9.exportReport();
-			//generatedToDBF("",outputFileName9.toString(),pathWithMounth);
+			// generatedToDBF("",outputFileName9.toString(),pathWithMounth);
 			return fileSys;
 
 		} catch (Exception e) {
@@ -1830,11 +2217,10 @@ public class Controller {
 			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter12.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint12);
-			Object outputFileName12 = pathWithMounth + "\\" +"FRUB_AK_O_UZ"
-					+ " " + dateFormat + ".xlsx";
+			Object outputFileName12 = pathWithMounth + "\\" + "FRUB_AK_O_UZ" + " " + dateFormat + ".xlsx";
 			exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
 			exporter12.exportReport();
-			generatedToDBF("",outputFileName12.toString(),pathWithMounth);
+			generatedToDBF("", outputFileName12.toString(), pathWithMounth);
 			// load file and compile it
 			/*
 			 * File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml"); JasperReport
@@ -1902,11 +2288,10 @@ public class Controller {
 			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter12.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint12);
-			Object outputFileName12 = pathWithMounth + "\\" +"FRUB_L_N_P"
-					+ " " + dateFormat + ".xlsx";
+			Object outputFileName12 = pathWithMounth + "\\" + "FRUB_L_NP" + " " + dateFormat + ".xlsx";
 			exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
 			exporter12.exportReport();
-			generatedToDBF("",outputFileName12.toString(),pathWithMounth);
+			generatedToDBF("", outputFileName12.toString(), pathWithMounth);
 			// load file and compile it
 			/*
 			 * File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml"); JasperReport
@@ -1974,11 +2359,10 @@ public class Controller {
 			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter12.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint12);
-			Object outputFileName12 = pathWithMounth + "\\" +"FRUB_M_R_S_X"
-					+ " " + dateFormat + ".xlsx";
+			Object outputFileName12 = pathWithMounth + "\\" + "FRUB_M_R_S_X" + " " + dateFormat + ".xlsx";
 			exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
 			exporter12.exportReport();
-			generatedToDBF("",outputFileName12.toString(),pathWithMounth);
+			generatedToDBF("", outputFileName12.toString(), pathWithMounth);
 			// load file and compile it
 			/*
 			 * File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml"); JasperReport
@@ -2046,11 +2430,10 @@ public class Controller {
 			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter12.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint12);
-			Object outputFileName12 = pathWithMounth + "\\" +"FRUB_T"
-					+ " " + dateFormat + ".xlsx";
+			Object outputFileName12 = pathWithMounth + "\\" + "FRUB_T" + " " + dateFormat + ".xlsx";
 			exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
 			exporter12.exportReport();
-			generatedToDBF("",outputFileName12.toString(),pathWithMounth);
+			generatedToDBF("", outputFileName12.toString(), pathWithMounth);
 			// load file and compile it
 			/*
 			 * File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml"); JasperReport
@@ -2118,11 +2501,10 @@ public class Controller {
 			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter12.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint12);
-			Object outputFileName12 = pathWithMounth + "\\" +"FRUB_Q"
-					+ " " + dateFormat + ".xlsx";
+			Object outputFileName12 = pathWithMounth + "\\" + "FRUB_Q" + " " + dateFormat + ".xlsx";
 			exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
 			exporter12.exportReport();
-			generatedToDBF("",outputFileName12.toString(),pathWithMounth);
+			generatedToDBF("", outputFileName12.toString(), pathWithMounth);
 			// load file and compile it
 			/*
 			 * File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml"); JasperReport
@@ -2213,7 +2595,7 @@ public class Controller {
 					+ " " + dateFormat + ".xlsx";
 			exporter13.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName13);
 			exporter13.exportReport();
-			generatedToDBF("",outputFileName13.toString(),pathWithMounth);
+			generatedToDBF("", outputFileName13.toString(), pathWithMounth);
 			return fileFrub;
 
 		} catch (Exception e) {
@@ -2253,7 +2635,7 @@ public class Controller {
 			if (!fileMounth.exists()) {
 				fileMounth.mkdir();
 			}
-			
+
 			File fileNewpaie = ResourceUtils.getFile("classpath:newPaie.jrxml");
 			JasperReport jasperReport10 = JasperCompileManager.compileReport(fileNewpaie.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource10 = new JRBeanCollectionDataSource(lesNewpaie);
@@ -2266,7 +2648,7 @@ public class Controller {
 					+ clotureRepo.findByDesc("newpaie").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter10.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName10);
 			exporter10.exportReport();
-			generatedToDBF("",outputFileName10.toString(),pathWithMounth);
+			generatedToDBF("", outputFileName10.toString(), pathWithMounth);
 			return fileNewPaie;
 		} catch (Exception e) {
 			System.out.println(e.getMessage() + "==>generateNewPaieFiles()");
@@ -2277,59 +2659,60 @@ public class Controller {
 	}
 
 	// génération des fichiers Pers
-		@GetMapping({ "generatePersFiles" })
-		public List<CloturePaie> generatePersFiles() throws FileNotFoundException, JRException {
-			List<CloturePaie> filesPers = new ArrayList();
-			try {
+	@GetMapping({ "generatePersFiles" })
+	public List<CloturePaie> generatePersFiles() throws FileNotFoundException, JRException {
+		List<CloturePaie> filesPers = new ArrayList();
+		try {
 
-				filesPers = clotureRepo.findByCategory("PERS");
-				//System.out.println( filesPers.get(0).getFOLDERPATH().trim());
+			filesPers = clotureRepo.findByCategory("PERS");
+			// System.out.println( filesPers.get(0).getFOLDERPATH().trim());
 
-				List<Pers> lesPers = persRepo.findAll();
+			List<Pers> lesPers = persRepo.findAll();
 
-				// **********************************************get current date from payMonth
+			// **********************************************get current date from payMonth
 
-				PayMonth currentDate = paymonthRepo.findByState();
-				String currentYear = currentDate.getPaymonth().substring(0, 4);
-				String currentMonth = currentDate.getPaymonth().substring(4, 6);
-				String dateFormat = currentYear + "-" + currentMonth;
+			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
 
-				// ********************************folder generation if not exist
-				String pathWithYear = filesPers.get(0).getFOLDERPATH().trim() + filesPers.get(0).getFOLDERNAME().trim() + "\\"
-						+ currentYear;
-				String pathWithMounth = pathWithYear + "\\" + dateFormat;
-				File fileYear = new File(pathWithYear);
-				if (!fileYear.exists()) {
-					fileYear.mkdir();
-				}
-				File fileMounth = new File(pathWithMounth);
-				if (!fileMounth.exists()) {
-					fileMounth.mkdir();
-				}
-				//System.out.println(pathWithMounth);
-				// load file and compile it
-				File filePers = ResourceUtils.getFile("classpath:pers.jrxml");
-				JasperReport jasperReport11 = JasperCompileManager.compileReport(filePers.getAbsolutePath());
-				JRBeanCollectionDataSource dataSource11 = new JRBeanCollectionDataSource(lesPers);
-				JasperPrint jasperPrint11 = JasperFillManager.fillReport(jasperReport11, null, dataSource11);
-				JRXlsxExporter exporter11 = new JRXlsxExporter();
-				exporter11.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
-				exporter11.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
-				exporter11.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint11);
-				Object outputFileName11 = pathWithMounth + "\\"
-						+ clotureRepo.findByDesc("pers").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
-				exporter11.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName11);
-				
-				exporter11.exportReport();
-				generatedToDBF("",outputFileName11.toString(),pathWithMounth);
-				return filesPers;
-			} catch (Exception e) {
-				System.out.println(e.getMessage() + "==>generatePersFiles()");
-				filesPers = null;
+			// ********************************folder generation if not exist
+			String pathWithYear = filesPers.get(0).getFOLDERPATH().trim() + filesPers.get(0).getFOLDERNAME().trim()
+					+ "\\" + currentYear;
+			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			File fileYear = new File(pathWithYear);
+			if (!fileYear.exists()) {
+				fileYear.mkdir();
 			}
-			return filesPers;
+			File fileMounth = new File(pathWithMounth);
+			if (!fileMounth.exists()) {
+				fileMounth.mkdir();
+			}
+			// System.out.println(pathWithMounth);
+			// load file and compile it
+			File filePers = ResourceUtils.getFile("classpath:pers.jrxml");
+			JasperReport jasperReport11 = JasperCompileManager.compileReport(filePers.getAbsolutePath());
+			JRBeanCollectionDataSource dataSource11 = new JRBeanCollectionDataSource(lesPers);
+			JasperPrint jasperPrint11 = JasperFillManager.fillReport(jasperReport11, null, dataSource11);
+			JRXlsxExporter exporter11 = new JRXlsxExporter();
+			exporter11.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+			exporter11.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+			exporter11.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint11);
+			Object outputFileName11 = pathWithMounth + "\\" + clotureRepo.findByDesc("pers").get(0).getPREFIXFILETYPE()
+					+ " " + dateFormat + ".xlsx";
+			exporter11.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName11);
 
+			exporter11.exportReport();
+			generatedToDBF("", outputFileName11.toString(), pathWithMounth);
+			return filesPers;
+		} catch (Exception e) {
+			System.out.println(e.getMessage() + "==>generatePersFiles()");
+			filesPers = null;
 		}
+		return filesPers;
+
+	}
+
 	/************************************************
 	 * Login/subscribe
 	 *********************************************************************************************************/

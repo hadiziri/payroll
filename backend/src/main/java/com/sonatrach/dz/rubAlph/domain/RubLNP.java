@@ -1,18 +1,22 @@
 package com.sonatrach.dz.rubAlph.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
 @Table(name ="PAIE_FRUB_L_NP")
+//@IdClass(RubId.class)
 public class RubLNP {
-	@Id
+	
 	@Column(name="DATE_EXPL")
 	private String DATEEXPL;
+	@Id
 	@Column(name= "MAT")
 	private String MAT;
 	@Column(name="NOM_PRENOM")
@@ -37,16 +41,20 @@ public class RubLNP {
 	private String NUMADHER;
 	@Column(name="DATE_NAISS")
 	private String DATENAISS;
+	
 	@Column(name="MOIS_EFFET")
 	private String MOISEFFET;
+
 	@Column(name="ANN_EFFET")
 	private String ANNEFFET;
 	@Column(name="CODE_PAIE")
 	private String CODEPAIE;
+
 	@Column(name="NO_RUB")
 	private String NORUB;
 	@Column(name="LIB_RUB")
 	private String LIBRUB;
+
 	@Column(name="CODE_NATUR")
 	private Integer CODENATUR;
 	@Column(name="DT_DEB")

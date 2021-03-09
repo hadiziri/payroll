@@ -27,6 +27,9 @@ public class Structure {
 	private String STRUCTURECODENOTLIKE;
 	private int STATUSSTRUCTURE;
 	private String EMAILGROUPMANAGERS;
+	private int isactif;
+	private int flagfichier;
+	private int flagetat;
 	
 	public Structure() {
 		
@@ -37,6 +40,42 @@ public class Structure {
 	
 
 	
+	public int getFlagfichier() {
+		return flagfichier;
+	}
+
+
+
+
+
+
+	public void setFlagfichier(int flagfichier) {
+		this.flagfichier = flagfichier;
+	}
+
+
+
+
+
+
+	public int getFlagetat() {
+		return flagetat;
+	}
+
+
+
+
+
+
+	public void setFlagetat(int flagetat) {
+		this.flagetat = flagetat;
+	}
+
+
+
+
+
+
 	public Integer getIDSTRUCTURE() {
 		return IDSTRUCTURE;
 	}
@@ -48,6 +87,24 @@ public class Structure {
 
 	public void setIDSTRUCTURE(Integer iDSTRUCTURE) {
 		IDSTRUCTURE = iDSTRUCTURE;
+	}
+
+
+
+
+
+
+	public int getIsactif() {
+		return isactif;
+	}
+
+
+
+
+
+
+	public void setIsactif(int isactif) {
+		this.isactif = isactif;
 	}
 
 

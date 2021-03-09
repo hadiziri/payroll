@@ -95,7 +95,7 @@ public class Pers {
 	@Column(name="CSAL")
 	private String CSAL;
 	@Column(name="SALBASE")
-	private BigDecimal SALBASE;
+	private String SALBASE;
 	@Column(name="SCLASS")
 	private String SCLASS;
 	@Column(name="CFONCT")
@@ -666,12 +666,14 @@ public class Pers {
 
 
 
-	public BigDecimal getSALBASE() {
+
+
+	public String getSALBASE() {
 		return SALBASE;
 	}
 
 
-	public void setSALBASE(BigDecimal sALBASE) {
+	public void setSALBASE(String sALBASE) {
 		SALBASE = sALBASE;
 	}
 

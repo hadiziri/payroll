@@ -8,6 +8,9 @@ idactivity:number;
 structurecodenotlike:string;
 statusstructure:number;
 emailgroupmanagers:string;
+isactif:number;
+flagfichier:number;
+flagetat:number;
 
 
 	

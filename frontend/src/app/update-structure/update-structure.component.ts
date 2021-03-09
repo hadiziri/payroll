@@ -43,7 +43,10 @@ export class UpdateStructureComponent implements OnInit {
   "statusstructure":3,
   "structurecodenotlike":"",
   "structurecodelike":"",
-  "structurename":""};
+  "structurename":"",
+"isactif":0,
+"flagetat":0,
+"flagfichier":0};
   structureArchive:ArchiveStructure={
     "archemailgroupemanagers":"",
     "archstatusstructure":3,

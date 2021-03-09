@@ -1,3 +1,10 @@
+4.5
+---
+-Regler prob header dans fichiers dbf(pers et frub)
+-Ajout button fichiers pour générer les fichiers de chaque structure
+-ajout barre d'outil recharger données
+-rechargement de données apres confirmation de l'utilisateur (pas dans ng on init)
+---------------------------------------------------------------------------------------------------
 4.4
 ---
 -Regler prob number (xlsx)(pers,newpaie,Frub)

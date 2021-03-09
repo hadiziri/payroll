@@ -233,7 +233,7 @@
 				<text><![CDATA[DATE_NAISS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="890" y="0" width="70" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+				<reportElement x="900" y="0" width="60" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement>
@@ -242,7 +242,7 @@
 				<text><![CDATA[NUM_ADHER]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="790" y="0" width="99" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+				<reportElement x="790" y="0" width="110" height="20" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement>
@@ -294,196 +294,197 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="20" splitType="Stretch">
+		<band height="40" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField>
-				<reportElement x="0" y="0" width="100" height="20" uuid="652256e2-0f1e-4848-b1d0-d064caaa5020">
+				<reportElement x="0" y="0" width="100" height="40" uuid="652256e2-0f1e-4848-b1d0-d064caaa5020">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{DATEEXPL}==null?"":$F{DATEEXPL}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="100" y="0" width="67" height="20" uuid="380af714-4dbd-4e0f-ae23-bfada0449a2f">
+				<reportElement x="100" y="0" width="67" height="40" uuid="380af714-4dbd-4e0f-ae23-bfada0449a2f">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{MAT}==null?"":$F{MAT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="167" y="0" width="103" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="167" y="0" width="103" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{NOMPRENOM}==null?"":$F{NOMPRENOM}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1280" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="1280" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{NORUB}==null?"":$F{NORUB}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1840" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="1840" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{TAUX}==null?"":$F{TAUX}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="2080" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="2080" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{NBENFTOT}==null?"":$F{NBENFTOT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="2160" y="0" width="140" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="2160" y="0" width="330" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{ADRESSE}==null?"":$F{ADRESSE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="2000" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="2000" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{GROUPE}==null?"":$F{GROUPE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1920" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="1920" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{ELEMSTAT}==null?"":$F{ELEMSTAT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1760" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="1760" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{MTRAPPEL}==null?"":$F{MTRAPPEL}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1680" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="1680" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{MTMOIS}==null?"":$F{MTMOIS}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1600" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="1600" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{DEFIN}==null?"":$F{DEFIN}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1520" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="1520" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{DTDEB}==null?"":$F{DTDEB}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1440" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="1440" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{CODENATUR}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1360" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="1360" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{LIBRUB}==null?"":$F{LIBRUB}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1200" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="1200" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{CODEPAIE}==null?"":$F{CODEPAIE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1120" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="1120" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{ANNEFFET}==null?"":$F{ANNEFFET}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1040" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="1040" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{MOISEFFET}==null?"":$F{MOISEFFET}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="960" y="0" width="80" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="960" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{DATENAISS}==null?"":$F{DATENAISS}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="890" y="0" width="70" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="900" y="0" width="60" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{NUMADHER}==null?"":$F{NUMADHER}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="790" y="0" width="99" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="790" y="0" width="110" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{NUMSS}==null?"":$F{NUMSS}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="730" y="0" width="60" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="730" y="0" width="60" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{CAISSE}==null?"":$F{CAISSE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="600" y="0" width="130" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="600" y="0" width="130" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{NRIPRIB}==null?"":$F{NRIPRIB}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="540" y="0" width="60" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="540" y="0" width="60" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{CODFONCT}==null?"":$F{CODFONCT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="470" y="0" width="70" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="470" y="0" width="70" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{ECHELON}==null?"":$F{ECHELON}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="400" y="0" width="70" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="400" y="0" width="70" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{ECHELLE}==null?"":$F{ECHELLE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="330" y="0" width="70" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="330" y="0" width="70" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{CPTANA}==null?"":$F{CPTANA}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="270" y="0" width="60" height="20" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="270" y="0" width="60" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>

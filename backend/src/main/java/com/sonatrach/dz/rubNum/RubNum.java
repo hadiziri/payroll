@@ -10,9 +10,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name ="PAIE_FRUB_N")
 public class RubNum {
-	@Id
+	
 	@Column(name="DATE_EXPL")
 	private String DATEEXPL;
+	@Id
 	@Column(name= "MAT")
 	private String MAT;
 	@Column(name="NOM_PRENOM")

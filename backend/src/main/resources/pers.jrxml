@@ -43,7 +43,7 @@
 	<field name="PROM" class="java.lang.String"/>
 	<field name="SANCT" class="java.lang.String"/>
 	<field name="CSAL" class="java.lang.String"/>
-	<field name="SALBASE" class="java.math.BigDecimal"/>
+	<field name="SALBASE" class="java.lang.String"/>
 	<field name="SCLASS" class="java.lang.String"/>
 	<field name="CFONCT" class="java.lang.String"/>
 	<field name="LIBFONC" class="java.lang.String"/>
@@ -1172,7 +1172,7 @@
 				<text><![CDATA[SF]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="890" y="0" width="70" height="30" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+				<reportElement x="900" y="0" width="60" height="30" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement>
@@ -1181,7 +1181,7 @@
 				<text><![CDATA[MOTIF]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="850" y="0" width="39" height="30" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+				<reportElement x="850" y="0" width="50" height="30" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement>
@@ -1998,14 +1998,14 @@
 				<textFieldExpression><![CDATA[$F{QF}==null?"":$F{QF}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="890" y="0" width="70" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="900" y="0" width="60" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{MOTIF}==null?"":$F{MOTIF}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="850" y="0" width="40" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="850" y="0" width="50" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>

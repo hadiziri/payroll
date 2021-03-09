@@ -237,4 +237,41 @@ export class HomeService {
     );
   }
 
+  public generateFrubNStr(structure:Structure):Observable<Structure>{
+    return this.httpClient.post<Structure>(this.host+"generateFrubNStr",structure).pipe(
+      catchError((err) => {
+         //console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
+  public generateFrubAStr(structure:Structure):Observable<Structure>{
+    return this.httpClient.post<Structure>(this.host+"generateFrubAStr",structure).pipe(
+      catchError((err) => {
+         //console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
+  public generateNewPaieStr(structure:Structure):Observable<Structure>{
+    return this.httpClient.post<Structure>(this.host+"generateNewPaieStr",structure).pipe(
+      catchError((err) => {
+         //console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
+  public generatePersStr(structure:Structure):Observable<Structure>{
+    return this.httpClient.post<Structure>(this.host+"generatePersStr",structure).pipe(
+      catchError((err) => {
+         //console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
+
 }

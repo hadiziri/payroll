@@ -1,3 +1,4 @@
+
 import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
 import { EtatRet } from './../Models/EtatRet';
 import { EtatRecap } from './../Models/EtatRecap';
@@ -61,7 +62,7 @@ export class FilesGeneratorComponent implements OnInit {
   };
 
   showSpinner: Boolean = false;
-  showProgressInit: Boolean = true;
+  showProgressInit: Boolean = false;
   color: String = "warn";
   showProgress: Boolean = false;
   mailRequest:MailRequest={"from":"","msg":"","sturcturename":"","subject":"","to":[],"filesName":[]};
@@ -84,16 +85,22 @@ export class FilesGeneratorComponent implements OnInit {
   codeStructure:string[]=[];
   codeNotLike:string[]=[];
   efiles:Efile[]=[];
+  efichiers:Efile[]=[];
   mand:Boolean=false;
   jour:Boolean=false;
   ret:Boolean=false;
   recap:Boolean=false;
   mip:Boolean=false;
+  newpaie:Boolean=false;
+  pers:Boolean=false;
+  frub:Boolean=false;
   allmand:Boolean=false;
   alljour:Boolean=false;
   allret:Boolean=false;
   allrecap:Boolean=false;
   allmip:Boolean=false;
+  isDataLoaded:Boolean=false;
+  
   count:number=0;
   updatedStructure:Structure={
     "idstructure":0,
@@ -102,11 +109,16 @@ export class FilesGeneratorComponent implements OnInit {
     "statusstructure":0,
     "structurecodenotlike":"",
     "structurecodelike":"",
-    "structurename":""
+    "structurename":"",
+    "isactif":0,
+    "flagetat":0,
+    "flagfichier":0
   };
 
   uploadedFiles:FileDetails[]=[{"name":"Journal","progress":0},{"name":"Mand","progress":0},{"name":"Mip","progress":0},{"name":"Ret","progress":0},{"name":"Recap","progress":0}];
+  uploadedFichiers:FileDetails[]=[{"name":"NewPaie","progress":0},{"name":"Pers","progress":0},{"name":"Frub","progress":0}];
   initProgress:number=0;
+  showProgressFichier:Boolean=false;
   
 
   @ViewChild(MatSort) set matSort(sort: MatSort) {
@@ -135,7 +147,7 @@ export class FilesGeneratorComponent implements OnInit {
  
 
   ngOnInit() {
- this.initProgress=10;
+ 
     //get current user
     this.currentUser.username=this.token.getUsername();
     this.paramService.getUserByUserName(this.currentUser).subscribe(
@@ -180,127 +192,149 @@ export class FilesGeneratorComponent implements OnInit {
 
       }
     );
-
-    //get all etat paie filtered by paymonth
-     this.homeService.getEtatJournal().subscribe(
-        (data) => {
-          if(data!=null){
-           console.log(data);
-           this.initProgress=this.initProgress+15;
-            this.allEtatJournal=data;
-            this.alljour=true;
-            this.disableSpinner();
-            
-          }else{
-            this.openDialog();
-          }
-          
-          
-        },
-        error => {
-          // //console.log(error);
-          this.openDialogError(error);
-          throw error;
-  
-        }
-      );
-    
-      this.homeService.getEtatMand().subscribe(
-        (data) => {
-          if(data!=null){
-         console.log(data);
-         this.initProgress=this.initProgress+15;
-            this.allEtatMand=data;
-            this.allmand=true;
-            this.disableSpinner();
-          }else{
-            this.openDialog();
-          }
-          
-          
-        },
-        error => {
-          // //console.log(error);
-          this.openDialogError(error);
-          throw error;
-  
-        }
-      );
-      
-      this.homeService.getEtatMip().subscribe(
-        (data) => {
-          if(data!=null){
-         console.log(data);
-         this.initProgress=this.initProgress+15;
-            this.allEtatMip=data;
-            this.allmip=true;
-            this.disableSpinner();
-          }else{
-            this.openDialog();
-          }
-          
-          
-        },
-        error => {
-          // //console.log(error);
-          this.openDialogError(error);
-          throw error;
-  
-        }
-      );
-      
-      this.homeService.getEtatRecap().subscribe(
-        (data) => {
-          if(data!=null){
-            this.initProgress=this.initProgress+15;
-            this.allEtatRecap=data;
-          console.log(this.allEtatRecap);
-          this.allrecap=true;
-          this.disableSpinner();
-          
-          }else{
-            this.openDialog();
-          }
-          
-          
-        },
-        error => {
-          // //console.log(error);
-          this.openDialogError(error);
-          throw error;
-  
-        }
-      );
-     
-      this.homeService.getEtatRet().subscribe(
-        (data) => {
-          if(data!=null){
-          console.log(data);
-         this.initProgress=this.initProgress+15;
-            this.allEtatRet=data;
-            this.allret=true;
-            this.disableSpinner();
-           
-          }else{
-            this.openDialog();
-          }
-          
-          
-        },
-        error => {
-          // //console.log(error);
-          this.openDialogError(error);
-          throw error;
-  
-        }
-      );
-    this.initProgress=25;
+/*
+   
+    */
   }
 
   disableSpinner(){
     if(this.alljour&&this.allmip&&this.allmand&&this.allret&&this.allrecap){
       this.showProgressInit=false;
+      this.isDataLoaded=true;
     }
+  }
+
+  getStatus(element:Structure):number{
+    if(element.statusstructure==3){
+      return 3;
+    }else{
+      if(element.statusstructure==2){
+        return 2;
+      }else{
+        return element.statusstructure*(element.flagetat+element.flagfichier)*element.isactif
+      }
+     
+    }
+    
+  }
+
+  chargerDonnees(){
+    this.initProgress=10;
+   this.showProgressInit=true;
+ //get all etat paie filtered by paymonth
+ this.homeService.getEtatJournal().subscribe(
+  (data) => {
+    if(data!=null){
+     console.log(data);
+     this.initProgress=this.initProgress+15;
+      this.allEtatJournal=data;
+      this.alljour=true;
+      this.disableSpinner();
+      
+    }else{
+      this.openDialog();
+    }
+    
+    
+  },
+  error => {
+    // //console.log(error);
+    this.openDialogError(error);
+    throw error;
+
+  }
+);
+
+this.homeService.getEtatMand().subscribe(
+  (data) => {
+    if(data!=null){
+   console.log(data);
+   this.initProgress=this.initProgress+15;
+      this.allEtatMand=data;
+      this.allmand=true;
+      this.disableSpinner();
+    }else{
+      this.openDialog();
+    }
+    
+    
+  },
+  error => {
+    // //console.log(error);
+    this.openDialogError(error);
+    throw error;
+
+  }
+);
+
+this.homeService.getEtatMip().subscribe(
+  (data) => {
+    if(data!=null){
+   console.log(data);
+   this.initProgress=this.initProgress+15;
+      this.allEtatMip=data;
+      this.allmip=true;
+      this.disableSpinner();
+    }else{
+      this.openDialog();
+    }
+    
+    
+  },
+  error => {
+    // //console.log(error);
+    this.openDialogError(error);
+    throw error;
+
+  }
+);
+
+this.homeService.getEtatRecap().subscribe(
+  (data) => {
+    if(data!=null){
+      this.initProgress=this.initProgress+15;
+      this.allEtatRecap=data;
+    console.log(this.allEtatRecap);
+    this.allrecap=true;
+    this.disableSpinner();
+    
+    }else{
+      this.openDialog();
+    }
+    
+    
+  },
+  error => {
+    // //console.log(error);
+    this.openDialogError(error);
+    throw error;
+
+  }
+);
+
+this.homeService.getEtatRet().subscribe(
+  (data) => {
+    if(data!=null){
+    console.log(data);
+   this.initProgress=this.initProgress+15;
+      this.allEtatRet=data;
+      this.allret=true;
+      this.disableSpinner();
+     
+    }else{
+      this.openDialog();
+    }
+    
+    
+  },
+  error => {
+    // //console.log(error);
+    this.openDialogError(error);
+    throw error;
+
+  }
+);
+this.initProgress=25;
   }
 //---------------------------------------------------------------------SEND EMAIL----------------------------------------------------------------------------------------------
   sendEmail(structure:Structure){
@@ -331,7 +365,7 @@ export class FilesGeneratorComponent implements OnInit {
      this.updatedStructure.structurecodelike=structure.structurecodelike;
      this.updatedStructure.structurecodenotlike=structure.structurecodenotlike;
      this.updatedStructure.structurename=structure.structurename;
-     this.updatedStructure.statusstructure=0;
+     this.updatedStructure.statusstructure=2;
     this.homeService.getEfiles(structure).subscribe(
       (data) => {
       
@@ -443,7 +477,7 @@ export class FilesGeneratorComponent implements OnInit {
        //  //console.log(data);
         if(data!=null){
           this.archiveSentFilesSaved=true;
-          currentStructure.statusstructure=0;
+          currentStructure.statusstructure=2;
           this.showSpinner=false;
           this.showAlert("Envoie Email","L'email a bien été envoyé aux gestionnaires");
          this.deleteZip(currentStructure);
@@ -468,7 +502,7 @@ export class FilesGeneratorComponent implements OnInit {
       (data) => {
       
         if(data!=null){
-        console.log(data);
+        //console.log(data);
         }else{
          //this.openDialog();
         }
@@ -500,8 +534,9 @@ export class FilesGeneratorComponent implements OnInit {
 
   //----------------------------------------------------------------Suspendre/activer Structure-----------------------------------------------------------------------
   suspendreStructure(structure:Structure){
-    let etat=structure.statusstructure;
-    structure.statusstructure=2;
+    let etat=structure.isactif;
+    
+    structure.isactif=0;
     this.homeService.suspendreStructure(structure).subscribe(
 
       (data) => {
@@ -512,7 +547,7 @@ export class FilesGeneratorComponent implements OnInit {
           this.showAlert("Suspension Structure","La structure a bien été suspendue");
         }else{
           
-          structure.statusstructure=etat;
+          structure.isactif=etat;
           this.openDialog();
         }
 
@@ -532,19 +567,21 @@ export class FilesGeneratorComponent implements OnInit {
 
 
   activerStructure(structure:Structure){
-    let etat=structure.statusstructure;
-    structure.statusstructure=1;
-    this.homeService.suspendreStructure(structure).subscribe(
+    let etat=structure.isactif;
+    
+    structure.isactif=1;
+    
+    this.homeService.activerStructure(structure).subscribe(
 
       (data) => {
       
-      //   //console.log(data);
+      //console.log(data);
         if(data!=null){
           
           this.showAlert("Activation Structure","La structure a bien été activée");
         }else{
           
-          structure.statusstructure=etat;
+          structure.isactif=etat;
           this.openDialog();
         }
 
@@ -561,9 +598,10 @@ export class FilesGeneratorComponent implements OnInit {
     )
   }
   
-    //----------------------------------------------------------------générer fichiers-----------------------------------------------------------------------
-    genererFichier(structure:Structure){
-      this.showProgress=true;
+    //----------------------------------------------------------------générer etats-----------------------------------------------------------------------
+    genererEtats(structure:Structure){
+     
+      
       //console.log(this.showProgress)
       this.codeStructure=[];
      if(structure.structurecodelike.includes("/")){
@@ -574,7 +612,7 @@ export class FilesGeneratorComponent implements OnInit {
      }
      // //console.log(this.codeStructure);
      if(this.allEtatJournal.length==0||this.allEtatMand.length==0||this.allEtatMip.length==0||this.allEtatRecap.length==0||this.allEtatRet.length==0){
-        this.showAlertInit("Initialisation des données","Veuillez patienter un petit moment s'il vous plait pour générer les fichiers");
+        this.showConfirm();
       
      }else{
         this.filtrerEtats(this.codeStructure,structure);
@@ -589,8 +627,25 @@ export class FilesGeneratorComponent implements OnInit {
     
   }
 
+  showConfirm() {
+ 
+    mobiscroll.confirm({
+      title: "Chargement des données",
+      message: "Aucune donnée n'est chargée! Voulez vous charger les données?",
+      okText: 'Charger',
+      cancelText: 'Annuler'
+    
+  }).then( (result) => {
+    // //console.log(result ? 'Agreed.' : 'Disagreed.');
+    if(result){
+     this.chargerDonnees();
+    }
+  }); 
+  
+  }
    
     filtrerEtats(codeLike:string[],str:Structure){
+      this.showProgress=true;
       this.filteredEtatJournal=[];
       this.filteredEtatMand=[];
       this.filteredEtatMip=[];
@@ -937,7 +992,8 @@ export class FilesGeneratorComponent implements OnInit {
   //********************************************SaveGeneratedFilesInDB************************************************************************************************* */
 saveGeneratedFilesInDB(structure:Structure){
 if(this.jour&&this.mip&&this.mand&&this.ret&&this.recap){
-this.homeService.saveGeneratedFiles(this.efiles).subscribe(
+ 
+this.homeService.saveGeneratedFiles(this.efichiers).subscribe(
   (data) => {
       
     // //console.log("save generated files in db")
@@ -966,14 +1022,18 @@ this.homeService.saveGeneratedFiles(this.efiles).subscribe(
 }
 
 updateStatusStructure(structure:Structure){
+  structure.statusstructure=4;
+  structure.isactif=0;
+  structure.flagetat=1;
   this.homeService.updateStructureFilesGenerated(structure).subscribe(
     (data) => {
       
      //  //console.log("updateStatusStructure")
      //  //console.log(data);
       if(data!=null){
-        structure.statusstructure=2;
+        
         this.showProgress=false;
+        
         this.showAlertGeneration("Génération etats paie","Les etats ont bien été généré.");
       }else{
         
@@ -991,6 +1051,233 @@ updateStatusStructure(structure:Structure){
   );
 }
 
+
+//************************************************************Générer les fichiers (newpaie,pers,frub)***************************************************** */
+genererFichiers(structure:Structure){
+  this.showProgressFichier=true;
+  this.codeStructure=[];
+  this.efichiers=[];
+  this.uploadedFichiers[0].progress=10;
+  this.uploadedFichiers[1].progress=10;
+  this.uploadedFichiers[2].progress=10;
+  if(structure.structurecodelike.includes("/")){
+    this.codeStructure=structure.structurecodelike.split("/");
+    
+  }else{
+     this.codeStructure.push(structure.structurecodelike);
+  }
+  console.log(this.codeStructure)
+  if(this.codeStructure.map(s => (/^[a-z].*/i.test(s))).includes(true)){
+    console.log("alph")
+    this.homeService.generateFrubAStr(structure).subscribe(
+      (data) => {
+      
+        //  //console.log("updateStatusStructure")
+        //  //console.log(data);
+         if(data!=null){
+          console.log(data)
+          let efile:Efile={
+            "idfile":0,
+            "filename":"FRUBALPH",
+            "filegenerationdate":new Date(),
+            "idfiletype":0,
+            "idpaymonth":0,
+            "idstructure":structure.idstructure,
+            "iduser":this.currentUser.iduser,
+            "validatedflag":1
+          }
+          this.efichiers.push(efile);
+          this.frub=true;
+          this.uploadedFichiers[2].progress=50;
+          this.saveGeneratedFichiersInDB(structure)
+         }else{
+           
+           
+           this.openDialog();
+         }
+     
+       },
+       error => {
+         // //console.log(error);
+         this.openDialogError(error);
+         throw error;
+     
+       }
+    )
+  }else{
+    this.homeService.generateFrubNStr(structure).subscribe(
+      (data) => {
+      
+      //console.log(data);
+         if(data!=null){
+          let efile:Efile={
+            "idfile":0,
+            "filename":"FRUBNUM",
+            "filegenerationdate":new Date(),
+            "idfiletype":0,
+            "idpaymonth":0,
+            "idstructure":structure.idstructure,
+            "iduser":this.currentUser.iduser,
+            "validatedflag":1
+          }
+          this.efichiers.push(efile);
+          this.frub=true;
+          this.uploadedFichiers[2].progress=50;
+          this.saveGeneratedFichiersInDB(structure)
+         }else{
+           
+           
+           this.openDialog();
+         }
+     
+       },
+       error => {
+         // //console.log(error);
+         this.openDialogError(error);
+         throw error;
+     
+       }
+    )
+  }
+
+  this.homeService.generateNewPaieStr(structure).subscribe(
+    (data) => {
+      
+     // console.log(data);
+         if(data!=null){
+          let efile:Efile={
+            "idfile":0,
+            "filename":"NEWPAIE",
+            "filegenerationdate":new Date(),
+            "idfiletype":0,
+            "idpaymonth":0,
+            "idstructure":structure.idstructure,
+            "iduser":this.currentUser.iduser,
+            "validatedflag":1
+          }
+          this.efichiers.push(efile);
+           this.newpaie=true;
+          this.uploadedFichiers[0].progress=50;
+          this.saveGeneratedFichiersInDB(structure)
+         }else{
+           
+           
+           this.openDialog();
+         }
+     
+       },
+       error => {
+         // //console.log(error);
+         this.openDialogError(error);
+         throw error;
+     
+       }
+  )
+  this.homeService.generatePersStr(structure).subscribe(
+    (data) => {
+      
+     // console.log(data);
+         if(data!=null){
+          let efile:Efile={
+            "idfile":0,
+            "filename":"PERS",
+            "filegenerationdate":new Date(),
+            "idfiletype":0,
+            "idpaymonth":0,
+            "idstructure":structure.idstructure,
+            "iduser":this.currentUser.iduser,
+            "validatedflag":1
+          }
+          this.efichiers.push(efile);
+           this.pers=true;
+          this.uploadedFichiers[1].progress=50;
+          this.saveGeneratedFichiersInDB(structure)
+         }else{
+           
+           
+           this.openDialog();
+         }
+     
+       },
+       error => {
+         // //console.log(error);
+         this.openDialogError(error);
+         throw error;
+     
+       }
+  )
+
+}
+
+
+/********************************************SaveGeneratedFilesInDB************************************************************************************************* */
+saveGeneratedFichiersInDB(structure:Structure){
+  if(this.frub&&this.newpaie&&this.pers){
+    this.uploadedFichiers[0].progress=80;
+    this.uploadedFichiers[1].progress=80;
+    this.uploadedFichiers[2].progress=80;
+
+  this.homeService.saveGeneratedFiles(this.efichiers).subscribe(
+    (data) => {
+        
+      // //console.log("save generated files in db")
+     //  //console.log(data);
+      if(data!=null){
+        
+        this.updateStatusStructureFichier(structure);
+        
+        //this.showAlert("Activation Structure","La structure a bien été activée");
+      }else{
+        
+        
+        this.openDialog();
+      }
+  
+    },
+    error => {
+     //  //console.log(error);
+      this.openDialogError(error);
+      throw error;
+  
+    }
+  );
+  }
+  
+  }
+  
+  updateStatusStructureFichier(structure:Structure){
+    this.uploadedFichiers[0].progress=100;
+    this.uploadedFichiers[1].progress=100;
+    this.uploadedFichiers[2].progress=100;
+    structure.statusstructure=5;
+          structure.isactif=0;
+          structure.flagfichier=1;
+    this.homeService.updateStructureFilesGenerated(structure).subscribe(
+      (data) => {
+        
+       //  //console.log("updateStatusStructure")
+       //  //console.log(data);
+        if(data!=null){
+          
+          this.showProgressFichier=false;
+         
+          this.showAlertGenerationFichiers("Génération fichiers paie","Les fichiers ont bien été généré.");
+        }else{
+          
+          
+
+          this.openDialog();
+        }
+    
+      },
+      error => {
+        // //console.log(error);
+        this.openDialogError(error);
+        throw error;
+    
+      }
+    );
+  }
   //****************************************************POUR LA RECHERCHE ET LES ERRURS ****************************************************************** */
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -1032,8 +1319,23 @@ updateStatusStructure(structure:Structure){
   
   
   
+}
+showAlertGenerationFichiers(title:String,msg:String) {
+  if(this.newpaie&&this.pers&&this.frub){
+    this.newpaie=false;
+    this.pers=false;
+    this.frub=false;
+    
+    mobiscroll.alert({
+      title: title,
+      message: msg
+      /* ,callback: function () {
+        window.location.reload();
+       }*/
+    });
   }
-  
+
+}
 }
 
 
