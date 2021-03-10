@@ -1,3 +1,10 @@
+4.6
+---
+-génération fichiers avec swap(pour frub,newpaie,pers)
+-Design(etat paie)
+-suppression order by pour les etat (journal,recap,mand,ret)
+-modification etat mand (colonne num compte )
+---------------------------------------------------------------------------------------------------
 4.5
 ---
 -Regler prob header dans fichiers dbf(pers et frub)

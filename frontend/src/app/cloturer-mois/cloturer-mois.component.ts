@@ -50,7 +50,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
         if (data != null) {
           // //console.log(data);
           for (let i = 0; i < data.length; i++) {
-            if (data[i].foldername != "ETAT") {
+            if (data[i].foldername != "ETAT"&&data[i].foldername != "FRUB") {
               this.folderCategories.push(data[i]);
             }
           }

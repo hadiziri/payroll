@@ -225,7 +225,7 @@ export class FilesGeneratorComponent implements OnInit {
  this.homeService.getEtatJournal().subscribe(
   (data) => {
     if(data!=null){
-     console.log(data);
+     //console.log(data);
      this.initProgress=this.initProgress+15;
       this.allEtatJournal=data;
       this.alljour=true;
@@ -248,7 +248,7 @@ export class FilesGeneratorComponent implements OnInit {
 this.homeService.getEtatMand().subscribe(
   (data) => {
     if(data!=null){
-   console.log(data);
+   //console.log(data);
    this.initProgress=this.initProgress+15;
       this.allEtatMand=data;
       this.allmand=true;
@@ -270,7 +270,7 @@ this.homeService.getEtatMand().subscribe(
 this.homeService.getEtatMip().subscribe(
   (data) => {
     if(data!=null){
-   console.log(data);
+   //console.log(data);
    this.initProgress=this.initProgress+15;
       this.allEtatMip=data;
       this.allmip=true;
@@ -294,7 +294,7 @@ this.homeService.getEtatRecap().subscribe(
     if(data!=null){
       this.initProgress=this.initProgress+15;
       this.allEtatRecap=data;
-    console.log(this.allEtatRecap);
+    //console.log(this.allEtatRecap);
     this.allrecap=true;
     this.disableSpinner();
     
@@ -315,7 +315,7 @@ this.homeService.getEtatRecap().subscribe(
 this.homeService.getEtatRet().subscribe(
   (data) => {
     if(data!=null){
-    console.log(data);
+    //console.log(data);
    this.initProgress=this.initProgress+15;
       this.allEtatRet=data;
       this.allret=true;
@@ -1066,9 +1066,9 @@ genererFichiers(structure:Structure){
   }else{
      this.codeStructure.push(structure.structurecodelike);
   }
-  console.log(this.codeStructure)
+ // console.log(this.codeStructure)
   if(this.codeStructure.map(s => (/^[a-z].*/i.test(s))).includes(true)){
-    console.log("alph")
+    //console.log("alph")
     this.homeService.generateFrubAStr(structure).subscribe(
       (data) => {
       

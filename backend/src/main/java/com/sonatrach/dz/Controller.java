@@ -151,6 +151,7 @@ import io.jsonwebtoken.lang.Collections;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -161,7 +162,9 @@ import net.sf.jasperreports.engine.data.JRCsvDataSource;
 import net.sf.jasperreports.engine.export.JRTextExporter;
 import net.sf.jasperreports.engine.export.JRTextExporterParameter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
+import net.sf.jasperreports.engine.fill.JRSwapFileVirtualizer;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.util.JRSwapFile;
 import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 
 /*
@@ -878,7 +881,11 @@ public class Controller {
 			JasperReport jasperReport13 = JasperCompileManager.compileReport(filerubN.getAbsolutePath());
 
 			JRBeanCollectionDataSource dataSource13 = new JRBeanCollectionDataSource(filtredFrubNum);
-			JasperPrint jasperPrint13 = JasperFillManager.fillReport(jasperReport13, null, dataSource13);
+			JRSwapFileVirtualizer virtualizer = null; 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			Map<String, Object> param = new HashMap<>();
+			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
+			JasperPrint jasperPrint13 = JasperFillManager.fillReport(jasperReport13, param, dataSource13);
 
 			JRXlsxExporter exporter13 = new JRXlsxExporter();
 			exporter13.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
@@ -980,7 +987,11 @@ public class Controller {
 			File filerubA = ResourceUtils.getFile("classpath:rubAlph.jrxml");
 			JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(filtredFrubT);
-			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, null, dataSource12);
+			JRSwapFileVirtualizer virtualizer = null; 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			Map<String, Object> param = new HashMap<>();
+			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
+			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, param, dataSource12);
 			JRXlsxExporter exporter12 = new JRXlsxExporter();
 			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
@@ -1045,7 +1056,11 @@ public class Controller {
 			File fileNewpaie = ResourceUtils.getFile("classpath:newPaie.jrxml");
 			JasperReport jasperReport10 = JasperCompileManager.compileReport(fileNewpaie.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource10 = new JRBeanCollectionDataSource(filtredNewPaie);
-			JasperPrint jasperPrint10 = JasperFillManager.fillReport(jasperReport10, null, dataSource10);
+			JRSwapFileVirtualizer virtualizer = null; 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			Map<String, Object> param = new HashMap<>();
+			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
+			JasperPrint jasperPrint10 = JasperFillManager.fillReport(jasperReport10, param, dataSource10);
 			JRXlsxExporter exporter10 = new JRXlsxExporter();
 			exporter10.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter10.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
@@ -1104,7 +1119,11 @@ public class Controller {
 			File filePers = ResourceUtils.getFile("classpath:pers.jrxml");
 			JasperReport jasperReport11 = JasperCompileManager.compileReport(filePers.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource11 = new JRBeanCollectionDataSource(filtredPers);
-			JasperPrint jasperPrint11 = JasperFillManager.fillReport(jasperReport11, null, dataSource11);
+			JRSwapFileVirtualizer virtualizer = null; 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			Map<String, Object> param = new HashMap<>();
+			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
+			JasperPrint jasperPrint11 = JasperFillManager.fillReport(jasperReport11, param, dataSource11);
 			JRXlsxExporter exporter11 = new JRXlsxExporter();
 			exporter11.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter11.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
@@ -1796,11 +1815,15 @@ public class Controller {
 			List<CloturePaie> files = clotureRepo.findByCategory(f.getFOLDERNAME());
 
 			for (int i = 0; i < files.size(); i++) {
+				if(files.get(i).getDESCFILETYPE().equals("frubAlph")) {
+					files.remove(files.get(i));
+				}else {
+					path = files.get(i).getFOLDERPATH() + files.get(i).getFOLDERNAME() + "\\" + currentYear + "\\"
+							+ dateFormat + "\\" + files.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 
-				path = files.get(i).getFOLDERPATH() + files.get(i).getFOLDERNAME() + "\\" + currentYear + "\\"
-						+ dateFormat + "\\" + files.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
-
-				files.get(i).setFOLDERPATH(path);
+					files.get(i).setFOLDERPATH(path);
+				}
+				
 
 			}
 
@@ -1902,6 +1925,9 @@ public class Controller {
 			String path;
 
 			for (int i = 0; i < toutLesCloturePaie.size(); i++) {
+				if(toutLesCloturePaie.get(i).getDESCFILETYPE().equals("frubAlph")) {
+					toutLesCloturePaie.remove(toutLesCloturePaie.get(i));
+				}
 				if (toutLesCloturePaie.get(i).getDESCFILETYPE().equals("pers")
 						|| toutLesCloturePaie.get(i).getDESCFILETYPE().equals("newpaie")
 						|| toutLesCloturePaie.get(i).getDESCFILETYPE().equals("frubA")
@@ -2208,11 +2234,15 @@ public class Controller {
 				fileMounth.mkdir();
 			}
 			// load file and compile it
-			System.out.println("frubAKOUZ");
+			//System.out.println("frubAKOUZ");
 			File filerubA = ResourceUtils.getFile("classpath:rubAlph.jrxml");
 			JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(lesFrubAlph);
-			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, null, dataSource12);
+			JRSwapFileVirtualizer virtualizer = null; 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			Map<String, Object> param = new HashMap<>();
+			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
+			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, param, dataSource12);
 			JRXlsxExporter exporter12 = new JRXlsxExporter();
 			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
@@ -2279,11 +2309,15 @@ public class Controller {
 				fileMounth.mkdir();
 			}
 			// load file and compile it
-			System.out.println("frubLNP");
+			//System.out.println("frubLNP");
 			File filerubA = ResourceUtils.getFile("classpath:rubAlph.jrxml");
 			JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(lesFrubAlph);
-			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, null, dataSource12);
+			JRSwapFileVirtualizer virtualizer = null; 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			Map<String, Object> param = new HashMap<>();
+			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
+			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, param, dataSource12);
 			JRXlsxExporter exporter12 = new JRXlsxExporter();
 			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
@@ -2350,11 +2384,15 @@ public class Controller {
 				fileMounth.mkdir();
 			}
 			// load file and compile it
-			System.out.println("frubMRSX");
+			//System.out.println("frubMRSX");
 			File filerubA = ResourceUtils.getFile("classpath:rubAlph.jrxml");
 			JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(lesFrubAlph);
-			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, null, dataSource12);
+			JRSwapFileVirtualizer virtualizer = null; 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			Map<String, Object> param = new HashMap<>();
+			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
+			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, param, dataSource12);
 			JRXlsxExporter exporter12 = new JRXlsxExporter();
 			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
@@ -2421,11 +2459,15 @@ public class Controller {
 				fileMounth.mkdir();
 			}
 			// load file and compile it
-			System.out.println("frubT");
+			//System.out.println("frubT");
 			File filerubA = ResourceUtils.getFile("classpath:rubAlph.jrxml");
 			JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(lesFrubAlph);
-			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, null, dataSource12);
+			JRSwapFileVirtualizer virtualizer = null; 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			Map<String, Object> param = new HashMap<>();
+			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
+			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, param, dataSource12);
 			JRXlsxExporter exporter12 = new JRXlsxExporter();
 			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
@@ -2492,11 +2534,15 @@ public class Controller {
 				fileMounth.mkdir();
 			}
 			// load file and compile it
-			System.out.println("frubQ");
+			//System.out.println("frubQ");
 			File filerubA = ResourceUtils.getFile("classpath:rubAlph.jrxml");
 			JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(lesFrubAlph);
-			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, null, dataSource12);
+			JRSwapFileVirtualizer virtualizer = null; 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			Map<String, Object> param = new HashMap<>();
+			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
+			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, param, dataSource12);
 			JRXlsxExporter exporter12 = new JRXlsxExporter();
 			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
@@ -2581,12 +2627,16 @@ public class Controller {
 			 * exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME,
 			 * outputFileName12); exporter12.exportReport();
 			 */
-			System.out.println("frubNum");
+			//System.out.println("frubNum");
 			// load file and compile it
 			File filerubN = ResourceUtils.getFile("classpath:rubNum.jrxml");
 			JasperReport jasperReport13 = JasperCompileManager.compileReport(filerubN.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource13 = new JRBeanCollectionDataSource(lesFrubNum);
-			JasperPrint jasperPrint13 = JasperFillManager.fillReport(jasperReport13, null, dataSource13);
+			JRSwapFileVirtualizer virtualizer = null; 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			Map<String, Object> param = new HashMap<>();
+			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
+			JasperPrint jasperPrint13 = JasperFillManager.fillReport(jasperReport13, param, dataSource13);
 			JRXlsxExporter exporter13 = new JRXlsxExporter();
 			exporter13.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter13.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
@@ -2639,7 +2689,11 @@ public class Controller {
 			File fileNewpaie = ResourceUtils.getFile("classpath:newPaie.jrxml");
 			JasperReport jasperReport10 = JasperCompileManager.compileReport(fileNewpaie.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource10 = new JRBeanCollectionDataSource(lesNewpaie);
-			JasperPrint jasperPrint10 = JasperFillManager.fillReport(jasperReport10, null, dataSource10);
+			JRSwapFileVirtualizer virtualizer = null; 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			Map<String, Object> param = new HashMap<>();
+			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
+			JasperPrint jasperPrint10 = JasperFillManager.fillReport(jasperReport10, param, dataSource10);
 			JRXlsxExporter exporter10 = new JRXlsxExporter();
 			exporter10.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter10.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
@@ -2693,7 +2747,11 @@ public class Controller {
 			File filePers = ResourceUtils.getFile("classpath:pers.jrxml");
 			JasperReport jasperReport11 = JasperCompileManager.compileReport(filePers.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource11 = new JRBeanCollectionDataSource(lesPers);
-			JasperPrint jasperPrint11 = JasperFillManager.fillReport(jasperReport11, null, dataSource11);
+			JRSwapFileVirtualizer virtualizer = null; 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			Map<String, Object> param = new HashMap<>();
+			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
+			JasperPrint jasperPrint11 = JasperFillManager.fillReport(jasperReport11, param, dataSource11);
 			JRXlsxExporter exporter11 = new JRXlsxExporter();
 			exporter11.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter11.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);

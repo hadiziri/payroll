@@ -75,8 +75,8 @@
           <th mat-header-cell *matHeaderCellDef class="header_table" style="padding-left: 20px;"> Action </th>
           <td mat-cell *matCellDef="let element">
             <mat-grid-list cols="3">
-              <button class="btn btn-info" id="first_btn" style="background-color: #61C2E6;"  (click)="genererEtats(element)" [disabled]="getStatus(element)==4||getStatus(element)==0||getStatus(element)==10||getStatus(element)==8" >Etats</button>
-              <button class="btn btn-secondary" id="second_btn" style="background-color: #06108A;" (click)="genererFichiers(element)" [disabled]="getStatus(element)==5||getStatus(element)==0||getStatus(element)==10||getStatus(element)==8">Fichiers</button>
+              <button class="btn btn-info" id="first_btn" style="background-color: #61C2E6;"  (click)="genererEtats(element)" [disabled]="getStatus(element)==4||getStatus(element)==0||getStatus(element)==10||getStatus(element)==8||getStatus(element)==2" >Etats</button>
+              <button class="btn btn-secondary" id="second_btn" style="background-color: #06108A;" (click)="genererFichiers(element)" [disabled]="getStatus(element)==5||getStatus(element)==0||getStatus(element)==10||getStatus(element)==8||getStatus(element)==2">Fichiers</button>
               <button class="btn btn-success" id="first_btn" (click)="sendEmail(element)" [disabled]="getStatus(element)!=10&&getStatus(element)!=8">Envoyer</button>
               <button class="btn btn-danger" id="first_btn" (click)="suspendreStructure(element)" [disabled]="getStatus(element)==2||getStatus(element)==0||getStatus(element)==3">Suspendre</button>
               <button class="btn btn-secondary" id="second_btn" (click)="activerStructure(element)" [disabled]="getStatus(element)!=0">Activer</button>
@@ -94,17 +94,17 @@
     <mat-paginator [pageSizeOptions]="[10, 15,20]"></mat-paginator>
   </div>
   
-  <mat-toolbar style="background-color:#ADA7A7; margin-top: 10px; margin-bottom: 10px; height: 50px;">
+  <mat-toolbar style="background-color:#000000; margin-top: 10px; margin-bottom: 10px; height: 50px;">
     
     
-    <span style="color: #09AA6F;" *ngIf="isDataLoaded">Données Chargées</span>
-    <span style="color: #D10F18;" *ngIf="!isDataLoaded">Données Non Chargées</span>
+    <span style="color: #09AA6F;text-shadow: 2px 2px 5px #939592;" *ngIf="isDataLoaded">Données chargées</span>
+    <span style="color: #D10F18;text-shadow: 2px 2px 5px #939592;" *ngIf="!isDataLoaded">Données non chargées</span>
     <span class="example-spacer"></span>
     <div [ngSwitch]="isDataLoaded">
       <mat-icon *ngSwitchCase="false" style="margin-top: 8px; color: #D10F18; ">cancel</mat-icon>
       <mat-icon *ngSwitchCase="true" style="margin-top: 8px;color: #09AA6F; ">check_circle</mat-icon>
       </div>
-      <button mat-flat-button color="warn"  disabled style="margin-left: 5px; color: white;" >Recharger les données
+      <button mat-flat-button color="warn"  disabled style="margin-left: 5px; color: black;background-color: #A0DFC0;" >Recharger les données
         
         <mat-icon aria-hidden="false"  style="cursor: pointer; " (click)="chargerDonnees()">autorenew</mat-icon>
       </button>

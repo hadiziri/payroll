@@ -394,7 +394,7 @@
 		<band height="58" splitType="Prevent">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement x="-10" y="13" width="350" height="24" uuid="d065f8ed-0c05-47d0-a679-a392c9cfabe5">
+				<reportElement x="-10" y="13" width="261" height="24" uuid="d065f8ed-0c05-47d0-a679-a392c9cfabe5">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -402,10 +402,10 @@
 					<pen lineWidth="0.0" lineStyle="Dashed"/>
 				</box>
 				<textElement textAlignment="Left"/>
-				<text><![CDATA[!   MATRICULE                                                     !]]></text>
+				<text><![CDATA[!   MATRICULE                                                     ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="450" y="13" width="560" height="24" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+				<reportElement x="360" y="13" width="560" height="24" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -413,10 +413,10 @@
 					<pen lineWidth="0.0" lineStyle="Dashed"/>
 				</box>
 				<textElement textAlignment="Left"/>
-				<text><![CDATA[!   NOM ET PRENOM                                              !]]></text>
+				<text><![CDATA[!   NOM ET PRENOM                                              ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1010" y="13" width="200" height="24" uuid="4b1f5b5c-4c61-4159-9357-041fd8e3e775">
+				<reportElement x="920" y="13" width="299" height="24" uuid="4b1f5b5c-4c61-4159-9357-041fd8e3e775">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -426,7 +426,7 @@
 				<text><![CDATA[!  NUMERO COMPTE       ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1210" y="13" width="170" height="24" uuid="4b1f5b5c-4c61-4159-9357-041fd8e3e775">
+				<reportElement x="1219" y="13" width="161" height="24" uuid="4b1f5b5c-4c61-4159-9357-041fd8e3e775">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -449,16 +449,16 @@
 			</staticText>
 			<staticText>
 				<reportElement x="-10" y="0" width="1620" height="13" uuid="bf985571-26a3-41fc-9a7e-e395c29a60fe"/>
-				<text><![CDATA[+---------------------------+--------+---------------------------------------------+----------------+-------------+----------------+]]></text>
+				<text><![CDATA[+--------------------+--------+---------------------------------------------+-----------------------+-------------+----------------+]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="-10" y="37" width="1620" height="14" uuid="8afe1fc3-c7c2-44bc-af43-80d93af68b27">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<text><![CDATA[+---------------------------+--------+---------------------------------------------+----------------+-------------+----------------+]]></text>
+				<text><![CDATA[+--------------------+--------+---------------------------------------------+-----------------------+-------------+----------------+]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="340" y="13" width="110" height="24" uuid="9937416f-8a38-440d-b8e4-155b5b910e17">
+				<reportElement x="251" y="13" width="109" height="24" uuid="9937416f-8a38-440d-b8e4-155b5b910e17">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -472,7 +472,7 @@
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField>
-				<reportElement x="-10" y="0" width="350" height="20" uuid="1324277f-1cf1-4cc2-a5f3-88ededc0ff6e">
+				<reportElement x="-10" y="0" width="261" height="20" uuid="1324277f-1cf1-4cc2-a5f3-88ededc0ff6e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>
 				</reportElement>
 				<box>
@@ -484,7 +484,7 @@
 				<textFieldExpression><![CDATA[$F{bulmatricule}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="450" y="0" width="560" height="20" uuid="b9c4d404-6ffe-47b5-aeaf-ee9ffb804c6a">
+				<reportElement x="360" y="0" width="560" height="20" uuid="b9c4d404-6ffe-47b5-aeaf-ee9ffb804c6a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="372fc4a5-58e8-4f68-9b0b-b8c92b4521d4"/>
 				</reportElement>
 				<box>
@@ -496,7 +496,7 @@
 				<textFieldExpression><![CDATA["!"+$F{bulnom}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1010" y="0" width="200" height="20" uuid="72ac64bb-1484-4b8a-8bdb-6ddcf6c57c70">
+				<reportElement x="920" y="0" width="290" height="20" uuid="72ac64bb-1484-4b8a-8bdb-6ddcf6c57c70">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aafde1ac-9f21-4267-b383-ffd18072315c"/>
 				</reportElement>
 				<box>
@@ -505,7 +505,7 @@
 				<textElement textAlignment="Left">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{bulncompte}==null?"!":"!"+"   "+$F{bulncompte}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{bulncompte}==null?"!":"!"+$F{bulncompte}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="1380" y="0" width="230" height="20" uuid="c7d9f004-ba41-4c99-9a6c-cfbf3173864a">
@@ -533,7 +533,7 @@
 				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{bulnet})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="340" y="0" width="110" height="20" uuid="52c3f95c-e640-4324-8f7c-41678ae6fdf8">
+				<reportElement x="251" y="0" width="109" height="20" uuid="52c3f95c-e640-4324-8f7c-41678ae6fdf8">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aafde1ac-9f21-4267-b383-ffd18072315c"/>
 				</reportElement>
 				<box>
