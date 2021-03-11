@@ -41,22 +41,30 @@
             <th mat-header-cell *matHeaderCellDef class="header_table"> Etat Structure </th>
             <td mat-cell *matCellDef="let element">
   
-              <div [ngSwitch]="element.statusstructure">
-                <svg width="25" height="25" viewBox="0 0 100 100" *ngSwitchCase="0">
+              <div [ngSwitch]="getStatus(element)">
+                <svg width="25" height="25" viewBox="0 0 100 100" *ngSwitchCase="2">
                   <circle cx="60" cy="60" r="40" style="fill:#3DBC14" />
                 </svg>
-                <svg width="25" height="25" viewBox="0 0 100 100" *ngSwitchCase="1">
+                <svg width="25" height="25" viewBox="0 0 100 100" *ngSwitchCase="10">
                   <circle cx="60" cy="60" r="40" style="fill:orange" />
                 </svg>
-                <svg width="25" height="25" viewBox="0 0 100 100" *ngSwitchCase="2">
+                <svg width="25" height="25" viewBox="0 0 100 100" *ngSwitchCase="8">
+                  <circle cx="60" cy="60" r="40" style="fill:orange" />
+                </svg>
+                <svg width="25" height="25" viewBox="0 0 100 100" *ngSwitchCase="0">
                   <circle cx="60" cy="60" r="40" style="fill:red" />
                 </svg>
                 <svg width="25" height="25" viewBox="0 0 100 100" *ngSwitchCase="3">
                   <circle cx="60" cy="60" r="40" style="fill:#FBED64" />
                 </svg>
+                <svg width="25" height="25" viewBox="0 0 100 100" *ngSwitchCase="4">
+                  <circle cx="60" cy="60" r="40" style="fill:#61C2E6" />
+                </svg>
+                <svg width="25" height="25" viewBox="0 0 100 100" *ngSwitchCase="5">
+                  <circle cx="60" cy="60" r="40" style="fill:#0437A4" />
+                </svg>
   
               </div>
-  
             </td>
           </ng-container>
   
@@ -79,7 +87,7 @@
       </div>
   
     </div>
-    <div class="dropdown" style="margin-top: 10px;">
+    <div class="dropdown">
       <button class="btn" type="button" data-toggle="dropdown">Signification état structure
         <span class="caret"></span></button>
       <ul class="dropdown-menu">
@@ -87,25 +95,37 @@
           <svg width="25" height="25" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="40" fill="#3DBC14" />
           </svg>
-          <strong> fichiers générées et envoyées</strong>
+          <strong> fichiers et états générés et envoyés</strong>
         </li>
         <li>
           <svg width="25" height="25" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="40" fill="orange" />
           </svg>
-          <strong> fichiers générées et non envoyées</strong>
+          <strong> fichiers et états générés et non envoyés</strong>
         </li>
         <li>
           <svg width="25" height="25" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="40" fill="#FBED64" />
           </svg>
-          <strong> fichiers non générées et non envoyées</strong>
+          <strong> fichiers et états non générés et non envoyés</strong>
         </li>
         <li>
           <svg width="25" height="25" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="40" fill="red" />
           </svg>
           <strong> structure suspendue</strong>
+        </li>
+        <li>
+          <svg width="25" height="25" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" fill="#61C2E6" />
+          </svg>
+          <strong>  états générés et non envoyés</strong>
+        </li>
+        <li>
+          <svg width="25" height="25" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" fill="#0437A4" />
+          </svg>
+          <strong>  fichiers  générés et non envoyés</strong>
         </li>
       </ul>
     </div>

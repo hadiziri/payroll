@@ -1143,6 +1143,37 @@ public class Controller {
 		return null;
 
 	}
+	
+	//********************************Activer/suspendre Tout********************************************************************************
+	@GetMapping({"suspendreAll"})
+	public List<Structure> suspendreAll() {
+		try {
+			List<Structure> structures=structureRepo.findAll();
+			for(int i=0;i<structures.size();i++) {
+				structures.get(i).setIsactif(0);
+				structureRepo.save(structures.get(i));
+			}
+			return structures;
+		}catch(Exception e) {
+			System.out.println(e.getMessage() + "==>suspendreAll() ");
+		}
+		return null;
+	}
+	
+	@GetMapping({"activerAll"})
+	public List<Structure> activerAll() {
+		try {
+			List<Structure> structures=structureRepo.findAll();
+			for(int i=0;i<structures.size();i++) {
+				structures.get(i).setIsactif(1);
+				structureRepo.save(structures.get(i));
+			}
+			return structures;
+		}catch(Exception e) {
+			System.out.println(e.getMessage() + "==>suspendreAll() ");
+		}
+		return null;
+	}
 
 	// *********************************************Récuperer les etat paie(filtrage
 	// par mois et annee)**********************************************************
@@ -1794,7 +1825,7 @@ public class Controller {
 	public List<Folder> getallFolders() {
 		List<Folder> folders = new ArrayList();
 		try {
-			folders = folderRepo.findByStatus(-1);
+			folders = folderRepo.findByStatus(1);
 			return folders;
 		} catch (Exception e) {
 			System.out.println("Exception getallFolders()==>" + e.getMessage());
@@ -1815,14 +1846,13 @@ public class Controller {
 			List<CloturePaie> files = clotureRepo.findByCategory(f.getFOLDERNAME());
 
 			for (int i = 0; i < files.size(); i++) {
-				if(files.get(i).getDESCFILETYPE().equals("frubAlph")) {
-					files.remove(files.get(i));
-				}else {
+				
+				
 					path = files.get(i).getFOLDERPATH() + files.get(i).getFOLDERNAME() + "\\" + currentYear + "\\"
 							+ dateFormat + "\\" + files.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 
 					files.get(i).setFOLDERPATH(path);
-				}
+				
 				
 
 			}
@@ -1925,9 +1955,7 @@ public class Controller {
 			String path;
 
 			for (int i = 0; i < toutLesCloturePaie.size(); i++) {
-				if(toutLesCloturePaie.get(i).getDESCFILETYPE().equals("frubAlph")) {
-					toutLesCloturePaie.remove(toutLesCloturePaie.get(i));
-				}
+				
 				if (toutLesCloturePaie.get(i).getDESCFILETYPE().equals("pers")
 						|| toutLesCloturePaie.get(i).getDESCFILETYPE().equals("newpaie")
 						|| toutLesCloturePaie.get(i).getDESCFILETYPE().equals("frubA")

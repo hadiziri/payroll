@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name ="FOLDER")
 @NamedQueries({@NamedQuery(name = "Folder.findByFolderName", query = "SELECT p FROM Folder p WHERE FOLDERNAME=?1"),
-	@NamedQuery(name = "Folder.findByStatus", query = "SELECT p FROM Folder p WHERE STATUSFOLDER!=?1")})
+	@NamedQuery(name = "Folder.findByStatus", query = "SELECT p FROM Folder p WHERE STATUSFOLDER=?1")})
 @SequenceGenerator(name="FOLDER_ID_SEQ",initialValue=7, allocationSize=1)
 public class Folder {
 	@Id

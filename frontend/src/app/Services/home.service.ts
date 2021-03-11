@@ -274,4 +274,23 @@ export class HomeService {
     );
   }
 
+
+  public suspendreAll():Observable<Array<Structure>>{
+    return this.httpClient.get<Array<Structure>>(this.host+"suspendreAll").pipe(
+      catchError((err) => {
+         //console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
+  public activerAll():Observable<Array<Structure>>{
+    return this.httpClient.get<Array<Structure>>(this.host+"activerAll").pipe(
+      catchError((err) => {
+         //console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
 }

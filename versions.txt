@@ -1,3 +1,10 @@
+4.7
+---
+-génération tout les fichiers ,les etats pour toutes les structures
+-suspension de toutes les structures
+-activation de toutes les structures
+-amelioration fichiers jasper(remarque merouane)
+---------------------------------------------------------------------------------------------------
 4.6
 ---
 -génération fichiers avec swap(pour frub,newpaie,pers)

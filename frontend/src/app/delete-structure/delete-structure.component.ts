@@ -232,5 +232,18 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
         window.location.reload();
       });
     }
+    getStatus(element:Structure):number{
+      if(element.statusstructure==3){
+        return 3;
+      }else{
+        if(element.statusstructure==2){
+          return 2;
+        }else{
+          return element.statusstructure*(element.flagetat+element.flagfichier)*element.isactif
+        }
+       
+      }
+      
+    }
 
 }

@@ -16,7 +16,7 @@ import com.sonatrach.dz.etatJournal.domain.EtatJournalId;
 @Entity
 @Table(name ="PAIE_ETAT_MIP")
 @IdClass(EtatMipId.class)
-@NamedQuery(name = "EtatMip.findByPayMonth", query = "SELECT p FROM EtatMip  p  order by divop,dir")
+@NamedQuery(name = "EtatMip.findByPayMonth", query = "SELECT p FROM EtatMip  p  order by divop,dir,bulmatricule")
 public class EtatMip implements Serializable{
 	@Id
 	@Column(name="BUL_MATRICULE")

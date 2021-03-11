@@ -63,7 +63,7 @@
                 <circle cx="60" cy="60" r="40" style="fill:#61C2E6" />
               </svg>
               <svg width="25" height="25" viewBox="0 0 100 100" *ngSwitchCase="5">
-                <circle cx="60" cy="60" r="40" style="fill:#06108A" />
+                <circle cx="60" cy="60" r="40" style="fill:#0437A4" />
               </svg>
 
             </div>
@@ -75,8 +75,8 @@
           <th mat-header-cell *matHeaderCellDef class="header_table" style="padding-left: 20px;"> Action </th>
           <td mat-cell *matCellDef="let element">
             <mat-grid-list cols="3">
-              <button class="btn btn-info" id="first_btn" style="background-color: #61C2E6;"  (click)="genererEtats(element)" [disabled]="getStatus(element)==4||getStatus(element)==0||getStatus(element)==10||getStatus(element)==8||getStatus(element)==2" >Etats</button>
-              <button class="btn btn-secondary" id="second_btn" style="background-color: #06108A;" (click)="genererFichiers(element)" [disabled]="getStatus(element)==5||getStatus(element)==0||getStatus(element)==10||getStatus(element)==8||getStatus(element)==2">Fichiers</button>
+              <button class="btn btn-info" id="first_btn" style="background-color: #61C2E6;"  (click)="genererEtats(element,1)" [disabled]="getStatus(element)==4||getStatus(element)==0||getStatus(element)==10||getStatus(element)==8||getStatus(element)==2" >Etats</button>
+              <button class="btn btn-secondary" id="second_btn" style="background-color: #0437A4;" (click)="genererFichiers(element,1)" [disabled]="getStatus(element)==5||getStatus(element)==0||getStatus(element)==10||getStatus(element)==8||getStatus(element)==2">Fichiers</button>
               <button class="btn btn-success" id="first_btn" (click)="sendEmail(element)" [disabled]="getStatus(element)!=10&&getStatus(element)!=8">Envoyer</button>
               <button class="btn btn-danger" id="first_btn" (click)="suspendreStructure(element)" [disabled]="getStatus(element)==2||getStatus(element)==0||getStatus(element)==3">Suspendre</button>
               <button class="btn btn-secondary" id="second_btn" (click)="activerStructure(element)" [disabled]="getStatus(element)!=0">Activer</button>
@@ -99,15 +99,38 @@
     
     <span style="color: #09AA6F;text-shadow: 2px 2px 5px #939592;" *ngIf="isDataLoaded">Données chargées</span>
     <span style="color: #D10F18;text-shadow: 2px 2px 5px #939592;" *ngIf="!isDataLoaded">Données non chargées</span>
-    <span class="example-spacer"></span>
+    <span ></span>
     <div [ngSwitch]="isDataLoaded">
-      <mat-icon *ngSwitchCase="false" style="margin-top: 8px; color: #D10F18; ">cancel</mat-icon>
-      <mat-icon *ngSwitchCase="true" style="margin-top: 8px;color: #09AA6F; ">check_circle</mat-icon>
+      <mat-icon *ngSwitchCase="false" style="margin-top: 8px; color: #D10F18;text-shadow: 2px 2px 5px #726E6E; ">cancel</mat-icon>
+      <mat-icon *ngSwitchCase="true" style="margin-top: 8px;color: #09AA6F;text-shadow: 2px 2px 5px #726E6E; ">check_circle</mat-icon>
       </div>
+      <span class="example-spacer"></span>
       <button mat-flat-button color="warn"  disabled style="margin-left: 5px; color: black;background-color: #A0DFC0;" >Recharger les données
         
-        <mat-icon aria-hidden="false"  style="cursor: pointer; " (click)="chargerDonnees()">autorenew</mat-icon>
+        <mat-icon aria-hidden="false"  style="cursor: pointer;text-shadow: 2px 2px 5px #080808; " (click)="chargerDonnees()">autorenew</mat-icon>
       </button>
+      
+      <button mat-flat-button color="warn"   style="margin-left: 5px; color: white;background-color: #61C2E6;" (click)="genererToutLesEtats(0)">	
+        	Tout les états<mat-icon style="text-shadow: 2px 2px 5px #080808;">done_all</mat-icon>
+       
+      
+      </button>
+      <button mat-flat-button color="warn"   style="margin-left: 5px; color: white;background-color: #0437A4; "(click)="genererToutLesFichiers(0)" >
+        Tout les fichiers<mat-icon style="text-shadow: 2px 2px 5px #080808;">done_all</mat-icon>
+        
+        
+      </button>
+      <button mat-flat-button color="warn"   style="margin-left: 5px; color: white;background-color: #E10E24;"(click)="suspendreAll()" >
+        Suspendre tout<mat-icon style="text-shadow: 2px 2px 5px #080808;">done_all</mat-icon>
+        
+        
+      </button>
+      <button mat-flat-button color="warn"   style="margin-left: 5px; color: white;background-color: orange;" (click)="activerAll()">
+        Activer tout<mat-icon style="text-shadow: 2px 2px 5px #080808;">done_all</mat-icon>
+        
+        
+      </button>
+      
   </mat-toolbar>
 
   <div class="dropdown">
@@ -142,13 +165,13 @@
         <svg width="25" height="25" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="40" fill="#61C2E6" />
         </svg>
-        <strong>  états non générés et non envoyés</strong>
+        <strong>  états générés et non envoyés</strong>
       </li>
       <li>
         <svg width="25" height="25" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="40" fill="#06108A" />
+          <circle cx="50" cy="50" r="40" fill="#0437A4" />
         </svg>
-        <strong>  fichiers non générés et non envoyés</strong>
+        <strong>  fichiers  générés et non envoyés</strong>
       </li>
     </ul>
   </div>
@@ -174,7 +197,7 @@
   <div  class="overlay"  *ngIf="showProgress">
     <mat-card class="center" style="width: 25%; background-color: #015F47; border-color: white;" >
       <mat-card-header>
-        <mat-card-title style="color: white;text-align: center;">Génération des Etats en cours... </mat-card-title>
+        <mat-card-title style="color: white;text-align: center;text-shadow: 2px 2px 5px #428A61;">Génération des Etats en cours... </mat-card-title>
         <mat-card-subtitle style="font-size: 15px; font-weight: bold; color: white;" *ngFor="let uploadedFile of uploadedFiles">
           <mat-icon>insert_drive_file</mat-icon>
           {{uploadedFile.name}} - {{uploadedFile.progress}}%
@@ -187,7 +210,7 @@
   <div  class="overlay"  *ngIf="showProgressFichier">
     <mat-card class="center" style="width: 25%; background-color: #015F47; border-color: white;" >
       <mat-card-header>
-        <mat-card-title style="color: white;text-align: center;">Génération des fichiers en cours... </mat-card-title>
+        <mat-card-title style="color: white;text-align: center;text-shadow: 2px 2px 5px #428A61;">Génération des fichiers en cours... </mat-card-title>
         <mat-card-subtitle style="font-size: 15px; font-weight: bold; color: white;" *ngFor="let uploadedFichier of uploadedFichiers">
           <mat-icon>insert_drive_file</mat-icon>
           {{uploadedFichier.name}} - {{uploadedFichier.progress}}%
@@ -196,11 +219,34 @@
       </mat-card-header>
     </mat-card>
   </div>
-  
+  <div  class="overlay"  *ngIf="showProgressAllFichier">
+    <mat-card class="center" style="width: 25%; background-color: #015F47; border-color: white;" >
+      <mat-card-header>
+        <mat-card-title style="color: white; font-size: 19px;text-align: center;text-shadow: 2px 2px 5px #428A61;">Génération de tout les fichiers </mat-card-title>
+        <mat-card-subtitle style="font-size: 15px; font-weight: bold; color: white; text-align: center;" >
+          
+          Génération des fichiers de la structure 	&#10032;{{generatedStructure}}&#10032;    en cours...
+          <mat-progress-bar mode="indeterminate"  ></mat-progress-bar>
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+  <div  class="overlay"  *ngIf="showProgressAllEtat">
+    <mat-card class="center" style="width: 25%; background-color: #015F47; border-color: white;" >
+      <mat-card-header>
+        <mat-card-title style="color: white; font-size: 19px;text-align: center;text-shadow: 2px 2px 5px #428A61;">Génération de tout les états </mat-card-title>
+        <mat-card-subtitle style="font-size: 15px; font-weight: bold; color: white; text-align: center;" >
+          
+          Génération des états de la structure 	&#10032;{{generatedStructureE}}&#10032;    en cours...
+          <mat-progress-bar mode="indeterminate"  ></mat-progress-bar>
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
   <div  class="overlay"  *ngIf="showProgressInit">
     <mat-card class="center" style="width: 20%; background-color: #015F47; border-color: white;" >
       <mat-card-header>
-        <mat-card-title style="color: white; font-size: 19px;text-align: center;">Initialisation des données en cours... </mat-card-title>
+        <mat-card-title style="color: white; font-size: 19px;text-align: center;text-shadow: 2px 2px 5px #428A61;">Initialisation des données en cours... </mat-card-title>
         <mat-card-subtitle style="font-size: 15px; font-weight: bold; color: white; text-align: center;" >
         
           Chargement des données - {{initProgress}}%
