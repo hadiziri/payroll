@@ -1,3 +1,8 @@
+4.9
+---
+-prob logout
+-prob delete all swap
+---------------------------------------------------------------------------------------------------
 4.8
 ---
 -Delete all swap files (login component)

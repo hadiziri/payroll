@@ -35,6 +35,7 @@ import javax.validation.Valid;
 
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -263,6 +264,8 @@ public class Controller {
 	ArchiveSentGfilesRepo archiveSentGfilesRepo;
 	@Autowired
 	RubAlphRepo rubAlphRepo;
+	@Value("${grokonez.app.swap}")
+	String SwapPath;
 
 	// ****************************************API*****************************************************************************
 	// Api Test
@@ -639,8 +642,9 @@ public class Controller {
 
 	@GetMapping({"deleteAllSwap"})
 	public PayMonth deleteAllSwap() {
-		File path=new File("C:\\tmp");
+	
 		try {
+			File path=new File(SwapPath.toString());
 			FileUtils.cleanDirectory(path);
 			PayMonth currentDate = paymonthRepo.findByState();
 			return currentDate;
@@ -943,7 +947,7 @@ public class Controller {
 
 			JRBeanCollectionDataSource dataSource13 = new JRBeanCollectionDataSource(filtredFrubNum);
 			JRSwapFileVirtualizer virtualizer = null; 
-			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile(SwapPath, 2048, 1024), true); 
 			Map<String, Object> param = new HashMap<>();
 			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			JasperPrint jasperPrint13 = JasperFillManager.fillReport(jasperReport13, param, dataSource13);
@@ -965,7 +969,7 @@ public class Controller {
 					+ ".dbf";
 			copyFile(outputFileName13.toString(), pathWithMounth2, pathfile);
 			copyFile(pathDbf, pathWithMounth2, pathfile2);
-
+			virtualizer.cleanup();
 			return structure;
 
 		} catch (Exception e) {
@@ -1049,7 +1053,7 @@ public class Controller {
 			JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(filtredFrubT);
 			JRSwapFileVirtualizer virtualizer = null; 
-			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile(SwapPath, 2048, 1024), true); 
 			Map<String, Object> param = new HashMap<>();
 			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, param, dataSource12);
@@ -1070,6 +1074,7 @@ public class Controller {
 					+ ".dbf";
 			copyFile(outputFileName12.toString(), pathWithMounth2, pathfile);
 			copyFile(pathDbf, pathWithMounth2, pathfile2);
+			virtualizer.cleanup();
 			return structure;
 
 		} catch (Exception e) {
@@ -1118,7 +1123,7 @@ public class Controller {
 			JasperReport jasperReport10 = JasperCompileManager.compileReport(fileNewpaie.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource10 = new JRBeanCollectionDataSource(filtredNewPaie);
 			JRSwapFileVirtualizer virtualizer = null; 
-			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile(SwapPath, 2048, 1024), true); 
 			Map<String, Object> param = new HashMap<>();
 			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			JasperPrint jasperPrint10 = JasperFillManager.fillReport(jasperReport10, param, dataSource10);
@@ -1131,7 +1136,7 @@ public class Controller {
 			exporter10.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName10);
 			exporter10.exportReport();
 			generatedToDBF("", outputFileName10.toString(), pathWithStructure);
-
+			virtualizer.cleanup();
 			return structure;
 		} catch (Exception e) {
 			System.out.println(e.getMessage() + "==>generateNewPaieStr()");
@@ -1181,7 +1186,7 @@ public class Controller {
 			JasperReport jasperReport11 = JasperCompileManager.compileReport(filePers.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource11 = new JRBeanCollectionDataSource(filtredPers);
 			JRSwapFileVirtualizer virtualizer = null; 
-			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile(SwapPath, 2048, 1024), true); 
 			Map<String, Object> param = new HashMap<>();
 			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			JasperPrint jasperPrint11 = JasperFillManager.fillReport(jasperReport11, param, dataSource11);
@@ -1195,7 +1200,8 @@ public class Controller {
 
 			exporter11.exportReport();
 			generatedToDBF("", outputFileName11.toString(), pathWithStructure);
-
+			
+			virtualizer.cleanup();
 			return structure;
 		} catch (Exception e) {
 			System.out.println(e.getMessage() + "==>generatePersStr()");
@@ -2321,7 +2327,7 @@ public class Controller {
 			JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(lesFrubAlph);
 			JRSwapFileVirtualizer virtualizer = null; 
-			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile(SwapPath, 2048, 1024), false); 
 			Map<String, Object> param = new HashMap<>();
 			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, param, dataSource12);
@@ -2396,7 +2402,7 @@ public class Controller {
 			JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(lesFrubAlph);
 			JRSwapFileVirtualizer virtualizer = null; 
-			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile(SwapPath, 2048, 1024), false); 
 			Map<String, Object> param = new HashMap<>();
 			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, param, dataSource12);
@@ -2471,7 +2477,7 @@ public class Controller {
 			JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(lesFrubAlph);
 			JRSwapFileVirtualizer virtualizer = null; 
-			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile(SwapPath, 2048, 1024), false); 
 			Map<String, Object> param = new HashMap<>();
 			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, param, dataSource12);
@@ -2546,7 +2552,7 @@ public class Controller {
 			JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(lesFrubAlph);
 			JRSwapFileVirtualizer virtualizer = null; 
-			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile(SwapPath, 2048, 1024), false); 
 			Map<String, Object> param = new HashMap<>();
 			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, param, dataSource12);
@@ -2621,7 +2627,7 @@ public class Controller {
 			JasperReport jasperReport12 = JasperCompileManager.compileReport(filerubA.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource12 = new JRBeanCollectionDataSource(lesFrubAlph);
 			JRSwapFileVirtualizer virtualizer = null; 
-			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile(SwapPath, 2048, 1024), false); 
 			Map<String, Object> param = new HashMap<>();
 			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, param, dataSource12);
@@ -2715,7 +2721,7 @@ public class Controller {
 			JasperReport jasperReport13 = JasperCompileManager.compileReport(filerubN.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource13 = new JRBeanCollectionDataSource(lesFrubNum);
 			JRSwapFileVirtualizer virtualizer = null; 
-			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile(SwapPath, 2048, 1024), false); 
 			Map<String, Object> param = new HashMap<>();
 			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			JasperPrint jasperPrint13 = JasperFillManager.fillReport(jasperReport13, param, dataSource13);
@@ -2772,7 +2778,7 @@ public class Controller {
 			JasperReport jasperReport10 = JasperCompileManager.compileReport(fileNewpaie.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource10 = new JRBeanCollectionDataSource(lesNewpaie);
 			JRSwapFileVirtualizer virtualizer = null; 
-			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile(SwapPath, 2048, 1024), false); 
 			Map<String, Object> param = new HashMap<>();
 			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			JasperPrint jasperPrint10 = JasperFillManager.fillReport(jasperReport10, param, dataSource10);
@@ -2830,7 +2836,7 @@ public class Controller {
 			JasperReport jasperReport11 = JasperCompileManager.compileReport(filePers.getAbsolutePath());
 			JRBeanCollectionDataSource dataSource11 = new JRBeanCollectionDataSource(lesPers);
 			JRSwapFileVirtualizer virtualizer = null; 
-			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile("C:\\tmp", 2048, 1024), false); 
+			virtualizer = new JRSwapFileVirtualizer(3, new JRSwapFile(SwapPath, 2048, 1024), false); 
 			Map<String, Object> param = new HashMap<>();
 			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			JasperPrint jasperPrint11 = JasperFillManager.fillReport(jasperReport11, param, dataSource11);

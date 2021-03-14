@@ -346,6 +346,8 @@ this.initProgress=25;
   sendEmail(structure:Structure){
     this.showSpinner=true;
     this.eFiles=[];
+    this.mailRequest.to=[];
+    this.email.receiver="";
     /**************initialisation of mail request************************************* */
     //this.mailRequest.to=structure.emailgroupmanagers;
     //this.mailRequest.to.push("DSI-Exploitation_paie@Sonatrach.dz")
