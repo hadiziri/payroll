@@ -39,10 +39,11 @@
                   {{getErrorEmail()}}
                 </mat-error>
               </mat-form-field>
-    
+             
               <button mat-flat-button color="warn"  disabled style="margin-left: 5px;" >Ajouter adresse email
                 <mat-icon aria-hidden="false"  style="cursor: pointer; " (click)="addInput()">add_circle</mat-icon>
               </button>
+        
               <br>
           <h3 >Sélectionner des fichiers</h3>
         <ul >
@@ -53,8 +54,8 @@
             </li>
         </ul> 
         
-        <button [disabled]="!formGroup.valid" mat-raised-button class="btn btn-success" mat-button>Envoyer les fichiers</button>
-            </form>
+        <button [disabled]="!formGroup.valid||nbClick==0" mat-raised-button class="btn btn-success" mat-button>Envoyer les fichiers</button>
+      </form>
     </mat-card-content>
    
   </mat-card>
