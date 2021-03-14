@@ -1,3 +1,8 @@
+4.8
+---
+-Delete all swap files (login component)
+-copy files to print in folder FileToPrint (C:\PAIE2000\)
+---------------------------------------------------------------------------------------------------
 4.7
 ---
 -génération tout les fichiers ,les etats pour toutes les structures

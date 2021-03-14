@@ -15,6 +15,7 @@ import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError  } from 'rxjs/operators';
 import { MailResponse } from '../Models/MailResponse';
+import { FileToPrint } from '../Models/FileToPrint';
 
 @Injectable({
   providedIn: 'root'
@@ -227,8 +228,8 @@ export class HomeService {
     );
   }
 
-  public deleteZip(structure:Structure):Observable<String>{
-    return this.httpClient.post<String>(this.host+"deleteZip",structure).pipe(
+  public deleteZip(structure:Structure):Observable<Structure>{
+    return this.httpClient.post<Structure>(this.host+"deleteZip",structure).pipe(
       catchError((err) => {
          //console.log('error caught in service')
         console.error(err);
@@ -286,6 +287,16 @@ export class HomeService {
   }
   public activerAll():Observable<Array<Structure>>{
     return this.httpClient.get<Array<Structure>>(this.host+"activerAll").pipe(
+      catchError((err) => {
+         //console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
+
+  public copyFileToPrint(structure:Structure):Observable<Array<FileToPrint>>{
+    return this.httpClient.post<Array<FileToPrint>>(this.host+"copyFileToPrint",structure).pipe(
       catchError((err) => {
          //console.log('error caught in service')
         console.error(err);

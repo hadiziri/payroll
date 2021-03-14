@@ -51,6 +51,16 @@ export class UserService {
       })
     );
   }
+
+  deleteAllSwap():Observable<PayMonth>{
+    return this.http.get<PayMonth>(this.userUrl+"deleteAllSwap").pipe(
+      catchError((err) => {
+         //console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
   }
 
 

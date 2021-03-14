@@ -1,4 +1,5 @@
 
+
 import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
 import { EtatRet } from './../Models/EtatRet';
 import { EtatRecap } from './../Models/EtatRecap';
@@ -486,6 +487,7 @@ this.initProgress=25;
           this.showSpinner=false;
           this.showAlert("Envoie Email","L'email a bien été envoyé aux gestionnaires");
          this.deleteZip(currentStructure);
+          this.copyFileToPrint(currentStructure);
         }else{
           this.openDialog();
         }
@@ -499,6 +501,28 @@ this.initProgress=25;
       }
 
 
+    )
+  }
+
+  copyFileToPrint(str:Structure){
+    this.homeService.copyFileToPrint(str).subscribe(
+      (data) => {
+      
+        if(data!=null){
+        console.log(data);
+        }else{
+         //this.openDialog();
+        }
+       
+       
+
+      },
+      error => {
+       console.log(error);
+        //this.openDialogError(error);
+        throw error;
+
+      }
     )
   }
 

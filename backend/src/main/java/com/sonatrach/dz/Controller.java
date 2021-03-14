@@ -33,6 +33,7 @@ import java.util.zip.ZipOutputStream;
 
 import javax.validation.Valid;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
@@ -611,7 +612,7 @@ public class Controller {
 	// *******************************suppression du zip aprés envoie
 	// émail********************************************************
 	@PostMapping({ "deleteZip" })
-	public String deleteZip(@RequestBody Structure structure) {
+	public Structure deleteZip(@RequestBody Structure structure) {
 		try {
 			Folder folder = folderRepo.findByFolderName("ETAT");
 			PayMonth currentDate = paymonthRepo.findByState();
@@ -621,7 +622,7 @@ public class Controller {
 			String zipPathWithName = folder.getFOLDERPATH() + "ETAT" + "\\" + currentYear + "\\" + dateFormat + "\\"
 					+ structure.getSTRUCTURENAME() + " " + dateFormat + ".zip";
 			Files.deleteIfExists(Paths.get(zipPathWithName));
-			return "success";
+			return structure;
 		} catch (NoSuchFileException e) {
 			System.out.println("No such file/directory exists deleteZip()==>" + e.getMessage());
 		} catch (DirectoryNotEmptyException e) {
@@ -636,6 +637,19 @@ public class Controller {
 
 	}
 
+	@GetMapping({"deleteAllSwap"})
+	public PayMonth deleteAllSwap() {
+		File path=new File("C:\\tmp");
+		try {
+			FileUtils.cleanDirectory(path);
+			PayMonth currentDate = paymonthRepo.findByState();
+			return currentDate;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Exception deleteAllSwap()==>" + e.getMessage());
+		} 
+		return null;
+	}
 	// ***********************************************sauvgarder dans la
 	// BDarchiveSentFiles***********************************************************
 	@PostMapping({ "SaveArchiveSentFiles" })
@@ -649,6 +663,53 @@ public class Controller {
 			return files;
 		} catch (Exception e) {
 			System.out.println("Exception while saving ArchiveSentFiles==>" + e.getMessage());
+
+		}
+
+		return null;
+
+	}
+	
+	@PostMapping({"copyFileToPrint"})
+	public List<FileToPrint> copyFileToPrint(@RequestBody Structure str) {
+		try {
+		
+			List<FileToPrint> allFilesToPrint=fileToPrintRepo.findByStructure(str.getIDSTRUCTURE());
+			List<Folder> folder=folderRepo.findByStatus(2);
+			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
+
+		
+			// ********************************folder generation if not exist
+			String pathWithYear = folder.get(0).getFOLDERPATH() + folder.get(0).getFOLDERNAME() + "\\" + currentYear;
+			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			Folder folderEtat = folderRepo.findByFolderName("ETAT");
+			String pathEtat=folderEtat.getFOLDERPATH()+folderEtat.getFOLDERNAME()+"\\"+ currentYear+"\\" + dateFormat;
+			File fileYear = new File(pathWithYear);
+			if (!fileYear.exists()) {
+				fileYear.mkdir();
+			}
+			File fileMounth = new File(pathWithMounth);
+			if (!fileMounth.exists()) {
+				fileMounth.mkdir();
+			}
+		
+			for(int i=0;i<allFilesToPrint.size();i++) {
+				Optional<Structure> structure=structureRepo.findById(allFilesToPrint.get(i).getIdStructure());
+				Optional<FileType> file=fileTypeRepo.findById(allFilesToPrint.get(i).getIdFileType());
+				if(structure.get()!=null && file.get()!=null) {
+					String source=pathEtat+"\\"+structure.get().getSTRUCTURENAME()+" "+dateFormat+"\\"+file.get().getPrefixfiletype()+" "+structure.get().getSTRUCTURENAME()+" "+dateFormat+".SPL";
+					String filePath=pathWithMounth+"\\"+file.get().getPrefixfiletype()+" "+structure.get().getSTRUCTURENAME()+" "+dateFormat+".SPL";
+					copyFile(source, pathWithMounth, filePath);
+				}
+				
+			}
+			
+			return allFilesToPrint;
+		} catch (Exception e) {
+			System.out.println("Exception copyFileToPrint()==>" + e.getMessage());
 
 		}
 
@@ -1956,18 +2017,11 @@ public class Controller {
 
 			for (int i = 0; i < toutLesCloturePaie.size(); i++) {
 				
-				if (toutLesCloturePaie.get(i).getDESCFILETYPE().equals("pers")
-						|| toutLesCloturePaie.get(i).getDESCFILETYPE().equals("newpaie")
-						|| toutLesCloturePaie.get(i).getDESCFILETYPE().equals("frubA")
-						|| toutLesCloturePaie.get(i).getDESCFILETYPE().equals("frubN")) {
+				
 					path = toutLesCloturePaie.get(i).getFOLDERPATH() + toutLesCloturePaie.get(i).getFOLDERNAME() + "\\"
 							+ currentYear + "\\" + dateFormat + "\\" + toutLesCloturePaie.get(i).getPREFIXFILETYPE()
 							+ " " + dateFormat + ".xlsx";
-				} else {
-					path = toutLesCloturePaie.get(i).getFOLDERPATH() + toutLesCloturePaie.get(i).getFOLDERNAME() + "\\"
-							+ currentYear + "\\" + dateFormat + "\\" + toutLesCloturePaie.get(i).getPREFIXFILETYPE()
-							+ " " + dateFormat + ".xlsx";
-				}
+				
 
 				toutLesCloturePaie.get(i).setFOLDERPATH(path);
 

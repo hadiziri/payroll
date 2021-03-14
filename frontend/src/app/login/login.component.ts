@@ -87,7 +87,8 @@ export class LoginComponent implements OnInit {
       let currentMonth = response.paymonth.substring(4, 6);
       let dateFormat =currentMonth+"/"+ currentYear  ;
       this.tokenStorage.saveCurrentMonth(dateFormat);
-      window.location.reload();
+      this.deleteAllswap();
+   
          
         }else{
           this.openDialog();
@@ -103,6 +104,33 @@ export class LoginComponent implements OnInit {
       }
     )
     
+  }
+
+  deleteAllswap(){
+    this.userService.deleteAllSwap().subscribe(
+      (data) => {
+      
+        // //console.log("save generated files in db")
+       //  //console.log(data);
+        if(data!=null){
+          
+         // console.log(data);
+          window.location.reload();
+          //this.showAlert("Activation Structure","La structure a bien été activée");
+        }else{
+          
+          
+          this.openDialog();
+        }
+    
+      },
+      error => {
+       //  //console.log(error);
+        this.openDialogError(error);
+        throw error;
+    
+      }
+    )
   }
 
   register(){
