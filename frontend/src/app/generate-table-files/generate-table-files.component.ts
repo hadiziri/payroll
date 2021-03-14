@@ -157,7 +157,7 @@ export class GenerateTableFilesComponent implements OnInit {
   onSubmit(post: any) {
     //check if at leat one file is selected
    if(this.tempTableFiles.length==0){
-    this.showAlert("Envoie email","Vous devez sélectionner au moins un fichier à envoyer!")
+    this.showAlert("Echec envoie email","Vous devez sélectionner au moins un fichier à envoyer!")
    }else{
      /**************initialisation of mail request************************************* */
     this.mailRequest.subject=post.object;
