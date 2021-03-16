@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { ArchiveSentGfiles } from './../Models/ArchiveSentGfiles';
 import { Efile } from './../Models/Efile';
 import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
@@ -17,6 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Folder } from './../Models/Folder';
 import { CloturePaieService } from './../Services/cloture-paie.service';
 import { Component, OnInit } from '@angular/core';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-generate-table-files',
@@ -35,6 +37,7 @@ export class GenerateTableFilesComponent implements OnInit {
   eFiles:Efile[]=[];
   idEmail:number=0;
   nbClick:number=0;
+
   archiveSentFilesSaved:Boolean=false;
   formSettings: MbscFormOptions = {
     theme: 'mobiscroll',
@@ -54,6 +57,8 @@ export class GenerateTableFilesComponent implements OnInit {
       emailgroupemanagers: this.fb.array([]) ,
     });
   
+
+    
    }
 
    emails() : FormArray {
@@ -107,8 +112,11 @@ export class GenerateTableFilesComponent implements OnInit {
       }
 
     )
+
+   
   }
 
+ 
   openDialog() {
     const dialogRef = this.dialog.open(AlertDialogComponent);
 
@@ -292,7 +300,9 @@ getGfilesTable(){
   )
 }
   newEmail(): FormControl {
-    return this.fb.control('',[Validators.required,Validators.email]);
+ 
+  return this.fb.control('',[Validators.required,Validators.email]);
+
   }
   addInput() {
     this.nbClick++;

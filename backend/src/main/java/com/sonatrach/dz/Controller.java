@@ -1903,8 +1903,8 @@ public class Controller {
 			String currentMonth = currentPaymonth.getPaymonth().substring(4, 6);
 			// get next month
 			Calendar calendar = new GregorianCalendar(Integer.valueOf(currentYear), Integer.valueOf(currentMonth) - 1,
-					31, 23, 30, 0);
-
+					1, 23, 30, 0);
+			
 			calendar.add(Calendar.MONTH, 1);
 			Date nextMonth = calendar.getTime();
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMM");
@@ -1927,6 +1927,9 @@ public class Controller {
 			List<Structure> structures = structureRepo.findAll();
 			for (int i = 0; i < structures.size(); i++) {
 				structures.get(i).setSTATUSSTRUCTURE(3);
+				structures.get(i).setFlagetat(0);
+				structures.get(i).setFlagfichier(0);
+				structures.get(i).setIsactif(1);
 				structureRepo.save(structures.get(i));
 			}
 			return structures;

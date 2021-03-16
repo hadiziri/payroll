@@ -1,3 +1,4 @@
+import { TokenStorageService } from './../auth/token-storage.service';
 import { ErrorDialogComponent } from './../error-dialog/error-dialog.component';
 import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -40,6 +41,7 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,
     private clotureService: CloturePaieService,
+    private token: TokenStorageService, 
     private clotureMoisService:ClotureMoisService,
     public dialog: MatDialog) { }
 
@@ -214,6 +216,10 @@ export class CloturerMoisComponent implements OnInit,AfterViewInit {
         if(data!=null){
           //this.showAlert("Le mois a bien été cloturé.");
           this.updateStructureStatus();
+          let currentYear = data.paymonth.substring(0, 4);
+          let currentMonth = data.paymonth.substring(4, 6);
+          let dateFormat =currentMonth+"/"+ currentYear  ;
+          this.token.saveCurrentMonth(dateFormat);
         }else{
           this.openDialog();
         }
