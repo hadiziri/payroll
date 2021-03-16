@@ -1058,9 +1058,9 @@ this.homeService.saveGeneratedFiles(this.efiles).subscribe(
 }
 
 updateStatusStructure(structure:Structure,state:number){
-  //structure.statusstructure=4;
-  //structure.isactif=0;
-  //structure.flagetat=1;
+  structure.statusstructure=4;
+  structure.isactif=0;
+  structure.flagetat=1;
   this.homeService.updateStructureFilesGenerated(structure).subscribe(
     (data) => {
       
@@ -1431,7 +1431,7 @@ saveGeneratedFichiersInDB(structure:Structure,state:number){
     const dialogRef = this.dialog.open(AlertDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-     // window.location.reload();
+      window.location.reload();
     });
   }
 
