@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="text_output" pageWidth="1600" pageHeight="1000" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9a0b1db2-1ed0-44e1-960b-4626cea0097d">
+	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+	<parameter name="div" class="java.lang.String"/>
+	<parameter name="dir" class="java.lang.String"/>
+	<parameter name="mois" class="java.util.Date"/>
+	<parameter name="divdes" class="java.lang.String"/>
+	<parameter name="page" class="java.lang.Integer"/>
+	<parameter name="dirdes" class="java.lang.String"/>
+	<parameter name="subReportDirCss" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="dataSourceDirCss" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<field name="dbulcrub" class="java.lang.String"/>
+	<field name="dbuldesignrub" class="java.lang.String"/>
+	<field name="mtbase" class="java.math.BigDecimal"/>
+	<field name="dbulimp" class="java.lang.Integer"/>
+	<field name="report" class="java.lang.String"/>
+	<field name="css" class="java.lang.String"/>
+	<field name="bulmoispaie" class="java.util.Date"/>
+	<field name="div" class="java.lang.String"/>
+	<field name="dir" class="java.lang.String"/>
+	<field name="dirdes" class="java.lang.String"/>
+	<field name="divdes" class="java.lang.String"/>
+	<field name="agtcptanal" class="java.lang.String"/>
+	<field name="dbulrappel" class="java.lang.Integer"/>
+	<field name="dbulnature" class="java.lang.String"/>
+	<field name="mtrub" class="java.math.BigDecimal"/>
+	<variable name="gainImp" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDir" calculation="Sum">
+		<variableExpression><![CDATA[$P{div}.equals( $F{div})?
+(
+	$P{dir}.equals( $F{dir})?
+	(
+	
+		$F{dbulnature}.equals( "G" )?
+($F{dbulimp}==1?
+$F{mtrub}:0):0
+	):0
+):0]]></variableExpression>
+	</variable>
+	<variable name="gainNimp" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDir" calculation="Sum">
+		<variableExpression><![CDATA[$P{div}.equals( $F{div})?
+(
+	$P{dir}.equals( $F{dir})?
+	(
+	
+		$F{dbulnature}.equals( "G" )?
+($F{dbulimp}==0?
+$F{mtrub}:0):0
+	):0
+):0]]></variableExpression>
+	</variable>
+	<variable name="retImp" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDir" calculation="Sum">
+		<variableExpression><![CDATA[$P{div}.equals( $F{div})?
+(
+	$P{dir}.equals( $F{dir})?
+	(
+		
+		$F{dbulnature}.equals( "R" )?
+($F{dbulimp}==1?
+$F{mtrub}:0):0
+	):0
+):0]]></variableExpression>
+	</variable>
+	<variable name="retNimp" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDir" calculation="Sum">
+		<variableExpression><![CDATA[$P{div}.equals( $F{div})?
+(
+	$P{dir}.equals( $F{dir})?
+	(
+		
+		$F{dbulnature}.equals( "R" )?
+($F{dbulimp}==0?
+$F{mtrub}:0):0
+	):0
+):0]]></variableExpression>
+	</variable>
+	<variable name="chargeEmp" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDir" calculation="Sum">
+		<variableExpression><![CDATA[$P{div}.equals( $F{div})?
+(
+	$P{dir}.equals( $F{dir})?
+	(
+	
+		$F{dbulnature}.equals( "C" )?
+$F{mtrub}:0
+	):0
+):0]]></variableExpression>
+	</variable>
+	<group name="grpDir" isStartNewColumn="true">
+		<groupExpression><![CDATA[$P{div}+$P{dir}]]></groupExpression>
+		<groupFooter>
+			<band height="183">
+				<textField isBlankWhenNull="true">
+					<reportElement x="1" y="20" width="391" height="20" isRemoveLineWhenBlank="true" uuid="6688d1e0-af5c-426b-a484-cabeb3f558ec"/>
+					<textFieldExpression><![CDATA["TOTAUX DES CHAPITRES:"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="1" y="40" width="571" height="20" isRemoveLineWhenBlank="true" uuid="0987071d-52bf-4aa1-abda-cbde899b4189"/>
+					<textFieldExpression><![CDATA["DINARS ***********************************"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="572" y="20" width="218" height="20" isRemoveLineWhenBlank="true" uuid="29f92e2b-1323-42b8-afef-34cb6fd8b56b">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{gainImp})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="790" y="20" width="200" height="20" isRemoveLineWhenBlank="true" uuid="ba7e7f76-3934-47d3-8362-23293fa55ffc"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{gainNimp})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="990" y="20" width="201" height="20" isRemoveLineWhenBlank="true" uuid="4a07dc49-3dd4-4c69-9577-cc22b55ca16a"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{retImp})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="572" y="40" width="218" height="20" isRemoveLineWhenBlank="true" uuid="8f5d2e32-d2a9-4c61-83bd-3ebba72dccd3"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{gainImp}.add( $V{gainNimp} ).subtract($V{retImp}.add($V{retNimp}) ))]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="1191" y="20" width="209" height="20" isRemoveLineWhenBlank="true" uuid="4fbd2898-cd3a-494c-9282-084966ffe1f5"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{retNimp})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="1400" y="20" width="200" height="20" isRemoveLineWhenBlank="true" uuid="08b53041-2f14-40c3-9ec1-948771b2f627"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{chargeEmp})]]></textFieldExpression>
+				</textField>
+				<subreport>
+					<reportElement x="1" y="60" width="1599" height="101" uuid="25e0d1cc-699b-4e24-b518-bd74c7b200f8"/>
+					<subreportParameter name="div">
+						<subreportParameterExpression><![CDATA[$P{div}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="dir">
+						<subreportParameterExpression><![CDATA[$P{dir}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{dataSourceDirCss}.getData())]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{subReportDirCss}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupFooter>
+	</group>
+	<pageHeader>
+		<band height="111" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="410" height="18" isRemoveLineWhenBlank="true" uuid="68bbcbc4-03a1-4314-8c63-87d32a6f47f0">
+					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textFieldExpression><![CDATA["SONATRACH"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="510" y="0" width="200" height="20" isRemoveLineWhenBlank="true" uuid="19e971d8-edff-4afd-93ab-b865d2a7b774">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["RECAPITULATION"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1395" y="0" width="85" height="15" isRemoveLineWhenBlank="true" uuid="21b28112-1783-4592-b27c-d7bcca86556e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["PAGE:"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="710" y="0" width="220" height="20" isRemoveLineWhenBlank="true" uuid="4018bc2f-a052-42a1-9dd9-05ca6420aa25">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[(  new SimpleDateFormat("MM").format($P{mois})
+    )+" "+new SimpleDateFormat("yyyy").format($P{mois})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="40" width="210" height="15" isRemoveLineWhenBlank="true" uuid="125acc07-6073-414e-b66e-c05330058689">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["DIV. OPER."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1150" y="20" width="120" height="15" isRemoveLineWhenBlank="true" uuid="e4974b27-28f6-41bf-b7b2-5f1eb71f5868">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textFieldExpression><![CDATA["Fait le:"]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy" isBlankWhenNull="true">
+				<reportElement x="1270" y="20" width="300" height="15" isRemoveLineWhenBlank="true" uuid="74c37943-34ba-4134-9726-63eff6b54415"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="60" width="440" height="20" isRemoveLineWhenBlank="true" uuid="30bbe63e-1329-41ef-8c39-cad391299f87"/>
+				<textFieldExpression><![CDATA[$P{divdes}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="860" y="60" width="380" height="20" isRemoveLineWhenBlank="true" uuid="ee0290de-4590-4964-a246-3a8212453224"/>
+				<textFieldExpression><![CDATA[$P{dirdes}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="501" y="60" width="360" height="20" isRemoveLineWhenBlank="true" uuid="0faee8a2-1c20-485d-8fd8-58fb5f5994cc"/>
+				<textFieldExpression><![CDATA["TOTAUX PAR DIRECTION"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1480" y="0" width="90" height="15" isRemoveLineWhenBlank="true" uuid="50e8a677-a9e6-4ccd-9a45-71037242929c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{page}+($V{PAGE_NUMBER}-1)]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="63" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="20" width="80" height="24" uuid="d065f8ed-0c05-47d0-a679-a392c9cfabe5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[!CRub]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="590" y="20" width="200" height="24" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[!GAINS IMP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="790" y="20" width="200" height="24" uuid="4b1f5b5c-4c61-4159-9357-041fd8e3e775">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[!GAINS NON IMP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="990" y="20" width="200" height="24" uuid="4b1f5b5c-4c61-4159-9357-041fd8e3e775">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font isItalic="false"/>
+				</textElement>
+				<text><![CDATA[!RET. IMP.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1190" y="20" width="200" height="24" uuid="4b1f5b5c-4c61-4159-9357-041fd8e3e775">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[!RET.  NON IMP.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="1600" height="20" uuid="bf985571-26a3-41fc-9a7e-e395c29a60fe"/>
+				<text><![CDATA[+-----+----------------------------+------------+---------------+----------------+---------------+----------------+---------------+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="1600" height="14" uuid="8afe1fc3-c7c2-44bc-af43-80d93af68b27">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[+-----+----------------------------+------------+---------------+----------------+---------------+----------------+---------------+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="20" width="160" height="24" uuid="9937416f-8a38-440d-b8e4-155b5b910e17">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[!NBRE OU BASE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="20" width="350" height="24" uuid="669d2370-7d9d-4cb6-9019-e43c583264cd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[!Libellé Rubrique]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1390" y="20" width="210" height="24" uuid="616345ff-6203-4fbd-bb38-ad4df86eb51d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[!CHARGES  EMPLOY.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$P{div}.equals( $F{div})?
+(
+	$P{dir}.equals( $F{dir})?
+	
+		
+		new Boolean (true):new Boolean(false)
+):new Boolean(false)]]></printWhenExpression>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="80" height="20" isRemoveLineWhenBlank="true" uuid="1324277f-1cf1-4cc2-a5f3-88ededc0ff6e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dbulcrub}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="600" y="0" width="190" height="20" isRemoveLineWhenBlank="true" uuid="b9c4d404-6ffe-47b5-aeaf-ee9ffb804c6a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="372fc4a5-58e8-4f68-9b0b-b8c92b4521d4"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dbulnature}.equals( "G" )?
+($F{dbulimp}==1?
+new DecimalFormat("###,##0.000#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtrub}):""):""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="800" y="0" width="190" height="20" isRemoveLineWhenBlank="true" uuid="72ac64bb-1484-4b8a-8bdb-6ddcf6c57c70">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aafde1ac-9f21-4267-b383-ffd18072315c"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dbulnature}.equals( "G" )?
+($F{dbulimp}==0?
+new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtrub}):""):""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1200" y="0" width="190" height="20" isRemoveLineWhenBlank="true" uuid="c7d9f004-ba41-4c99-9a6c-cfbf3173864a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c05cb4c4-7321-464e-b20b-38a19f892a19"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dbulnature}.equals( "R" )?
+($F{dbulimp}==0?
+new DecimalFormat("###,##0.000#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtrub}):""):""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1000" y="0" width="190" height="20" isRemoveLineWhenBlank="true" uuid="c7d9f004-ba41-4c99-9a6c-cfbf3173864a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c05cb4c4-7321-464e-b20b-38a19f892a19"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dbulnature}.equals( "R" )?
+($F{dbulimp}==1?
+new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtrub}):""):""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="439" y="0" width="151" height="20" isRemoveLineWhenBlank="true" uuid="52c3f95c-e640-4324-8f7c-41678ae6fdf8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aafde1ac-9f21-4267-b383-ffd18072315c"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mtbase}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtbase})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="0" width="350" height="20" isRemoveLineWhenBlank="true" uuid="6b06199e-874c-4add-8981-544792134a3d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{dbuldesignrub}==null?"! ":($F{dbulrappel}==2?
+"!"+"RAP."+$F{dbuldesignrub}:"!"+$F{dbuldesignrub}))]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1400" y="0" width="200" height="20" isRemoveLineWhenBlank="true" uuid="0544ae57-c556-4063-b598-98787a28839b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c05cb4c4-7321-464e-b20b-38a19f892a19"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dbulnature}.equals( "C" )?
+new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtrub}):""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="590" y="0" width="9" height="20" isRemoveLineWhenBlank="true" uuid="7479545f-5738-4491-b2cc-d9e4dfd70e21">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["!"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="790" y="0" width="10" height="20" isRemoveLineWhenBlank="true" uuid="0d80fa89-36a3-4475-acf8-0afb755920ea">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["!"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="990" y="0" width="9" height="20" isRemoveLineWhenBlank="true" uuid="ab53ce9d-91e8-49bc-a26a-4af92f98d317">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["!"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1190" y="0" width="9" height="20" isRemoveLineWhenBlank="true" uuid="47471686-d367-42fa-aeb3-e4a19af6b275">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["!"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1391" y="0" width="9" height="20" isRemoveLineWhenBlank="true" uuid="c4cfd4b7-e84b-453a-95ba-19f9ab7dc6b1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["!"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="430" y="0" width="9" height="20" isRemoveLineWhenBlank="true" uuid="d5fa859f-8e11-40fe-9688-c60c6171baf2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["!"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

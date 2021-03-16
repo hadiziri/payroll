@@ -46,6 +46,10 @@ public class EtatRet implements Serializable{
 	String divdes;
 	@Column(name="DIR_DESIGNATION")
 	String dirdes;
+	@Column(name="CSTR")
+	String cstr;
+	@Column(name="STR_DESIGNATION")
+	String strdes;
 	
 	public EtatRet() {
 		
@@ -116,6 +120,22 @@ public class EtatRet implements Serializable{
 	}
 
 	
+
+	public String getCstr() {
+		return cstr;
+	}
+
+	public void setCstr(String cstr) {
+		this.cstr = cstr;
+	}
+
+	public String getStrdes() {
+		return strdes;
+	}
+
+	public void setStrdes(String strdes) {
+		this.strdes = strdes;
+	}
 
 	public Integer getDbulrappel() {
 		return dbulrappel;

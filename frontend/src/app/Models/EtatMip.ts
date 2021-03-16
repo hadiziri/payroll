@@ -1,3 +1,5 @@
+import { ExecOptionsWithStringEncoding } from "child_process";
+
 export interface EtatMip {
 
     bulmatricule: String;
@@ -21,5 +23,7 @@ export interface EtatMip {
     rapp460: number;
     divdes:String;
     dirdes:String;
+    cstr:String;
+    strdes:String;
 
 }

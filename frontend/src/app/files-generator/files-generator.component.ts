@@ -1029,7 +1029,7 @@ this.initProgress=25;
 saveGeneratedFilesInDB(structure:Structure,state:number){
 if(this.jour&&this.mip&&this.mand&&this.ret&&this.recap){
  
-this.homeService.saveGeneratedFiles(this.efichiers).subscribe(
+this.homeService.saveGeneratedFiles(this.efiles).subscribe(
   (data) => {
       
     // //console.log("save generated files in db")
@@ -1058,9 +1058,9 @@ this.homeService.saveGeneratedFiles(this.efichiers).subscribe(
 }
 
 updateStatusStructure(structure:Structure,state:number){
-  structure.statusstructure=4;
-  structure.isactif=0;
-  structure.flagetat=1;
+  //structure.statusstructure=4;
+  //structure.isactif=0;
+  //structure.flagetat=1;
   this.homeService.updateStructureFilesGenerated(structure).subscribe(
     (data) => {
       
@@ -1431,7 +1431,7 @@ saveGeneratedFichiersInDB(structure:Structure,state:number){
     const dialogRef = this.dialog.open(AlertDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+     // window.location.reload();
     });
   }
 

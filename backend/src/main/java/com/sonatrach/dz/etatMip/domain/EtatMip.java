@@ -46,10 +46,45 @@ public class EtatMip implements Serializable{
 	String divdes;
 	@Column(name="DIR_DESIGNATION")
 	String dirdes;
+	@Column(name="CSTR")
+	String cstr;
+	@Column(name="STR_DESIGNATION")
+	String strdes;
 	
 	public EtatMip() {
 		
 	}
+	
+	
+	
+
+	public String getCstr() {
+		return cstr;
+	}
+
+
+
+
+	public void setCstr(String cstr) {
+		this.cstr = cstr;
+	}
+
+
+
+
+	public String getStrdes() {
+		return strdes;
+	}
+
+
+
+
+	public void setStrdes(String strdes) {
+		this.strdes = strdes;
+	}
+
+
+
 
 	public String getBulmatricule() {
 		return bulmatricule;

@@ -1399,7 +1399,22 @@ public class Controller {
 			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
 			}
+			if(structure.equals("DP")) {
+				// load file and compile it
+				File file = ResourceUtils.getFile("classpath:etatMipDp.jrxml");
+				JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+				JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(mip);
+				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+				JRTextExporter exporter = new JRTextExporter();
+				exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 180);
+				exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
+				exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+				Object outputFileName = pathWithStructure + "\\" + "MIP_dp" + " " + structure.toString() + " " + dateFormat
+						+ ".SPL";
+				exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
 
+				exporter.exportReport();
+			}
 			// load file and compile it
 			File file = ResourceUtils.getFile("classpath:etatMip.jrxml");
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
@@ -1694,7 +1709,22 @@ public class Controller {
 			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
 			}
+			if(structure.equals("DP")) {
+				// load file and compile it
+				File file = ResourceUtils.getFile("classpath:etatRetDp.jrxml");
+				JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+				JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(ret);
+				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+				JRTextExporter exporter = new JRTextExporter();
+				exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 180);
+				exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
+				exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+				Object outputFileName = pathWithStructure + "\\" + "RET_dp" + " " + structure.toString() + " " + dateFormat
+						+ ".SPL";
+				exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
 
+				exporter.exportReport();
+			}
 			// load file and compile it
 			File file = ResourceUtils.getFile("classpath:etatRet.jrxml");
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
@@ -1720,7 +1750,7 @@ public class Controller {
 	public List<EtatMand> generateMand(@RequestBody List<EtatMand> mand, @RequestParam String structure) {
 		try {
 			// **********************************************get current date from payMonth
-
+			
 			PayMonth currentDate = paymonthRepo.findByState();
 			String currentYear = currentDate.getPaymonth().substring(0, 4);
 			String currentMonth = currentDate.getPaymonth().substring(4, 6);
@@ -1750,7 +1780,30 @@ public class Controller {
 			 * for(int i=0;i<mand.size();i++) { if(mand.get(i).getBulnet()==new
 			 * BigDecimal(0)) { mand.get(i).setBulnet(new BigDecimal(0)); } }
 			 */
+			if(structure.equals("DP")) {
+				// load file and compile it
+				File file = ResourceUtils.getFile("classpath:etatMandDp.jrxml");
+				JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 
+				JRBeanCollectionDataSource data = new JRBeanCollectionDataSource(mand);
+				Map<String, Object> parameters = new HashMap<>();
+				parameters.put("currenntMonth", sysDate);
+				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, data);
+
+				JRTextExporter exporter = new JRTextExporter();
+
+				exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 180);
+
+				exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
+
+				exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+
+				Object outputFileName = pathWithStructure + "\\" + "MAND_dp" + " " + structure.toString() + " " + dateFormat
+						+ ".SPL";
+				exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
+
+				exporter.exportReport();
+			}
 			// load file and compile it
 			File file = ResourceUtils.getFile("classpath:etatMand.jrxml");
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());

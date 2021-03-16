@@ -22,4 +22,6 @@ export interface EtatRet {
     dbulmontant: number;
     divdes:String;
     dirdes:String;
+    cstr:String;
+    strdes:String;
 }
