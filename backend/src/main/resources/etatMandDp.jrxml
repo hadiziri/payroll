@@ -94,7 +94,7 @@
 		</groupFooter>
 	</group>
 	<group name="grpeTotal" isStartNewColumn="true">
-		<groupExpression><![CDATA[$F{bulmoisexp}+$F{bulcbanque}]]></groupExpression>
+		<groupExpression><![CDATA[$F{bulmoisexp}<$P{currenntMonth}+$F{bulcbanque}]]></groupExpression>
 		<groupFooter>
 			<band height="129" splitType="Prevent">
 				<printWhenExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?new Boolean(true):new Boolean(false)]]></printWhenExpression>
@@ -148,7 +148,7 @@
 		</groupFooter>
 	</group>
 	<group name="grpdep" isStartNewColumn="true">
-		<groupExpression><![CDATA[$F{bulmoisexp}+$F{bulcbanque}+$F{bulcagence}]]></groupExpression>
+		<groupExpression><![CDATA[$F{bulmoisexp}<$P{currenntMonth}+$F{bulcbanque}+$F{bulcagence}]]></groupExpression>
 		<groupFooter>
 			<band height="196" splitType="Stretch">
 				<printWhenExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?new Boolean(true):new Boolean(false)]]></printWhenExpression>
