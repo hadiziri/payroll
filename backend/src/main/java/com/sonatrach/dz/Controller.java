@@ -1861,9 +1861,11 @@ public class Controller {
 
 			for (int j = 0; j < files.size(); j++) {
 				Efile file = efileRepo.findByIdStrIdFile(files.get(j).getIdstructure(), files.get(j).getIdfiletype());
+				Optional<Structure> structure = structureRepo.findById(files.get(j).getIdstructure());
 				if (file != null) {
 					file.setFilegenerationdate(files.get(j).getFilegenerationdate());
 					file.setIduser(files.get(j).getIduser());
+					file.setFilename(files.get(j).getFilename() + " " + structure.get().getSTRUCTURENAME() + " " + dateFormat);
 					file.setIdpaymonth(files.get(j).getIdpaymonth());
 					efileRepo.save(file);
 				} else {
