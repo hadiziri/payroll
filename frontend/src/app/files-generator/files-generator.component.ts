@@ -227,6 +227,11 @@ export class FilesGeneratorComponent implements OnInit {
   chargerDonnees(){
     this.initProgress=10;
    this.showProgressInit=true;
+   this.alljour=false;
+   this.allmip=false;
+   this.allmand=false;
+   this.allret=false;
+   this.allrecap=false;
  //get all etat paie filtered by paymonth
  this.homeService.getEtatJournal().subscribe(
   (data) => {

@@ -24,16 +24,16 @@
 	<field name="strdes" class="java.lang.String"/>
 	<field name="cstr" class="java.lang.String"/>
 	<variable name="bulgainsimp1" class="java.math.BigDecimal" resetType="Group" resetGroup="grpdep" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulgainsimp}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulgainsimp}]]></variableExpression>
 	</variable>
 	<variable name="bulgainsnimp1" class="java.math.BigDecimal" resetType="Group" resetGroup="grpdep" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulgainsnimp}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulgainsnimp}]]></variableExpression>
 	</variable>
 	<variable name="bulretimp1" class="java.math.BigDecimal" resetType="Group" resetGroup="grpdep" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulretimp}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulretimp}]]></variableExpression>
 	</variable>
 	<variable name="bulretnimp1" class="java.math.BigDecimal" resetType="Group" resetGroup="grpdep" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulretnimp}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulretnimp}]]></variableExpression>
 	</variable>
 	<variable name="bulnet1" class="java.math.BigDecimal" resetType="Group" resetGroup="grpdep" calculation="Sum">
 		<variableExpression><![CDATA[$F{bulnet}]]></variableExpression>
@@ -51,7 +51,7 @@
 		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
 	</variable>
 	<variable name="bulgainsimp2" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulgainsimp}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulgainsimp}]]></variableExpression>
 	</variable>
 	<variable name="div1" class="java.lang.Integer" resetType="Group" resetGroup="grpDiv" calculation="Count">
 		<variableExpression><![CDATA[$F{div}]]></variableExpression>
@@ -69,31 +69,31 @@
 		<variableExpression><![CDATA[$F{divdes}]]></variableExpression>
 	</variable>
 	<variable name="bulgainsimp3" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDiv" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulgainsimp}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulgainsimp}]]></variableExpression>
 	</variable>
 	<variable name="bulgainsnimp2" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDiv" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulgainsnimp}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulgainsnimp}]]></variableExpression>
 	</variable>
 	<variable name="bulretimp2" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDiv" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulretimp}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulretimp}]]></variableExpression>
 	</variable>
 	<variable name="bulretnimp2" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDiv" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulretnimp}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulretnimp}]]></variableExpression>
 	</variable>
 	<variable name="bulnet2" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDiv" calculation="Sum">
 		<variableExpression><![CDATA[$F{bulnet}]]></variableExpression>
 	</variable>
 	<variable name="bulgainsimp4" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulgainsimp}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulgainsimp}]]></variableExpression>
 	</variable>
 	<variable name="bulgainsnimp3" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulgainsnimp}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulgainsnimp}]]></variableExpression>
 	</variable>
 	<variable name="bulretimp3" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulretimp}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulretimp}]]></variableExpression>
 	</variable>
 	<variable name="bulgainsnimp4" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulgainsnimp}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulgainsnimp}]]></variableExpression>
 	</variable>
 	<variable name="bulnet3" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
 		<variableExpression><![CDATA[$F{bulnet}]]></variableExpression>
@@ -120,16 +120,16 @@
 		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
 	</variable>
 	<variable name="bulgainsimp5" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulgainsimp}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulgainsimp}]]></variableExpression>
 	</variable>
 	<variable name="bulgainsnimp5" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulgainsnimp}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulgainsnimp}]]></variableExpression>
 	</variable>
 	<variable name="bulretimp4" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulretimp}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulretimp}]]></variableExpression>
 	</variable>
 	<variable name="bulretnimp3" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulretnimp}]]></variableExpression>
+		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulretnimp}]]></variableExpression>
 	</variable>
 	<variable name="bulnet4" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{bulnet}]]></variableExpression>
@@ -154,7 +154,7 @@
 					<text><![CDATA[TOTAL AGENTS:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="520" y="70" width="180" height="20" uuid="51df5162-ce30-48db-be6f-ff599920cf43"/>
+					<reportElement x="480" y="70" width="220" height="20" uuid="51df5162-ce30-48db-be6f-ff599920cf43"/>
 					<box>
 						<pen lineWidth="0.0" lineStyle="Dashed"/>
 					</box>
@@ -194,7 +194,7 @@
 					<text><![CDATA[NET  A PAYER ]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="520" y="100" width="180" height="16" uuid="3050b0a8-90c7-40e8-af64-7abc17ccd94e"/>
+					<reportElement x="480" y="100" width="220" height="16" uuid="3050b0a8-90c7-40e8-af64-7abc17ccd94e"/>
 					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulgainsimp3})]]></textFieldExpression>
 				</textField>
 				<textField>
@@ -246,7 +246,7 @@
 					<text><![CDATA[TOTAL AGENTS:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="520" y="70" width="180" height="20" uuid="e4d84408-fb22-4bb4-9d40-96564f455e80"/>
+					<reportElement x="480" y="70" width="220" height="20" uuid="e4d84408-fb22-4bb4-9d40-96564f455e80"/>
 					<box>
 						<pen lineWidth="0.0" lineStyle="Dashed"/>
 					</box>
@@ -286,7 +286,7 @@
 					<text><![CDATA[NET  A PAYER ]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="520" y="100" width="180" height="16" uuid="bf2a7621-fc3b-46ea-a0e8-6c1386d3b416"/>
+					<reportElement x="480" y="100" width="220" height="16" uuid="bf2a7621-fc3b-46ea-a0e8-6c1386d3b416"/>
 					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulgainsimp4})]]></textFieldExpression>
 				</textField>
 				<textField>
@@ -327,7 +327,7 @@
 			<band height="114">
 				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				<textField>
-					<reportElement x="540" y="53" width="180" height="19" uuid="34e01230-70bc-435b-b8d5-b2fa05277956">
+					<reportElement x="480" y="53" width="240" height="19" uuid="34e01230-70bc-435b-b8d5-b2fa05277956">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulgainsimp1})]]></textFieldExpression>
@@ -379,7 +379,7 @@
 					<textFieldExpression><![CDATA[$V{strdes1}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="540" y="30" width="180" height="20" uuid="e010cdd5-f06c-4f55-a0d2-dd6bac1ec407"/>
+					<reportElement x="480" y="30" width="240" height="20" uuid="e010cdd5-f06c-4f55-a0d2-dd6bac1ec407"/>
 					<box>
 						<pen lineWidth="0.0" lineStyle="Dashed"/>
 					</box>
@@ -883,7 +883,7 @@
 	<summary>
 		<band height="114" splitType="Prevent">
 			<staticText>
-				<reportElement x="510" y="50" width="180" height="20" uuid="86755bdb-5688-4755-8468-f2a2d309e700"/>
+				<reportElement x="480" y="50" width="210" height="20" uuid="86755bdb-5688-4755-8468-f2a2d309e700"/>
 				<box>
 					<pen lineWidth="0.0" lineStyle="Dashed"/>
 				</box>
@@ -939,7 +939,7 @@
 				<textFieldExpression><![CDATA[$V{bulmatricule5}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="510" y="70" width="180" height="16" uuid="7ae1a4ee-bea8-4397-b5bf-ed780c523c4d"/>
+				<reportElement x="480" y="70" width="210" height="16" uuid="7ae1a4ee-bea8-4397-b5bf-ed780c523c4d"/>
 				<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulgainsimp5})]]></textFieldExpression>
 			</textField>
 			<textField>

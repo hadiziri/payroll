@@ -65,7 +65,7 @@
 		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulnet}]]></variableExpression>
 	</variable>
 	<group name="grpeMois">
-		<groupExpression><![CDATA[$F{bulmoisexp}]]></groupExpression>
+		<groupExpression><![CDATA[$F{bulmoisexp}<$P{currenntMonth}]]></groupExpression>
 		<groupFooter>
 			<band height="94">
 				<printWhenExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})!=0?new Boolean(true):new Boolean(false)]]></printWhenExpression>
