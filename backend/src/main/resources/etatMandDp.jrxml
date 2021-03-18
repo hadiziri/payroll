@@ -16,6 +16,7 @@
 	<field name="divdes" class="java.lang.String"/>
 	<field name="bandes" class="java.lang.String"/>
 	<field name="agedes" class="java.lang.String"/>
+	<field name="retro" class="java.lang.Integer"/>
 	<variable name="bulmatricule2" class="java.lang.Integer" resetType="Group" resetGroup="grpeTotal" calculation="DistinctCount">
 		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
 	</variable>
@@ -65,7 +66,7 @@
 		<variableExpression><![CDATA[$F{bulnet}.compareTo(new BigDecimal(0))==0?new BigDecimal(0):$F{bulnet}]]></variableExpression>
 	</variable>
 	<group name="grpeMois">
-		<groupExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth} )!=0?"":$F{bulmoisexp}]]></groupExpression>
+		<groupExpression><![CDATA[$F{retro}]]></groupExpression>
 		<groupFooter>
 			<band height="94">
 				<printWhenExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})!=0?new Boolean(true):new Boolean(false)]]></printWhenExpression>
@@ -94,7 +95,7 @@
 		</groupFooter>
 	</group>
 	<group name="grpeTotal" isStartNewColumn="true">
-		<groupExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth} )!=0?"":$F{bulmoisexp}+$F{bulcbanque}]]></groupExpression>
+		<groupExpression><![CDATA[$F{retro}+$F{bulcbanque}]]></groupExpression>
 		<groupFooter>
 			<band height="129" splitType="Prevent">
 				<printWhenExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?new Boolean(true):new Boolean(false)]]></printWhenExpression>
@@ -148,7 +149,7 @@
 		</groupFooter>
 	</group>
 	<group name="grpdep" isStartNewColumn="true">
-		<groupExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth} )!=0?"":$F{bulmoisexp}+$F{bulcbanque}+$F{bulcagence}]]></groupExpression>
+		<groupExpression><![CDATA[$F{retro}+$F{bulcbanque}+$F{bulcagence}]]></groupExpression>
 		<groupFooter>
 			<band height="196" splitType="Stretch">
 				<printWhenExpression><![CDATA[$F{bulmoisexp}.compareTo($P{currenntMonth})==0?new Boolean(true):new Boolean(false)]]></printWhenExpression>

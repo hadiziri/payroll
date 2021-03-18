@@ -69,8 +69,10 @@ $F{mtrub}:0):0
 		
 		$F{dbulnature}.equals( "R" )?
 ($F{dbulimp}==0?
-$F{mtrub}:0):0
-	):0
+	$F{dbulcrub}.equals("319")?0:
+	$F{dbulcrub}.equals("331")?0:
+	$F{dbulcrub}.equals("311")?0:
+$F{mtrub}:0):0):0
 ):0]]></variableExpression>
 	</variable>
 	<variable name="chargeEmp" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDir" calculation="Sum">
@@ -400,7 +402,7 @@ new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Lo
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{mtbase}==null?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtbase})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{mtbase}==null?"":$F{mtbase}.compareTo(new BigDecimal(0))==0?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtbase})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="80" y="0" width="350" height="20" isRemoveLineWhenBlank="true" uuid="6b06199e-874c-4add-8981-544792134a3d">

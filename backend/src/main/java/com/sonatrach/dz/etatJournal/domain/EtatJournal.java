@@ -69,7 +69,8 @@ public class EtatJournal implements Serializable{
 	String divdes;
 	@Column(name="DIR_DESIGNATION")
 	String dirdes;
-	
+	@Column(name="FLAG_PAIE_NEG")
+	int flag;
 	public EtatJournal() {
 		
 	}
@@ -259,6 +260,14 @@ public class EtatJournal implements Serializable{
 
 	public void setDirdes(String dirdes) {
 		this.dirdes = dirdes;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 	
 	

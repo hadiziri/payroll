@@ -27,18 +27,23 @@
                 *ngIf="!formGroup.controls['message'].valid && formGroup.controls['message'].touched">
                 Champ obligatoire
               </mat-error>
+        
             </mat-form-field>
             <br>
            
             <mat-form-field appearance="outline" style="margin:3px;" formArrayName="emailgroupemanagers" *ngFor="let element of emails().controls; let i = index">
               <mat-label>Email*</mat-label>
-                <input matInput placeholder="Email" [formControlName]="i" >
+                <input matInput placeholder="Email" [formControlName]="i" [matAutocomplete]="auto">
                 <mat-icon matSuffix> email</mat-icon>
                 <mat-error
                   *ngIf="!formGroup.controls['emailgroupemanagers'].valid && formGroup.controls['emailgroupemanagers'].touched">
                   {{getErrorEmail()}}
                 </mat-error>
-               
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
               </mat-form-field>
              
               <button mat-flat-button color="warn"  disabled style="margin-left: 5px;" >Ajouter adresse email

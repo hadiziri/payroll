@@ -1541,7 +1541,7 @@ public class Controller {
 			java.util.Collections.sort(transform, new DivSorter());
 			// transform div data with css and sort by div
 			List<EtatRecap> transform2 = subReportDivCssData.stream()
-					.collect(Collectors.groupingBy(foo -> getGroupingByKey(foo))).entrySet().stream()
+					.collect(Collectors.groupingBy(foo -> getGroupingByKey3(foo))).entrySet().stream()
 					.map(e -> e.getValue().stream()
 							.reduce((f1, f2) -> new EtatRecap(f1.getDiv(), f1.getDir(), f1.getBulmoispaie(),
 									f1.getAgtcptanal(), f1.getDbulcrub(), f1.getDbulrappel(), f1.getDbuldesignrub(),
@@ -1551,6 +1551,8 @@ public class Controller {
 					.map(f -> f.get()).collect(Collectors.toList());
 
 			java.util.Collections.sort(transform2, new DivSorter());
+			
+			
 			// transform entreprise data without css and sort by crub
 			List<EtatRecap> entreprise = subReportDivData.stream()
 					.collect(Collectors.groupingBy(foo -> getGroupingByKey2(foo))).entrySet().stream()
@@ -1561,6 +1563,8 @@ public class Controller {
 									f1.getMtrub().add(f2.getMtrub()), f1.getDivdes(), f1.getDirdes(), f1.getCss(),
 									f1.getReport())))
 					.map(f -> f.get()).collect(Collectors.toList());
+			
+			
 
 			java.util.Collections.sort(entreprise, new DbulcrubSorter());
 			// j'ai pas besoin d'utiliser le group by jasper s'occupe de calculer les sommes
@@ -1678,7 +1682,7 @@ public class Controller {
 	}
 
 	private String getGroupingByKey3(EtatRecap p) {
-		return p.getDbulcrub() + p.getCss();
+		return	p.getDiv() + p.getDbulcrub() + p.getDbulrappel()+p.getCss();
 	}
 
 	@PostMapping({ "generateRet" })

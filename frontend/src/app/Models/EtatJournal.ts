@@ -42,4 +42,5 @@ export interface EtatJournal {
     strdes:String;
     divdes:String;
     dirdes:String;
+    flag:number;
 }

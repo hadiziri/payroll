@@ -23,4 +23,5 @@ export interface EtatMand {
     dirdes:String;
     bandes:String;
     agedes:String;
+    retro:number;
 }

@@ -50,10 +50,20 @@ public class EtatMand implements Serializable{
 	String divdes;
 	@Column(name="DIR_DESIGNATION")
 	String dirdes;
+	@Column(name="RETRO")
+	int retro;
 
 	
 	public EtatMand() {
 		
+	}
+
+	public int getRetro() {
+		return retro;
+	}
+
+	public void setRetro(int retro) {
+		this.retro = retro;
 	}
 
 	public String getBulcbanque() {

@@ -1086,6 +1086,7 @@ updateStatusStructure(structure:Structure,state:number){
       if(this.indexE<this.ELEMENT_DATA.length){
         this.genererToutLesEtats(this.indexE);
       }else{
+        this.indexE=0;
         this.showProgressAllEtat=false;
         this.showAlert("Génération de tout les états paie","Les états de toutes les structures ont bien été générés.");
       }
@@ -1343,6 +1344,7 @@ saveGeneratedFichiersInDB(structure:Structure,state:number){
             if(this.index<this.ELEMENT_DATA.length){
               this.genererToutLesFichiers(this.index);
             }else{
+              this.index=0;
               this.showProgressAllFichier=false;
               this.showAlert("Génération de tout les fichiers","Les fichiers de toutes les structures ont bien été générés.");
             }
@@ -1417,12 +1419,14 @@ saveGeneratedFichiersInDB(structure:Structure,state:number){
 
   //******************************************************Generer tout les fichiers/etats pour toutes les structures******************************************** */
   genererToutLesFichiers(position:number){
+    
     this.generatedStructure=this.ELEMENT_DATA[position].structurename;
       this.genererFichiers(this.ELEMENT_DATA[position],2);
     
   }
 
   genererToutLesEtats(position:number){
+    
       this.generatedStructureE=this.ELEMENT_DATA[position].structurename;
       this.genererEtats(this.ELEMENT_DATA[position],2);
 

@@ -76,6 +76,7 @@ $F{mtrub}:0):0]]></variableExpression>
 ($F{dbulimp}==0?
 	$F{dbulcrub}.equals("319")?0:
 	$F{dbulcrub}.equals("331")?0:
+	$F{dbulcrub}.equals("311")?0:
 $F{mtrub}:0):0]]></variableExpression>
 	</variable>
 	<variable name="chargeEmp" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeCPTE" calculation="Sum">

@@ -37,7 +37,8 @@ export class GenerateTableFilesComponent implements OnInit {
   eFiles:Efile[]=[];
   idEmail:number=0;
   nbClick:number=0;
-
+  options: string[] = ['DSI-Exploitation_paie@Sonatrach.dz'];
+  filteredOptions: Observable<string[]>=new Observable<string[]>();
   archiveSentFilesSaved:Boolean=false;
   formSettings: MbscFormOptions = {
     theme: 'mobiscroll',
@@ -111,12 +112,49 @@ export class GenerateTableFilesComponent implements OnInit {
 
       }
 
-    )
+    );
+    this.homeService.getAllStructures().subscribe(
+      (data) => {
+        if(data!=null){
+         for(let i=0;i<data.length;i++){
+           this.options.push(data[i].emailgroupmanagers);
+         }
+         let object = this.formGroup.get('emailgroupemanagers');
+         if (object != null) {
+           
+           this.filteredOptions = object.valueChanges.pipe(
+             startWith(''),
+             map(value => this._filter(value))
+           );
+         /* console.log(this.filteredOptions.subscribe(
+            data=>{
+              console.log(data)
+            }
+          ))*/
+         }
+        }else{
+          this.openDialog();
+        }
+        
+        
+      },
+      error => {
+        // //console.log(error);
+        this.openDialogError(error);
+        throw error;
 
+      }
+    );
+ 
+    
    
   }
 
- 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
   openDialog() {
     const dialogRef = this.dialog.open(AlertDialogComponent);
 
@@ -306,6 +344,7 @@ getGfilesTable(){
   }
   addInput() {
     this.nbClick++;
+  
    return this.emails().push(this.newEmail())
   }
 
