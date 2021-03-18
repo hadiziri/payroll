@@ -38,7 +38,7 @@ export class GenerateTableFilesComponent implements OnInit {
   idEmail:number=0;
   nbClick:number=0;
   options: string[] = ['DSI-Exploitation_paie@Sonatrach.dz'];
-  filteredOptions: Observable<string[]>=new Observable<string[]>();
+  filteredOptions: Observable<string[]>=new Observable;
   archiveSentFilesSaved:Boolean=false;
   formSettings: MbscFormOptions = {
     theme: 'mobiscroll',
@@ -119,6 +119,7 @@ export class GenerateTableFilesComponent implements OnInit {
          for(let i=0;i<data.length;i++){
            this.options.push(data[i].emailgroupmanagers);
          }
+        
          let object = this.formGroup.get('emailgroupemanagers');
          if (object != null) {
            
@@ -132,6 +133,7 @@ export class GenerateTableFilesComponent implements OnInit {
             }
           ))*/
          }
+         
         }else{
           this.openDialog();
         }
@@ -149,12 +151,22 @@ export class GenerateTableFilesComponent implements OnInit {
     
    
   }
+  removeItem() {
+    
+    const controls = this.emails();
+    controls.removeAt(0);
+    // remove from filteredOptions too.
+  
 
+  }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
+
+  
+  
   openDialog() {
     const dialogRef = this.dialog.open(AlertDialogComponent);
 
