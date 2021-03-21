@@ -84,6 +84,10 @@ $F{mtrub}:0):0]]></variableExpression>
 		<variableExpression><![CDATA[$F{dbulnature}.equals( "C" )?
 $F{mtrub}:0]]></variableExpression>
 	</variable>
+	<variable name="test" class="java.lang.Integer" resetType="Group" resetGroup="grpeMois">
+		<variableExpression><![CDATA[$V{test}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+	</variable>
 	<group name="grpeDiv" isStartNewColumn="true">
 		<groupExpression><![CDATA[$F{divdes}]]></groupExpression>
 		<groupFooter>
@@ -305,8 +309,8 @@ $F{mtrub}:0]]></variableExpression>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?(  new SimpleDateFormat("MM").format($F{bulmoispaie})
-    )+" "+new SimpleDateFormat("yyyy").format($F{bulmoispaie}):null]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{report}.equals( "0" )?(  new SimpleDateFormat("MM").format($P{currenntMonth})
+    )+" "+new SimpleDateFormat("yyyy").format($P{currenntMonth}):null]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="-10" y="55" width="210" height="15" isRemoveLineWhenBlank="true" uuid="125acc07-6073-414e-b66e-c05330058689">
@@ -389,14 +393,16 @@ $F{mtrub}:0]]></variableExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="130" y="30" width="420" height="20" isRemoveLineWhenBlank="true" uuid="0faee8a2-1c20-485d-8fd8-58fb5f5994cc"/>
-				<textFieldExpression><![CDATA[$V{grpeCPTE_COUNT}==0?"TOTAUX PAR CPTE. ANALYTIQUE":null]]></textFieldExpression>
+				<textFieldExpression><![CDATA["TOTAUX PAR CPTE. ANALYTIQUE"]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="58" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
-			<printWhenExpression><![CDATA[$V{grpeCPTE_COUNT}==0?new Boolean(true):new Boolean(false)]]></printWhenExpression>
+			<printWhenExpression><![CDATA[$V{grpeCPTE_COUNT}==0?new Boolean(true):
+$V{grpeCPTE_COUNT}<$V{test}?new Boolean(true):
+new Boolean(false)]]></printWhenExpression>
 			<staticText>
 				<reportElement x="-10" y="13" width="80" height="24" uuid="d065f8ed-0c05-47d0-a679-a392c9cfabe5">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>

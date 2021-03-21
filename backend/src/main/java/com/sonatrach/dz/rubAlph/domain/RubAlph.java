@@ -1,20 +1,28 @@
 package com.sonatrach.dz.rubAlph.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
+
+import com.sonatrach.dz.rubNum.domain.RubId;
 
 @Entity
 @Table(name ="PAIE_FRUB_A")
-public class RubAlph {
+
+public class RubAlph implements Serializable{
 	@Column(name="DATE_EXPL")
 	private String DATEEXPL;
-	@Id
+	
 	@Column(name= "MAT")
 	private String MAT;
+	@Id
+	@Column(name= "ID")
+	private String id;
 	@Column(name="NOM_PRENOM")
 	private String NOMPRENOM;
 	@Column(name="DIREC")
@@ -40,17 +48,17 @@ public class RubAlph {
 	
 	@Column(name="MOIS_EFFET")
 	private String MOISEFFET;
-
+	
 	@Column(name="ANN_EFFET")
 	private String ANNEFFET;
 	@Column(name="CODE_PAIE")
 	private String CODEPAIE;
-
+	
 	@Column(name="NO_RUB")
 	private String NORUB;
 	@Column(name="LIB_RUB")
 	private String LIBRUB;
-
+	
 	@Column(name="CODE_NATUR")
 	private Integer CODENATUR;
 	@Column(name="DT_DEB")
@@ -74,6 +82,14 @@ public class RubAlph {
 	
 	public RubAlph() {
 		
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getDATEEXPL() {

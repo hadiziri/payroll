@@ -273,7 +273,7 @@
 				<textField>
 					<reportElement x="430" y="160" width="450" height="20" uuid="f8c01d06-1118-4ce0-b430-391950c4d701"/>
 					<textElement textAlignment="Right"/>
-					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulnet1})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,##0.0#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($V{bulnet1})]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="240" y="60" width="1140" height="15" uuid="cb37e66b-18ba-4b08-b796-e5c5baa9ff3e"/>
