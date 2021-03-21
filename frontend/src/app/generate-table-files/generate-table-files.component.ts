@@ -152,7 +152,7 @@ export class GenerateTableFilesComponent implements OnInit {
    
   }
   removeItem() {
-    
+    this.nbClick--;
     const controls = this.emails();
     controls.removeAt(0);
     // remove from filteredOptions too.

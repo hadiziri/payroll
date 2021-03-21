@@ -318,7 +318,7 @@
 		</groupFooter>
 	</group>
 	<group name="grpdep" isStartNewColumn="true">
-		<groupExpression><![CDATA[$F{divdes}+$F{dirdes}+$F{strdes}]]></groupExpression>
+		<groupExpression><![CDATA[$F{divdes}+$F{dirdes}+$F{cstr}]]></groupExpression>
 		<groupHeader>
 			<band>
 				<property name="com.jaspersoft.studio.unit.height" value="px"/>
