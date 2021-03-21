@@ -151,6 +151,11 @@ export class GenerateTableFilesComponent implements OnInit {
     
    
   }
+
+ 
+    
+
+  
   removeItem() {
     this.nbClick--;
     const controls = this.emails();
@@ -356,7 +361,7 @@ getGfilesTable(){
   }
   addInput() {
     this.nbClick++;
-  
+    
    return this.emails().push(this.newEmail())
   }
 

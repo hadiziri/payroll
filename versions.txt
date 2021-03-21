@@ -1,3 +1,7 @@
+5.4
+----
+-Correction etat journal ,recap
+-------------------------------------------------------------------------------------------------
 5.3
 ----
 -Ajout suppression email (envoie fichier systeme)

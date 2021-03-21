@@ -42,17 +42,41 @@
 	<variable name="bulmatricule1" class="java.lang.Integer" resetType="Group" resetGroup="grpdep" calculation="DistinctCount">
 		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
 	</variable>
+	<variable name="strdes1" class="java.lang.Integer" resetType="Group" resetGroup="grpdep" calculation="Count">
+		<variableExpression><![CDATA[$F{strdes}]]></variableExpression>
+	</variable>
 	<variable name="cstr1" class="java.lang.Integer" resetType="Group" resetGroup="grpdep" calculation="Count">
 		<variableExpression><![CDATA[$F{cstr}]]></variableExpression>
 	</variable>
 	<variable name="dir1" class="java.lang.Integer" resetType="Group" resetGroup="grpeDir" calculation="Count">
 		<variableExpression><![CDATA[$F{dir}]]></variableExpression>
 	</variable>
+	<variable name="bulgainsimp3" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDiv" calculation="Sum">
+		<variableExpression><![CDATA[$F{flag}==0?new BigDecimal(0):$F{bulgainsimp}]]></variableExpression>
+	</variable>
 	<variable name="bulmatricule2" class="java.lang.Integer" resetType="Group" resetGroup="grpeDir" calculation="DistinctCount">
 		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
 	</variable>
+	<variable name="dirdes1" class="java.lang.Integer" resetType="Group" resetGroup="grpeDir" calculation="Count">
+		<variableExpression><![CDATA[$F{dirdes}]]></variableExpression>
+	</variable>
 	<variable name="bulgainsimp2" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
 		<variableExpression><![CDATA[$F{flag}==0?new BigDecimal(0):$F{bulgainsimp}]]></variableExpression>
+	</variable>
+	<variable name="bulretimp3" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
+		<variableExpression><![CDATA[$F{flag}==0?new BigDecimal(0):$F{bulretimp}]]></variableExpression>
+	</variable>
+	<variable name="bulgainsnimp4" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
+		<variableExpression><![CDATA[$F{flag}==0?new BigDecimal(0):$F{bulretnimp}]]></variableExpression>
+	</variable>
+	<variable name="bulnet3" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
+		<variableExpression><![CDATA[$F{bulnet}]]></variableExpression>
+	</variable>
+	<variable name="bulgainsimp4" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
+		<variableExpression><![CDATA[$F{flag}==0?new BigDecimal(0):$F{bulgainsimp}]]></variableExpression>
+	</variable>
+	<variable name="bulgainsnimp3" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
+		<variableExpression><![CDATA[$F{flag}==0?new BigDecimal(0):$F{bulgainsnimp}]]></variableExpression>
 	</variable>
 	<variable name="div1" class="java.lang.Integer" resetType="Group" resetGroup="grpDiv" calculation="Count">
 		<variableExpression><![CDATA[$F{div}]]></variableExpression>
@@ -60,17 +84,8 @@
 	<variable name="bulmatricule3" class="java.lang.Integer" resetType="Group" resetGroup="grpDiv" calculation="DistinctCount">
 		<variableExpression><![CDATA[$F{bulmatricule}]]></variableExpression>
 	</variable>
-	<variable name="strdes1" class="java.lang.Integer" resetType="Group" resetGroup="grpdep" calculation="Count">
-		<variableExpression><![CDATA[$F{strdes}]]></variableExpression>
-	</variable>
-	<variable name="dirdes1" class="java.lang.Integer" resetType="Group" resetGroup="grpeDir" calculation="Count">
-		<variableExpression><![CDATA[$F{dirdes}]]></variableExpression>
-	</variable>
 	<variable name="divdes1" class="java.lang.Integer" resetType="Group" resetGroup="grpDiv" calculation="Count">
 		<variableExpression><![CDATA[$F{divdes}]]></variableExpression>
-	</variable>
-	<variable name="bulgainsimp3" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDiv" calculation="Sum">
-		<variableExpression><![CDATA[$F{flag}==0?new BigDecimal(0):$F{bulgainsimp}]]></variableExpression>
 	</variable>
 	<variable name="bulgainsnimp2" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDiv" calculation="Sum">
 		<variableExpression><![CDATA[$F{flag}==0?new BigDecimal(0):$F{bulgainsnimp}]]></variableExpression>
@@ -82,21 +97,6 @@
 		<variableExpression><![CDATA[$F{flag}==0?new BigDecimal(0):$F{bulretnimp}]]></variableExpression>
 	</variable>
 	<variable name="bulnet2" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDiv" calculation="Sum">
-		<variableExpression><![CDATA[$F{bulnet}]]></variableExpression>
-	</variable>
-	<variable name="bulgainsimp4" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
-		<variableExpression><![CDATA[$F{flag}==0?new BigDecimal(0):$F{bulgainsimp}]]></variableExpression>
-	</variable>
-	<variable name="bulgainsnimp3" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
-		<variableExpression><![CDATA[$F{flag}==0?new BigDecimal(0):$F{bulgainsnimp}]]></variableExpression>
-	</variable>
-	<variable name="bulretimp3" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
-		<variableExpression><![CDATA[$F{flag}==0?new BigDecimal(0):$F{bulretimp}]]></variableExpression>
-	</variable>
-	<variable name="bulgainsnimp4" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
-		<variableExpression><![CDATA[$F{flag}==0?new BigDecimal(0):$F{bulgainsnimp}]]></variableExpression>
-	</variable>
-	<variable name="bulnet3" class="java.math.BigDecimal" resetType="Group" resetGroup="grpeDir" calculation="Sum">
 		<variableExpression><![CDATA[$F{bulnet}]]></variableExpression>
 	</variable>
 	<variable name="divdes2" class="java.lang.Integer" calculation="Count">
