@@ -183,8 +183,8 @@ $F{mtrub}:0:0
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[(  new SimpleDateFormat("MM").format($F{bulmoispaie})
-    )+" "+new SimpleDateFormat("yyyy").format($F{bulmoispaie})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[(  new SimpleDateFormat("MM").format($P{currenntMonth})
+    )+" "+new SimpleDateFormat("yyyy").format($P{currenntMonth})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="-10" y="70" width="210" height="15" isRemoveLineWhenBlank="true" uuid="125acc07-6073-414e-b66e-c05330058689">
@@ -228,30 +228,30 @@ $F{mtrub}:0:0
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[( new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("01") ?
-	$F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Janvier" :"RETRO   Janvier" :
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("02") ?
-         $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Février" :"RETRO   Février":
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("03") ?
-          $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Mars" :"RETRO   Mars":
-        new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("04") ?
-         $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Avril" :"RETRO   Avril":
-        new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("05") ?
-         $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Mai" :"RETRO   Mai":
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("06") ?
-          $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Juin" :"RETRO   Juin":
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("07") ?
-          $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Juillet" :"RETRO   Juillet":
-        new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("08") ? 
-         $F{bulmoispaie}.compareTo($P{currenntMonth})==0?"Aout" :"RETRO   Aout":
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("09") ?
-          $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Septembre" :"RETRO   Septembre":
-        new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("10") ?
-         $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Octobre" : "RETRO   Octobre":
-         new SimpleDateFormat("MM").format($F{bulmoispaie}).equals("11") ? 
-          $F{bulmoispaie}.compareTo($P{currenntMonth})==0?"Novembre" :"RETRO   Novembre":
-             $F{bulmoispaie}.compareTo($P{currenntMonth})==0? "Decembre":"RETRO   Decembre"
-    )+" "+new SimpleDateFormat("yyyy").format($F{bulmoispaie})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( new SimpleDateFormat("MM").format($P{mois}).equals("01") ?
+	$P{mois}.compareTo($P{currenntMonth})==0? "Janvier" :"RETRO   Janvier" :
+         new SimpleDateFormat("MM").format($P{mois}).equals("02") ?
+         $P{mois}.compareTo($P{currenntMonth})==0? "Février" :"RETRO   Février":
+         new SimpleDateFormat("MM").format($P{mois}).equals("03") ?
+         $P{mois}.compareTo($P{currenntMonth})==0? "Mars" :"RETRO   Mars":
+        new SimpleDateFormat("MM").format($P{mois}).equals("04") ?
+         $P{mois}.compareTo($P{currenntMonth})==0? "Avril" :"RETRO   Avril":
+        new SimpleDateFormat("MM").format($P{mois}).equals("05") ?
+         $P{mois}.compareTo($P{currenntMonth})==0? "Mai" :"RETRO   Mai":
+         new SimpleDateFormat("MM").format($P{mois}).equals("06") ?
+          $P{mois}.compareTo($P{currenntMonth})==0? "Juin" :"RETRO   Juin":
+         new SimpleDateFormat("MM").format($P{mois}).equals("07") ?
+          $P{mois}.compareTo($P{currenntMonth})==0? "Juillet" :"RETRO   Juillet":
+        new SimpleDateFormat("MM").format($P{mois}).equals("08") ? 
+         $P{mois}.compareTo($P{currenntMonth})==0?"Aout" :"RETRO   Aout":
+         new SimpleDateFormat("MM").format($P{mois}).equals("09") ?
+          $P{mois}.compareTo($P{currenntMonth})==0? "Septembre" :"RETRO   Septembre":
+        new SimpleDateFormat("MM").format($P{mois}).equals("10") ?
+         $P{mois}.compareTo($P{currenntMonth})==0? "Octobre" : "RETRO   Octobre":
+         new SimpleDateFormat("MM").format($P{mois}).equals("11") ? 
+          $P{mois}.compareTo($P{currenntMonth})==0?"Novembre" :"RETRO   Novembre":
+             $P{mois}.compareTo($P{currenntMonth})==0? "Decembre":"RETRO   Decembre"
+    )+" "+new SimpleDateFormat("yyyy").format($P{mois})]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
