@@ -4,9 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.sonatrach.dz.rubAlph.domain.RubAlph;
+import com.sonatrach.dz.rubAlph.domain.RubId;
 
 
 @Repository
-public interface RubAlphRepo extends JpaRepository<RubAlph ,String >{
+public interface RubAlphRepo extends JpaRepository<RubAlph ,RubId >{
 
 }

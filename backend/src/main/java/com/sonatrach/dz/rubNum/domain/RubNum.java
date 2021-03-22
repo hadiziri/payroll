@@ -13,14 +13,13 @@ import com.sonatrach.dz.etatRecap.domain.EtatRecapId;
 
 @Entity
 @Table(name ="PAIE_FRUB_N")
-
+@IdClass(RubId.class)
 public class RubNum implements Serializable{
 	
 	@Column(name="DATE_EXPL")
 	private String DATEEXPL;
+	
 	@Id
-	@Column(name= "ID")
-	private String id;
 	@Column(name= "MAT")
 	private String MAT;
 	@Column(name="NOM_PRENOM")
@@ -45,20 +44,20 @@ public class RubNum implements Serializable{
 	private String NUMADHER;
 	@Column(name="DATE_NAISS")
 	private String DATENAISS;
-	
+	@Id
 	@Column(name="MOIS_EFFET")
 	private String MOISEFFET;
-	
+	@Id
 	@Column(name="ANN_EFFET")
 	private String ANNEFFET;
 	@Column(name="CODE_PAIE")
 	private String CODEPAIE;
-	
+	@Id
 	@Column(name="NO_RUB")
 	private String NORUB;
 	@Column(name="LIB_RUB")
 	private String LIBRUB;
-	
+	@Id
 	@Column(name="CODE_NATUR")
 	private Integer CODENATUR;
 	@Column(name="DT_DEB")
@@ -84,13 +83,7 @@ public class RubNum implements Serializable{
 		
 	}
 	
-	public String getId() {
-		return id;
-	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getDATEEXPL() {
 		return DATEEXPL;

@@ -8,6 +8,6 @@ import com.sonatrach.dz.rubNum.domain.RubNum;
 
 
 @Repository
-public interface RubNumRepo extends JpaRepository<RubNum ,String > {
+public interface RubNumRepo extends JpaRepository<RubNum ,RubId > {
 
 }
