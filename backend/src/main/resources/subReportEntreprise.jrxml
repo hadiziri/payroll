@@ -424,4 +424,12 @@ new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Lo
 			</textField>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="70" height="20" uuid="1bf1c8a5-03cc-4597-82a7-38a93c7e6e2d"/>
+				<textFieldExpression><![CDATA["\f"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
 </jasperReport>
