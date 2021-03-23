@@ -1527,6 +1527,7 @@ public class Controller {
 				 */
 
 			}
+			
 			// transform div data without css and sort by div
 			List<EtatRecap> transform = subReportDivData.stream()
 					.collect(Collectors.groupingBy(foo -> getGroupingByKey(foo))).entrySet().stream()
@@ -1589,11 +1590,14 @@ public class Controller {
 			 * +"           "+entrepriseCss.get(i).getMtrub()); }
 			 * //System.out.println(subReportDivCssData.size());
 			 */
+			
+			
 
 			// load file and compile it
 			// get path files
 			File file = ResourceUtils.getFile("classpath:etatRecap.jrxml");
 			File file2 = ResourceUtils.getFile("classpath:subReport.jrxml");
+			
 			File fileMonth = ResourceUtils.getFile("classpath:subReportMonth.jrxml");
 			File fileMonthCss = ResourceUtils.getFile("classpath:subReportMonthCss.jrxml");
 			File fileDir = ResourceUtils.getFile("classpath:subReportDir.jrxml");
@@ -1605,6 +1609,7 @@ public class Controller {
 
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 			JasperReport subReport = JasperCompileManager.compileReport(file2.getAbsolutePath());
+		
 			JasperReport subReportMonth = JasperCompileManager.compileReport(fileMonth.getAbsolutePath());
 			JasperReport subReportMonthCss = JasperCompileManager.compileReport(fileMonthCss.getAbsolutePath());
 			JasperReport subReportDir = JasperCompileManager.compileReport(fileDir.getAbsolutePath());
@@ -1617,6 +1622,7 @@ public class Controller {
 
 			// get data source for files
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(mainReportData);
+			
 			JRBeanCollectionDataSource dataSource2 = new JRBeanCollectionDataSource(mainReportDataTotaux);
 			JRBeanCollectionDataSource dataSourceMonth = new JRBeanCollectionDataSource(subReportMonthData);
 			JRBeanCollectionDataSource dataSourceMonthCss = new JRBeanCollectionDataSource(subReportMonthCssData);
@@ -1632,8 +1638,9 @@ public class Controller {
 			// parameters to send
 			Map<String, Object> parameters = new HashMap<>();
 			parameters.put("subReport", subReport);
-			parameters.put("subReportMonth", subReportMonth);
 			parameters.put("totaux1", dataSource2);
+
+			parameters.put("subReportMonth", subReportMonth);
 			parameters.put("dataSourceMonth", dataSourceMonth);
 			parameters.put("subReportMonthCss", subReportMonthCss);
 			parameters.put("dataSourceMonthCss", dataSourceMonthCss);
@@ -1653,7 +1660,7 @@ public class Controller {
 			String date = "01" + "/" + currentMonth + "/" + currentYear;
 			Date sysDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
 			parameters.put("currenntMonth", sysDate);
-
+			
 			// fill main report and sub reports by sending data with parameter and export
 			// the report
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);

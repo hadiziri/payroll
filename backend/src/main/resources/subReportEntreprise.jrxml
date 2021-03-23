@@ -151,11 +151,11 @@ $F{mtrub}:0]]></variableExpression>
 				<reportElement x="260" y="40" width="360" height="20" isRemoveLineWhenBlank="true" uuid="d71eb56c-ff6a-4edd-a5e4-208d29b466cf"/>
 				<textFieldExpression><![CDATA["TOTAUX PAR SOCIETE:"]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
+			<textField evaluationTime="Master" isBlankWhenNull="true">
 				<reportElement x="1480" y="0" width="90" height="15" isRemoveLineWhenBlank="true" uuid="ed6c9d7b-8503-4a73-87aa-fd6fc0de880b">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$P{page}+($V{PAGE_NUMBER}-1)]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{MASTER_CURRENT_PAGE}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="620" y="40" width="200" height="20" isRemoveLineWhenBlank="true" uuid="fede599d-b6d7-491e-b778-8c03f70f6f2a">

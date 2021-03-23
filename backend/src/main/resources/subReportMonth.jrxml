@@ -88,6 +88,10 @@ $F{mtrub}:0:0
 	):0
 ):0]]></variableExpression>
 	</variable>
+	<variable name="isSub" class="java.lang.Boolean">
+		<variableExpression><![CDATA[new Boolean(true)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Boolean(true)]]></initialValueExpression>
+	</variable>
 	<group name="grpMonth" isStartNewColumn="true">
 		<groupExpression><![CDATA[$P{div}+$P{dir}+$P{mois}]]></groupExpression>
 		<groupFooter>
@@ -172,11 +176,11 @@ $F{mtrub}:0:0
 				</reportElement>
 				<textFieldExpression><![CDATA["PAGE:"]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
+			<textField evaluationTime="Master" isBlankWhenNull="true">
 				<reportElement x="1480" y="0" width="90" height="15" isRemoveLineWhenBlank="true" uuid="b7069660-9384-4a35-b596-7a87af6d8f4a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$P{page}+($V{PAGE_NUMBER}-1)]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{MASTER_CURRENT_PAGE}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="710" y="0" width="220" height="20" isRemoveLineWhenBlank="true" uuid="4018bc2f-a052-42a1-9dd9-05ca6420aa25">

@@ -93,6 +93,10 @@
 	):new BigDecimal(0)
 ):new BigDecimal(0)]]></variableExpression>
 	</variable>
+	<variable name="isSubCpt" class="java.lang.Boolean">
+		<variableExpression><![CDATA[new Boolean(true)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Boolean(true)]]></initialValueExpression>
+	</variable>
 	<group name="grpeNew">
 		<groupExpression><![CDATA[$P{div}+$P{dir}+$P{mois}+$P{cpteAnal}]]></groupExpression>
 		<groupFooter>

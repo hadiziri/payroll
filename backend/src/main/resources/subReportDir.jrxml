@@ -87,6 +87,10 @@ $F{mtrub}:0
 	):0
 ):0]]></variableExpression>
 	</variable>
+	<variable name="numpage" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{numpage}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer (1)]]></initialValueExpression>
+	</variable>
 	<group name="grpDir" isStartNewColumn="true">
 		<groupExpression><![CDATA[$P{div}+$P{dir}]]></groupExpression>
 		<groupFooter>
@@ -207,11 +211,11 @@ $F{mtrub}:0
 				<reportElement x="501" y="60" width="360" height="20" isRemoveLineWhenBlank="true" uuid="0faee8a2-1c20-485d-8fd8-58fb5f5994cc"/>
 				<textFieldExpression><![CDATA["TOTAUX PAR DIRECTION"]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
+			<textField evaluationTime="Master" isBlankWhenNull="true">
 				<reportElement x="1480" y="0" width="90" height="15" isRemoveLineWhenBlank="true" uuid="50e8a677-a9e6-4ccd-9a45-71037242929c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$P{page}+($V{PAGE_NUMBER}-1)]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{MASTER_CURRENT_PAGE}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
