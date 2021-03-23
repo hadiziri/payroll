@@ -491,7 +491,7 @@ new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Lo
 				<subreport overflowType="Stretch">
 					<reportElement isPrintRepeatedValues="false" x="-12" y="50" width="1600" height="110" uuid="c66932be-495b-4979-b7ea-41d7cd7c7dfb">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-						<printWhenExpression><![CDATA[]]></printWhenExpression>
+						<printWhenExpression><![CDATA[$F{report}.equals( "0" )?new Boolean(true):new Boolean(false)]]></printWhenExpression>
 					</reportElement>
 					<subreportParameter name="div">
 						<subreportParameterExpression><![CDATA[$F{div}]]></subreportParameterExpression>
