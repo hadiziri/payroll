@@ -26,6 +26,22 @@
       <mat-icon matSuffix> highlight_off</mat-icon>
     </mat-form-field>
 
+    <mat-form-field style="margin: 10px;" appearance="outline">
+      <mat-label>Code fichier </mat-label>
+      <input matInput  placeholder="Code fichier " formControlName="fichiercodelike" value={{structureArchive.archfichiercodelike}}>
+      <mat-icon matSuffix> offline_pin</mat-icon>
+    </mat-form-field>
+
+
+
+    <mat-form-field style="margin: 10px;" appearance="outline">
+      <mat-label>Code not like fichier</mat-label>
+      
+      
+    <input matInput  placeholder="Code not like fichier" formControlName="fichiercodenotlike" value={{structureArchive.archfichiercodenotlike}}>
+    <mat-icon matSuffix> highlight_off</mat-icon>
+  </mat-form-field>
+
       <mat-form-field style="margin: 10px;" appearance="outline">
         <mat-label>Email groupe gestionnaire</mat-label>
         <input matInput  placeholder="Email groupe gestionnaire" formControlName="emailgroupemanagers" value="{{structureArchive.archemailgroupemanagers}}">

@@ -9,7 +9,7 @@ public class RubId implements Serializable{
 	private String MOISEFFET;
 	private String ANNEFFET;
 	private String NORUB;
-	private Integer CODENATUR;
+	private String CODENATUR;
 	public String getMAT() {
 		return MAT;
 	}
@@ -34,12 +34,13 @@ public class RubId implements Serializable{
 	public void setNORUB(String nORUB) {
 		NORUB = nORUB;
 	}
-	public Integer getCODENATUR() {
+	public String getCODENATUR() {
 		return CODENATUR;
 	}
-	public void setCODENATUR(Integer cODENATUR) {
+	public void setCODENATUR(String cODENATUR) {
 		CODENATUR = cODENATUR;
 	}
+	
 	
 	
 }

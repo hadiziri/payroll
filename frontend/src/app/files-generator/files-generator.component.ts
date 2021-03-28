@@ -118,7 +118,9 @@ export class FilesGeneratorComponent implements OnInit {
     "structurename":"",
     "isactif":0,
     "flagetat":0,
-    "flagfichier":0
+    "flagfichier":0,
+    "fichiercodelike":"",
+    "fichiercodenotlike":""
   };
 
   uploadedFiles:FileDetails[]=[{"name":"Journal","progress":0},{"name":"Mand","progress":0},{"name":"Mip","progress":0},{"name":"Ret","progress":0},{"name":"Recap","progress":0}];

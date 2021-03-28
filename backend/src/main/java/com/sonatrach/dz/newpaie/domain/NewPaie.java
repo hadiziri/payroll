@@ -27,9 +27,9 @@ public class NewPaie {
 	@Column(name="ECHELON")
 	private String echelon;
 	@Column(name="MT_SB")
-	private String mtsb;
+	private BigDecimal mtsb;
 	@Column(name="MT_ECHLON")
-	private String mtechelon;
+	private BigDecimal mtechelon;
 	@Column(name="MT_PRS")
 	private BigDecimal mtpers;
 	@Column(name="MT_AI07")
@@ -133,19 +133,21 @@ public class NewPaie {
 		this.echelon = echelon;
 	}
 
-	public String getMtsb() {
+	
+
+	public BigDecimal getMtsb() {
 		return mtsb;
 	}
 
-	public void setMtsb(String mtsb) {
+	public void setMtsb(BigDecimal mtsb) {
 		this.mtsb = mtsb;
 	}
 
-	public String getMtechelon() {
+	public BigDecimal getMtechelon() {
 		return mtechelon;
 	}
 
-	public void setMtechelon(String mtechelon) {
+	public void setMtechelon(BigDecimal mtechelon) {
 		this.mtechelon = mtechelon;
 	}
 

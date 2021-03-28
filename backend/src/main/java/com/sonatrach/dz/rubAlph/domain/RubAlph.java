@@ -1,12 +1,20 @@
 package com.sonatrach.dz.rubAlph.domain;
 
+import java.awt.Cursor;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.ArrayList;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 
 import com.sonatrach.dz.etatRecap.domain.EtatRecapId;
@@ -15,6 +23,12 @@ import com.sonatrach.dz.rubNum.domain.RubId;
 @Entity
 @Table(name ="PAIE_FRUB_A")
 @IdClass(RubId.class)
+/*@NamedStoredProcedureQuery(name = "FINDRUB", 
+procedureName = "FINDRUB", parameters = {
+ @StoredProcedureParameter(mode = ParameterMode.IN, name = "frub", type = Integer.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "conditionlike", type = String.class),
+  @StoredProcedureParameter(mode = ParameterMode.IN, name = "conditionnotlike", type = String.class),
+  @StoredProcedureParameter(mode = ParameterMode.OUT, name = "xresult", type = Cursor.class)},resultClasses = RubAlph.class)*/
 public class RubAlph implements Serializable{
 	@Column(name="DATE_EXPL")
 	private String DATEEXPL;
@@ -59,7 +73,7 @@ public class RubAlph implements Serializable{
 	private String LIBRUB;
 	@Id
 	@Column(name="CODE_NATUR")
-	private Integer CODENATUR;
+	private String CODENATUR;
 	@Column(name="DT_DEB")
 	private String DTDEB;
 	@Column(name="DT_FIN")
@@ -228,13 +242,20 @@ public class RubAlph implements Serializable{
 		LIBRUB = lIBRUB;
 	}
 
-	public Integer getCODENATUR() {
+
+
+
+
+
+	public String getCODENATUR() {
 		return CODENATUR;
 	}
 
-	public void setCODENATUR(Integer cODENATUR) {
+
+	public void setCODENATUR(String cODENATUR) {
 		CODENATUR = cODENATUR;
 	}
+
 
 	public String getDTDEB() {
 		return DTDEB;

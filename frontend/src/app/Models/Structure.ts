@@ -11,7 +11,8 @@ emailgroupmanagers:string;
 isactif:number;
 flagfichier:number;
 flagetat:number;
-
+fichiercodelike:string;
+fichiercodenotlike:string;
 
 	
 }

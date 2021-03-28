@@ -1,3 +1,9 @@
+5.7
+----
+-modification flag fichiercodelike/notlike
+-génération fichiers par procedure stockée
+-update structure fichiercodelike/notlike
+-------------------------------------------------------------------------------------------------
 5.6
 ----
 -app icon

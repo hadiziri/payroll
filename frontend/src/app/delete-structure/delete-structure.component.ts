@@ -53,7 +53,9 @@ export class DeleteStructureComponent implements OnInit {
     "idstructure":0,
     "iduser":0,
     "structurearchiveddate":new Date(),
-    "structureoperation":""
+    "structureoperation":"",
+    "archfichiercodelike":"",
+    "archfichiercodenotlike":""
   }
 
   dataSource: MatTableDataSource<Structure> = new MatTableDataSource(this.ELEMENT_DATA);
@@ -139,9 +141,12 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
         "statusstructure":element.statusstructure,
         "structurecodenotlike":element.structurecodenotlike,
         "structurecodelike":element.structurecodelike,
-        "structurename":element.structurename
+        "structurename":element.structurename,
+        "fichiercodelike":element.fichiercodelike,
+        "fichiercodenotlike":element.fichiercodenotlike
       }
   };
+  //console.log(navigationExtras)
   this.router.navigate(["updateStructure/"+element.idstructure], navigationExtras);
     
   }
@@ -157,7 +162,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
     this.structureArchive.archstructurename=element.structurename;
     this.structureArchive.idactivity=element.idactivity;
     this.structureArchive.structureoperation="delete";
-    // //console.log(this.structureArchive)
+    //console.log(this.structureArchive)
     this.showConfirm();
   
   }

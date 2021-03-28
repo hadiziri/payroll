@@ -9,4 +9,6 @@ export interface ArchiveStructure{
 	  archstatusstructure :number;
       archemailgroupemanagers:String;
       structureoperation:String;
+      archfichiercodelike:String;
+      archfichiercodenotlike:String;
 }

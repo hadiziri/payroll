@@ -46,7 +46,9 @@ export class UpdateStructureComponent implements OnInit {
   "structurename":"",
 "isactif":0,
 "flagetat":0,
-"flagfichier":0};
+"flagfichier":0,
+"fichiercodelike":"",
+"fichiercodenotlike":""};
   structureArchive:ArchiveStructure={
     "archemailgroupemanagers":"",
     "archstatusstructure":3,
@@ -57,7 +59,9 @@ export class UpdateStructureComponent implements OnInit {
     "idstructure":0,
     "iduser":0,
     "structurearchiveddate":new Date(),
-    "structureoperation":""
+    "structureoperation":"",
+    "archfichiercodelike":"",
+    "archfichiercodenotlike":""
   }
   messageAdded:Boolean=false;
   messageArchive:Boolean=false;
@@ -71,7 +75,8 @@ export class UpdateStructureComponent implements OnInit {
     this.formGroup = new FormGroup({
       structurename: new FormControl(''),
       structurecodelike: new FormControl(''),
-  
+      fichiercodelike:new FormControl(''),
+      fichiercodenotlike:new FormControl(''),
       emailgroupemanagers: new FormControl('', [Validators.email]),
       idactivity: new FormControl(''),
       structurecodenotlike:new FormControl('')
@@ -86,6 +91,8 @@ export class UpdateStructureComponent implements OnInit {
      this.structureArchive.idstructure=params["idstructure"];
      this.structureArchive.archstructurecodenotlike=params["structurecodenotlike"];
      this.structureArchive.idactivity=params["idactivity"];
+     this.structureArchive.archfichiercodelike=params['fichiercodelike'];
+     this.structureArchive.archfichiercodenotlike=params['fichiercodenotlike'];
      this.structureArchive.structureoperation="update"
 
   });
@@ -152,6 +159,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
  
 
   onSubmit(post:any) {
+   // console.log(post)
     this.post = post;
     if(this.post.structurename==""&&this.post.structurecodelike==""&&this.post.emailgroupemanagers==""&&this.post.idactivity==""&&this.post.structurecodenotlike==""){
       alert("Veuillez au moins remplir un champ");
@@ -164,6 +172,14 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
          this.StructureToUpdate.structurecodelike=this.post.structurecodelike;
       
        }
+       if(this.post.fichiercodelike!=""){
+        this.StructureToUpdate.fichiercodelike=this.post.fichiercodelike;
+     
+      }
+      if(this.post.fichiercodenotlike!=""){
+        this.StructureToUpdate.fichiercodenotlike=this.post.fichiercodenotlike;
+     
+      }
        if(this.post.emailgroupemanagers!=""){
          this.StructureToUpdate.emailgroupmanagers=this.post.emailgroupemanagers;
        

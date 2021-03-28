@@ -59,7 +59,7 @@ public class RubNum implements Serializable{
 	private String LIBRUB;
 	@Id
 	@Column(name="CODE_NATUR")
-	private Integer CODENATUR;
+	private String CODENATUR;
 	@Column(name="DT_DEB")
 	private String DTDEB;
 	@Column(name="DT_FIN")
@@ -194,12 +194,19 @@ public class RubNum implements Serializable{
 		LIBRUB = lIBRUB;
 	}
 	
-	public Integer getCODENATUR() {
+
+	public String getCODENATUR() {
 		return CODENATUR;
 	}
-	public void setCODENATUR(Integer cODENATUR) {
+
+
+
+	public void setCODENATUR(String cODENATUR) {
 		CODENATUR = cODENATUR;
 	}
+
+
+
 	public String getDTDEB() {
 		return DTDEB;
 	}

@@ -25,6 +25,8 @@ public class Structure {
 	private String STRUCTURENAME;
 	private String STRUCTURECODELIKE;
 	private String STRUCTURECODENOTLIKE;
+	private String FICHIERCODELIKE;
+	private String FICHIERCODENOTLIKE;
 	private int STATUSSTRUCTURE;
 	private String EMAILGROUPMANAGERS;
 	private int isactif;
@@ -40,6 +42,42 @@ public class Structure {
 	
 
 	
+	public String getFICHIERCODELIKE() {
+		return FICHIERCODELIKE;
+	}
+
+
+
+
+
+
+	public void setFICHIERCODELIKE(String fICHIERCODELIKE) {
+		FICHIERCODELIKE = fICHIERCODELIKE;
+	}
+
+
+
+
+
+
+	public String getFICHIERCODENOTLIKE() {
+		return FICHIERCODENOTLIKE;
+	}
+
+
+
+
+
+
+	public void setFICHIERCODENOTLIKE(String fICHIERCODENOTLIKE) {
+		FICHIERCODENOTLIKE = fICHIERCODENOTLIKE;
+	}
+
+
+
+
+
+
 	public int getFlagfichier() {
 		return flagfichier;
 	}

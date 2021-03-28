@@ -30,6 +30,8 @@ public class ArchiveStructure implements Serializable{
 	 int  archstatusstructure ;
 	 String archemailgroupemanagers;
 	 String structureoperation;
+	 String archfichiercodelike;
+	 String archfichiercodenotlike;
 	 
 	 public ArchiveStructure() {
 		 
@@ -49,6 +51,24 @@ public class ArchiveStructure implements Serializable{
 
 	public void setIduser(Integer iduser) {
 		this.iduser = iduser;
+	}
+	
+	
+
+	public String getArchfichiercodelike() {
+		return archfichiercodelike;
+	}
+
+	public void setArchfichiercodelike(String archfichiercodelike) {
+		this.archfichiercodelike = archfichiercodelike;
+	}
+
+	public String getArchfichiercodenotlike() {
+		return archfichiercodenotlike;
+	}
+
+	public void setArchfichiercodenotlike(String archfichiercodenotlike) {
+		this.archfichiercodenotlike = archfichiercodenotlike;
 	}
 
 	public Date getStructurearchiveddate() {

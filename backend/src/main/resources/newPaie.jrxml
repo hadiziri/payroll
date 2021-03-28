@@ -10,8 +10,8 @@
 	<field name="codefct" class="java.lang.String"/>
 	<field name="echelle" class="java.lang.String"/>
 	<field name="echelon" class="java.lang.String"/>
-	<field name="mtsb" class="java.lang.String"/>
-	<field name="mtechelon" class="java.lang.String"/>
+	<field name="mtsb" class="java.math.BigDecimal"/>
+	<field name="mtechelon" class="java.math.BigDecimal"/>
 	<field name="mtpers" class="java.math.BigDecimal"/>
 	<field name="mtai07" class="java.math.BigDecimal"/>
 	<field name="mtai08" class="java.math.BigDecimal"/>
@@ -482,12 +482,12 @@
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{mtpers}==null?"":$F{mtpers}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="600" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[$F{mtechelon}==null?"":$F{mtechelon}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{mtechelon}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="540" y="0" width="60" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
@@ -496,12 +496,12 @@
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{mtsb}==null?"":$F{mtsb}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="470" y="0" width="70" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[$F{echelon}==null?"":$F{echelon}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{echelon}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="400" y="0" width="70" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">

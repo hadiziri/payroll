@@ -32,7 +32,9 @@ export class AddStructureComponent implements OnInit {
       "structurename": "",
       "isactif":0,
       "flagetat":0,
-      "flagfichier":0
+      "flagfichier":0,
+      "fichiercodelike":"",
+      "fichiercodenotlike":""
     };
   structureArchive: ArchiveStructure = {
     "archemailgroupemanagers": "",
@@ -44,7 +46,9 @@ export class AddStructureComponent implements OnInit {
     "idstructure": 0,
     "iduser": 0,
     "structurearchiveddate": new Date(),
-    "structureoperation":""
+    "structureoperation":"",
+    "archfichiercodelike":"",
+    "archfichiercodenotlike":""
   }
   currentUser: User = {
     "email": "",

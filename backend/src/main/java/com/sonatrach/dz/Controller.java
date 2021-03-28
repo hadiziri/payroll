@@ -1,5 +1,6 @@
 package com.sonatrach.dz;
 
+import java.awt.Cursor;
 import java.io.BufferedReader;
 
 import java.io.DataOutputStream;
@@ -32,6 +33,10 @@ import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
+import javax.persistence.Persistence;
+import javax.persistence.StoredProcedureQuery;
 import javax.validation.Valid;
 
 import org.apache.tomcat.util.http.fileupload.FileUtils;
@@ -40,6 +45,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -162,6 +171,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.data.JRCsvDataSource;
+import net.sf.jasperreports.engine.export.JRCsvExporter;
 import net.sf.jasperreports.engine.export.JRTextExporter;
 import net.sf.jasperreports.engine.export.JRTextExporterParameter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
@@ -169,6 +179,7 @@ import net.sf.jasperreports.engine.fill.JRSwapFileVirtualizer;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.engine.util.JRSwapFile;
 import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
+
 
 /*
  * Developped by : AID FERIEL for SONATRACH --2020--
@@ -267,11 +278,19 @@ public class Controller {
 	RubAlphRepo rubAlphRepo;
 	@Value("${grokonez.app.swap}")
 	String SwapPath;
+	
+	
+	
+	  @Autowired
+	    private JdbcTemplate jdbcTemplate;
+	  
+	    private SimpleJdbcCall simpleJdbcCall;
 
 	// ****************************************API*****************************************************************************
+	
 	// Api Test
 	@GetMapping({ "/test" })
-	public List<RubT> getAllBanques() throws IOException {
+	public List<NewPaie> getAllBanques() throws IOException {
 		/*
 		 * ProcessBuilder processBuilder = new ProcessBuilder(
 		 * "C:\\DIN_DRH\\DCDSI_EXPLOITATION\\SYSTEME\\2021\\2021-02\\convert.bat","C:\\DIN_DRH\\DCDSI_EXPLOITATION\\SYSTEME\\2021\\2021-02\\DEP 2021-02.xlsx"
@@ -298,8 +317,110 @@ public class Controller {
 		 * } catch (IOException e) { e.printStackTrace(); } catch (InterruptedException
 		 * e) { e.printStackTrace(); }
 		 */
-		return rubTRepo.findAll();
+		
+		//return rubTRepo.findAll();
+		String codelike="^(A|B|C)";
+		String codenotLike="^(A01|B04)";
+		Cursor cur = null;
+		List<NewPaie> filtredNewPaie =new ArrayList();
+		
+		simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withProcedureName("FINDNEWPAIE");
+		
+        SqlParameterSource in = new MapSqlParameterSource().addValue("conditionlike", codelike);
+               
+       
+                ((MapSqlParameterSource) in).addValue("conditionnotlike", codenotLike);
+                Map out = simpleJdbcCall.execute(in);
+
+	            if (out != null) {
+	            	
+	             
+	            	filtredNewPaie =  (ArrayList<NewPaie>) out.get("XRESULT");
+	            }
+	
+		//return rubAlphRepo.findRub(0,codelike,codenotLike);
+		return filtredNewPaie;
 	}
+	
+	@GetMapping({ "/test3" })
+	public List<Pers> test3() throws IOException {
+	
+		
+		//return rubTRepo.findAll();
+		String codelike="^(A|B|C)";
+		String codenotLike="^(A01|B04)";
+		Cursor cur = null;
+		List<Pers> filtredPers = new ArrayList();
+		
+		simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withProcedureName("FINDPERS");
+	
+        SqlParameterSource in = new MapSqlParameterSource().addValue("conditionlike", codelike);
+                
+                
+       
+                ((MapSqlParameterSource) in).addValue("conditionnotlike", codenotLike);
+                Map out = simpleJdbcCall.execute(in);
+
+	            if (out != null) {
+	            	
+	             
+	            	filtredPers =  (ArrayList<Pers>) out.get("XRESULT");
+	            }
+	
+		//return rubAlphRepo.findRub(0,codelike,codenotLike);
+		return filtredPers;
+	}
+	
+	
+	@GetMapping({ "/test2" })
+	ArrayList<RubAlph> test2() {
+		 SimpleJdbcCall simpleJdbcCall;
+		simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withProcedureName("findRub");
+		String codelike="^(A|B|C)";
+		String codenotLike="^(A01|B04)";
+        SqlParameterSource in = new MapSqlParameterSource()
+                .addValue("frub", 0);
+                ((MapSqlParameterSource) in).addValue("conditionlike", codelike);
+       
+                ((MapSqlParameterSource) in).addValue("conditionnotlike", codenotLike);
+
+        
+
+        try {
+
+            Map out = simpleJdbcCall.execute(in);
+
+            if (out != null) {
+            	
+             
+                return (ArrayList<RubAlph>) out.get("XRESULT");
+            }
+
+        } catch (Exception e) {
+            // ORA-01403: no data found, or any java.sql.SQLException
+            System.err.println(e.getMessage());
+        }
+
+        return null;
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// get structure by activity
 	@PostMapping({ "getStructurByActivity" })
@@ -792,10 +913,9 @@ public class Controller {
 		return null;
 	}
 
-	// *****************************filter by codeLike and codeNotLike
-	// structure****************************************
+	// *****************************filter by codeLike and codeNotLike structure****************************************
 
-	public List<RubNum> filtrerFrubN(List<RubNum> data, Structure structure) {
+	/*public List<RubNum> filtrerFrubN(List<RubNum> data, Structure structure) {
 
 		String[] codeLike = structure.getSTRUCTURECODELIKE().split("/");
 		String[] codeNotLike = structure.getSTRUCTURECODENOTLIKE().split("/");
@@ -890,7 +1010,7 @@ public class Controller {
 		return filtredData;
 
 	}
-
+*/
 	// ************************************generer les fichiers par
 	// structure*********************************************************//
 	// génération des fichiers FRUBN
@@ -898,10 +1018,26 @@ public class Controller {
 	public Structure generateFrubNStr(@RequestBody Structure structure) throws FileNotFoundException, JRException {
 
 		try {
-			List<RubNum> lesFrubNum = rubNumRepo.findAll();
-			// System.out.println(lesFrubNum.size());
-			List<RubNum> filtredFrubNum = filtrerFrubN(lesFrubNum, structure);
-			// System.out.println(filtredFrubNum.size());
+		
+			SimpleJdbcCall simpleJdbcCall;
+			List<RubNum> filtredFrubNum  = new ArrayList();
+			
+			simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+	                .withProcedureName("FINDRUB");
+			String codelike="^("+structure.getFICHIERCODELIKE()+")";
+			String codenotLike="^("+structure.getFICHIERCODENOTLIKE()+")";
+	        SqlParameterSource in = new MapSqlParameterSource()
+	                .addValue("frub", 1);
+	                ((MapSqlParameterSource) in).addValue("conditionlike", codelike);
+	       
+	                ((MapSqlParameterSource) in).addValue("conditionnotlike", codenotLike);
+	                Map out = simpleJdbcCall.execute(in);
+
+		            if (out != null) {
+		            	
+		             
+		            	filtredFrubNum=  (ArrayList<RubNum>) out.get("XRESULT");
+		            }
 
 			// **********************************************get current date from payMonth
 
@@ -953,6 +1089,7 @@ public class Controller {
 			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			JasperPrint jasperPrint13 = JasperFillManager.fillReport(jasperReport13, param, dataSource13);
 
+			
 			JRXlsxExporter exporter13 = new JRXlsxExporter();
 			exporter13.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter13.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
@@ -1005,16 +1142,33 @@ public class Controller {
 	public Structure generateFrubAStr(@RequestBody Structure structure) throws FileNotFoundException, JRException {
 
 		try {
+			SimpleJdbcCall simpleJdbcCall;
+			List<RubAlph> filtredFrubT = new ArrayList();
+			
+			simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+	                .withProcedureName("FINDRUB");
+			String codelike="^("+structure.getFICHIERCODELIKE()+")";
+			String codenotLike="^("+structure.getFICHIERCODENOTLIKE()+")";
+	        SqlParameterSource in = new MapSqlParameterSource()
+	                .addValue("frub", 0);
+	                ((MapSqlParameterSource) in).addValue("conditionlike", codelike);
+	       
+	                ((MapSqlParameterSource) in).addValue("conditionnotlike", codenotLike);
+	                Map out = simpleJdbcCall.execute(in);
 
-			List<RubAlph> lesFrubAlph = rubAlphRepo.findAll();
-			// System.out.println(lesFrubAlph.size());
-			List<RubAlph> filtredFrubT = filtrerFrubA(lesFrubAlph, structure);
+		            if (out != null) {
+		            	
+		             
+		            	 filtredFrubT =  (ArrayList<RubAlph>) out.get("XRESULT");
+		            }
 			// **********************************************get current date from payMonth
 
 			PayMonth currentDate = paymonthRepo.findByState();
 			String currentYear = currentDate.getPaymonth().substring(0, 4);
 			String currentMonth = currentDate.getPaymonth().substring(4, 6);
 			String dateFormat = currentYear + "-" + currentMonth;
+			
+			
 
 			// ******************************************get Folder path
 			Folder folder = folderRepo.findByFolderName("ETAT");
@@ -1058,6 +1212,8 @@ public class Controller {
 			Map<String, Object> param = new HashMap<>();
 			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			JasperPrint jasperPrint12 = JasperFillManager.fillReport(jasperReport12, param, dataSource12);
+		
+			
 			JRXlsxExporter exporter12 = new JRXlsxExporter();
 			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
@@ -1092,8 +1248,25 @@ public class Controller {
 
 		try {
 
-			List<NewPaie> lesNewpaie = newPaieRepo.findAll();
-			List<NewPaie> filtredNewPaie = filtrerNewPaie(lesNewpaie, structure);
+			 SimpleJdbcCall simpleJdbcCall;
+			List<NewPaie> filtredNewPaie =new ArrayList();
+			
+			simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+	                .withProcedureName("FINDNEWPAIE");
+			String codelike="^("+structure.getFICHIERCODELIKE()+")";
+			String codenotLike="^("+structure.getFICHIERCODENOTLIKE()+")";
+	        SqlParameterSource in = new MapSqlParameterSource().addValue("conditionlike", codelike);
+	               
+	       
+	                ((MapSqlParameterSource) in).addValue("conditionnotlike", codenotLike);
+	                Map out = simpleJdbcCall.execute(in);
+
+		            if (out != null) {
+		            	
+		             
+		            	filtredNewPaie =  (ArrayList<NewPaie>) out.get("XRESULT");
+		            	//System.out.println(simpleJdbcCall.getCallString()+" here");
+		            }
 			// **********************************************get current date from payMonth
 
 			PayMonth currentDate = paymonthRepo.findByState();
@@ -1128,6 +1301,8 @@ public class Controller {
 			Map<String, Object> param = new HashMap<>();
 			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			JasperPrint jasperPrint10 = JasperFillManager.fillReport(jasperReport10, param, dataSource10);
+			
+			
 			JRXlsxExporter exporter10 = new JRXlsxExporter();
 			exporter10.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter10.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
@@ -1153,8 +1328,25 @@ public class Controller {
 
 		try {
 
-			List<Pers> lesPers = persRepo.findAll();
-			List<Pers> filtredPers = filtrerPers(lesPers, structure);
+			SimpleJdbcCall simpleJdbcCall;
+			List<Pers> filtredPers = new ArrayList();
+			
+			simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+	                .withProcedureName("FINDPERS");
+			String codelike="^("+structure.getFICHIERCODELIKE()+")";
+			String codenotLike="^("+structure.getFICHIERCODENOTLIKE()+")";
+	        SqlParameterSource in = new MapSqlParameterSource().addValue("conditionlike", codelike);
+	                
+	                
+	       
+	                ((MapSqlParameterSource) in).addValue("conditionnotlike", codenotLike);
+	                Map out = simpleJdbcCall.execute(in);
+
+		            if (out != null) {
+		            	
+		             
+		            	filtredPers =  (ArrayList<Pers>) out.get("XRESULT");
+		            }
 			// **********************************************get current date from payMonth
 
 			PayMonth currentDate = paymonthRepo.findByState();
@@ -1192,6 +1384,7 @@ public class Controller {
 			param.put(JRParameter.REPORT_VIRTUALIZER, virtualizer);
 			JasperPrint jasperPrint11 = JasperFillManager.fillReport(jasperReport11, param, dataSource11);
 			JRXlsxExporter exporter11 = new JRXlsxExporter();
+			//JRCsvExporter exporter = new JRCsvExporter();
 			exporter11.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter11.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter11.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint11);

@@ -216,11 +216,11 @@ $F{mtrub}:0:0
 				<textFieldExpression><![CDATA["DIRECTION"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="-11" y="110" width="440" height="20" isRemoveLineWhenBlank="true" uuid="30bbe63e-1329-41ef-8c39-cad391299f87"/>
+				<reportElement x="-11" y="110" width="440" height="30" isRemoveLineWhenBlank="true" uuid="30bbe63e-1329-41ef-8c39-cad391299f87"/>
 				<textFieldExpression><![CDATA[$P{divdes}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="600" y="110" width="380" height="20" isRemoveLineWhenBlank="true" uuid="ee0290de-4590-4964-a246-3a8212453224"/>
+				<reportElement x="600" y="110" width="970" height="30" isRemoveLineWhenBlank="true" uuid="ee0290de-4590-4964-a246-3a8212453224"/>
 				<textFieldExpression><![CDATA[$P{dirdes}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
@@ -422,7 +422,7 @@ new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Lo
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dbulnature}.equals( "R" )?
 ($F{dbulimp}==0?
-new DecimalFormat("###,##0.000#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtrub}):""):""]]></textFieldExpression>
+new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtrub}):""):""]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="980" y="0" width="190" height="20" isRemoveLineWhenBlank="true" uuid="c7d9f004-ba41-4c99-9a6c-cfbf3173864a">
@@ -436,7 +436,7 @@ new DecimalFormat("###,##0.000#", new java.text.DecimalFormatSymbols(java.util.L
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dbulnature}.equals( "R" )?
 ($F{dbulimp}==1?
-new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtrub}):""):""]]></textFieldExpression>
+new DecimalFormat("###,##0.000#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtrub}):""):""]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="419" y="0" width="151" height="20" isRemoveLineWhenBlank="true" uuid="52c3f95c-e640-4324-8f7c-41678ae6fdf8">
