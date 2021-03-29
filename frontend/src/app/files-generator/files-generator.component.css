@@ -257,3 +257,10 @@ h1 {
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  opacity: .35;
+  box-shadow: none;
+}

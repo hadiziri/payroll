@@ -204,7 +204,7 @@ $F{mtrub}:0
 				<textFieldExpression><![CDATA[$P{divdes}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="860" y="60" width="730" height="30" isRemoveLineWhenBlank="true" uuid="ee0290de-4590-4964-a246-3a8212453224"/>
+				<reportElement x="860" y="60" width="660" height="30" isRemoveLineWhenBlank="true" uuid="ee0290de-4590-4964-a246-3a8212453224"/>
 				<textFieldExpression><![CDATA[$P{dirdes}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
@@ -223,7 +223,7 @@ $F{mtrub}:0
 		<band height="63" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement x="0" y="20" width="80" height="24" uuid="d065f8ed-0c05-47d0-a679-a392c9cfabe5">
+				<reportElement x="0" y="20" width="50" height="24" uuid="d065f8ed-0c05-47d0-a679-a392c9cfabe5">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -231,7 +231,7 @@ $F{mtrub}:0
 					<pen lineWidth="0.0" lineStyle="Dashed"/>
 				</box>
 				<textElement textAlignment="Left"/>
-				<text><![CDATA[!CRub]]></text>
+				<text><![CDATA[!Rub]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="590" y="20" width="200" height="24" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
@@ -278,16 +278,16 @@ $F{mtrub}:0
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="1600" height="20" uuid="bf985571-26a3-41fc-9a7e-e395c29a60fe"/>
-				<text><![CDATA[+-----+----------------------------+------------+---------------+----------------+---------------+---------------+----------------+ ]]></text>
+				<text><![CDATA[+---+---------------------------+---------------+---------------+----------------+---------------+---------------+----------------+ ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="40" width="1600" height="14" uuid="8afe1fc3-c7c2-44bc-af43-80d93af68b27">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<text><![CDATA[+-----+----------------------------+------------+---------------+----------------+---------------+---------------+----------------+ ]]></text>
+				<text><![CDATA[+---+---------------------------+---------------+---------------+----------------+---------------+---------------+----------------+ ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="430" y="20" width="160" height="24" uuid="9937416f-8a38-440d-b8e4-155b5b910e17">
+				<reportElement x="400" y="20" width="190" height="24" uuid="9937416f-8a38-440d-b8e4-155b5b910e17">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -297,7 +297,7 @@ $F{mtrub}:0
 				<text><![CDATA[!NBRE OU BASE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="80" y="20" width="350" height="24" uuid="669d2370-7d9d-4cb6-9019-e43c583264cd">
+				<reportElement x="50" y="20" width="350" height="24" uuid="669d2370-7d9d-4cb6-9019-e43c583264cd">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -330,7 +330,7 @@ $F{mtrub}:0
 		new Boolean (true):new Boolean(false)
 ):new Boolean(false)]]></printWhenExpression>
 			<textField isBlankWhenNull="true">
-				<reportElement x="0" y="0" width="80" height="20" isRemoveLineWhenBlank="true" uuid="1324277f-1cf1-4cc2-a5f3-88ededc0ff6e">
+				<reportElement x="0" y="0" width="50" height="20" isRemoveLineWhenBlank="true" uuid="1324277f-1cf1-4cc2-a5f3-88ededc0ff6e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>
 				</reportElement>
 				<box>
@@ -381,7 +381,7 @@ new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Lo
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dbulnature}.equals( "R" )?
 ($F{dbulimp}==0?
-new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtrub}):""):""]]></textFieldExpression>
+new DecimalFormat("###,##0.000#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtrub}):""):""]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="1000" y="0" width="190" height="20" isRemoveLineWhenBlank="true" uuid="c7d9f004-ba41-4c99-9a6c-cfbf3173864a">
@@ -395,10 +395,10 @@ new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Lo
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dbulnature}.equals( "R" )?
 ($F{dbulimp}==1?
-new DecimalFormat("###,##0.000#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtrub}):""):""]]></textFieldExpression>
+new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtrub}):""):""]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="439" y="0" width="151" height="20" isRemoveLineWhenBlank="true" uuid="52c3f95c-e640-4324-8f7c-41678ae6fdf8">
+				<reportElement x="410" y="0" width="180" height="20" isRemoveLineWhenBlank="true" uuid="52c3f95c-e640-4324-8f7c-41678ae6fdf8">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aafde1ac-9f21-4267-b383-ffd18072315c"/>
 				</reportElement>
 				<box>
@@ -410,7 +410,7 @@ new DecimalFormat("###,##0.000#", new java.text.DecimalFormatSymbols(java.util.L
 				<textFieldExpression><![CDATA[$F{mtbase}==null?"":$F{mtbase}.compareTo(new BigDecimal(0))==0?"":new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Locale.GERMAN)).format($F{mtbase})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="80" y="0" width="350" height="20" isRemoveLineWhenBlank="true" uuid="6b06199e-874c-4add-8981-544792134a3d">
+				<reportElement x="50" y="0" width="350" height="20" isRemoveLineWhenBlank="true" uuid="6b06199e-874c-4add-8981-544792134a3d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40a9814d-ecb4-424f-aea8-cad246f112b5"/>
 				</reportElement>
 				<box>
@@ -466,7 +466,7 @@ new DecimalFormat("###,##0.00#", new java.text.DecimalFormatSymbols(java.util.Lo
 				<textFieldExpression><![CDATA["!"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="430" y="0" width="9" height="20" isRemoveLineWhenBlank="true" uuid="d5fa859f-8e11-40fe-9688-c60c6171baf2">
+				<reportElement x="400" y="0" width="9" height="20" isRemoveLineWhenBlank="true" uuid="d5fa859f-8e11-40fe-9688-c60c6171baf2">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textFieldExpression><![CDATA["!"]]></textFieldExpression>
