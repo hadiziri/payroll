@@ -2965,6 +2965,12 @@ public class Controller {
 				if (structure.getSTRUCTURECODENOTLIKE() != "") {
 					structureToUpdate.get().setSTRUCTURECODENOTLIKE(structure.getSTRUCTURECODENOTLIKE());
 				}
+				if (structure.getFICHIERCODELIKE() != "") {
+					structureToUpdate.get().setFICHIERCODELIKE(structure.getFICHIERCODELIKE());
+				}
+				if (structure.getFICHIERCODENOTLIKE() != "") {
+					structureToUpdate.get().setFICHIERCODENOTLIKE(structure.getFICHIERCODENOTLIKE());
+				}
 				// System.out.println(structureToUpdate.get().getIDACTIVITY()+"
 				// "+structureToUpdate.get().getIDSTRUCTURE());
 				structureRepo.save(structureToUpdate.get());

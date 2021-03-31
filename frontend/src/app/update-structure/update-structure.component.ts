@@ -159,7 +159,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
  
 
   onSubmit(post:any) {
-   // console.log(post)
+    //console.log(post)
     this.post = post;
     if(this.post.structurename==""&&this.post.structurecodelike==""&&this.post.emailgroupemanagers==""&&this.post.idactivity==""&&this.post.structurecodenotlike==""){
       alert("Veuillez au moins remplir un champ");
@@ -192,7 +192,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
          this.StructureToUpdate.structurecodenotlike=this.post.structurecodenotlike;
        }
        this.StructureToUpdate.idstructure=this.activatedRoute.snapshot.params.id;
-      //  //console.log(this.StructureToUpdate)
+      //console.log(this.StructureToUpdate)
        this.paramService.updateStructure(this.StructureToUpdate).subscribe(
          data=>{
            if(data!=null){
