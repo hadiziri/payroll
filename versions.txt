@@ -1,3 +1,7 @@
+5.10
+----
+-Suppression historique (emails,structures,folders)
+-------------------------------------------------------------------------------------------------
 5.9
 ----
 -Correction pers et quelques bugs

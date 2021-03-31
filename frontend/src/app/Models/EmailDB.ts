@@ -6,4 +6,5 @@ export interface EmailDB {
     emailobject: String;
     msg: String;
      emailgenerationdate :Date;
+     emailstatus:number;
 }

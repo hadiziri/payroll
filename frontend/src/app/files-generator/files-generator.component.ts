@@ -68,7 +68,7 @@ export class FilesGeneratorComponent implements OnInit {
   showProgress: Boolean = false;
   mailRequest:MailRequest={"from":"","msg":"","sturcturename":"","subject":"","to":[],"filesName":[]};
   currentUser:User={"email":"","iduser":0,"name":"","password":"","state":0,"username":""};
-  email:EmailDB={"emailgenerationdate":new Date(),"emailobject":"","idemail":0,"iduser":0,"msg":"","receiver":"","sender":""};
+  email:EmailDB={"emailgenerationdate":new Date(),"emailobject":"","idemail":0,"iduser":0,"msg":"","receiver":"","sender":"","emailstatus":0};
   emailSaved:Boolean=false;
   archiveSentFilesSaved:Boolean=false;
   eFiles:Efile[]=[];

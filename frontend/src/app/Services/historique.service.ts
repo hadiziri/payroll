@@ -62,4 +62,34 @@ export class HistoriqueService {
       })
     );
   }
+
+  public deleteHistoryEmails(user:User):Observable<Array<EmailDB>>{
+    return this.httpClient.post<Array<EmailDB>>(this.host+"deleteHistoryEmails",user).pipe(
+      catchError((err) => {
+         //console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
+
+  public deleteHistoryStructure(user:User):Observable<Array<ArchiveStructure>>{
+    return this.httpClient.post<Array<ArchiveStructure>>(this.host+"deleteHistoryStructure",user).pipe(
+      catchError((err) => {
+         //console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
+
+  public deleteHistoryFolder(user:User):Observable<Array<FolderArchive>>{
+    return this.httpClient.post<Array<FolderArchive>>(this.host+"deleteHistoryFolder",user).pipe(
+      catchError((err) => {
+         //console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
 }

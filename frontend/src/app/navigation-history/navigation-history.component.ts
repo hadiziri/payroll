@@ -3,7 +3,6 @@ import { FolderArchive } from './../Models/FolderArchive';
 import { ArchiveStructure } from './../Models/ArchiveStructure';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MbscFormOptions } from '@mobiscroll/angular-lite';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmailDB } from './../Models/EmailDB';
 import { AlertDialogComponent } from './../alert-dialog/alert-dialog.component';
@@ -14,6 +13,7 @@ import { TokenStorageService } from './../auth/token-storage.service';
 import { HistoriqueService } from './../Services/historique.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { mobiscroll, MbscFormOptions } from '@mobiscroll/angular-lite';
 
 export interface FileElement {
   
@@ -50,12 +50,11 @@ export class NavigationHistoryComponent implements OnInit {
   dataSourceEmail: MatTableDataSource<EmailDB> = new MatTableDataSource(this.ELEMENT_DATA);
   dataSourceStructure :MatTableDataSource<ArchiveStructure> = new MatTableDataSource(this.archiveStructure);
   dataSourceFolder:MatTableDataSource<FolderArchive> = new MatTableDataSource(this.archiveFolder);
-  
   formSettings: MbscFormOptions = {
     theme: 'mobiscroll',
     themeVariant: 'light'
   };
-  email:EmailDB={"emailgenerationdate":new Date(),"emailobject":"","idemail":0,"iduser":0,"msg":"","receiver":"","sender":""};
+  email:EmailDB={"emailgenerationdate":new Date(),"emailobject":"","idemail":0,"iduser":0,"msg":"","receiver":"","sender":"","emailstatus":0};
   operation:String="add";
   displayedColumnsStructure: string[] = ['idstructure', 'structurename', 'STRUCTURECODELIKE', 'EMAILGROUPMANAGERS', 'STATUSSTRUCTURE'];
   @ViewChild(MatSort) set matSort(sort: MatSort) {
@@ -136,7 +135,7 @@ export class NavigationHistoryComponent implements OnInit {
     )
    
   }
-  
+//**************************************************************get history (added/updated/deleted) structure or emails or folders ************************************************************** */
   getEmails(){
     this.historiqueService.getAllEmails(this.currentUser).subscribe(
       (data) => {
@@ -184,25 +183,7 @@ export class NavigationHistoryComponent implements OnInit {
       }
     )
   }
-  setStep(index: number) {
-    this.step = index;
-  }
-
-  nextStep() {
-    this.step++;
-  }
-
-  prevStep() {
-    this.step--;
-  }
-  openDialog() {
-    const dialogRef = this.dialog.open(AlertDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
-    });
-  }
-
+ 
   getStructure(event:any){
      //console.log(event)
     if(event.tab.textLabel=="Structures ajoutées"){
@@ -275,6 +256,26 @@ export class NavigationHistoryComponent implements OnInit {
       }
     )
   }
+//******************************************************************Control panel et dialog Error /Alert*************************************************************** */
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
+  openDialog() {
+    const dialogRef = this.dialog.open(AlertDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
+  }
+
   openDialogError(error:String): void {
     const dialogRef = this.dialog.open(ErrorDialogComponent, {
       width: '650px',
@@ -285,6 +286,103 @@ export class NavigationHistoryComponent implements OnInit {
       window.location.reload();
     });
   }
+
+  //***************************************Delete history(emails/structure/folders)************************************************************* */
+  clearTable(state:number) {
+   
+    this.showConfirm(state);
+  }
+  showConfirm(state:number) {
+ 
+    mobiscroll.confirm({
+      title: 'Suppression historique',
+      message: 'Voulez vous vraiment supprimer votre historique?',
+      okText: 'Oui',
+      cancelText: 'Non'
+    
+  }).then( (result) => {
+    // //console.log(result ? 'Agreed.' : 'Disagreed.');
+    if(result){
+     this.deleteHistory(state);
+    }
+  }); 
+  
+  }
+
+  deleteHistory(state:number){
+    if(state==1){
+      this.dataSourceEmail.data=[];
+      this.historiqueService.deleteHistoryEmails(this.currentUser).subscribe(
+        (data) => {
+          if (data != null) {
+           this.showAlert("Suppression historique des emails","Votre historique a bien été supprimé");
+          } else {
+            this.openDialog();
+          }
+  
+  
+        },
+        (error) => {
+          //  //console.log(error);
+           this.openDialogError(error);;
+          throw error;
+        }
+      )
+    }else{
+      if(state==2){
+        this.dataSourceStructure.data = [];
+        this.historiqueService.deleteHistoryStructure(this.currentUser).subscribe(
+          (data) => {
+            if (data != null) {
+             this.showAlert("Suppression historique des structures","Votre historique a bien été supprimé");
+            } else {
+              this.openDialog();
+            }
+    
+    
+          },
+          (error) => {
+            //  //console.log(error);
+             this.openDialogError(error);;
+            throw error;
+          }
+        )
+
+      }else{
+        this.dataSourceFolder.data=[];
+        this.historiqueService.deleteHistoryFolder(this.currentUser).subscribe(
+          (data) => {
+            if (data != null) {
+              //console.log(data)
+             this.showAlert("Suppression historique des fichiers","Votre historique a bien été supprimé");
+            } else {
+              this.openDialog();
+            }
+    
+    
+          },
+          (error) => {
+            //  //console.log(error);
+             this.openDialogError(error);;
+            throw error;
+          }
+        )
+      }
+    }
+    
+  }
+
+  showAlert(title:String,msg:String) {
+    mobiscroll.alert({
+      title: title,
+      message: msg
+      /* ,callback: function () {
+        window.location.reload();
+       }*/
+    });
+  
+ 
+}
 }
 
 

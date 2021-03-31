@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name ="EMAIL")
 @SequenceGenerator(name="EMAIL_ID_SEQ",initialValue=1, allocationSize=1)
-@NamedQuery(name = "EmailDB.findByIdUser", query = "SELECT p FROM EmailDB p WHERE iduser=?1")
+@NamedQuery(name = "EmailDB.findByIdUser", query = "SELECT p FROM EmailDB p WHERE iduser=?1 and emailstatus=?2 ")
 public class EmailDB {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EMAIL_ID_SEQ")
@@ -24,6 +24,7 @@ public class EmailDB {
 	 String emailobject;
 	 String msg  ;
 	 Date emailgenerationdate;
+	 Integer emailstatus;
 	 
 	 public EmailDB() {
 		 
@@ -83,6 +84,14 @@ public class EmailDB {
 
 	public void setEmailgenerationdate(Date emailgenerationdate) {
 		this.emailgenerationdate = emailgenerationdate;
+	}
+
+	public Integer getEmailstatus() {
+		return emailstatus;
+	}
+
+	public void setEmailstatus(Integer emailstatus) {
+		this.emailstatus = emailstatus;
 	}
 	 
 	 

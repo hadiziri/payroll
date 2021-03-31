@@ -5,6 +5,7 @@ import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -13,7 +14,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name ="FOLDERARCHIVE")
 @IdClass(FolderArchiveId.class)
-@NamedQuery(name = "FolderArchive.findByOperation", query = "SELECT p FROM FolderArchive  p WHERE folderoperation=?1 and iduser=?2")
+@NamedQueries({@NamedQuery(name = "FolderArchive.findByOperation", query = "SELECT p FROM FolderArchive  p WHERE folderoperation=?1 and iduser=?2 and archstatusfolder!=?3"),
+	@NamedQuery(name = "FolderArchive.findByUser", query = "SELECT p FROM FolderArchive  p WHERE  iduser=?1 and archstatusfolder!=?2")
+})
+
 public class FolderArchive {
 	@Id
 	 Integer iduser ;

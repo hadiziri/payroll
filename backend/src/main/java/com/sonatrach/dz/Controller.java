@@ -482,7 +482,7 @@ public class Controller {
 	public List<EmailDB> getAllEmails(@RequestBody User user) {
 		ArrayList emails = new ArrayList();
 		try {
-			emails = emailDbRepo.findByIdUser(user.getIduser());
+			emails = emailDbRepo.findByIdUser(user.getIduser(),0);
 
 			return emails;
 
@@ -545,7 +545,7 @@ public class Controller {
 	public List<ArchiveStructure> getArchiveStructure(@RequestBody User user) {
 		try {
 			ArrayList<ArchiveStructure> archiveStructure = new ArrayList();
-			archiveStructure = archiveStructureRepo.findByOperation(user.getName(), user.getIduser());
+			archiveStructure = archiveStructureRepo.findByOperation(user.getName(), user.getIduser(),-1);
 
 			return archiveStructure;
 
@@ -560,7 +560,7 @@ public class Controller {
 	public List<FolderArchive> getArchiveFolder(@RequestBody User user) {
 		try {
 			ArrayList<FolderArchive> archiveFolder = new ArrayList();
-			archiveFolder = folderArchiveRepo.findByOperation(user.getName(), user.getIduser());
+			archiveFolder = folderArchiveRepo.findByOperation(user.getName(), user.getIduser(),-1);
 
 			return archiveFolder;
 
@@ -569,6 +569,65 @@ public class Controller {
 		}
 		return null;
 	}
+	
+	
+	//delete history emails
+	@PostMapping({"deleteHistoryEmails"})
+	public List<EmailDB>deleteHistoryEmails(@RequestBody User user){
+		ArrayList<EmailDB> emails = new ArrayList();
+		try {
+			emails = emailDbRepo.findByIdUser(user.getIduser(),0);
+
+			for(int i=0;i<emails.size();i++) {
+				emails.get(i).setEmailstatus(-1);
+				emailDbRepo.save(emails.get(i));
+			}
+			return emails;
+		} catch (Exception e) {
+			System.out.println("Exception deleteHistoryEmails()==>" + e.getMessage());
+		}
+		return null;
+	}
+	
+	//delete history structure
+	@PostMapping({ "deleteHistoryStructure" })
+	public List<ArchiveStructure> deleteHistoryStructure(@RequestBody User user) {
+		try {
+			ArrayList<ArchiveStructure> archiveStructure = new ArrayList();
+			archiveStructure = archiveStructureRepo.findByUser(user.getIduser(), -1);
+
+			for(int i=0;i<archiveStructure.size();i++) {
+				archiveStructure.get(i).setArchstatusstructure(-1);
+				archiveStructureRepo.save(archiveStructure.get(i));
+			}
+			return archiveStructure;
+
+		} catch (Exception e) {
+			System.out.println("Exception  deleteHistoryStructure()==>" + e.getMessage());
+		}
+		return null;
+	}
+	
+	//delete history folders
+		@PostMapping({ "deleteHistoryFolder" })
+		public List<FolderArchive> deleteHistoryFolder(@RequestBody User user) {
+			try {
+				ArrayList<FolderArchive> archiveFolder = new ArrayList();
+				archiveFolder = folderArchiveRepo.findByUser(user.getIduser(), -1);
+				
+				for(int i=0;i<archiveFolder.size();i++) {
+					archiveFolder.get(i).setArchstatusfolder(-1);
+					
+					FolderArchive ar=folderArchiveRepo.save(archiveFolder.get(i));
+					
+				}
+				return archiveFolder;
+
+			} catch (Exception e) {
+				System.out.println("Exception  deleteHistoryFolder()==>" + e.getMessage());
+			}
+			return null;
+		}
 
 	/*******************************************************
 	 * Send Table files (email)

@@ -6,8 +6,11 @@
           <h2>Les emails envoyés</h2>
         </mat-panel-title>
         <mat-panel-description>
-          <h3 style="margin-top: 10px;">Voir tout les émails que vous avez envoyé</h3>
-          <mat-icon style="margin-top:13px;">mail_outline</mat-icon>
+         
+          <div style="margin-top: 10px;position: absolute;
+          right: 0px; margin-right: 5px;">
+            <button mat-raised-button (click)="clearTable(1)" color="warn">Supprimer l'historique	<mat-icon>delete</mat-icon></button>
+          </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
   
@@ -78,8 +81,11 @@
           <h2 >Gestion structure</h2>
         </mat-panel-title>
         <mat-panel-description>
-            <h3 style="margin-top: 10px;">Voir les structures ajoutées,supprimées et modifiées</h3>
-          <mat-icon style="margin-top: 13px;">account_circle</mat-icon>
+   
+          <div style="margin-top: 10px;position: absolute;
+          right: 0px; margin-right: 5px;">
+            <button mat-raised-button (click)="clearTable(2)" color="warn">Supprimer l'historique	<mat-icon>delete</mat-icon></button>
+          </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
   
@@ -88,7 +94,7 @@
          
             
             <table mat-table  [dataSource]="dataSourceStructure" matSort class="mat-elevation-z8" style="margin-top: 40px;" >
-
+            
                
               <!-- Position Column -->
         <ng-container matColumnDef="idstructure">
@@ -152,7 +158,7 @@
             </mat-tab-group>
   
       <mat-action-row>
-        <button mat-raised-button color="warn" (click)="prevStep()">Précédent</button>
+        <button mat-raised-button style="background-color: #34495E; color: white;" (click)="prevStep()">Précédent</button>
         <button class="btn btn-secondary" id="next_btn" (click)="nextStep()">Suivant</button>
       </mat-action-row>
     </mat-expansion-panel>
@@ -163,8 +169,11 @@
             <h2 >Gestion Dossier</h2>
         </mat-panel-title>
         <mat-panel-description>
-            <h3 style="margin-top: 10px;">Voir les dossier ajoutés,supprimés et modifiés</h3>
-          <mat-icon style="margin-top: 13px;">account_circle</mat-icon>
+           
+          <div style="margin-top: 10px;position: absolute;
+          right: 0px; margin-right: 5px;">
+            <button mat-raised-button (click)="clearTable(3)" color="warn">Supprimer l'historique	<mat-icon>delete</mat-icon></button>
+          </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-tab-group mat-align-tabs="center" style="margin-top: 25px;" (selectedTabChange)=" getFolder($event)"  >
@@ -206,7 +215,7 @@
   </mat-tab>
   </mat-tab-group>
       <mat-action-row>
-        <button mat-raised-button color="warn" (click)="prevStep()">Précédent</button>
+        <button mat-raised-button style="background-color: #34495E; color: white;" (click)="prevStep()">Précédent</button>
         <button class="btn btn-secondary" id="next_btn" (click)="nextStep()">Fermer</button>
       </mat-action-row>
     </mat-expansion-panel>

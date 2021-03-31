@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -15,7 +16,9 @@ import com.sonatrach.dz.fileToPrint.domain.FileToPrintId;
 @Entity
 @Table(name ="PAYROLLSTRUCTUREARCHIVE")
 @IdClass(ArchiveStructureId.class)
-@NamedQuery(name = "ArchiveStructure.findByOperation", query = "SELECT p FROM ArchiveStructure  p WHERE structureoperation=?1 and iduser=?2")
+@NamedQueries({@NamedQuery(name = "ArchiveStructure.findByOperation", query = "SELECT p FROM ArchiveStructure  p WHERE structureoperation=?1 and iduser=?2 and archstatusstructure!=?3"),
+	@NamedQuery(name = "ArchiveStructure.findByUser", query = "SELECT p FROM ArchiveStructure  p WHERE iduser=?1 and archstatusstructure!=?2 ")
+})
 public class ArchiveStructure implements Serializable{
 	@Id
 	 Integer  idstructure ;

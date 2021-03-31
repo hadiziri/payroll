@@ -11,5 +11,6 @@ import com.sonatrach.dz.archiveStructure.domain.ArchiveStructureId;
 
 @Repository
 public interface ArchiveStructureRepo extends JpaRepository<ArchiveStructure,ArchiveStructureId > {
-ArrayList<ArchiveStructure> findByOperation(String op,Integer id);
+ArrayList<ArchiveStructure> findByOperation(String op,Integer id,int status);
+ArrayList<ArchiveStructure>  findByUser(Integer id,int status);
 }

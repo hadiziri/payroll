@@ -11,5 +11,5 @@ import com.sonatrach.dz.emailDB.domain.EmailDB;
 
 @Repository
 public interface EmailDbRepo extends JpaRepository<EmailDB, Integer>{
-ArrayList<EmailDB>findByIdUser(Integer id);
+ArrayList<EmailDB>findByIdUser(Integer id,Integer status);
 }
