@@ -85,51 +85,6 @@ export class CloturePaieService {
   );
  }
  
- public generateFrubAK_O_UZ():Observable<Array<clotureFiles>>{
-  return this.httpClient.get<Array<clotureFiles>>(this.host+"generateFrubAK_O_UZ").pipe(
-    catchError((err) => {
-       //console.log('error caught in service')
-      console.error(err);
-      return throwError(err);
-    })
-  );
- }
- public generateFrubL_NP():Observable<Array<clotureFiles>>{
-  return this.httpClient.get<Array<clotureFiles>>(this.host+"generateFrubL_NP").pipe(
-    catchError((err) => {
-       //console.log('error caught in service')
-      console.error(err);
-      return throwError(err);
-    })
-  );
- }
- public generateFrubM_R_S_X():Observable<Array<clotureFiles>>{
-  return this.httpClient.get<Array<clotureFiles>>(this.host+"generateFrubM_R_S_X").pipe(
-    catchError((err) => {
-       //console.log('error caught in service')
-      console.error(err);
-      return throwError(err);
-    })
-  );
- }
- public generateFrubT():Observable<Array<clotureFiles>>{
-  return this.httpClient.get<Array<clotureFiles>>(this.host+"generateFrubT").pipe(
-    catchError((err) => {
-       //console.log('error caught in service')
-      console.error(err);
-      return throwError(err);
-    })
-  );
- }
- public generateFrubQ():Observable<Array<clotureFiles>>{
-  return this.httpClient.get<Array<clotureFiles>>(this.host+"generateFrubQ").pipe(
-    catchError((err) => {
-       //console.log('error caught in service')
-      console.error(err);
-      return throwError(err);
-    })
-  );
- }
 
  public generateFrubNum():Observable<Array<clotureFiles>>{
   return this.httpClient.get<Array<clotureFiles>>(this.host+"generateFrubNum").pipe(

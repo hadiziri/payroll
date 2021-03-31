@@ -71,7 +71,8 @@ export class AddStructureComponent implements OnInit {
     this.formGroup = new FormGroup({
       structurename: new FormControl('', [Validators.required]),
       structurecodelike: new FormControl('', [Validators.required]),
-
+      fichiercodenotlike: new FormControl('', [Validators.required]),
+      fichiercodelike: new FormControl('', [Validators.required]),
       emailgroupemanagers: new FormControl('', [Validators.email, Validators.required]),
       idactivity: new FormControl('', [Validators.required]),
       structurecodenotlike: new FormControl('', [Validators.required])
@@ -139,6 +140,8 @@ export class AddStructureComponent implements OnInit {
     this.StructureToAdd.emailgroupmanagers = post.emailgroupemanagers;
     this.StructureToAdd.idactivity = post.idactivity;
     this.StructureToAdd.structurecodenotlike = post.structurecodenotlike;
+    this.StructureToAdd.fichiercodelike=post.fichiercodelike;
+    this.StructureToAdd.fichiercodenotlike=post.fichiercodenotlike;
 
     //archive structure
     this.structureArchive.archstructurename = post.structurename;
@@ -147,6 +150,8 @@ export class AddStructureComponent implements OnInit {
     this.structureArchive.archemailgroupemanagers = post.emailgroupemanagers;
     this.structureArchive.iduser = this.currentUser.iduser;
     this.structureArchive.idactivity = post.idactivity;
+    this.structureArchive.archfichiercodelike=post.fichiercodelike;
+    this.structureArchive.archfichiercodenotlike=post.fichiercodenotlike;
     this.structureArchive.structureoperation="add";
     this.paramService.addStructure(this.StructureToAdd).subscribe(
       data => {

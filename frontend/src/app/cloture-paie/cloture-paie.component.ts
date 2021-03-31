@@ -457,53 +457,7 @@ this.paramService.getUserByUserName(this.currentUser).subscribe(
     });
 
   }
-  showAlertFRUB() {
-    if (this.FrubAlph && this.FrubNum &&this.FrubAlph1 &&this.FrubAlph2 &&this.FrubAlph3 && this.FrubAlph4) {
-      this.clotureService.saveGeneratedGfiles(this.gfiles).subscribe(
-        (data) => {
-          if (data != null) {
-            // //console.log(data);
-      this.showSpinner = false;
-      mobiscroll.alert({
-        title: 'Cloture Paie',
-        message: " Les fichiers Frub ont bien été générés et la paie a bien été cloturée."
-
-        , callback: function () {
-          window.location.reload();
-        }
-      });
-          } else {
-            this.showSpinner = false;
-            this.openDialog();
-            //alert("Une erreur s'est produite.Veuillez réessayer plus tard\n(Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus)");
-          }
-  
-        },
-  
-        (error) => {
-          // //console.log(error);
-           this.openDialogError(error);;
-          throw error;
-        }
-      )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
-
-
-  }
+ 
 
   openDialog() {
     const dialogRef = this.dialog.open(AlertDialogComponent);
