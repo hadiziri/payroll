@@ -1,10 +1,10 @@
 
 <div class="card m-6">
-  <h1>Pour changer votre mot de passe veuillez suivre les etapes suivantes:</h1>
+  <h1 id="text3d">Changement mot de passe</h1>
   <div class="card-body">
    
         <mat-vertical-stepper #stepper 
-          style="background-color:white;padding-left: 90px; padding-right: 90px;margin-top: 50px;">
+          style="padding-left: 90px; padding-right: 90px;margin-top: 50px;">
           <mat-step [stepControl]="firstFormGroup" errorMessage="Champ obligatoire">
             <form [formGroup]="firstFormGroup">
               <ng-template matStepLabel>Saisir votre mot de passe actuel</ng-template>
@@ -13,7 +13,7 @@
                 <input matInput placeholder="mot de passe actuel" type="password" formControlName="username" required>
               </mat-form-field>
               <div>
-                <button mat-raised-button color="primary" matStepperNext>Suivant</button>
+                <button mat-raised-button style="background-color: #138D75;color:white" matStepperNext>Suivant</button>
               </div>
             </form>
           </mat-step>
@@ -38,7 +38,7 @@
               <div>
 
 
-                <button mat-raised-button color="primary"  matStepperNext>suivant</button>
+                <button mat-raised-button style="background-color: #138D75;color:white"  matStepperNext>suivant</button>
               </div>
             </form>
           </mat-step>
@@ -47,7 +47,7 @@
             <ng-template matStepLabel>Enregistrer les modifications</ng-template>
             <p>Enregistrer les modifications</p>
             <div>
-              <button mat-raised-button color="primary"  (click)="changerPsw()"
+              <button mat-button style="background-color: #138D75;color:white"  (click)="changerPsw()" class="btn btn-primary"
                 [disabled]="!secondFormGroup.valid||!firstFormGroup.valid">Confirmer</button>
 
             </div>

@@ -1,12 +1,15 @@
+<head>
+  <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+</head>
 
     
 <div class="container">
  
   <div class="row">
-    <h1> Générer des etats de paie et les envoyer aux gestionnaires par émail  </h1>
-    <mat-form-field appearance="fill" style="width: 100%; ">
-      <mat-label style="font-size: large;"><span class="glyphicon glyphicon-search" aria-hidden="true" style="margin-right: 8px;"></span>Chercher</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="nom structure" #input>
+    <h1 > Gestion des états/fichiers paie  </h1>
+    <mat-form-field appearance="fill" style="width: 100%; margin-top: 30px;" >
+      <mat-label style="font-size: large; color: black;"><span class="glyphicon glyphicon-search" aria-hidden="true" style="margin-right: 8px;"></span>Chercher</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="nom structure" #input style="color: black; ">
       
     </mat-form-field>
     <div class="table-container">
@@ -94,15 +97,15 @@
     <mat-paginator [pageSizeOptions]="[10, 15,20]"></mat-paginator>
   </div>
   
-  <mat-toolbar style="background-color:#000000; margin-top: 10px; margin-bottom: 10px; height: 50px;">
+  <mat-toolbar style="background-color:#343A3D; margin-top: 10px; margin-bottom: 10px; height: 50px;">
     
     
-    <span style="color: #09AA6F;text-shadow: 2px 2px 5px #939592;" *ngIf="isDataLoaded">Données chargées</span>
-    <span style="color: #D10F18;text-shadow: 2px 2px 5px #939592;" *ngIf="!isDataLoaded">Données non chargées</span>
+    <span style="color: #09AA6F;" *ngIf="isDataLoaded">Données chargées</span>
+    <span style="color: #D10F18;" *ngIf="!isDataLoaded">Données non chargées</span>
     <span ></span>
     <div [ngSwitch]="isDataLoaded">
-      <mat-icon *ngSwitchCase="false" style="margin-top: 8px; color: #D10F18;text-shadow: 2px 2px 5px #726E6E; ">cancel</mat-icon>
-      <mat-icon *ngSwitchCase="true" style="margin-top: 8px;color: #09AA6F;text-shadow: 2px 2px 5px #726E6E; ">check_circle</mat-icon>
+      <mat-icon *ngSwitchCase="false" style="margin-top: 8px; color: #D10F18;">cancel</mat-icon>
+      <mat-icon *ngSwitchCase="true" style="margin-top: 8px;color: #09AA6F;">check_circle</mat-icon>
       </div>
       <span class="example-spacer"></span>
       <button mat-flat-button color="warn"   style="margin-left: 5px; color: black;background-color: #A0DFC0;" (click)="chargerDonnees()">Recharger les données
@@ -111,12 +114,12 @@
       </button>
       
       <button mat-flat-button color="warn"   style="margin-left: 5px; color: white;background-color: #61C2E6;" (click)="genererToutLesEtats(0)">	
-        	Tout les états<mat-icon style="text-shadow: 2px 2px 5px #080808;">done_all</mat-icon>
+        	Tous les états<mat-icon style="text-shadow: 2px 2px 5px #080808;">done_all</mat-icon>
        
       
       </button>
       <button mat-flat-button color="warn"   style="margin-left: 5px; color: white;background-color: #0437A4; "(click)="genererToutLesFichiers(0)" >
-        Tout les fichiers<mat-icon style="text-shadow: 2px 2px 5px #080808;">done_all</mat-icon>
+        Tous les fichiers<mat-icon style="text-shadow: 2px 2px 5px #080808;">done_all</mat-icon>
         
         
       </button>
@@ -133,10 +136,10 @@
       
   </mat-toolbar>
 
-  <div class="dropdown">
-    <button class="btn" type="button" data-toggle="dropdown">Signification état structure
+  <div class="dropdown" style="margin-bottom: 15px;" >
+    <button class="btn" type="button" data-toggle="dropdown" style="background-color: #138D75; color: white;">Signification état structure
       <span class="caret"></span></button>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu" >
       <li>
         <svg width="25" height="25" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="40" fill="#3DBC14" />

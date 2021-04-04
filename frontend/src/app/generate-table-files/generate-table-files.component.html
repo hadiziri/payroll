@@ -1,9 +1,8 @@
-<h1> Sélectionner des fichiers table et les envoyer  aux gestionnaires par émail </h1>
+<h1 id="text3d"> Envoi fichiers par émail </h1>
 
-<mat-card  style="background-color:white ; margin-top: 50px;"  > 
+<mat-card  style=" margin-top: 50px; margin-bottom: 15px;"  > 
     <mat-card-header>
-      <mat-card-title style="font-size:x-large;text-align: center;
-      font-family: serif;">*****Veuillez sélectionner les fichiers à envoyer en indiquant l'adresse email (ou bien les adresses email)***** </mat-card-title>
+    
     </mat-card-header>
     <mat-card-content style="margin-top: 8px;">
         <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" novalidate >
@@ -51,12 +50,12 @@
                 <mat-icon aria-hidden="false"  style="cursor: pointer; " (click)="addInput()">add_circle</mat-icon>
               </button>
               <button mat-mini-fab  type="button" title="supprimer adresse émail" style="margin-left: 5px; background-color: #CC2323;"  (click)="removeItem()">
-                <mat-icon>delete</mat-icon>
+                <mat-icon >delete</mat-icon>
               </button>
         
               <br>
-         <h3 style="text-shadow: 2px 2px 5px #B0B1B2; margin-left: 10px; ">	
-          &#9989;	Sélectionner des fichiers	  </h3>
+              <hr>
+     
         <ul >
             <li  *ngFor="let etat of allTableFiles; let i = index">
                 <mat-checkbox (change)="updateCheckedFiles(allTableFiles[i])"   >

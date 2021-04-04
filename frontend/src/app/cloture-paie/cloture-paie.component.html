@@ -1,6 +1,6 @@
 <div class="card m-3">
   <div class="card-body">
-    <h1> Générer les fichiers des différents dossiers pour la clôture paie</h1>
+    <h1 id="text3d"> Génération fichiers clôture paie</h1>
     <form [formGroup]="fileToPrintFormGroup">
         <mat-tab-group mat-align-tabs="center" style="margin-top: 25px;" (selectedTabChange)=" getFiles($event)"  >
             <mat-tab *ngFor="let structure of folderCategories; let j = index" label="{{folderCategories[j].foldername}}" >
@@ -57,7 +57,7 @@
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                   </table>
                
-                  <button  style="margin-top: 50px;" class="btn btn-info btn-lg" (click)="generateFiles(folderCategories[j].foldername)">Générer les fichiers</button>
+                  <button  style="margin-top: 30px;background-color: #138D75; color: white; font-size: 20px; margin-bottom: 10px; padding: 10px;" mat-flat-button (click)="generateFiles(folderCategories[j].foldername)">Générer les fichiers</button>
                     
 
                 </mat-tab>

@@ -1,17 +1,11 @@
-<h1> Voici l'historique de votre navigation:</h1>
-<mat-accordion style="margin-top: 150px;">
+<h1 > Historique</h1>
+<mat-accordion  style="margin-top: 500px;">
     <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header > 
         <mat-panel-title>
           <h2>Les emails envoyés</h2>
         </mat-panel-title>
-        <mat-panel-description>
-         
-          <div style="margin-top: 10px;position: absolute;
-          right: 0px; margin-right: 5px;">
-            <button mat-raised-button (click)="clearTable(1)" color="warn">Supprimer l'historique	<mat-icon>delete</mat-icon></button>
-          </div>
-        </mat-panel-description>
+      
       </mat-expansion-panel-header>
   
       <div class="table-container">
@@ -49,8 +43,8 @@
             <th mat-header-cell *matHeaderCellDef  class="header_table"> Message </th>
             <td mat-cell *matCellDef="let element"> {{element.msg}} </td>
           </ng-container>
-          <ng-container matColumnDef="files">
-            <th mat-header-cell *matHeaderCellDef  class="header_table"> Fichiers envoyés </th>
+          <ng-container matColumnDef="files" >
+            <th mat-header-cell *matHeaderCellDef  class="header_table" > Fichiers envoyés </th>
             <td mat-cell *matCellDef="let element">
           <dl *ngFor="let file of allFiles; let i = index">
              <dt *ngIf="element.idemail==allFiles[i].idemail &&allFiles[i].filename.length!=0">
@@ -70,27 +64,22 @@
         <mat-paginator matPaginator [pageSizeOptions]="[5, 10]"></mat-paginator>
   <!-- #docregion action-bar -->
       <mat-action-row>
-        <button class="btn btn-secondary" id="next_btn" (click)="nextStep()">Suivant</button>
+        <button mat-raised-button (click)="clearTable(1)" style="background-color: #C41E07; color:white">Supprimer l'historique	<mat-icon>delete</mat-icon></button>
+        <button mat-raised-button  (click)="nextStep()" style="background-color: #138D75; color: white;">Suivant	<mat-icon>navigate_next</mat-icon></button>
       </mat-action-row>
   <!-- #enddocregion action-bar -->
     </mat-expansion-panel>
   
     <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
+      <mat-expansion-panel-header >
+        <mat-panel-title >
           <h2 >Gestion structure</h2>
         </mat-panel-title>
-        <mat-panel-description>
-   
-          <div style="margin-top: 10px;position: absolute;
-          right: 0px; margin-right: 5px;">
-            <button mat-raised-button (click)="clearTable(2)" color="warn">Supprimer l'historique	<mat-icon>delete</mat-icon></button>
-          </div>
-        </mat-panel-description>
+     
       </mat-expansion-panel-header>
   
       <mat-tab-group mat-align-tabs="center" style="margin-top: 25px;" (selectedTabChange)=" getStructure($event)"  >
-        <mat-tab *ngFor="let operation of operationsStructure; let j = index" label="{{operationsStructure[j]}}" >
+        <mat-tab *ngFor="let operation of operationsStructure; let j = index" label="{{operationsStructure[j]}}" style="color: white;" >
          
             
             <table mat-table  [dataSource]="dataSourceStructure" matSort class="mat-elevation-z8" style="margin-top: 40px;" >
@@ -158,23 +147,18 @@
             </mat-tab-group>
   
       <mat-action-row>
-        <button mat-raised-button style="background-color: #34495E; color: white;" (click)="prevStep()">Précédent</button>
-        <button class="btn btn-secondary" id="next_btn" (click)="nextStep()">Suivant</button>
+        <button mat-raised-button (click)="clearTable(1)" style="background-color: #C41E07; color:white">Supprimer l'historique	<mat-icon>delete</mat-icon></button>
+        <button mat-raised-button style="background-color: #97A3AF; color: white;" (click)="prevStep()"><mat-icon>navigate_before</mat-icon>Précédent </button>
+        <button  mat-raised-button (click)="nextStep()" style="background-color: #138D75; color: white;">Suivant <mat-icon>navigate_next</mat-icon></button>
       </mat-action-row>
     </mat-expansion-panel>
   
     <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header >
         <mat-panel-title>
             <h2 >Gestion Dossier</h2>
         </mat-panel-title>
-        <mat-panel-description>
-           
-          <div style="margin-top: 10px;position: absolute;
-          right: 0px; margin-right: 5px;">
-            <button mat-raised-button (click)="clearTable(3)" color="warn">Supprimer l'historique	<mat-icon>delete</mat-icon></button>
-          </div>
-        </mat-panel-description>
+   
       </mat-expansion-panel-header>
       <mat-tab-group mat-align-tabs="center" style="margin-top: 25px;" (selectedTabChange)=" getFolder($event)"  >
         <mat-tab *ngFor="let operation of operationsFolder; let j = index" label="{{operationsFolder[j]}}" >
@@ -215,8 +199,9 @@
   </mat-tab>
   </mat-tab-group>
       <mat-action-row>
-        <button mat-raised-button style="background-color: #34495E; color: white;" (click)="prevStep()">Précédent</button>
-        <button class="btn btn-secondary" id="next_btn" (click)="nextStep()">Fermer</button>
+        <button mat-raised-button (click)="clearTable(3)" style="background-color: #C41E07; color:white">Supprimer l'historique	<mat-icon>delete</mat-icon></button>
+        <button mat-raised-button style="background-color: #97A3AF; color: white;" (click)="prevStep()"><mat-icon>navigate_before</mat-icon>Précédent </button>
+        <button  mat-raised-button (click)="nextStep()" style="background-color: #138D75; color: white;">Fermer <mat-icon>close</mat-icon>	</button>
       </mat-action-row>
     </mat-expansion-panel>
   

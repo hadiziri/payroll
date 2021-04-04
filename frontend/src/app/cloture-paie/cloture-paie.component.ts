@@ -38,7 +38,7 @@ export interface EtatFolder {
   selector: 'app-cloture-paie',
   templateUrl: './cloture-paie.component.html',
   styleUrls: ['./cloture-paie.component.css'],
-  encapsulation: ViewEncapsulation.None
+  //encapsulation: ViewEncapsulation.None
 })
 
 export class CloturePaieComponent implements OnInit, AfterViewInit {

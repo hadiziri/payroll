@@ -1,6 +1,6 @@
 <div class="container">
-  <h1>Pour ajouter une structure,veuillez remplir les champs suivants:</h1>
-  <div class="panel panel-default">
+  <h1 id="text3d">ajout structure</h1>
+  <div class="panel panel-default" >
     <div class="panel-body">
       <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" novalidate>
         <div class="table-container">
@@ -84,7 +84,7 @@
             </mat-autocomplete>
           </mat-form-field>
 
-          <button [disabled]="!formGroup.valid" mat-raised-button class="btn btn-primary btn-lg" mat-button>Ajouter une
+          <button [disabled]="!formGroup.valid" class="btn btn-primary btn-lg"  style="background-color: #138D75; color: white;">Ajouter une
             structure</button>
         </div>
       </form>

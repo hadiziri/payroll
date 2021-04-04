@@ -14,6 +14,7 @@ import { HistoriqueService } from './../Services/historique.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { mobiscroll, MbscFormOptions } from '@mobiscroll/angular-lite';
+import { ViewEncapsulation } from '@angular/core';
 
 export interface FileElement {
   
@@ -26,7 +27,8 @@ export interface FileElement {
 @Component({
   selector: 'app-navigation-history',
   templateUrl: './navigation-history.component.html',
-  styleUrls: ['./navigation-history.component.css']
+  styleUrls: ['./navigation-history.component.css'],
+  //encapsulation: ViewEncapsulation.None
 })
 export class NavigationHistoryComponent implements OnInit {
   step = 0;

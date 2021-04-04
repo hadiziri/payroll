@@ -50,12 +50,28 @@ margin:10px;
 margin-left: 20px;
 
 }
+
+::ng-deep .mat-step-header .mat-step-icon-selected {
+  background-color: #138D75; 
+}
+::ng-deep .mat-step-header .mat-step-icon-state-edit {
+  background-color: #138D75; 
+}
+
 h1 {
-  
+ 
+
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-family: Geneva, sans-serif;
   text-align: center;
-  font-family: "serif";
-  font-size: 30px;
-  border-style: groove;
-  padding: 8px;
-  text-shadow: 2px 2px 5px #888586;
+    text-transform: uppercase;
+  
+    padding: 12px;
+    
+    font-size: 3em;
+  font-weight: bold;
+ 
+  text-shadow: #343A3D 0 0 1px, #343A3D 0 -1px 2px, #343A3D 0 -3px 2px, rgba(0,0,0,0.5) 0 5px 5px;
+  transition: margin-left 0.3s cubic-bezier(0, 1, 0, 1);
 }

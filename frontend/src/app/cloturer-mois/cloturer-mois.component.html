@@ -1,6 +1,6 @@
 <div class="card m-3">
     <div class="card-body">
-      <h1> Clôturer le mois et passer au mois suivant</h1>
+      <h1 id="text3d">  Clôture mois </h1>
 <table mat-table  [dataSource]="dataSource" matSort class="mat-elevation-z8" style="margin-top: 40px;">
 
 
@@ -56,14 +56,14 @@
   </table>
 
    <div class="dropdown">
-    <button class="btn" type="button" data-toggle="dropdown">Signification état fichier
+    <button class="btn" type="button" data-toggle="dropdown" style="background-color: #138D75;color: white;">Signification état fichier
       <span class="caret"></span></button>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu" >
       <li>
         <svg width="25" height="25" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="40" fill="#3DBC14" />
         </svg>
-        <strong> Tout les fichiers sont générés</strong>
+        <strong> Tous les fichiers sont générés</strong>
       </li>
       <li>
         <svg width="25" height="25" viewBox="0 0 100 100">
@@ -76,7 +76,7 @@
         <svg width="25" height="25" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="40" fill="red" />
         </svg>
-        <strong> Tout les fichiers ne sont pas générés</strong>
+        <strong> aucun fichier  généré</strong>
       </li>
     </ul>
   </div>

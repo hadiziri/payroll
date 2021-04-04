@@ -1,6 +1,6 @@
 <div class="container">
-    <h1>Pour ajouter un dossier,veuillez remplir les champs suivants:</h1>
-    <div class="panel panel-default">
+    <h1 id="text3d">ajout dossier</h1>
+    <div class="panel panel-default" >
       <div class="panel-body">
         <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" novalidate>
           <div class="table-container">
@@ -34,7 +34,7 @@
                 </li>
             </ul> 
   
-            <button [disabled]="!formGroup.valid" mat-raised-button class="btn btn-primary btn-lg" mat-button style="background-color: #71BED1;">Ajouter un
+            <button [disabled]="!formGroup.valid" mat-raised-button class="btn btn-primary btn-lg" mat-button style="background-color: #138D75;">Ajouter un
               dossier</button>
           </div>
         </form>

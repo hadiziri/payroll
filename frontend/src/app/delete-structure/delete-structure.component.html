@@ -1,10 +1,10 @@
 
   <div class="container">
     <div class="row">
-      <h1> Gestion de structures (modifier ou bien supprimer des stuctures)  </h1>
-      <mat-form-field appearance="fill" style="width: 100%; ">
-        <mat-label style="font-size: large;"><span class="glyphicon glyphicon-search" aria-hidden="true" style="margin-right: 8px;"></span>Chercher</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="nom structure" #input>
+      <h1 id="text3d"> Gestion  structures  </h1>
+      <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label style="font-size: large; color: black;"><span class="glyphicon glyphicon-search" aria-hidden="true" style="margin-right: 8px;"></span>Chercher</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="nom structure" #input style="color: black;">
         
       </mat-form-field>
       <div class="example-container">
@@ -87,10 +87,10 @@
       </div>
   
     </div>
-    <div class="dropdown">
-      <button class="btn" type="button" data-toggle="dropdown">Signification état structure
+    <div class="dropdown" style="margin-top: 10px;">
+      <button class="btn" type="button" data-toggle="dropdown" style="background-color: #138D75; color: white;">Signification état structure
         <span class="caret"></span></button>
-      <ul class="dropdown-menu">
+      <ul class="dropdown-menu" >
         <li>
           <svg width="25" height="25" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="40" fill="#3DBC14" />

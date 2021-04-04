@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 
 import { User } from './../Models/User';
 import { UserService } from './../Services/user.service';
-import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MustExist, MustMatch } from '../helpers/must-match-validator';
@@ -20,6 +20,7 @@ import { MatDialog } from '@angular/material/dialog';
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],
+  //encapsulation: ViewEncapsulation.None,
   providers: [{
     provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true }
   }]

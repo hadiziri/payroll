@@ -1,5 +1,5 @@
 <div *ngIf="!selectFiles">
-    <h1>Voici les états paie à imprimer pour chaque structure</h1>
+    <h1 > états paie à imprimer par structure</h1>
 <mat-tab-group mat-align-tabs="center" style="margin-top: 25px;" >
     <mat-tab *ngFor="let activity of allShActivities; let k=index" label="{{allShActivities[k].descactivity}}" >
         <div  *ngFor="let structure of payrollstructures; let j = index"  style="display: inline-block;margin: auto; margin-top: 15px;">
@@ -26,12 +26,12 @@
 </mat-tab>    
 
 </mat-tab-group>
-<mat-slide-toggle style="margin-top: 20px;" [(ngModel)]="selectFiles">Sélectionner des fichiers à imprimer</mat-slide-toggle> 
+<mat-slide-toggle style="margin-top: 20px; color: white; font-size: 18px;" [(ngModel)]="selectFiles">Sélectionner des fichiers à imprimer</mat-slide-toggle> 
 </div>
 
 
 <div class="card m-3" *ngIf="selectFiles">
-  <h1>Veuillez sélectionner les états paie à imprimer pour chaque structure</h1>
+  <h1 id="text3d"> sélection des états paie à imprimer par structure</h1>
   <div class="card-body">
       <form [formGroup]="fileToPrintFormGroup" >
 
@@ -84,5 +84,5 @@
   </div>
 </div>
 <footer class="footer" *ngIf="selectFiles" >
-  <button  id="new-board-btn" class="btn btn-success btn-lg" (click)="SelectFileToPrint()">Valider</button>
+  <button  id="new-board-btn" class="btn btn-success btn-lg" (click)="SelectFileToPrint()" style="background-color: #138D75;">Valider</button>
 </footer>

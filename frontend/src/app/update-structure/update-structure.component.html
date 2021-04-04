@@ -1,6 +1,6 @@
 <div class="container">
-    <h1>Pour modifier la structure,veuillez remplir les champs suivants:</h1>
-<div class="panel panel-default">
+    <h1 id="text3d">modification structure</h1>
+<div class="panel panel-default" >
     <div class="panel-body">
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" novalidate>
     <div class="example-container">
@@ -64,7 +64,7 @@
         </mat-autocomplete>
       </mat-form-field>
 
-      <button [disabled]="!formGroup.valid" mat-raised-button class="btn btn-success btn-lg" mat-button>Enregistrer les
+      <button [disabled]="!formGroup.valid" mat-raised-button class="btn btn-success btn-lg" mat-button style="background-color: #138D75; color: white;">Enregistrer les
         modifications</button>
     </div>
   </form>

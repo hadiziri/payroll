@@ -7,3 +7,7 @@
         from {background-color: #E77F03;}
         to {background-color: #FDAF52;}
       }
+      a{
+        text-transform: uppercase;
+        font-family: Geneva, sans-serif;
+      }
