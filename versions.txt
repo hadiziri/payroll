@@ -1,3 +1,9 @@
+6.0
+----
+-Ajout d'un module envoyer etats/fichiers(par mois/interval).
+-Correction des bugs.
+-Amelioartion design.
+-------------------------------------------------------------------------------------------------
 5.11
 ----
 -Nouveau design

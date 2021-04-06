@@ -1,0 +1,49 @@
+
+<div *ngIf="state==1">
+  <h1 mat-dialog-title>Choisir les différents états à envoyer</h1>
+  <div mat-dialog-content>
+    
+      <ul >
+        <li  *ngFor="let etat of tousLesEtats; let i = index">
+            <mat-checkbox   (change)="updateCheckedEtats(tousLesEtats[i])" >
+            {{tousLesEtats[i].prefixfiletype}}
+            </mat-checkbox>
+        </li>
+    </ul> 
+  
+  
+  
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button class="btn btn-success"(click)="onNoClick()" style="background-color: #C41E07; color: white;">Annuler</button>
+    <button mat-raised-button class="btn btn-success"  [disabled]="tempEtatFiles.length==0" (click)="sendEtats()"  style="background-color: #138D75; color: white;">Valider</button>
+  </div>
+</div>
+
+<div *ngIf="state==2">
+  <h1 mat-dialog-title>Choisir les différents fichiers à envoyer</h1>
+  <div mat-dialog-content>
+    
+      <ul >
+        <li  *ngFor="let fichier of tousLesFichiers; let i = index">
+            <mat-checkbox   (change)="updateCheckedFichier(tousLesFichiers[i])" >
+            {{tousLesFichiers[i].prefixfiletype}}
+            </mat-checkbox>
+        </li>
+    </ul> 
+  
+  
+  
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button  class="btn btn-success" (click)="onNoClick()" style="background-color: #C41E07; color: white;">Annuler</button>
+    <button mat-raised-button  class="btn btn-success" style="background-color: #138D75; color: white;"  [disabled]="tempFichiers.length==0" (click)="sendFichier()">Valider</button>
+  </div>
+</div>
+
+<div class="disable-background" *ngIf="showSpinner"></div>
+<div class="center" *ngIf="showSpinner">
+  <mat-progress-spinner diameter=65 mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+

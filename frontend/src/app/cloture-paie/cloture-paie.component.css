@@ -103,3 +103,4 @@ h1 {
   color:white;
   background-color: #A2D9CE ;
   }
+  ::ng-deep.mat-progress-spinner circle,.mat-spinner circle {stroke: #138D75 !important;}

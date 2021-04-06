@@ -1,0 +1,95 @@
+
+
+
+  <div class="container">
+   
+    <div class="row">
+      <h1 > Gestion des états/fichiers paie  </h1>
+      <mat-form-field appearance="fill" style="width: 100%; margin-top: 30px;" >
+        <mat-label style="font-size: large; color: black;"><span class="glyphicon glyphicon-search" aria-hidden="true" style="margin-right: 8px;"></span>Chercher</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="nom structure" #input style="color: black; ">
+        
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="float: right;">
+        <mat-label>Veuillez choisir un mois paie</mat-label>
+        <input matInput [matDatepicker]="picker3"  [formControl]="moisPaie">
+        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Veuillez choisir un interval </mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate placeholder="Date debut" [formControl]="dateDebut">
+          <input matEndDate placeholder="Date fin" [formControl]="dateFin">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+   
+      <div class="table-container">
+       
+     
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  
+          <!-- Position Column -->
+          <ng-container matColumnDef="idstructure">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="header_table"> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.idstructure}}</td>
+          </ng-container>
+  
+          <!-- Position Column -->
+          <ng-container matColumnDef="structurename">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="header_table"> Nom structure </th>
+            <td mat-cell *matCellDef="let element"> {{element.structurename}} </td>
+  
+          </ng-container>
+  
+          <!-- Name Column -->
+          <ng-container matColumnDef="STRUCTURECODELIKE">
+            <th mat-header-cell *matHeaderCellDef class="header_table"> Code Structure </th>
+            <td mat-cell *matCellDef="let element"> {{element.structurecodelike}} </td>
+          </ng-container>
+  
+          <!-- Weight Column -->
+          <ng-container matColumnDef="EMAILGROUPMANAGERS">
+            <th mat-header-cell *matHeaderCellDef r class="header_table"> Email groupe gestionnaire</th>
+            <td mat-cell *matCellDef="let element"> {{element.emailgroupmanagers}} </td>
+          </ng-container>
+      
+  
+          <ng-container matColumnDef="action" >
+            <th mat-header-cell *matHeaderCellDef class="header_table" style="padding-left: 20px;"> Action </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-grid-list cols="3">
+                <button class="btn btn-info" id="first_btn" style="background-color: #138D75;"  (click)="sendEtat(element)" >Etats</button>
+                <button class="btn btn-secondary" id="second_btn" style="background-color: #13BD9B ;" (click)="sendFichier(element)" >Fichiers</button>
+               
+              </mat-grid-list>
+  
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+  
+  
+      </div>
+      <mat-paginator [pageSizeOptions]="[10, 15,20]" style="margin-bottom: 10px;"></mat-paginator>
+    </div>
+    
+    
+  
+    
+    
+      
+
+    
+ 
+    
+  
+  </div>
+  
+    
+    
+  
+  

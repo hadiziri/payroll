@@ -1,3 +1,4 @@
+import { SendEtatFichierComponent } from './send-etat-fichier/send-etat-fichier.component';
 import { NavigationHistoryComponent } from './navigation-history/navigation-history.component';
 import { AddStorageSettingsComponent } from './add-storage-settings/add-storage-settings.component';
 import { CloturerMoisComponent } from './cloturer-mois/cloturer-mois.component';
@@ -33,7 +34,8 @@ const APP_ROUTING : Routes =[
     {path:'clotureMois',component:CloturerMoisComponent},
     {path :"Error", component: ErrorComponent},
     {path :"generateTableFiles", component: GenerateTableFilesComponent},
-    {path :"addNewFolder", component: AddStorageSettingsComponent}
+    {path :"addNewFolder", component: AddStorageSettingsComponent},
+    {path :"sendEtatFichier", component: SendEtatFichierComponent}
    
     
 ]

@@ -101,6 +101,7 @@ export class FilesGeneratorComponent implements OnInit {
   allrecap:Boolean=false;
   allmip:Boolean=false;
   isDataLoaded:Boolean=false;
+  countFilesErrorResponse:String="";
   index:number=0;
   indexE:number=0;
   generatedStructure:String="";
@@ -355,6 +356,7 @@ this.initProgress=25;
     this.eFiles=[];
     this.mailRequest.to=[];
     this.email.receiver="";
+   // console.log(structure)
     /**************initialisation of mail request************************************* */
     //this.mailRequest.to=structure.emailgroupmanagers;
     //this.mailRequest.to.push("DSI-Exploitation_paie@Sonatrach.dz")
@@ -381,6 +383,8 @@ this.initProgress=25;
      this.updatedStructure.structurecodenotlike=structure.structurecodenotlike;
      this.updatedStructure.structurename=structure.structurename;
      this.updatedStructure.statusstructure=2;
+     this.updatedStructure.fichiercodelike=structure.fichiercodelike;
+     this.updatedStructure.fichiercodenotlike=structure.fichiercodenotlike;
     this.homeService.getEfiles(structure).subscribe(
       (data) => {
       
@@ -415,6 +419,9 @@ this.initProgress=25;
         if(data!=null){
           if(data.status==true){
             this.saveEmailDB(struture,currentStructure);
+            if(data.message=="error files count"){
+              this.countFilesErrorResponse=data.message;
+            }
            
           
           }else{
@@ -463,6 +470,7 @@ this.initProgress=25;
 
 
     )
+    //console.log(struture)
     this.homeService.updateStructureStatus(struture).subscribe(
       (data) => {
       
@@ -494,7 +502,13 @@ this.initProgress=25;
           this.archiveSentFilesSaved=true;
           currentStructure.statusstructure=2;
           this.showSpinner=false;
-          this.showAlert("Envoie Email","L'email a bien été envoyé aux gestionnaires");
+          if(this.countFilesErrorResponse!=""){
+            this.showAlert("Envoie Email","L'email a bien été envoyé aux gestionnaires. "+
+           "&#9888;"+"  ATTENTION :"+"  Le nombre de fichiers envoyés est inférieur au nombre total des fichiers");
+          }else{
+            this.showAlert("Envoie Email","L'email a bien été envoyé aux gestionnaires");
+          }
+          
          this.deleteZip(currentStructure);
           this.copyFileToPrint(currentStructure);
         }else{
@@ -518,7 +532,7 @@ this.initProgress=25;
       (data) => {
       
         if(data!=null){
-        console.log(data);
+        //console.log(data);
         }else{
          //this.openDialog();
         }

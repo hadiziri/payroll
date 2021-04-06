@@ -21,6 +21,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 import java.util.GregorianCalendar;
@@ -149,6 +150,7 @@ import com.sonatrach.dz.tabstructure.domain.TabStructure;
 import com.sonatrach.dz.tabstructure.repo.TabStructureRepo;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
+import freemarker.template.TemplateException;
 import io.jsonwebtoken.lang.Collections;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -711,10 +713,18 @@ public class Controller {
 			fos = new FileOutputStream(zipName);
 			ZipOutputStream zipOut = new ZipOutputStream(fos);
 			File fileToZip = new File(sourceFile);
-			zipFile(fileToZip, fileToZip.getName(), zipOut);
+			String response=zipFile(fileToZip, fileToZip.getName(), zipOut);
 			zipOut.close();
 			fos.close();
-			return zipName;
+			if(response.equals("yes")) {
+				return zipName;
+			}else {
+				if(response.equals("no")) {
+					return "error!"+zipName;
+				}
+				
+			}
+			
 		} catch (FileNotFoundException e1) {
 			System.out.println("exception in compressDirectory e1==>" + e1.getMessage());
 		} catch (IOException e2) {
@@ -723,14 +733,14 @@ public class Controller {
 			System.out.println("exception in compressDirectory e3==>" + e3.getMessage());
 		}
 
-		return "error";
+		return "faillure";
 
 	}
 
-	public void zipFile(File fileToZip, String fileName, ZipOutputStream zipOut) throws IOException {
+	public String zipFile(File fileToZip, String fileName, ZipOutputStream zipOut) throws IOException {
 		try {
 			if (fileToZip.isHidden()) {
-				return;
+				return null;
 			}
 			if (fileToZip.isDirectory()) {
 				if (fileName.endsWith("/")) {
@@ -741,10 +751,18 @@ public class Controller {
 					zipOut.closeEntry();
 				}
 				File[] children = fileToZip.listFiles();
+				
+				
 				for (File childFile : children) {
 					zipFile(childFile, fileName + "/" + childFile.getName(), zipOut);
 				}
-				return;
+				//System.out.println(children.length);
+				if(children.length!=11) {
+					return "no";
+				}else {
+					return "yes";
+				}
+				
 			}
 			FileInputStream fis = new FileInputStream(fileToZip);
 			ZipEntry zipEntry = new ZipEntry(fileName);
@@ -758,7 +776,7 @@ public class Controller {
 		} catch (Exception e) {
 			System.out.println("exception in method zipFile==>" + e.getMessage());
 		}
-
+		return "error";
 	}
 
 	// **********************************************************Envoyer les etats
@@ -784,10 +802,22 @@ public class Controller {
 						+ request.getSturcturename() + " " + dateFormat + ".zip";
 				String zipName = request.getSturcturename() + " " + dateFormat + ".zip";
 				String compressedDir = compressDirectory(zipPathWithName, path);
-				if (!compressedDir.equals("error")) {
+				//System.out.println(compressedDir);
+				if (!compressedDir.equals("faillure")) {
 					Map<String, Object> model = new HashMap<>();
 					model.put("msg", request.getMsg());
-					MailResponse response = service.sendEmailZip(request, compressedDir, zipName, model);
+					String[] errorsCompressDir=compressedDir.split("!");
+					MailResponse response =new MailResponse();
+					if(errorsCompressDir[0].equals("error")) {
+						response= service.sendEmailZip(request, errorsCompressDir[1], zipName, model);
+						
+						response.setMessage("error files count");
+						
+						
+					}else {
+						response = service.sendEmailZip(request,compressedDir , zipName, model);
+						
+					}
 					return response;
 				}
 			}
@@ -1173,16 +1203,16 @@ public class Controller {
 			exporter13.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter13.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter13.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint13);
-			Object outputFileName13 = pathWithStructure + "\\" + "Frub" + " " + structure.getSTRUCTURENAME() + " "
+			Object outputFileName13 = pathWithStructure + "\\" + "FRUBNUM" + " " + structure.getSTRUCTURENAME() + " "
 					+ dateFormat + ".xlsx";
 			exporter13.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName13);
 			exporter13.exportReport();
 			generatedToDBF("", outputFileName13.toString(), pathWithStructure);
-			String pathfile = pathWithMounth2 + "\\" + "Frub" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathfile = pathWithMounth2 + "\\" + "FRUBNUM" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".xlsx";
-			String pathfile2 = pathWithMounth2 + "\\" + "Frub" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathfile2 = pathWithMounth2 + "\\" + "FRUBNUM" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".dbf";
-			String pathDbf = pathWithStructure + "\\" + "Frub" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathDbf = pathWithStructure + "\\" + "FRUBNUM" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".dbf";
 			copyFile(outputFileName13.toString(), pathWithMounth2, pathfile);
 			copyFile(pathDbf, pathWithMounth2, pathfile2);
@@ -1297,16 +1327,16 @@ public class Controller {
 			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter12.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint12);
-			Object outputFileName12 = pathWithStructure + "\\" + "Frub" + " " + structure.getSTRUCTURENAME() + " "
+			Object outputFileName12 = pathWithStructure + "\\" + "FRUBALPH" + " " + structure.getSTRUCTURENAME() + " "
 					+ dateFormat + ".xlsx";
 			exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
 			exporter12.exportReport();
 			generatedToDBF("", outputFileName12.toString(), pathWithStructure);
-			String pathfile = pathWithMounth2 + "\\" + "Frub" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathfile = pathWithMounth2 + "\\" + "FRUBALPH" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".xlsx";
-			String pathfile2 = pathWithMounth2 + "\\" + "Frub" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathfile2 = pathWithMounth2 + "\\" + "FRUBALPH" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".dbf";
-			String pathDbf = pathWithStructure + "\\" + "Frub" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathDbf = pathWithStructure + "\\" + "FRUBALPH" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".dbf";
 			copyFile(outputFileName12.toString(), pathWithMounth2, pathfile);
 			copyFile(pathDbf, pathWithMounth2, pathfile2);
@@ -1467,7 +1497,7 @@ public class Controller {
 			exporter11.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter11.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter11.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint11);
-			Object outputFileName11 = pathWithStructure + "\\" + "Pers" + " " + structure.getSTRUCTURENAME() + " "
+			Object outputFileName11 = pathWithStructure + "\\" + "PERS" + " " + structure.getSTRUCTURENAME() + " "
 					+ dateFormat + ".xlsx";
 			exporter11.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName11);
 
@@ -1672,22 +1702,7 @@ public class Controller {
 			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
 			}
-			if(structure.equals("DP")) {
-				// load file and compile it
-				File file = ResourceUtils.getFile("classpath:etatMipDp.jrxml");
-				JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-				JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(mip);
-				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-				JRTextExporter exporter = new JRTextExporter();
-				exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 180);
-				exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
-				exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-				Object outputFileName = pathWithStructure + "\\" + "MIP_dp" + " " + structure.toString() + " " + dateFormat
-						+ ".SPL";
-				exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
-
-				exporter.exportReport();
-			}
+			
 			// load file and compile it
 			File file = ResourceUtils.getFile("classpath:etatMip.jrxml");
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
@@ -1993,22 +2008,7 @@ public class Controller {
 			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
 			}
-			if(structure.equals("DP")) {
-				// load file and compile it
-				File file = ResourceUtils.getFile("classpath:etatRetDp.jrxml");
-				JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-				JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(ret);
-				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-				JRTextExporter exporter = new JRTextExporter();
-				exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 180);
-				exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
-				exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-				Object outputFileName = pathWithStructure + "\\" + "RET_dp" + " " + structure.toString() + " " + dateFormat
-						+ ".SPL";
-				exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
-
-				exporter.exportReport();
-			}
+		
 			// load file and compile it
 			File file = ResourceUtils.getFile("classpath:etatRet.jrxml");
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
@@ -2064,30 +2064,7 @@ public class Controller {
 			 * for(int i=0;i<mand.size();i++) { if(mand.get(i).getBulnet()==new
 			 * BigDecimal(0)) { mand.get(i).setBulnet(new BigDecimal(0)); } }
 			 */
-			if(structure.equals("DP")) {
-				// load file and compile it
-				File file = ResourceUtils.getFile("classpath:etatMandDp.jrxml");
-				JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-
-				JRBeanCollectionDataSource data = new JRBeanCollectionDataSource(mand);
-				Map<String, Object> parameters = new HashMap<>();
-				parameters.put("currenntMonth", sysDate);
-				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, data);
-
-				JRTextExporter exporter = new JRTextExporter();
-
-				exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 180);
-
-				exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
-
-				exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-
-				Object outputFileName = pathWithStructure + "\\" + "MAND_dp" + " " + structure.toString() + " " + dateFormat
-						+ ".SPL";
-				exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
-
-				exporter.exportReport();
-			}
+			
 			// load file and compile it
 			File file = ResourceUtils.getFile("classpath:etatMand.jrxml");
 			JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
@@ -2149,7 +2126,8 @@ public class Controller {
 				if (file != null) {
 					file.setFilegenerationdate(files.get(j).getFilegenerationdate());
 					file.setIduser(files.get(j).getIduser());
-					file.setFilename(files.get(j).getFilename() + " " + structure.get().getSTRUCTURENAME() + " " + dateFormat);
+					String[]fileName=files.get(j).getFilename().split(" ");
+					file.setFilename(fileName[0] + " " + structure.get().getSTRUCTURENAME() + " " + dateFormat);
 					file.setIdpaymonth(files.get(j).getIdpaymonth());
 					efileRepo.save(file);
 				} else {
@@ -2914,7 +2892,7 @@ public class Controller {
 
 		} catch (Exception e) {
 
-			System.out.println("Erreur lors de la génération des fichiers:   " + e.getMessage());
+			System.out.println("Exception getAllEtat():   " + e.getMessage());
 			toutLesEtats = null;
 		}
 
@@ -3218,4 +3196,75 @@ public class Controller {
 		return null;
 	}
 
+	/****************************************************
+	 * Send Etats Fichiers
+	 *****************************************************************************************************/
+	@GetMapping({"getAllFichiers"})
+	public List<CloturePaie> getAllFichiers() {
+		List<CloturePaie> toutLesFichiers = new ArrayList();
+		try {
+
+			// ***************************get all files to generate and its directory path
+			toutLesFichiers = clotureRepo.findByFileCat(4);
+			return toutLesFichiers;
+
+		} catch (Exception e) {
+
+			System.out.println("Exception getAllFichiers():   " + e.getMessage());
+			
+		}
+
+		return null;
+	}
+	
+	public String ZipMultipleFiles(String[] srcFiles,String zipPath)  {
+		 try {
+			 FileOutputStream fos = new FileOutputStream(zipPath);
+		        ZipOutputStream zipOut = new ZipOutputStream(fos);
+		        for (String srcFile : srcFiles) {
+		            File fileToZip = new File(srcFile);
+		            FileInputStream fis = new FileInputStream(fileToZip);
+		            ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
+		            zipOut.putNextEntry(zipEntry);
+
+		            byte[] bytes = new byte[1024];
+		            int length;
+		            while((length = fis.read(bytes)) >= 0) {
+		                zipOut.write(bytes, 0, length);
+		            }
+		            fis.close();
+		        }
+		        zipOut.close();
+		        fos.close(); 
+		        return "success";
+		 }catch(IOException e) {
+			 System.out.println("Exception ZipMultipleFiles()==> "+e.getMessage());
+		 }catch(Exception e ) {
+			 System.out.println("Exception ZipMultipleFiles()==> "+e.getMessage());
+		 }
+	      return null;  
+	}
+	@PostMapping({"sendEtats"})
+	public MailResponse sendEtats(@RequestBody MailRequest request , @RequestParam String zipPath) {
+		try {
+			String Zipresponse=ZipMultipleFiles(request.getFilesName(),zipPath);
+			if(Zipresponse!=null) {
+				Map<String, Object> model = new HashMap<>();
+				model.put("msg", request.getMsg());
+				String zipName=request.getSturcturename();
+				MailResponse response = service.sendEmailZip(request, zipPath, zipName, model);
+				return response;
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Exception sendEtats==> "+e.getMessage());
+		} catch (TemplateException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Exception sendEtats==> "+e.getMessage());
+		}
+		return null;
+	}
+	
+	
 }

@@ -13,7 +13,9 @@ import com.sonatrach.dz.fileTypeToFolder.domain.FileTypeToFolderId;
 @Table(name ="CLOTURE_PAIE")
 @IdClass(FileTypeToFolderId.class)
 @NamedQueries({@NamedQuery(name = "CloturePaie.findByDesc", query = "SELECT p FROM CloturePaie p WHERE DESCFILETYPE=?1"),
-		@NamedQuery(name = "CloturePaie.findByCategory", query = "SELECT p FROM CloturePaie p WHERE FOLDERNAME=?1")})
+		@NamedQuery(name = "CloturePaie.findByCategory", query = "SELECT p FROM CloturePaie p WHERE FOLDERNAME=?1"),
+		@NamedQuery(name = "CloturePaie.findByFileCat", query = "SELECT p FROM CloturePaie p WHERE IDFILECATEGORY=?1")
+})
 		
 public class CloturePaie {
 	@Id

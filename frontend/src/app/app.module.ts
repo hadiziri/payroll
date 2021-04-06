@@ -11,13 +11,13 @@ import{ROUTING} from './app-routing';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler, APP_INITIALIZER } from '@angular/core';
 import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http'
-
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FilesGeneratorComponent } from './files-generator/files-generator.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSortModule } from '@angular/material/sort';
+import { MatSortModule} from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
@@ -56,7 +56,12 @@ import { AddStorageSettingsComponent } from './add-storage-settings/add-storage-
 import { NavigationHistoryComponent } from './navigation-history/navigation-history.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
+
+
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { SendEtatFichierComponent } from './send-etat-fichier/send-etat-fichier.component';
+import { SelectEtatFichierComponent } from './select-etat-fichier/select-etat-fichier.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
 
@@ -71,9 +76,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
   declarations: [
     AppComponent,
     FilesGeneratorComponent,AddStructureComponent,DeleteStructureComponent,UpdateStructureComponent,ErrorComponent,HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, SettingsComponent, FileToPrintSettingsComponent,  StorageSettingsComponent, CloturePaieComponent, CloturerMoisComponent, 
-    AlertDialogComponent, GenerateTableFilesComponent, UpdateStorageSettingsComponent, AddStorageSettingsComponent, NavigationHistoryComponent, ErrorDialogComponent
+    AlertDialogComponent, GenerateTableFilesComponent, UpdateStorageSettingsComponent, AddStorageSettingsComponent, NavigationHistoryComponent, ErrorDialogComponent, SendEtatFichierComponent, SelectEtatFichierComponent
   ],
-  entryComponents: [AlertDialogComponent,UpdateStorageSettingsComponent,ErrorDialogComponent],
+  entryComponents: [AlertDialogComponent,UpdateStorageSettingsComponent,ErrorDialogComponent,SelectEtatFichierComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -102,6 +107,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatToolbarModule,
     MatButtonModule,
     MatProgressBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule
  
   
  

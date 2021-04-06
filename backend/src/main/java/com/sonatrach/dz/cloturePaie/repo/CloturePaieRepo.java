@@ -12,4 +12,5 @@ import com.sonatrach.dz.fileTypeToFolder.domain.FileTypeToFolderId;
 public interface CloturePaieRepo extends JpaRepository<CloturePaie, FileTypeToFolderId>{
 	List<CloturePaie> findByDesc(String desc);
 	List<CloturePaie> findByCategory(String FOLDERNAME);
+	List<CloturePaie> findByFileCat(Integer idCat);
 }

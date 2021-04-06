@@ -50,7 +50,7 @@
              <dt *ngIf="element.idemail==allFiles[i].idemail &&allFiles[i].filename.length!=0">
              
                 <p *ngFor="let item of allFiles[i].filename;let j=index">
-                    <mat-icon matSuffix aria-hidden="false">insert_drive_file</mat-icon>{{allFiles[i].filename[j]}}  
+                    <mat-icon matSuffix aria-hidden="false" style="color: #138D75;">insert_drive_file</mat-icon>{{allFiles[i].filename[j]}}  
                 </p>
                 
             </dt>
@@ -147,7 +147,7 @@
             </mat-tab-group>
   
       <mat-action-row>
-        <button mat-raised-button (click)="clearTable(1)" style="background-color: #C41E07; color:white">Supprimer l'historique	<mat-icon>delete</mat-icon></button>
+        <button mat-raised-button (click)="clearTable(2)" style="background-color: #C41E07; color:white">Supprimer l'historique	<mat-icon>delete</mat-icon></button>
         <button mat-raised-button style="background-color: #97A3AF; color: white;" (click)="prevStep()"><mat-icon>navigate_before</mat-icon>Précédent </button>
         <button  mat-raised-button (click)="nextStep()" style="background-color: #138D75; color: white;">Suivant <mat-icon>navigate_next</mat-icon></button>
       </mat-action-row>
@@ -206,4 +206,3 @@
     </mat-expansion-panel>
   
   </mat-accordion>
-

@@ -93,8 +93,8 @@
     background-color: #A2D9CE;
     }
     mat-expansion-panel{
-     
-     background-image: url('/assets/img/historique.jpg');
+     background-color: #D2E3DD;
+     /*background-image: url('/assets/img/historique.jpg');*/
     }
     
  

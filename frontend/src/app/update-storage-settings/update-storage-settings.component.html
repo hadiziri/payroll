@@ -16,6 +16,6 @@
 
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button color="primary" (click)="onNoClick()">Annuler</button>
-  <button mat-raised-button color="primary" [disabled]="!formGroup.valid" [mat-dialog-close]="data.path" >Valider</button>
+  <button mat-raised-button class="btn btn-success" (click)="onNoClick()" style="background-color: #C41E07; color: white;">Annuler</button>
+  <button mat-raised-button class="btn btn-success" [disabled]="!formGroup.valid" [mat-dialog-close]="data.path" style="background-color: #138D75; color: white;" >Valider</button>
 </div>

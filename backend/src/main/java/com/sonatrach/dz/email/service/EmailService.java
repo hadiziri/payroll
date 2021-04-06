@@ -57,11 +57,13 @@ public class EmailService {
 			sender.send(message);
 
 			response.setMessage("mail send to : " + request.getTo());
+			
 			response.setStatus(Boolean.TRUE);
 
 		} catch (MessagingException e) {
 			response.setMessage("Mail Sending failure : "+e.getMessage());
 			response.setStatus(Boolean.FALSE);
+			
 		}
 
 		return response;
