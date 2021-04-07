@@ -11,3 +11,12 @@
         text-transform: uppercase;
         font-family: Geneva, sans-serif;
       }
+      a:active{
+        color: white!important;
+       
+       
+      }
+    a:hover{
+      color: white!important;
+      background-color: black!important;
+    }

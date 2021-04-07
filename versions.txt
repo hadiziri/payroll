@@ -1,3 +1,7 @@
+6.1
+----
+-Amelioartion design.
+-------------------------------------------------------------------------------------------------
 6.0
 ----
 -Ajout d'un module envoyer etats/fichiers(par mois/interval).

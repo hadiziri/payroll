@@ -110,13 +110,11 @@ export class LoginComponent implements OnInit {
     this.userService.deleteAllSwap().subscribe(
       (data) => {
       
-        // //console.log("save generated files in db")
-       //  //console.log(data);
         if(data!=null){
           
          // console.log(data);
           window.location.reload();
-          //this.showAlert("Activation Structure","La structure a bien été activée");
+ 
         }else{
           
           
