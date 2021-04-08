@@ -26,11 +26,12 @@ margin-left: 20px;
 #text3d{
   width: 1300px;
   padding: 0px;
+  margin: 30px;
 }
 h1 {
  
 
-  margin-top: 0;
+  margin-top: 20px;
   margin-bottom: 10px;
   font-family: Geneva, sans-serif;
   text-align: center;

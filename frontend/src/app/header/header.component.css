@@ -1,5 +1,6 @@
 #header{
-    margin: 25px;
+    /*margin: 25px;*/
+    
     background-color:#343A3D ;
    
     }
@@ -11,12 +12,13 @@
         text-transform: uppercase;
         font-family: Geneva, sans-serif;
       }
-      a:active{
+      .nav_link:active{
         color: white!important;
        
        
       }
-    a:hover{
+    
+    .nav_link:hover{
       color: white!important;
       background-color: black!important;
     }

@@ -1,6 +1,6 @@
 <div *ngIf="!selectFiles">
     <h1 > états paie à imprimer par structure</h1>
-<mat-tab-group mat-align-tabs="center" style="margin-top: 25px;" >
+<mat-tab-group mat-align-tabs="center" style="margin-top: 45px;" >
     <mat-tab *ngFor="let activity of allShActivities; let k=index" label="{{allShActivities[k].descactivity}}" >
         <div  *ngFor="let structure of payrollstructures; let j = index"  style="display: inline-block;margin: auto; margin-top: 15px;">
 <mat-card   class="file-to-print-card"   *ngIf="allShActivities[k].idactivity==payrollstructures[j].idactivity"> 
@@ -32,10 +32,10 @@
 
 <div class="card m-3" *ngIf="selectFiles">
   <h1 id="text3d"> sélection des états paie à imprimer par structure</h1>
-  <div class="card-body">
+  <div class="card-body" >
       <form [formGroup]="fileToPrintFormGroup" >
 
-          <mat-tab-group mat-align-tabs="center" style="margin-top: 25px;" >
+          <mat-tab-group mat-align-tabs="center" style="margin-top: 45px;" >
               <mat-tab *ngFor="let activity of allShActivities; let k=index" label="{{allShActivities[k].descactivity}}" >
               
                   <!--<mat-accordion *ngFor="let structure of structureFormArray.controls; let j = index" style="margin: 8px;" >-->
