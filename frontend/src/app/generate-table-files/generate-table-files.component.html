@@ -55,7 +55,7 @@
         
               <br>
               <hr>
-     
+     <p *ngIf="allTableFiles.length==0">Aucune table n'est encore générée.</p>
         <ul >
             <li  *ngFor="let etat of allTableFiles; let i = index">
                 <mat-checkbox (change)="updateCheckedFiles(allTableFiles[i])"   >
