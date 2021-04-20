@@ -96,21 +96,21 @@ sendEtat(structure:Structure){
     let selectedMonth:String=this.getMoisPaie(this.moisPaie.value.toString());
     
     this.selectedPaieMonth.push(selectedMonth);
-    console.log(this.selectedPaieMonth)
+    //console.log(this.selectedPaieMonth)
     this.selectEtatFichier(1,structure);
   }else{
     if(this.dateDebut.value!=null&&this.dateFin.value!=null){
-      console.log("range")
+      //console.log("range")
     let selectedDateDebut:String=this.getMoisPaie(this.dateDebut.value.toString());
     
     
     let selectedDateFin:String=this.getMoisPaie(this.dateFin.value.toString());
    
     this.selectedPaieMonth=this.dateRange(selectedDateDebut,selectedDateFin)
-    console.log(this.selectedPaieMonth)
+    //console.log(this.selectedPaieMonth)
     this.selectEtatFichier(1,structure);
     }else{
-      this.showAlert("&#9888;"+"Alerte Envoi Etats","Veuillez sélectionner un mois paie ou bien un interval de mois")
+      this.showAlert("&#9888;"+"  Alerte Envoi Etats","Veuillez sélectionner un mois paie ou bien un interval de mois")
     }
     
   }
@@ -124,18 +124,18 @@ sendFichier(structure:Structure){
   if(this.moisPaie.value!=null){
     let selectedMonth:String=this.getMoisPaie(this.moisPaie.value.toString());
     this.selectedPaieMonth.push(selectedMonth);
-    console.log(this.selectedPaieMonth)
+    //console.log(this.selectedPaieMonth)
     this.selectEtatFichier(2,structure);
   }else{
     if(this.dateDebut.value!=null&&this.dateFin.value!=null){
-      console.log("range")
+      //console.log("range")
       let selectedDateDebut:String=this.getMoisPaie(this.dateDebut.value.toString()); 
       let selectedDateFin:String=this.getMoisPaie(this.dateFin.value.toString());
       this.selectedPaieMonth=this.dateRange(selectedDateDebut,selectedDateFin)
-      console.log(this.selectedPaieMonth)
+      //console.log(this.selectedPaieMonth)
       this.selectEtatFichier(2,structure);
     }else{
-        this.showAlert("&#9888;"+"Alerte Envoi Fichiers","Veuillez sélectionner un mois paie ou bien un interval de mois")
+        this.showAlert("&#9888;"+"  Alerte Envoi Fichiers","Veuillez sélectionner un mois paie ou bien un interval de mois")
     }
    
   }

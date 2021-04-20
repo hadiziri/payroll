@@ -53,7 +53,7 @@ export class UserService {
   }
 
   deleteAllSwap():Observable<PayMonth>{
-    return this.http.get<PayMonth>(this.userUrl+"deleteAllSwap").pipe(
+    return this.http.get<PayMonth>(this.userUrl+"api/auth/deleteAllSwap").pipe(
       catchError((err) => {
          //console.log('error caught in service')
         console.error(err);

@@ -230,4 +230,14 @@ public getAllFileType():Observable<Array<FileType>>{
   );
 }
 
+
+public getNotGeneratedStructure():Observable<Array<Structure>>{
+  return this.httpClient.get<Array<Structure>>(this.host+"getNotGeneratedStructure").pipe(
+    catchError((err) => {
+       //console.log('error caught in service')
+      console.error(err);
+      return throwError(err);
+    })
+  );
+}
 }

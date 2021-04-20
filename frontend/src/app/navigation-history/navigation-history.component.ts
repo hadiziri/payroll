@@ -11,7 +11,7 @@ import { ParametreService } from './../Services/parametre.service';
 import { User } from './../Models/User';
 import { TokenStorageService } from './../auth/token-storage.service';
 import { HistoriqueService } from './../Services/historique.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, QueryList, ViewChildren } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { mobiscroll, MbscFormOptions } from '@mobiscroll/angular-lite';
 import { ViewEncapsulation } from '@angular/core';
@@ -65,7 +65,7 @@ export class NavigationHistoryComponent implements OnInit {
   @ViewChild(MatPaginator) set matPaginator(paginator: MatPaginator) {
     this.dataSourceEmail.paginator = paginator;
   }
- 
+  @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
  
   
   constructor(public dialog: MatDialog,private paramService: ParametreService,private token: TokenStorageService,private historiqueService:HistoriqueService) { }

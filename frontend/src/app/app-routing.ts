@@ -1,3 +1,4 @@
+import { ControlGenerationComponent } from './control-generation/control-generation.component';
 import { SendEtatFichierComponent } from './send-etat-fichier/send-etat-fichier.component';
 import { NavigationHistoryComponent } from './navigation-history/navigation-history.component';
 import { AddStorageSettingsComponent } from './add-storage-settings/add-storage-settings.component';
@@ -35,7 +36,8 @@ const APP_ROUTING : Routes =[
     {path :"Error", component: ErrorComponent},
     {path :"generateTableFiles", component: GenerateTableFilesComponent},
     {path :"addNewFolder", component: AddStorageSettingsComponent},
-    {path :"sendEtatFichier", component: SendEtatFichierComponent}
+    {path :"sendEtatFichier", component: SendEtatFichierComponent},
+    {path :"controlGeneration", component: ControlGenerationComponent}
    
     
 ]

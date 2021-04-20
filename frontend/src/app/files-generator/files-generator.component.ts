@@ -1147,8 +1147,43 @@ genererFichiers(structure:Structure,state:number){
      this.codeStructure.push(structure.structurecodelike);
   }
  // console.log(this.codeStructure)
+
+  this.homeService.generateNewPaieStr(structure).subscribe(
+    (data) => {
+      
+     // console.log(data);
+         if(data!=null){
+          let efile:Efile={
+            "idfile":0,
+            "filename":"NEWPAIE",
+            "filegenerationdate":new Date(),
+            "idfiletype":0,
+            "idpaymonth":0,
+            "idstructure":structure.idstructure,
+            "iduser":this.currentUser.iduser,
+            "validatedflag":1
+          }
+          this.efichiers.push(efile);
+           this.newpaie=true;
+          this.uploadedFichiers[0].progress=50;
+          this.saveGeneratedFichiersInDB(structure,state)
+         }else{
+           
+           
+           this.openDialog();
+         }
+     
+       },
+       error => {
+         // //console.log(error);
+         this.openDialogError(error);
+         throw error;
+     
+       }
+  )
   if(this.codeStructure.map(s => (/^[a-z].*/i.test(s))).includes(true)){
     //console.log("alph")
+  
     this.homeService.generateFrubAStr(structure).subscribe(
       (data) => {
       
@@ -1185,6 +1220,7 @@ genererFichiers(structure:Structure,state:number){
        }
     )
   }else{
+    
     this.homeService.generateFrubNStr(structure).subscribe(
       (data) => {
       
@@ -1219,40 +1255,7 @@ genererFichiers(structure:Structure,state:number){
        }
     )
   }
-
-  this.homeService.generateNewPaieStr(structure).subscribe(
-    (data) => {
-      
-     // console.log(data);
-         if(data!=null){
-          let efile:Efile={
-            "idfile":0,
-            "filename":"NEWPAIE",
-            "filegenerationdate":new Date(),
-            "idfiletype":0,
-            "idpaymonth":0,
-            "idstructure":structure.idstructure,
-            "iduser":this.currentUser.iduser,
-            "validatedflag":1
-          }
-          this.efichiers.push(efile);
-           this.newpaie=true;
-          this.uploadedFichiers[0].progress=50;
-          this.saveGeneratedFichiersInDB(structure,state)
-         }else{
-           
-           
-           this.openDialog();
-         }
-     
-       },
-       error => {
-         // //console.log(error);
-         this.openDialogError(error);
-         throw error;
-     
-       }
-  )
+ 
   this.homeService.generatePersStr(structure).subscribe(
     (data) => {
       
@@ -1286,6 +1289,7 @@ genererFichiers(structure:Structure,state:number){
      
        }
   )
+
 
 }
 

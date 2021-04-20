@@ -119,7 +119,18 @@ export class SelectEtatFichierComponent implements OnInit {
     this.sendEtatFichierService.getAllFichiers().subscribe(
       (data) => {
         if(data!=null){
-          this.tousLesFichiers = data;
+            for(let i=0;i<data.length;i++){
+            if(data[i].prefixfiletype!="FRUBNUM" ){
+              if(data[i].prefixfiletype=="FRUBALPH"){
+                data[i].prefixfiletype="FRUB";
+                this.tousLesFichiers.push(data[i]);
+              }else{
+                this.tousLesFichiers.push(data[i]);
+              }
+              
+            }
+           
+          }
          
          //console.log(data);
         }else{

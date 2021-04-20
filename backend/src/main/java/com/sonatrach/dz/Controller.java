@@ -1,6 +1,7 @@
 package com.sonatrach.dz;
 
 import java.awt.Cursor;
+
 import java.io.BufferedReader;
 
 import java.io.DataOutputStream;
@@ -177,8 +178,15 @@ import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
  * Developped by : AID FERIEL for SONATRACH --2020--
  * Email:aidferiel@gmail.com
  */
+
+
+
 @RestController
-@CrossOrigin("*")
+//@CrossOrigin(origins = "http://localhost:4200",allowedHeaders = {"Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"},methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.OPTIONS})
+//@CrossOrigin(origins={"http://10.100.12.215:4200","http://10.100.22.94:7070"},methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.HEAD,RequestMethod.PUT,RequestMethod.OPTIONS})
+//@CrossOrigin(origins="*",allowedHeaders = "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With", exposedHeaders = "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
+//@CrossOrigin(origins={"*","http://10.100.12.215:4200","http://10.100.12.215"})
+@CrossOrigin(origins="*")
 public class Controller {
 	// **********************************************repositories************************************************************
 
@@ -871,7 +879,7 @@ public class Controller {
 
 	}
 
-	@GetMapping({"deleteAllSwap"})
+	@GetMapping("api/auth/deleteAllSwap")
 	public PayMonth deleteAllSwap() {
 	
 		try {
@@ -1203,16 +1211,16 @@ public class Controller {
 			exporter13.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter13.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter13.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint13);
-			Object outputFileName13 = pathWithStructure + "\\" + "FRUBNUM" + " " + structure.getSTRUCTURENAME() + " "
+			Object outputFileName13 = pathWithStructure + "\\" + "FRUB" + " " + structure.getSTRUCTURENAME() + " "
 					+ dateFormat + ".xlsx";
 			exporter13.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName13);
 			exporter13.exportReport();
 			generatedToDBF("", outputFileName13.toString(), pathWithStructure);
-			String pathfile = pathWithMounth2 + "\\" + "FRUBNUM" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathfile = pathWithMounth2 + "\\" + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".xlsx";
-			String pathfile2 = pathWithMounth2 + "\\" + "FRUBNUM" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathfile2 = pathWithMounth2 + "\\" + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".dbf";
-			String pathDbf = pathWithStructure + "\\" + "FRUBNUM" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathDbf = pathWithStructure + "\\" + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".dbf";
 			copyFile(outputFileName13.toString(), pathWithMounth2, pathfile);
 			copyFile(pathDbf, pathWithMounth2, pathfile2);
@@ -1327,16 +1335,16 @@ public class Controller {
 			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter12.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint12);
-			Object outputFileName12 = pathWithStructure + "\\" + "FRUBALPH" + " " + structure.getSTRUCTURENAME() + " "
+			Object outputFileName12 = pathWithStructure + "\\" + "FRUB" + " " + structure.getSTRUCTURENAME() + " "
 					+ dateFormat + ".xlsx";
 			exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
 			exporter12.exportReport();
 			generatedToDBF("", outputFileName12.toString(), pathWithStructure);
-			String pathfile = pathWithMounth2 + "\\" + "FRUBALPH" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathfile = pathWithMounth2 + "\\" + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".xlsx";
-			String pathfile2 = pathWithMounth2 + "\\" + "FRUBALPH" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathfile2 = pathWithMounth2 + "\\" + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".dbf";
-			String pathDbf = pathWithStructure + "\\" + "FRUBALPH" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathDbf = pathWithStructure + "\\" + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".dbf";
 			copyFile(outputFileName12.toString(), pathWithMounth2, pathfile);
 			copyFile(pathDbf, pathWithMounth2, pathfile2);
@@ -2739,7 +2747,9 @@ public class Controller {
 	 *********************************************************************************************************/
 
 	// Connexion
+	
 	@RequestMapping(value = "/api/auth/signin", method = RequestMethod.POST)
+	//@PostMapping("/api/auth/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
 		Optional<User> currentUser = userRepository.findByUsername(loginRequest.getUsername());
@@ -2811,6 +2821,7 @@ public class Controller {
 	/****************************************************
 	 * Parametres
 	 *****************************************************************************************************/
+	//**************************************************************************Update PSW**************************************************************************
 	// get User by username
 	@PostMapping({ "getUserByUserName" })
 	public User getUserByUserName(@RequestBody User u) {
@@ -2878,7 +2889,7 @@ public class Controller {
 		return user;
 
 	}
-
+	//**************************************************************************File to print**************************************************************************
 	// for settings : avoir tout les etats paie pour séléctionner les etat à
 	// imprimer(file to print)
 	@GetMapping({ "allEtats" })
@@ -2979,7 +2990,7 @@ public class Controller {
 
 		return null;
 	}
-
+	//**************************************************************************Gestion structure**************************************************************************
 	// update structure
 	@PostMapping({ "/updateStructure" })
 	public Structure updateStructure(@RequestBody Structure structure) {
@@ -3084,7 +3095,7 @@ public class Controller {
 		}
 		return null;
 	}
-
+//**************************************************************************Gestion Fichier**************************************************************************
 	// get all folders(MAJ path )
 	// on trouve cette api dans la section cloture paie
 
@@ -3196,6 +3207,49 @@ public class Controller {
 		return null;
 	}
 
+	//**************************************************************************Controle Generation Etats/fichier**************************************************************************
+	@GetMapping({"getNotGeneratedStructure"})
+	public List<Structure> getNotGeneratedStructure(){
+		try {
+			//to get folder path Etat+fichier
+			Folder folderEtat=folderRepo.findByFolderName("ETAT");
+			//get current paymonth
+			PayMonth currentDate = paymonthRepo.findByState();
+			String currentYear = currentDate.getPaymonth().substring(0, 4);
+			String currentMonth = currentDate.getPaymonth().substring(4, 6);
+			String dateFormat = currentYear + "-" + currentMonth;
+			//current path 
+			String path=folderEtat.getFOLDERPATH()+folderEtat.getFOLDERNAME()+"\\"+currentYear+"\\"+dateFormat;
+			//get all structure to check them all
+			List<Structure> allStructures=structureRepo.findByStatus(-1);
+			//list of structure to return
+			List<Structure> structuresToReturn=new ArrayList<>();
+			for(int i=0;i<allStructures.size();i++) {
+				//path with structure folder
+				String pathWithStructure=path+"\\"+allStructures.get(i).getSTRUCTURENAME()+" "+dateFormat;
+				File folderToCheck=new File(pathWithStructure);
+				
+				File[] children = folderToCheck.listFiles();
+				if(children==null) {
+					return allStructures;
+				}else {
+					if(children.length!=11) {
+						structuresToReturn.add(allStructures.get(i));
+					}
+				}
+				
+			}
+			return structuresToReturn;
+		}catch(Exception e) {
+			System.out.println("Exception getNotGeneratedStructure()==>" + e.getMessage());
+		}
+	
+		return null;
+	}
+	
+	
+	
+	
 	/****************************************************
 	 * Send Etats Fichiers
 	 *****************************************************************************************************/

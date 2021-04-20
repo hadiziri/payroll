@@ -62,6 +62,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { SendEtatFichierComponent } from './send-etat-fichier/send-etat-fichier.component';
 import { SelectEtatFichierComponent } from './select-etat-fichier/select-etat-fichier.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { ControlGenerationComponent } from './control-generation/control-generation.component';
+import { GenerateControlledEtatFichierComponent } from './generate-controlled-etat-fichier/generate-controlled-etat-fichier.component';
 
 
 
@@ -76,9 +78,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
   declarations: [
     AppComponent,
     FilesGeneratorComponent,AddStructureComponent,DeleteStructureComponent,UpdateStructureComponent,ErrorComponent,HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, SettingsComponent, FileToPrintSettingsComponent,  StorageSettingsComponent, CloturePaieComponent, CloturerMoisComponent, 
-    AlertDialogComponent, GenerateTableFilesComponent, UpdateStorageSettingsComponent, AddStorageSettingsComponent, NavigationHistoryComponent, ErrorDialogComponent, SendEtatFichierComponent, SelectEtatFichierComponent
+    AlertDialogComponent, GenerateTableFilesComponent, UpdateStorageSettingsComponent, AddStorageSettingsComponent, NavigationHistoryComponent, ErrorDialogComponent, SendEtatFichierComponent, SelectEtatFichierComponent, ControlGenerationComponent, GenerateControlledEtatFichierComponent
   ],
-  entryComponents: [AlertDialogComponent,UpdateStorageSettingsComponent,ErrorDialogComponent,SelectEtatFichierComponent],
+  entryComponents: [AlertDialogComponent,UpdateStorageSettingsComponent,ErrorDialogComponent,SelectEtatFichierComponent,GenerateControlledEtatFichierComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

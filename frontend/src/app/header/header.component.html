@@ -1,7 +1,9 @@
 <nav class="navbar navbar-inverse" id="header">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" style="cursor:pointer;color: white; text-size-adjust: 20px;text-transform: uppercase;text-shadow: #343A3D 0 0 1px, #343A3D 0 -1px 2px, #343A3D 0 -3px 2px, rgba(0,0,0,0.5) 0 5px 5px;"><strong>Application Exploitation
+      <a class="navbar-brand"
+        style="cursor:pointer;color: white; text-size-adjust: 20px;text-transform: uppercase;text-shadow: #343A3D 0 0 1px, #343A3D 0 -1px 2px, #343A3D 0 -3px 2px, rgba(0,0,0,0.5) 0 5px 5px;"><strong>Application
+          Exploitation
           Paie</strong> </a>
     </div>
     <ul class="nav navbar-nav">
@@ -18,13 +20,14 @@
       <li><a [routerLink]="['/clotureMois']" routerLinkActive="router-link-active" class="nav_link">Clôture Mois
           <span class="glyphicon glyphicon-saved" aria-hidden="true"></span>
         </a></li>
-        <li><a [routerLink]="['/generateTableFiles']" routerLinkActive="router-link-active" class="nav_link">Envoyer tables 
+      <li><a [routerLink]="['/generateTableFiles']" routerLinkActive="router-link-active" class="nav_link">Envoyer
+          tables
           <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
         </a></li>
-        <li><a [routerLink]="['/sendEtatFichier']" routerLinkActive="router-link-active" class="nav_link">Envoyer Fichiers 
+      <li><a [routerLink]="['/sendEtatFichier']" routerLinkActive="router-link-active" class="nav_link">Envoyer Fichiers
           <span class=" glyphicon glyphicon-send" aria-hidden="true"></span>
         </a></li>
-        
+
       <li><a [routerLink]="['/historique']" routerLinkActive="router-link-active" class="nav_link">Historique
           <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
         </a></li>
@@ -33,36 +36,46 @@
           <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a [routerLink]="['/parametre']" routerLinkActive="router-link-active" class="nav_link">Changer mot de passe</a></li>
-          <li><a [routerLink]="['/fileToPrint']" routerLinkActive="router-link-active" class="nav_link">Choisir les fichiers à
+          <li><a [routerLink]="['/parametre']" routerLinkActive="router-link-active" class="nav_link">Changer mot de
+              passe</a></li>
+          <li><a [routerLink]="['/fileToPrint']" routerLinkActive="router-link-active" class="nav_link">Choisir les
+              fichiers à
               imprimer</a></li>
-          <li><a [routerLink]="['/storageSettings']" routerLinkActive="router-link-active" class="nav_link">Modifier le chemin de stockage</a></li>
-          <li><a [routerLink]="['/addStructure']" routerLinkActive="router-link-active" class="nav_link">Ajouter structure</a></li>
-          <li><a [routerLink]="['/structures']" routerLinkActive="router-link-active" class="nav_link">Modifier/Supprimer structure</a>
+          <li><a [routerLink]="['/storageSettings']" routerLinkActive="router-link-active" class="nav_link">Modifier le
+              chemin de stockage</a></li>
+          <li><a [routerLink]="['/addStructure']" routerLinkActive="router-link-active" class="nav_link">Ajouter
+              structure</a></li>
+          <li><a [routerLink]="['/structures']" routerLinkActive="router-link-active"
+              class="nav_link">Modifier/Supprimer structure</a>
+          </li>
+          <li><a [routerLink]="['/controlGeneration']" routerLinkActive="router-link-active"
+             class="nav_link">Contrôle génération Etats/Fichiers</a>
           </li>
         </ul>
 
       </li>
 
-      <li><a style="cursor: pointer;" class="nav-item" (click)="showConfirm() " routerLinkActive="router-link-active" class="nav_link">Se
+      <li><a style="cursor: pointer;" class="nav-item" (click)="showConfirm() " routerLinkActive="router-link-active"
+          class="nav_link">Se
           déconnecter
           <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
         </a></li>
-      </ul>
-        <ul class="nav navbar-nav navbar-right" >
-        <li style="margin-right: 5px;"><a class="nav-link disabled navbar-right"  style="margin-right: 0px;cursor: pointer; color:#138D75;font-size: 18px;
-          text-shadow: #343A3D 0 0 1px, #343A3D 0 -1px 2px, #343A3D 0 -3px 2px, rgba(0,0,0,0.5) 0 5px 5px;"  ><strong>
-          <span class="glyphicon glyphicon glyphicon-calendar" aria-hidden="true"></span>Mois Paie:    <span>   {{currentMonth}}</span>
-         
-        </strong>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li style="margin-right: 5px;"><a class="nav-link disabled navbar-right" style="margin-right: 0px;cursor: pointer; color:#138D75;font-size: 18px;
+          text-shadow: #343A3D 0 0 1px, #343A3D 0 -1px 2px, #343A3D 0 -3px 2px, rgba(0,0,0,0.5) 0 5px 5px;"><strong>
+            <span class="glyphicon glyphicon glyphicon-calendar" aria-hidden="true"></span>Mois Paie: <span>
+              {{currentMonth}}</span>
+
+          </strong>
         </a></li>
-      </ul>
-      <!-- 
+    </ul>
+    <!-- 
         <li *ngIf="!connection" class="nav-item">
           <a class="nav-link" [routerLink]="['/auth/login']">Connexion</a>
         </li>
         -->
 
-   
+
   </div>
 </nav>

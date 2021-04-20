@@ -27,7 +27,7 @@ import com.sonatrach.dz.security.services.UserDetailsServiceImpl;
 
 
 
-public class JwtAuthTokenFilter extends OncePerRequestFilter {
+public class JwtAuthTokenFilter extends OncePerRequestFilter{
 
 	@Autowired
 	private JwtProvider tokenProvider;
@@ -56,8 +56,18 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
 		} catch (Exception e) {
 			logger.error("Can NOT set user authentication -> Message: {}", e);
 		}
-
-		filterChain.doFilter(request, response);
+		
+		/*response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+	    response.setHeader("Access-Control-Allow-Credentials", "true");
+	    response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+	    response.setHeader("Access-Control-Max-Age", "3600");
+	    response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With,Authorization, remember-me");
+	    if ("OPTIONS".equals(request.getMethod())) {
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else { 
+        	filterChain.doFilter(request, response);
+        }*/
+	    filterChain.doFilter(request, response);
 	}
 
 	private String getJwt(HttpServletRequest request) {

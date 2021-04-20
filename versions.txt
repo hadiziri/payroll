@@ -1,3 +1,9 @@
+7.0
+----
+-Amelioartion design.
+-Ajout fonctionnalité control generation etats/fichiers.
+-Ajout fonctionnalité control nombre fichiers/etats avant envoie email.
+-------------------------------------------------------------------------------------------------
 6.2
 ----
 -Amelioartion design.
