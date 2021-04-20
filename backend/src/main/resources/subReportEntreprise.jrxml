@@ -45,6 +45,7 @@ $F{mtrub}:0)
 	$F{dbulcrub}.equals("331")?0:
 	$F{dbulcrub}.equals("311")?0:
 	$F{dbulcrub}.equals("313")?0:
+	$F{dbulcrub}.equals("315")?0:
 $F{mtrub}:0):0]]></variableExpression>
 	</variable>
 	<variable name="chargeEmp" class="java.math.BigDecimal" resetType="Group" resetGroup="grpDiv" calculation="Sum">
