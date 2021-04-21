@@ -765,7 +765,7 @@ public class Controller {
 					zipFile(childFile, fileName + "/" + childFile.getName(), zipOut);
 				}
 				//System.out.println(children.length);
-				if(children.length!=11) {
+				if(children.length!=8) {
 					return "no";
 				}else {
 					return "yes";
@@ -2390,8 +2390,10 @@ public class Controller {
 			int exitVal = process.waitFor();
 			//System.out.println(exitVal);
 			if (exitVal == 0) {
+				Files.deleteIfExists(Paths.get(filePath));
 				// System.out.println(output);
 				// System.exit(0);
+				
 			} else {
 				// abnormal...
 				//System.out.println("prob"+exitVal);
@@ -3233,7 +3235,7 @@ public class Controller {
 				if(children==null) {
 					return allStructures;
 				}else {
-					if(children.length!=11) {
+					if(children.length!=8) {
 						structuresToReturn.add(allStructures.get(i));
 					}
 				}

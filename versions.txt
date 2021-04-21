@@ -1,3 +1,8 @@
+8.0
+----
+-Suppression des fichiers xlsx apres generation DBF.
+-Modification control lors de l'envoie des émails/Parametre control generation (8fichiers).
+-------------------------------------------------------------------------------------------------
 7.1
 ----
 -Correction etat recap(suppression calcul rubrique 315).
