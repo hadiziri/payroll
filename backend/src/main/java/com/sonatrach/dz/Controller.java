@@ -182,10 +182,6 @@ import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:4200",allowedHeaders = {"Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"},methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.OPTIONS})
-//@CrossOrigin(origins={"http://10.100.12.215:4200","http://10.100.22.94:7070"},methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.HEAD,RequestMethod.PUT,RequestMethod.OPTIONS})
-//@CrossOrigin(origins="*",allowedHeaders = "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With", exposedHeaders = "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
-//@CrossOrigin(origins={"*","http://10.100.12.215:4200","http://10.100.12.215"})
 @CrossOrigin(origins="*")
 public class Controller {
 	// **********************************************repositories************************************************************
@@ -274,181 +270,6 @@ public class Controller {
 	    
 
 	// ****************************************API*****************************************************************************
-	
-	// Api Test
-	@GetMapping({ "/test" })
-	public void getAllBanques() throws IOException {
-		/*
-		 * ProcessBuilder processBuilder = new ProcessBuilder(
-		 * "C:\\DIN_DRH\\DCDSI_EXPLOITATION\\SYSTEME\\2021\\2021-02\\convert.bat","C:\\DIN_DRH\\DCDSI_EXPLOITATION\\SYSTEME\\2021\\2021-02\\DEP 2021-02.xlsx"
-		 * ,"C:\\DIN_DRH\\DCDSI_EXPLOITATION\\SYSTEME\\2021\\2021-02");
-		 * 
-		 * //Process process = Runtime.getRuntime().exec( // "cmd /c hello.bat", null,
-		 * new File("C:\\Users\\mkyong\\"));
-		 * 
-		 * try {
-		 * 
-		 * Process process = processBuilder.start();
-		 * 
-		 * StringBuilder output = new StringBuilder();
-		 * 
-		 * BufferedReader reader = new BufferedReader( new
-		 * InputStreamReader(process.getInputStream()));
-		 * 
-		 * String line; while ((line = reader.readLine()) != null) { output.append(line
-		 * + "\n"); }
-		 * 
-		 * int exitVal = process.waitFor(); if (exitVal == 0) {
-		 * System.out.println(output); System.exit(0); } else { //abnormal... }
-		 * 
-		 * } catch (IOException e) { e.printStackTrace(); } catch (InterruptedException
-		 * e) { e.printStackTrace(); }
-		 */
-		/*
-		//return rubTRepo.findAll();
-		String codelike="^(A|B|C)";
-		String codenotLike="^(A01|B04)";
-		Cursor cur = null;
-		List<NewPaie> filtredNewPaie =new ArrayList();
-		
-		simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withProcedureName("FINDNEWPAIE");
-		
-        SqlParameterSource in = new MapSqlParameterSource().addValue("conditionlike", codelike);
-               
-       
-                ((MapSqlParameterSource) in).addValue("conditionnotlike", codenotLike);
-                Map out = simpleJdbcCall.execute(in);
-
-	            if (out != null) {
-	            	
-	             
-	            	filtredNewPaie =  (ArrayList<NewPaie>) out.get("XRESULT");
-	            }
-	
-		//return rubAlphRepo.findRub(0,codelike,codenotLike);
-		return filtredNewPaie;*/
-		
-		System.out.println("============================");
-		System.out.println(" ");
-		final StringBuffer sb = new StringBuffer();
-		int processComplete = -1;
-		File file = ResourceUtils.getFile("classpath:convert.bat");
-		ProcessBuilder pb = new ProcessBuilder(file.getAbsolutePath(), "C:\\PAIE2000\\ETAT\\2021\\2021-03\\SMA 2021-03\\Frub SMA 2021-03.xlsx" , "C:\\PAIE2000\\ETAT\\2021\\2021-03\\SMA 2021-03");
-		//ProcessBuilder pb = new ProcessBuilder(args);
-		pb.redirectErrorStream(true);
-		try {
-			final Process process = pb.start();
-			final InputStream is = process.getInputStream();
-			// the background thread watches the output from the process
-			new Thread(new Runnable() {
-				public void run() {
-					try {
-						BufferedReader reader = new BufferedReader(
-								new InputStreamReader(is));
-						String line;
-						while ((line = reader.readLine()) != null) {
-							sb.append(line).append('\n');
-						}
-					} catch (IOException e) {
-						System.out
-								.println("Java ProcessBuilder: IOException occured.");
-						e.printStackTrace();
-					} finally {
-						try {
-							is.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			}).start();
-			// Wait to get exit value
-			// the outer thread waits for the process to finish
-			processComplete = process.waitFor();
-			System.out.println("Java ProcessBuilder result:" + processComplete);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println("Java ProcessBuilder - return=: " + sb.toString());
-	}
-	
-	@GetMapping({ "/test3" })
-	public List<Pers> test3() throws IOException {
-		SimpleJdbcCall simpleJdbcCall;
-		
-		//return rubTRepo.findAll();
-		String codelike="^(A|B|C)";
-		String codenotLike="^(A01|B04)";
-		Cursor cur = null;
-		List<Pers> filtredPers = new ArrayList();
-		
-		simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withProcedureName("FINDPERS");
-	
-        SqlParameterSource in = new MapSqlParameterSource().addValue("conditionlike", codelike);
-                
-                
-       
-                ((MapSqlParameterSource) in).addValue("conditionnotlike", codenotLike);
-                Map out = simpleJdbcCall.execute(in);
-
-	            if (out != null) {
-	            	
-	             
-	            	filtredPers =  (ArrayList<Pers>) out.get("XRESULT");
-	            }
-	
-		//return rubAlphRepo.findRub(0,codelike,codenotLike);
-		return filtredPers;
-	}
-	
-	
-	@GetMapping({ "/test2" })
-	ArrayList<RubAlph> test2() {
-		 SimpleJdbcCall simpleJdbcCall;
-		simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withProcedureName("findRub");
-		String codelike="^(A|B|C)";
-		String codenotLike="^(A01|B04)";
-        SqlParameterSource in = new MapSqlParameterSource()
-                .addValue("frub", 0);
-                ((MapSqlParameterSource) in).addValue("conditionlike", codelike);
-       
-                ((MapSqlParameterSource) in).addValue("conditionnotlike", codenotLike);
-
-        
-
-        try {
-
-            Map out = simpleJdbcCall.execute(in);
-
-            if (out != null) {
-            	
-             
-                return (ArrayList<RubAlph>) out.get("XRESULT");
-            }
-
-        } catch (Exception e) {
-            // ORA-01403: no data found, or any java.sql.SQLException
-            System.err.println(e.getMessage());
-        }
-
-        return null;
-    }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 
@@ -661,7 +482,7 @@ public class Controller {
 				fileNames[i] = files[i] + " " + dateFormat + ".xlsx";
 			}
 			if (folder != null) {
-				String path = folder.getFOLDERPATH() + "TABLES" + "\\" + currentYear + "\\" + dateFormat + "\\";
+				String path = folder.getFOLDERPATH() + "TABLES" + File.separator + currentYear + File.separator + dateFormat + File.separator;
 				Map<String, Object> model = new HashMap<>();
 				model.put("msg", request.getMsg());
 
@@ -804,9 +625,9 @@ public class Controller {
 			String dateFormat = currentYear + "-" + currentMonth;
 
 			if (folder != null) {
-				String path = folder.getFOLDERPATH() + "ETAT" + "\\" + currentYear + "\\" + dateFormat + "\\"
+				String path = folder.getFOLDERPATH() + "ETAT" + File.separator + currentYear + File.separator + dateFormat + File.separator
 						+ request.getSturcturename() + " " + dateFormat;
-				String zipPathWithName = folder.getFOLDERPATH() + "ETAT" + "\\" + currentYear + "\\" + dateFormat + "\\"
+				String zipPathWithName = folder.getFOLDERPATH() + "ETAT" + File.separator + currentYear + File.separator + dateFormat + File.separator
 						+ request.getSturcturename() + " " + dateFormat + ".zip";
 				String zipName = request.getSturcturename() + " " + dateFormat + ".zip";
 				String compressedDir = compressDirectory(zipPathWithName, path);
@@ -861,7 +682,7 @@ public class Controller {
 			String currentYear = currentDate.getPaymonth().substring(0, 4);
 			String currentMonth = currentDate.getPaymonth().substring(4, 6);
 			String dateFormat = currentYear + "-" + currentMonth;
-			String zipPathWithName = folder.getFOLDERPATH() + "ETAT" + "\\" + currentYear + "\\" + dateFormat + "\\"
+			String zipPathWithName = folder.getFOLDERPATH() + "ETAT" + File.separator + currentYear + File.separator + dateFormat + File.separator
 					+ structure.getSTRUCTURENAME() + " " + dateFormat + ".zip";
 			Files.deleteIfExists(Paths.get(zipPathWithName));
 			return structure;
@@ -926,10 +747,10 @@ public class Controller {
 
 		
 			// ********************************folder generation if not exist
-			String pathWithYear = folder.get(0).getFOLDERPATH() + folder.get(0).getFOLDERNAME() + "\\" + currentYear;
-			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			String pathWithYear = folder.get(0).getFOLDERPATH() + folder.get(0).getFOLDERNAME() + File.separator + currentYear;
+			String pathWithMounth = pathWithYear + File.separator + dateFormat;
 			Folder folderEtat = folderRepo.findByFolderName("ETAT");
-			String pathEtat=folderEtat.getFOLDERPATH()+folderEtat.getFOLDERNAME()+"\\"+ currentYear+"\\" + dateFormat;
+			String pathEtat=folderEtat.getFOLDERPATH()+folderEtat.getFOLDERNAME()+File.separator+ currentYear+File.separator + dateFormat;
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
 				fileYear.mkdir();
@@ -943,8 +764,8 @@ public class Controller {
 				Optional<Structure> structure=structureRepo.findById(allFilesToPrint.get(i).getIdStructure());
 				Optional<FileType> file=fileTypeRepo.findById(allFilesToPrint.get(i).getIdFileType());
 				if(structure.get()!=null && file.get()!=null) {
-					String source=pathEtat+"\\"+structure.get().getSTRUCTURENAME()+" "+dateFormat+"\\"+file.get().getPrefixfiletype()+" "+structure.get().getSTRUCTURENAME()+" "+dateFormat+".SPL";
-					String filePath=pathWithMounth+"\\"+file.get().getPrefixfiletype()+" "+structure.get().getSTRUCTURENAME()+" "+dateFormat+".SPL";
+					String source=pathEtat+File.separator+structure.get().getSTRUCTURENAME()+" "+dateFormat+File.separator+file.get().getPrefixfiletype()+" "+structure.get().getSTRUCTURENAME()+" "+dateFormat+".SPL";
+					String filePath=pathWithMounth+File.separator+file.get().getPrefixfiletype()+" "+structure.get().getSTRUCTURENAME()+" "+dateFormat+".SPL";
 					copyFile(source, pathWithMounth, filePath);
 				}
 				
@@ -1167,11 +988,11 @@ public class Controller {
 			Folder folder = folderRepo.findByFolderName("ETAT");
 			Folder folder2 = folderRepo.findByFolderName("FRUB");
 			// ********************************folder generation if not exist
-			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
-			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + File.separator + currentYear;
+			String pathWithMounth = pathWithYear + File.separator + dateFormat;
 
-			String pathWithYear2 = folder2.getFOLDERPATH() + folder2.getFOLDERNAME() + "\\" + currentYear;
-			String pathWithMounth2 = pathWithYear2 + "\\" + dateFormat;
+			String pathWithYear2 = folder2.getFOLDERPATH() + folder2.getFOLDERNAME() + File.separator + currentYear;
+			String pathWithMounth2 = pathWithYear2 + File.separator + dateFormat;
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
 				fileYear.mkdir();
@@ -1189,7 +1010,7 @@ public class Controller {
 			if (!fileMounth2.exists()) {
 				fileMounth2.mkdir();
 			}
-			String pathWithStructure = pathWithMounth + "\\" + structure.getSTRUCTURENAME() + " " + dateFormat;
+			String pathWithStructure = pathWithMounth + File.separator + structure.getSTRUCTURENAME() + " " + dateFormat;
 			File fileStructure = new File(pathWithStructure);
 			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
@@ -1211,16 +1032,16 @@ public class Controller {
 			exporter13.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter13.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter13.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint13);
-			Object outputFileName13 = pathWithStructure + "\\" + "FRUB" + " " + structure.getSTRUCTURENAME() + " "
+			Object outputFileName13 = pathWithStructure + File.separator + "FRUB" + " " + structure.getSTRUCTURENAME() + " "
 					+ dateFormat + ".xlsx";
 			exporter13.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName13);
 			exporter13.exportReport();
 			generatedToDBF("", outputFileName13.toString(), pathWithStructure);
-			String pathfile = pathWithMounth2 + "\\" + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathfile = pathWithMounth2 + File.separator + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".xlsx";
-			String pathfile2 = pathWithMounth2 + "\\" + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathfile2 = pathWithMounth2 + File.separator + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".dbf";
-			String pathDbf = pathWithStructure + "\\" + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathDbf = pathWithStructure + File.separator + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".dbf";
 			copyFile(outputFileName13.toString(), pathWithMounth2, pathfile);
 			copyFile(pathDbf, pathWithMounth2, pathfile2);
@@ -1291,11 +1112,11 @@ public class Controller {
 			Folder folder = folderRepo.findByFolderName("ETAT");
 			Folder folder2 = folderRepo.findByFolderName("FRUB");
 			// ********************************folder generation if not exist
-			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
-			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + File.separator + currentYear;
+			String pathWithMounth = pathWithYear + File.separator + dateFormat;
 
-			String pathWithYear2 = folder2.getFOLDERPATH() + folder2.getFOLDERNAME() + "\\" + currentYear;
-			String pathWithMounth2 = pathWithYear2 + "\\" + dateFormat;
+			String pathWithYear2 = folder2.getFOLDERPATH() + folder2.getFOLDERNAME() + File.separator + currentYear;
+			String pathWithMounth2 = pathWithYear2 + File.separator + dateFormat;
 
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
@@ -1313,7 +1134,7 @@ public class Controller {
 			if (!fileMounth2.exists()) {
 				fileMounth2.mkdir();
 			}
-			String pathWithStructure = pathWithMounth + "\\" + structure.getSTRUCTURENAME() + " " + dateFormat;
+			String pathWithStructure = pathWithMounth + File.separator + structure.getSTRUCTURENAME() + " " + dateFormat;
 			File fileStructure = new File(pathWithStructure);
 			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
@@ -1335,16 +1156,16 @@ public class Controller {
 			exporter12.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter12.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter12.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint12);
-			Object outputFileName12 = pathWithStructure + "\\" + "FRUB" + " " + structure.getSTRUCTURENAME() + " "
+			Object outputFileName12 = pathWithStructure + File.separator + "FRUB" + " " + structure.getSTRUCTURENAME() + " "
 					+ dateFormat + ".xlsx";
 			exporter12.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName12);
 			exporter12.exportReport();
 			generatedToDBF("", outputFileName12.toString(), pathWithStructure);
-			String pathfile = pathWithMounth2 + "\\" + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathfile = pathWithMounth2 + File.separator + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".xlsx";
-			String pathfile2 = pathWithMounth2 + "\\" + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathfile2 = pathWithMounth2 + File.separator + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".dbf";
-			String pathDbf = pathWithStructure + "\\" + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
+			String pathDbf = pathWithStructure + File.separator + "FRUB" + " " + structure.getSTRUCTURENAME() + " " + dateFormat
 					+ ".dbf";
 			copyFile(outputFileName12.toString(), pathWithMounth2, pathfile);
 			copyFile(pathDbf, pathWithMounth2, pathfile2);
@@ -1394,8 +1215,8 @@ public class Controller {
 			// ******************************************get Folder path
 			Folder folder = folderRepo.findByFolderName("ETAT");
 			// ********************************folder generation if not exist
-			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
-			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + File.separator + currentYear;
+			String pathWithMounth = pathWithYear + File.separator + dateFormat;
 
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
@@ -1405,7 +1226,7 @@ public class Controller {
 			if (!fileMounth.exists()) {
 				fileMounth.mkdir();
 			}
-			String pathWithStructure = pathWithMounth + "\\" + structure.getSTRUCTURENAME() + " " + dateFormat;
+			String pathWithStructure = pathWithMounth + File.separator + structure.getSTRUCTURENAME() + " " + dateFormat;
 			File fileStructure = new File(pathWithStructure);
 			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
@@ -1424,7 +1245,7 @@ public class Controller {
 			exporter10.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter10.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter10.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint10);
-			Object outputFileName10 = pathWithStructure + "\\" + "NEWPAIE" + " " + structure.getSTRUCTURENAME() + " "
+			Object outputFileName10 = pathWithStructure + File.separator + "NEWPAIE" + " " + structure.getSTRUCTURENAME() + " "
 					+ dateFormat + ".xlsx";
 			exporter10.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName10);
 			exporter10.exportReport();
@@ -1474,8 +1295,8 @@ public class Controller {
 			// ******************************************get Folder path
 			Folder folder = folderRepo.findByFolderName("ETAT");
 			// ********************************folder generation if not exist
-			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
-			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + File.separator + currentYear;
+			String pathWithMounth = pathWithYear + File.separator + dateFormat;
 
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
@@ -1485,7 +1306,7 @@ public class Controller {
 			if (!fileMounth.exists()) {
 				fileMounth.mkdir();
 			}
-			String pathWithStructure = pathWithMounth + "\\" + structure.getSTRUCTURENAME() + " " + dateFormat;
+			String pathWithStructure = pathWithMounth + File.separator + structure.getSTRUCTURENAME() + " " + dateFormat;
 			File fileStructure = new File(pathWithStructure);
 			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
@@ -1505,7 +1326,7 @@ public class Controller {
 			exporter11.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter11.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter11.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint11);
-			Object outputFileName11 = pathWithStructure + "\\" + "PERS" + " " + structure.getSTRUCTURENAME() + " "
+			Object outputFileName11 = pathWithStructure + File.separator + "PERS" + " " + structure.getSTRUCTURENAME() + " "
 					+ dateFormat + ".xlsx";
 			exporter11.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName11);
 
@@ -1645,8 +1466,8 @@ public class Controller {
 			// ******************************************get Folder path
 			Folder folder = folderRepo.findByFolderName("ETAT");
 			// ********************************folder generation if not exist
-			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
-			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + File.separator + currentYear;
+			String pathWithMounth = pathWithYear + File.separator + dateFormat;
 
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
@@ -1656,7 +1477,7 @@ public class Controller {
 			if (!fileMounth.exists()) {
 				fileMounth.mkdir();
 			}
-			String pathWithStructure = pathWithMounth + "\\" + structure + " " + dateFormat;
+			String pathWithStructure = pathWithMounth + File.separator + structure + " " + dateFormat;
 			File fileStructure = new File(pathWithStructure);
 			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
@@ -1672,7 +1493,7 @@ public class Controller {
 			exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 180);
 			exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-			Object outputFileName = pathWithStructure + "\\" + "JOUR" + " " + structure + " " + dateFormat + ".SPL";
+			Object outputFileName = pathWithStructure + File.separator + "JOUR" + " " + structure + " " + dateFormat + ".SPL";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
 			exporter.exportReport();
 			return journal;
@@ -1695,8 +1516,8 @@ public class Controller {
 			// ******************************************get Folder path
 			Folder folder = folderRepo.findByFolderName("ETAT");
 			// ********************************folder generation if not exist
-			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
-			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + File.separator + currentYear;
+			String pathWithMounth = pathWithYear + File.separator + dateFormat;
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
 				fileYear.mkdir();
@@ -1705,7 +1526,7 @@ public class Controller {
 			if (!fileMounth.exists()) {
 				fileMounth.mkdir();
 			}
-			String pathWithStructure = pathWithMounth + "\\" + structure + " " + dateFormat;
+			String pathWithStructure = pathWithMounth + File.separator + structure + " " + dateFormat;
 			File fileStructure = new File(pathWithStructure);
 			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
@@ -1720,7 +1541,7 @@ public class Controller {
 			exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 180);
 			exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-			Object outputFileName = pathWithStructure + "\\" + "MIP" + " " + structure.toString() + " " + dateFormat
+			Object outputFileName = pathWithStructure + File.separator + "MIP" + " " + structure.toString() + " " + dateFormat
 					+ ".SPL";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
 
@@ -1745,8 +1566,8 @@ public class Controller {
 			// ******************************************get Folder path
 			Folder folder = folderRepo.findByFolderName("ETAT");
 			// ********************************folder generation if not exist
-			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
-			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + File.separator + currentYear;
+			String pathWithMounth = pathWithYear + File.separator + dateFormat;
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
 				fileYear.mkdir();
@@ -1755,7 +1576,7 @@ public class Controller {
 			if (!fileMounth.exists()) {
 				fileMounth.mkdir();
 			}
-			String pathWithStructure = pathWithMounth + "\\" + structure + " " + dateFormat;
+			String pathWithStructure = pathWithMounth + File.separator + structure + " " + dateFormat;
 			File fileStructure = new File(pathWithStructure);
 			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
@@ -1964,7 +1785,7 @@ public class Controller {
 			exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 180);
 			exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-			Object outputFileName = pathWithStructure + "\\" + "RECAP" + " " + structure.toString() + " " + dateFormat
+			Object outputFileName = pathWithStructure + File.separator + "RECAP" + " " + structure.toString() + " " + dateFormat
 					+ ".SPL";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
 
@@ -2001,8 +1822,8 @@ public class Controller {
 			// ******************************************get Folder path
 			Folder folder = folderRepo.findByFolderName("ETAT");
 			// ********************************folder generation if not exist
-			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
-			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + File.separator + currentYear;
+			String pathWithMounth = pathWithYear + File.separator + dateFormat;
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
 				fileYear.mkdir();
@@ -2011,7 +1832,7 @@ public class Controller {
 			if (!fileMounth.exists()) {
 				fileMounth.mkdir();
 			}
-			String pathWithStructure = pathWithMounth + "\\" + structure + " " + dateFormat;
+			String pathWithStructure = pathWithMounth + File.separator + structure + " " + dateFormat;
 			File fileStructure = new File(pathWithStructure);
 			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
@@ -2026,7 +1847,7 @@ public class Controller {
 			exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 180);
 			exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-			Object outputFileName = pathWithStructure + "\\" + "RET" + " " + structure.toString() + " " + dateFormat
+			Object outputFileName = pathWithStructure + File.separator + "RET" + " " + structure.toString() + " " + dateFormat
 					+ ".SPL";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
 
@@ -2053,8 +1874,8 @@ public class Controller {
 			// ******************************************get Folder path
 			Folder folder = folderRepo.findByFolderName("ETAT");
 			// ********************************folder generation if not exist
-			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + "\\" + currentYear;
-			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			String pathWithYear = folder.getFOLDERPATH() + folder.getFOLDERNAME() + File.separator + currentYear;
+			String pathWithMounth = pathWithYear + File.separator + dateFormat;
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
 				fileYear.mkdir();
@@ -2063,7 +1884,7 @@ public class Controller {
 			if (!fileMounth.exists()) {
 				fileMounth.mkdir();
 			}
-			String pathWithStructure = pathWithMounth + "\\" + structure + " " + dateFormat;
+			String pathWithStructure = pathWithMounth + File.separator + structure + " " + dateFormat;
 			File fileStructure = new File(pathWithStructure);
 			if (!fileStructure.exists()) {
 				fileStructure.mkdir();
@@ -2090,7 +1911,7 @@ public class Controller {
 
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 
-			Object outputFileName = pathWithStructure + "\\" + "MAND" + " " + structure.toString() + " " + dateFormat
+			Object outputFileName = pathWithStructure + File.separator + "MAND" + " " + structure.toString() + " " + dateFormat
 					+ ".SPL";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
 
@@ -2243,8 +2064,8 @@ public class Controller {
 			for (int i = 0; i < files.size(); i++) {
 				
 				
-					path = files.get(i).getFOLDERPATH() + files.get(i).getFOLDERNAME() + "\\" + currentYear + "\\"
-							+ dateFormat + "\\" + files.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
+					path = files.get(i).getFOLDERPATH() + files.get(i).getFOLDERNAME() + File.separator + currentYear + File.separator
+							+ dateFormat + File.separator + files.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 
 					files.get(i).setFOLDERPATH(path);
 				
@@ -2271,8 +2092,8 @@ public class Controller {
 			List<CloturePaie> existFiles = new ArrayList();
 			for (int i = 0; i < files.size(); i++) {
 
-				path = files.get(i).getFOLDERPATH() + files.get(i).getFOLDERNAME() + "\\" + currentYear + "\\"
-						+ dateFormat + "\\" + files.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
+				path = files.get(i).getFOLDERPATH() + files.get(i).getFOLDERNAME() + File.separator + currentYear + File.separator
+						+ dateFormat + File.separator + files.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 
 				files.get(i).setFOLDERPATH(path);
 
@@ -2352,8 +2173,8 @@ public class Controller {
 			for (int i = 0; i < toutLesCloturePaie.size(); i++) {
 				
 				
-					path = toutLesCloturePaie.get(i).getFOLDERPATH() + toutLesCloturePaie.get(i).getFOLDERNAME() + "\\"
-							+ currentYear + "\\" + dateFormat + "\\" + toutLesCloturePaie.get(i).getPREFIXFILETYPE()
+					path = toutLesCloturePaie.get(i).getFOLDERPATH() + toutLesCloturePaie.get(i).getFOLDERNAME() + File.separator
+							+ currentYear + File.separator + dateFormat + File.separator + toutLesCloturePaie.get(i).getPREFIXFILETYPE()
 							+ " " + dateFormat + ".xlsx";
 				
 
@@ -2439,9 +2260,9 @@ public class Controller {
 			String dateFormat = currentYear + "-" + currentMonth;
 
 			// ********************************folder generation if not exist
-			String pathWithYear = fileTables.get(0).getFOLDERPATH() + fileTables.get(0).getFOLDERNAME() + "\\"
+			String pathWithYear = fileTables.get(0).getFOLDERPATH() + fileTables.get(0).getFOLDERNAME() + File.separator
 					+ currentYear;
-			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			String pathWithMounth = pathWithYear + File.separator + dateFormat;
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
 				fileYear.mkdir();
@@ -2460,7 +2281,7 @@ public class Controller {
 			exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-			Object outputFileName = pathWithMounth + "\\" + clotureRepo.findByDesc("banque").get(0).getPREFIXFILETYPE()
+			Object outputFileName = pathWithMounth + File.separator + clotureRepo.findByDesc("banque").get(0).getPREFIXFILETYPE()
 					+ " " + dateFormat + ".xlsx";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
 			exporter.exportReport();
@@ -2475,7 +2296,7 @@ public class Controller {
 			exporter2.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter2.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter2.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint2);
-			Object outputFileName2 = pathWithMounth + "\\"
+			Object outputFileName2 = pathWithMounth + File.separator
 					+ clotureRepo.findByDesc("diplome").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter2.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName2);
 			exporter2.exportReport();
@@ -2490,7 +2311,7 @@ public class Controller {
 			exporter3.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter3.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter3.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint3);
-			Object outputFileName3 = pathWithMounth + "\\"
+			Object outputFileName3 = pathWithMounth + File.separator
 					+ clotureRepo.findByDesc("fonction").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter3.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName3);
 			exporter3.exportReport();
@@ -2504,7 +2325,7 @@ public class Controller {
 			exporter4.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter4.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter4.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint4);
-			Object outputFileName4 = pathWithMounth + "\\"
+			Object outputFileName4 = pathWithMounth + File.separator
 					+ clotureRepo.findByDesc("localite").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter4.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName4);
 			exporter4.exportReport();
@@ -2518,7 +2339,7 @@ public class Controller {
 			exporter5.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter5.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter5.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint5);
-			Object outputFileName5 = pathWithMounth + "\\" + clotureRepo.findByDesc("pays").get(0).getPREFIXFILETYPE()
+			Object outputFileName5 = pathWithMounth + File.separator + clotureRepo.findByDesc("pays").get(0).getPREFIXFILETYPE()
 					+ " " + dateFormat + ".xlsx";
 			exporter5.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName5);
 			exporter5.exportReport();
@@ -2532,7 +2353,7 @@ public class Controller {
 			exporter6.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter6.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter6.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint6);
-			Object outputFileName6 = pathWithMounth + "\\"
+			Object outputFileName6 = pathWithMounth + File.separator
 					+ clotureRepo.findByDesc("rubrique").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter6.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName6);
 			exporter6.exportReport();
@@ -2546,7 +2367,7 @@ public class Controller {
 			exporter7.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter7.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter7.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint7);
-			Object outputFileName7 = pathWithMounth + "\\"
+			Object outputFileName7 = pathWithMounth + File.separator
 					+ clotureRepo.findByDesc("structure").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter7.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName7);
 			exporter7.exportReport();
@@ -2579,8 +2400,8 @@ public class Controller {
 			String dateFormat = currentYear + "-" + currentMonth;
 
 			// ********************************folder generation if not exist
-			String pathWithYear = fileSys.get(0).getFOLDERPATH() + fileSys.get(0).getFOLDERNAME() + "\\" + currentYear;
-			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			String pathWithYear = fileSys.get(0).getFOLDERPATH() + fileSys.get(0).getFOLDERNAME() + File.separator + currentYear;
+			String pathWithMounth = pathWithYear + File.separator + dateFormat;
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
 				fileYear.mkdir();
@@ -2598,7 +2419,7 @@ public class Controller {
 			exporter8.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter8.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter8.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint8);
-			Object outputFileName8 = pathWithMounth + "\\" + clotureRepo.findByDesc("change").get(0).getPREFIXFILETYPE()
+			Object outputFileName8 = pathWithMounth + File.separator + clotureRepo.findByDesc("change").get(0).getPREFIXFILETYPE()
 					+ " " + dateFormat + ".xlsx";
 			exporter8.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName8);
 			exporter8.exportReport();
@@ -2612,7 +2433,7 @@ public class Controller {
 			exporter9.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter9.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter9.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint9);
-			Object outputFileName9 = pathWithMounth + "\\" + clotureRepo.findByDesc("dep").get(0).getPREFIXFILETYPE()
+			Object outputFileName9 = pathWithMounth + File.separator + clotureRepo.findByDesc("dep").get(0).getPREFIXFILETYPE()
 					+ " " + dateFormat + ".xlsx";
 			exporter9.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName9);
 			exporter9.exportReport();
@@ -2647,9 +2468,9 @@ public class Controller {
 			String dateFormat = currentYear + "-" + currentMonth;
 
 			// ********************************folder generation if not exist
-			String pathWithYear = fileNewPaie.get(0).getFOLDERPATH() + fileNewPaie.get(0).getFOLDERNAME() + "\\"
+			String pathWithYear = fileNewPaie.get(0).getFOLDERPATH() + fileNewPaie.get(0).getFOLDERNAME() + File.separator
 					+ currentYear;
-			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+			String pathWithMounth = pathWithYear + File.separator + dateFormat;
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
 				fileYear.mkdir();
@@ -2671,7 +2492,7 @@ public class Controller {
 			exporter10.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter10.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter10.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint10);
-			Object outputFileName10 = pathWithMounth + "\\"
+			Object outputFileName10 = pathWithMounth + File.separator
 					+ clotureRepo.findByDesc("newpaie").get(0).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
 			exporter10.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName10);
 			exporter10.exportReport();
@@ -2705,8 +2526,8 @@ public class Controller {
 
 			// ********************************folder generation if not exist
 			String pathWithYear = filesPers.get(0).getFOLDERPATH().trim() + filesPers.get(0).getFOLDERNAME().trim()
-					+ "\\" + currentYear;
-			String pathWithMounth = pathWithYear + "\\" + dateFormat;
+					+ File.separator + currentYear;
+			String pathWithMounth = pathWithYear + File.separator + dateFormat;
 			File fileYear = new File(pathWithYear);
 			if (!fileYear.exists()) {
 				fileYear.mkdir();
@@ -2729,7 +2550,7 @@ public class Controller {
 			exporter11.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
 			exporter11.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
 			exporter11.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint11);
-			Object outputFileName11 = pathWithMounth + "\\" + clotureRepo.findByDesc("pers").get(0).getPREFIXFILETYPE()
+			Object outputFileName11 = pathWithMounth + File.separator + clotureRepo.findByDesc("pers").get(0).getPREFIXFILETYPE()
 					+ " " + dateFormat + ".xlsx";
 			exporter11.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName11);
 
@@ -3221,14 +3042,14 @@ public class Controller {
 			String currentMonth = currentDate.getPaymonth().substring(4, 6);
 			String dateFormat = currentYear + "-" + currentMonth;
 			//current path 
-			String path=folderEtat.getFOLDERPATH()+folderEtat.getFOLDERNAME()+"\\"+currentYear+"\\"+dateFormat;
+			String path=folderEtat.getFOLDERPATH()+folderEtat.getFOLDERNAME()+File.separator+currentYear+File.separator+dateFormat;
 			//get all structure to check them all
 			List<Structure> allStructures=structureRepo.findByStatus(-1);
 			//list of structure to return
 			List<Structure> structuresToReturn=new ArrayList<>();
 			for(int i=0;i<allStructures.size();i++) {
 				//path with structure folder
-				String pathWithStructure=path+"\\"+allStructures.get(i).getSTRUCTURENAME()+" "+dateFormat;
+				String pathWithStructure=path+File.separator+allStructures.get(i).getSTRUCTURENAME()+" "+dateFormat;
 				File folderToCheck=new File(pathWithStructure);
 				
 				File[] children = folderToCheck.listFiles();
@@ -3303,6 +3124,14 @@ public class Controller {
 	@PostMapping({"sendEtats"})
 	public MailResponse sendEtats(@RequestBody MailRequest request , @RequestParam String zipPath) {
 		try {
+			//to replace "\\" in paths with File.separator (Windows/linux)
+			for(int i=0;i<request.getFilesName().length;i++) {
+				request.getFilesName()[i].replace("\\", File.separator);
+		
+				
+			}
+			zipPath.replace("\\", File.separator);
+			
 			String Zipresponse=ZipMultipleFiles(request.getFilesName(),zipPath);
 			if(Zipresponse!=null) {
 				Map<String, Object> model = new HashMap<>();

@@ -1,3 +1,7 @@
+9.0
+----
+-Modification tous les paths (File.separator) pour windows/linux
+-------------------------------------------------------------------------------------------------
 8.0
 ----
 -Suppression des fichiers xlsx apres generation DBF.
