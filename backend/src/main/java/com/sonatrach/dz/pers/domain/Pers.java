@@ -177,7 +177,7 @@ public class Pers {
 	@Column(name="FILX")
 	private String FILX;
 	@Column(name="NO_RIB")
-	private String NO_RIB;
+	private String NORIB;
 	@Column(name="FIL7")
 	private String FIL7;
 	@Column(name="RUB1")
@@ -1082,12 +1082,12 @@ public class Pers {
 
 
 	public String getNORIB() {
-		return NO_RIB;
+		return NORIB;
 	}
 
 
 	public void setNORIB(String nORIB) {
-		NO_RIB = nORIB;
+		NORIB = nORIB;
 	}
 
 

@@ -84,7 +84,7 @@
 	<field name="FIL6" class="java.lang.String"/>
 	<field name="CPOS" class="java.lang.String"/>
 	<field name="FILX" class="java.lang.String"/>
-	<field name="NO_RIB" class="java.lang.String"/>
+	<field name="NORIB" class="java.lang.String"/>
 	<field name="FIL7" class="java.lang.String"/>
 	<field name="RUB1" class="java.lang.String"/>
 	<field name="SENS1" class="java.lang.String"/>
@@ -1567,7 +1567,7 @@
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[$F{NO_RIB}==null?"":$F{NO_RIB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{NORIB}==null?"":$F{NORIB}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="5110" y="0" width="50" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
