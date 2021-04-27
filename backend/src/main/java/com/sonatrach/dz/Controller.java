@@ -578,7 +578,7 @@ public class Controller {
 					zipFile(childFile, fileName + "/" + childFile.getName(), zipOut);
 				}
 				// System.out.println(children.length);
-				if (children.length != 8) {
+				if (children.length != 11) {
 					return "no";
 				} else {
 					return "yes";
@@ -2171,7 +2171,7 @@ public class Controller {
 			int exitVal = process.waitFor();
 			// System.out.println(exitVal);
 			if (exitVal == 0) {
-				Files.deleteIfExists(Paths.get(filePath));
+				//Files.deleteIfExists(Paths.get(filePath));  //***to delete xlsx files after generation of dbf files
 				// System.out.println(output);
 				// System.exit(0);
 
@@ -3025,7 +3025,7 @@ public class Controller {
 				if (children == null) {
 					return allStructures;
 				} else {
-					if (children.length != 8) {
+					if (children.length != 11) {
 						structuresToReturn.add(allStructures.get(i));
 					}
 				}

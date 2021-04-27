@@ -1,3 +1,7 @@
+10.0
+----
+-Annulation suppression fichiers xlsx et contole fichiers 11
+-------------------------------------------------------------------------------------------------
 9.0
 ----
 -Modification tous les paths (File.separator) pour windows/linux
