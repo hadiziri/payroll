@@ -1,3 +1,7 @@
+12.0
+----
+-Version finale avec corrections des bugs
+-------------------------------------------------------------------------------------------------
 11.0
 ----
 -Suppression copy file pour Frub.xlsx

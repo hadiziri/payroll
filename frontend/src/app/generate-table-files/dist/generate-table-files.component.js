@@ -91,6 +91,7 @@ var GenerateTableFilesComponent = /** @class */ (function () {
                 for (var i = 0; i < data.length; i++) {
                     _this.options.push(data[i].emailgroupmanagers);
                 }
+                _this.options.sort();
                 var object = _this.formGroup.get('emailgroupemanagers');
                 if (object != null) {
                     _this.filteredOptions = object.valueChanges.pipe(operators_1.startWith(''), operators_1.map(function (value) { return _this._filter(value); }));

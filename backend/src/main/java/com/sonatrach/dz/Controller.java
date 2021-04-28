@@ -3093,10 +3093,10 @@ public class Controller {
 		try {
 			// to replace "\\" in paths with File.separator (Windows/linux)
 			for (int i = 0; i < request.getFilesName().length; i++) {
-				request.getFilesName()[i].replace("\\", File.separator);
+				request.getFilesName()[i]=request.getFilesName()[i].replace("\\", File.separator);
 
 			}
-			zipPath.replace("\\", File.separator);
+			zipPath=zipPath.replace("\\", File.separator);
 
 			String Zipresponse = ZipMultipleFiles(request.getFilesName(), zipPath);
 			if (Zipresponse != null) {

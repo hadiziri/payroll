@@ -364,7 +364,7 @@ this.initProgress=25;
     
     this.mailRequest.sturcturename=structure.structurename;
     this.mailRequest.subject="états paie";
-    this.mailRequest.msg="Veuillez trouver ci-attaché les état paie du mois.";
+    this.mailRequest.msg="Veuillez trouver ci-attaché les états paie du mois.";
     this.mailRequest.from=this.currentUser.email;
      /**************initialisation of mail to save in DB************************************* */
     this.email.emailobject=this.mailRequest.subject;

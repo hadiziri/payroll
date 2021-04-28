@@ -119,7 +119,7 @@ export class GenerateTableFilesComponent implements OnInit {
          for(let i=0;i<data.length;i++){
            this.options.push(data[i].emailgroupmanagers);
          }
-        
+        this.options.sort();
          let object = this.formGroup.get('emailgroupemanagers');
          if (object != null) {
            
