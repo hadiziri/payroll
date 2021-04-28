@@ -358,10 +358,10 @@ this.initProgress=25;
     this.email.receiver="";
    // console.log(structure)
     /**************initialisation of mail request************************************* */
-    //this.mailRequest.to=structure.emailgroupmanagers;
-    //this.mailRequest.to.push("DSI-Exploitation_paie@Sonatrach.dz")
-    this.mailRequest.to.push("Feriel.Aid@Sonatrach.dz");
-    this.mailRequest.to.push(this.currentUser.email); //pour le moment juste pour tester
+    this.mailRequest.to.push(structure.emailgroupmanagers);
+    this.mailRequest.to.push("DSI-Exploitation_paie@Sonatrach.dz");
+    this.mailRequest.to.push("isi-exploitation_paie@sonatrach.dz");
+    
     this.mailRequest.sturcturename=structure.structurename;
     this.mailRequest.subject="états paie";
     this.mailRequest.msg="Veuillez trouver ci-attaché les état paie du mois.";

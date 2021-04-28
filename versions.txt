@@ -1,3 +1,8 @@
+11.0
+----
+-Suppression copy file pour Frub.xlsx
+-Correction des adresses émails.
+-------------------------------------------------------------------------------------------------
 10.0
 ----
 -Annulation suppression fichiers xlsx et contole fichiers 11

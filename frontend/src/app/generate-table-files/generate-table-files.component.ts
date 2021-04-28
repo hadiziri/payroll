@@ -37,7 +37,7 @@ export class GenerateTableFilesComponent implements OnInit {
   eFiles:Efile[]=[];
   idEmail:number=0;
   nbClick:number=0;
-  options: string[] = ['DSI-Exploitation_paie@Sonatrach.dz'];
+  options: string[] = ['DSI-Exploitation_paie@Sonatrach.dz','isi-exploitation_paie@sonatrach.dz'];
   filteredOptions: Observable<string[]>=new Observable;
   archiveSentFilesSaved:Boolean=false;
   formSettings: MbscFormOptions = {

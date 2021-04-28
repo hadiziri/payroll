@@ -191,9 +191,13 @@ var SelectEtatFichierComponent = /** @class */ (function () {
         //console.log(this.mailRequest.filesName)
         var zipPath = this.tempEtatFiles[0].folderpath.concat(this.tempEtatFiles[0].foldername.toString()).concat("\\").concat(year.toString()).concat("\\")
             .concat(paymonth.toString()).concat("\\").concat(this.currentStructure.structurename + " " + paymonth.toString() + ".zip");
-        this.mailRequest.to.push("Feriel.Aid@Sonatrach.dz");
+        this.mailRequest.to.push(this.currentStructure.emailgroupmanagers);
+        this.mailRequest.to.push("DSI-Exploitation_paie@Sonatrach.dz");
+        this.mailRequest.to.push("isi-exploitation_paie@sonatrach.dz");
         this.mailRequest.from = this.currentUser.email;
         this.mailRequest.sturcturename = this.currentStructure.structurename + " " + paymonth.toString() + ".zip";
+        this.mailRequest.subject = "Etats";
+        this.mailRequest.msg = "Veuillez trouver ci-attaché les états  demandés.";
         this.sendEtatFichierService.sendEtats(this.mailRequest, zipPath).subscribe(function (data) {
             if (data != null) {
                 // console.log(data);
@@ -290,7 +294,9 @@ var SelectEtatFichierComponent = /** @class */ (function () {
         //console.log(this.mailRequest.filesName)
         var zipPath = this.tousLesEtats[0].folderpath.concat(this.tousLesEtats[0].foldername.toString()).concat("\\").concat(year.toString()).concat("\\")
             .concat(paymonth.toString()).concat("\\").concat(this.currentStructure.structurename + " " + paymonth.toString() + ".zip");
-        this.mailRequest.to.push("Feriel.Aid@Sonatrach.dz");
+        this.mailRequest.to.push(this.currentStructure.emailgroupmanagers);
+        this.mailRequest.to.push("DSI-Exploitation_paie@Sonatrach.dz");
+        this.mailRequest.to.push("isi-exploitation_paie@sonatrach.dz");
         this.mailRequest.from = this.currentUser.email;
         this.mailRequest.sturcturename = this.currentStructure.structurename + " " + paymonth.toString() + ".zip";
         this.mailRequest.subject = "Fichiers";

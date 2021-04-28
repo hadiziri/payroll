@@ -1020,8 +1020,8 @@ public class Controller {
 					+ dateFormat + ".dbf";
 			String pathDbf = pathWithStructure + File.separator + "FRUB" + " " + structure.getSTRUCTURENAME() + " "
 					+ dateFormat + ".dbf";
-			copyFile(outputFileName13.toString(), pathWithMounth2, pathfile);
-			copyFile(pathDbf, pathWithMounth2, pathfile2);
+			//copyFile(outputFileName13.toString(), pathWithMounth2, pathfile);//pour copier frub.xlsx dans Dindrh
+			copyFile(pathDbf, pathWithMounth2, pathfile2);//pour copier frub.dbf dans Dindrh
 			virtualizer.cleanup();
 			return structure;
 
@@ -1139,8 +1139,8 @@ public class Controller {
 					+ dateFormat + ".dbf";
 			String pathDbf = pathWithStructure + File.separator + "FRUB" + " " + structure.getSTRUCTURENAME() + " "
 					+ dateFormat + ".dbf";
-			copyFile(outputFileName12.toString(), pathWithMounth2, pathfile);
-			copyFile(pathDbf, pathWithMounth2, pathfile2);
+			//copyFile(outputFileName12.toString(), pathWithMounth2, pathfile); //pour copier frub.xlsx dans Dindrh
+			copyFile(pathDbf, pathWithMounth2, pathfile2);//pour copier frub.dbf dans Dindrh
 			virtualizer.cleanup();
 			return structure;
 
