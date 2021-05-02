@@ -224,7 +224,7 @@ export class SelectEtatFichierComponent implements OnInit {
     this.mailRequest.to.push("DSI-Exploitation_paie@Sonatrach.dz");
     this.mailRequest.to.push("isi-exploitation_paie@sonatrach.dz");
     
-    this.mailRequest.from=this.currentUser.email;
+    this.mailRequest.from="DSI-Exploitation_paie@Sonatrach.dz";
     this.mailRequest.sturcturename=this.currentStructure.structurename+" "+paymonth.toString()+".zip";
     this.mailRequest.subject="Etats";
     this.mailRequest.msg="Veuillez trouver ci-attaché les états  demandés."
@@ -350,7 +350,7 @@ export class SelectEtatFichierComponent implements OnInit {
     this.mailRequest.to.push("isi-exploitation_paie@sonatrach.dz");
 
     
-    this.mailRequest.from=this.currentUser.email;
+    this.mailRequest.from="DSI-Exploitation_paie@Sonatrach.dz";
     this.mailRequest.sturcturename=this.currentStructure.structurename+" "+paymonth.toString()+".zip";
     this.mailRequest.subject="Fichiers";
     this.mailRequest.msg="Veuillez trouver ci-attaché les fichiers  demandés."

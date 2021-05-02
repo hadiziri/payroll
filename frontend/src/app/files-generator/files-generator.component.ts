@@ -365,7 +365,7 @@ this.initProgress=25;
     this.mailRequest.sturcturename=structure.structurename;
     this.mailRequest.subject="états paie";
     this.mailRequest.msg="Veuillez trouver ci-attaché les états paie du mois.";
-    this.mailRequest.from=this.currentUser.email;
+    this.mailRequest.from="DSI-Exploitation_paie@Sonatrach.dz";
      /**************initialisation of mail to save in DB************************************* */
     this.email.emailobject=this.mailRequest.subject;
     this.email.iduser=this.currentUser.iduser;
@@ -374,7 +374,7 @@ this.initProgress=25;
       this.email.receiver=this.email.receiver.concat(this.mailRequest.to[i]+";");
     }
    
-    this.email.sender=this.mailRequest.from;
+    this.email.sender=this.currentUser.email;
      /**************get Efiles for choosed structure************************************* */
      this.updatedStructure.emailgroupmanagers=structure.emailgroupmanagers;
      this.updatedStructure.idactivity=structure.idactivity;

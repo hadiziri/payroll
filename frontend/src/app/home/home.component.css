@@ -4,7 +4,7 @@
   height: 100%;
 }
 mat-grid-tile {
-  background-image:url('/assets/img/background.jpg') ;
+  background-image:url('./../../assets/img/background.jpg') ;
 }
 .example-card {
   max-width: 400px;
@@ -21,7 +21,7 @@ h1 {
 }
 
 .example-header-image {
-  background-image: url('/assets/img/sonatrach.svg');
+  background-image: url('./../../assets/img/sonatrach.svg');
   background-size: cover;
 }
   .content {

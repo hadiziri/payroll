@@ -170,13 +170,13 @@ var GenerateTableFilesComponent = /** @class */ (function () {
             this.mailRequest.subject = post.object;
             this.mailRequest.msg = post.message;
             this.mailRequest.to = post.emailgroupemanagers;
-            this.mailRequest.from = this.currentUser.email;
+            this.mailRequest.from = "DSI-Exploitation_paie@Sonatrach.dz";
             for (var i = 0; i < this.tempTableFiles.length; i++) {
                 this.mailRequest.filesName.push(this.tempTableFiles[i].prefixfiletype);
             }
             //console.log(this.mailRequest)
             /**************initialisation of mail to save in DB************************************* */
-            this.email.sender = this.mailRequest.from;
+            this.email.sender = this.currentUser.email;
             this.email.emailobject = this.mailRequest.subject;
             this.email.iduser = this.currentUser.iduser;
             this.email.msg = this.mailRequest.msg;

@@ -63,7 +63,7 @@ h1 {
 }
 
 .file-to-print-header-image {
-  background-image: url('/assets/img/sonatrach.svg');
+  background-image: url('./../../assets/img/sonatrach.svg');
   background-size: cover;
 
 }
