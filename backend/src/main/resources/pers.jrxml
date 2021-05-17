@@ -2072,7 +2072,6 @@
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[$F{LOCTRAV}==null?"":$F{LOCTRAV}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="280" y="0" width="60" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">

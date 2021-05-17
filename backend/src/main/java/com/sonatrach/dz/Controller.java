@@ -759,9 +759,9 @@ public class Controller {
 				if (structure.get() != null && file.get() != null) {
 					String source = pathEtat + File.separator + structure.get().getSTRUCTURENAME() + " " + dateFormat
 							+ File.separator + file.get().getPrefixfiletype() + " " + structure.get().getSTRUCTURENAME()
-							+ " " + dateFormat + ".SPL";
+							+ " " + dateFormat + ".txt";
 					String filePath = pathWithMounth + File.separator + file.get().getPrefixfiletype() + " "
-							+ structure.get().getSTRUCTURENAME() + " " + dateFormat + ".SPL";
+							+ structure.get().getSTRUCTURENAME() + " " + dateFormat + ".txt";
 					copyFile(source, pathWithMounth, filePath);
 				}
 
@@ -1461,7 +1461,7 @@ public class Controller {
 			exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 			Object outputFileName = pathWithStructure + File.separator + "JOUR" + " " + structure + " " + dateFormat
-					+ ".SPL";
+					+ ".txt";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
 			exporter.exportReport();
 			return journal;
@@ -1510,7 +1510,7 @@ public class Controller {
 			exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 			Object outputFileName = pathWithStructure + File.separator + "MIP" + " " + structure.toString() + " "
-					+ dateFormat + ".SPL";
+					+ dateFormat + ".txt";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
 
 			exporter.exportReport();
@@ -1749,7 +1749,7 @@ public class Controller {
 			exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 			Object outputFileName = pathWithStructure + File.separator + "RECAP" + " " + structure.toString() + " "
-					+ dateFormat + ".SPL";
+					+ dateFormat + ".txt";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
 
 			exporter.exportReport();
@@ -1811,7 +1811,7 @@ public class Controller {
 			exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 50);
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 			Object outputFileName = pathWithStructure + File.separator + "RET" + " " + structure.toString() + " "
-					+ dateFormat + ".SPL";
+					+ dateFormat + ".txt";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
 
 			exporter.exportReport();
@@ -1875,7 +1875,7 @@ public class Controller {
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 
 			Object outputFileName = pathWithStructure + File.separator + "MAND" + " " + structure.toString() + " "
-					+ dateFormat + ".SPL";
+					+ dateFormat + ".txt";
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outputFileName);
 
 			exporter.exportReport();
