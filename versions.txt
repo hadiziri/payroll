@@ -1,3 +1,7 @@
+15.0
+----
+-Corrections bugs
+-------------------------------------------------------------------------------------------------
 13.0
 ----
 -Version finale (modification url images et email sender)
