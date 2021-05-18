@@ -2151,7 +2151,7 @@ public class Controller {
 	}
 
 	public void generatedToDBF(String batPath, String filePath, String outPutPath) throws FileNotFoundException {
-		File file = ResourceUtils.getFile("classpath:convert.bat");
+		File file = ResourceUtils.getFile("classpath:convert.sh");
 		ProcessBuilder processBuilder = new ProcessBuilder(file.getAbsolutePath(), filePath, outPutPath);
 
 		try {

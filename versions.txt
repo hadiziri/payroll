@@ -1,3 +1,7 @@
+17.0
+----
+-Ajout de la propriété <property name="net.sf.jasperreports.export.text.line.separator" value="&#xD;&#xA;"/>
+-------------------------------------------------------------------------------------------------
 16.0
 ----
 -Modification properties
