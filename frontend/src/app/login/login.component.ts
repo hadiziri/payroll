@@ -87,8 +87,8 @@ export class LoginComponent implements OnInit {
       let currentMonth = response.paymonth.substring(4, 6);
       let dateFormat =currentMonth+"/"+ currentYear  ;
       this.tokenStorage.saveCurrentMonth(dateFormat);
-      this.deleteAllswap();
-   
+      //this.deleteAllswap();
+      window.location.reload();
          
         }else{
           this.openDialog();
