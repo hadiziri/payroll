@@ -253,7 +253,7 @@ public class Pers {
 	@Column(name="MONT12")
 	private String MONT12;
 	@Column(name="DATE_MAJ")
-	private String DATEMAJ;
+	private String DATE_MAJ;
 	@Column(name="JOURNEE")
 	private String JOURNEE;
 	
@@ -1462,12 +1462,12 @@ public class Pers {
 
 
 	public String getDATEMAJ() {
-		return DATEMAJ;
+		return DATE_MAJ;
 	}
 
 
 	public void setDATEMAJ(String dATEMAJ) {
-		DATEMAJ = dATEMAJ;
+		DATE_MAJ = dATEMAJ;
 	}
 
 

@@ -215,7 +215,7 @@ export class SelectEtatFichierComponent implements OnInit {
     for(let i=0;i<this.tempEtatFiles.length;i++){
       let path:String=this.tempEtatFiles[i].folderpath.concat(this.tempEtatFiles[i].foldername.toString()).concat("\\").concat(year.toString()).concat("\\")
       .concat(paymonth.toString()).concat("\\").concat(this.currentStructure.structurename+" "+paymonth.toString()+"\\");
-      this.mailRequest.filesName.push(path.toString()+this.tempEtatFiles[i].prefixfiletype+" "+this.currentStructure.structurename+" "+paymonth.toString()+".SPL");
+      this.mailRequest.filesName.push(path.toString()+this.tempEtatFiles[i].prefixfiletype+" "+this.currentStructure.structurename+" "+paymonth.toString()+".txt");
     }
     //console.log(this.mailRequest.filesName)
     let zipPath:String=this.tempEtatFiles[0].folderpath.concat(this.tempEtatFiles[0].foldername.toString()).concat("\\").concat(year.toString()).concat("\\")

@@ -122,7 +122,7 @@
 	<field name="RUB12" class="java.lang.String"/>
 	<field name="SENS12" class="java.lang.String"/>
 	<field name="MONT12" class="java.lang.String"/>
-	<field name="DATEMAJ" class="java.lang.String"/>
+	<field name="DATE_MAJ" class="java.lang.String"/>
 	<field name="JOURNEE" class="java.lang.String"/>
 	<columnHeader>
 		<band height="30" splitType="Stretch">
@@ -308,7 +308,7 @@
 				<text><![CDATA[SENS7]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="7330" y="0" width="70" height="30" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+				<reportElement x="7330" y="0" width="110" height="30" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement>
@@ -317,7 +317,7 @@
 				<text><![CDATA[DATE_MAJ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="7400" y="0" width="70" height="30" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
+				<reportElement x="7440" y="0" width="110" height="30" uuid="573550a9-5fc9-41ee-ae4f-7b550868c75d">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement>
@@ -1304,18 +1304,18 @@
 				<textFieldExpression><![CDATA[$F{RUB7}==null?"":$F{RUB7}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="7400" y="0" width="70" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="7440" y="0" width="110" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{JOURNEE}==null?"":$F{JOURNEE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="7330" y="0" width="70" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
+				<reportElement x="7330" y="0" width="110" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[$F{DATEMAJ}==null?"":$F{DATEMAJ}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{DATE_MAJ}==null?"":$F{DATE_MAJ}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="7280" y="0" width="50" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
