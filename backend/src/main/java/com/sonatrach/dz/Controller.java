@@ -266,6 +266,7 @@ public class Controller {
 
 	// ****************************************API*****************************************************************************
 
+	
 	// get structure by activity
 	@PostMapping({ "getStructurByActivity" })
 	public List<Structure> getStructureByActivity(@RequestBody ShActivity a) {
@@ -2133,10 +2134,16 @@ public class Controller {
 			String path;
 
 			for (int i = 0; i < toutLesCloturePaie.size(); i++) {
-
-				path = toutLesCloturePaie.get(i).getFOLDERPATH() + toutLesCloturePaie.get(i).getFOLDERNAME()
-						+ File.separator + currentYear + File.separator + dateFormat + File.separator
-						+ toutLesCloturePaie.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
+					if(toutLesCloturePaie.get(i).getPREFIXFILETYPE().equals("NEWPAIE")||toutLesCloturePaie.get(i).getPREFIXFILETYPE().equals("PERS")) {
+						path = toutLesCloturePaie.get(i).getFOLDERPATH() + toutLesCloturePaie.get(i).getFOLDERNAME()
+								+ File.separator + currentYear + File.separator + dateFormat + File.separator
+								+ toutLesCloturePaie.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".dbf";
+					}else {
+						path = toutLesCloturePaie.get(i).getFOLDERPATH() + toutLesCloturePaie.get(i).getFOLDERNAME()
+								+ File.separator + currentYear + File.separator + dateFormat + File.separator
+								+ toutLesCloturePaie.get(i).getPREFIXFILETYPE() + " " + dateFormat + ".xlsx";
+					}
+			
 
 				toutLesCloturePaie.get(i).setFOLDERPATH(path);
 
