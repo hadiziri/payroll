@@ -322,7 +322,7 @@
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{NORUB}==null?"":$F{NORUB}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#0.00;#0.00-">
 				<reportElement x="1840" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
@@ -350,21 +350,21 @@
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{GROUPE}==null?"":$F{GROUPE}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#0.00;#0.00-">
 				<reportElement x="1920" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{ELEMSTAT}==null?"":$F{ELEMSTAT}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#0.00;#0.00-">
 				<reportElement x="1760" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{MTRAPPEL}==null?"":$F{MTRAPPEL}.doubleValue()]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#0.00;#0.00-">
 				<reportElement x="1680" y="0" width="80" height="40" uuid="752c0f18-2dea-4209-bd0d-d787d8c462a8">
 					<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
 				</reportElement>

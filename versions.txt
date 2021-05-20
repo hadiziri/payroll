@@ -1,3 +1,7 @@
+18.0
+----
+-Ajout du pattern dans NewPaie et les Frub
+-------------------------------------------------------------------------------------------------
 17.0
 ----
 -Ajout de la propriété <property name="net.sf.jasperreports.export.text.line.separator" value="&#xD;&#xA;"/>
